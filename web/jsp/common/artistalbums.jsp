@@ -10,28 +10,28 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Title</title>
+  <title>Title</title>
 </head>
 <body>
 <div>
-    <form action="controller" method="get" target="_self">
-        <input type="search" value="Enter artist name">
-        <input type="submit" value="Search">
-    </form>
-    <table>
-        <thead>
-        <tr>
-            <th>name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="">
-            <tr>
+  <form action="controller" method="get" target="_self">
+    <input type="search" value="Enter artist name">
+    <input type="submit" value="Search">
+  </form>
+  <table>
+    <thead>
+    <tr>
+      <th>name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="">
+      <tr>
 
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+      </tr>
+    </c:forEach>
+    </tbody>
+  </table>
 </div>
 
 </body>

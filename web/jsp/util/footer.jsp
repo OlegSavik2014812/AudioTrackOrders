@@ -8,8 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="../../css/for_footer.css" rel="stylesheet">
-    <title>Title</title>
+  <link href="../../css/for_footer.css" rel="stylesheet">
+  <title>Title</title>
 </head>
 <body>
 <div id="copyright">© copyright Aleh Savik</div>

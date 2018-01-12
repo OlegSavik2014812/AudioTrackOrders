@@ -8,12 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="../../css/for_header.css" rel="stylesheet">
-    <title>header</title>
+  <link href="../../css/for_header.css" rel="stylesheet">
+  <title>header</title>
 </head>
 <body>
 <div id="head">
-    <input type="button" value="To main" id="to_main" onclick="goToIndexPage()">
+  <input type="button" value="To main" id="to_main" onclick="goToIndexPage()">
 </div>
 <script src="../../js/indexredirect.js"></script>
 </body>

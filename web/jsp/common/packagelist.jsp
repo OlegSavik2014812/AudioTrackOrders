@@ -9,42 +9,42 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <link href="../../css/for_list.css" rel="stylesheet">
-    <title>AudioTracks</title>
+  <link href="../../css/for_list.css" rel="stylesheet">
+  <title>AudioTracks</title>
 </head>
 <body>
 <jsp:include page="../util/header.jsp"/>
 
 <div id="container">
-    <div id="search">
-        <form action="controller" method="get">
-            <select id="search_select">
-                <option><span>Package name</span></option>
-                <option><span>AudioTrack name</span></option>
-                <option><span>Artist name</span></option>
+  <div id="search">
+    <form action="controller" method="get">
+      <select id="search_select">
+        <option><span>Package name</span></option>
+        <option><span>AudioTrack name</span></option>
+        <option><span>Artist name</span></option>
 
-            </select>
-            <input type="search" id="search_input">
-            <input type="submit" value="Search" id="search-btn">
-        </form>
-    </div>
-    <table id="entity_information">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Artist</th>
-            <th>Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${requestScope.audiotracks}" var="track">
-            <tr bgcolor="#FFFFFF">
-                <td><c:out value="${track}"/></td>
-            </tr>
-            <<input type="button" value="Buy">
-        </c:forEach>
-        </tbody>
-    </table>
+      </select>
+      <input type="search" id="search_input">
+      <input type="submit" value="Search" id="search-btn">
+    </form>
+  </div>
+  <table id="entity_information">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Artist</th>
+      <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${requestScope.audiotracks}" var="track">
+      <tr bgcolor="#FFFFFF">
+        <td><c:out value="${track}"/></td>
+      </tr>
+      <<input type="button" value="Buy">
+    </c:forEach>
+    </tbody>
+  </table>
 </div>
 <jsp:include page="../util/footer.jsp"/>
 </body>

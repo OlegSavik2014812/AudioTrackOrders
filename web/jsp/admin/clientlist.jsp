@@ -9,30 +9,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>AudioTracks</title>
+  <title>AudioTracks</title>
 </head>
 <body>
 <jsp:include page="../util/header.jsp"/>
 <div id="container">
-    <table id="entity_information">
-        <thead>
-        <tr>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Login</th>
-            <th>Bonus</th>
-            <th>Role</th>
-            <th>Balance</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${requestScope.audiotracks}" var="track">
-            <tr bgcolor="#FFFFFF">
-                <td><c:out value="${track}"/></td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+  <table id="entity_information">
+    <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Login</th>
+      <th>Bonus</th>
+      <th>Role</th>
+      <th>Balance</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${requestScope.audiotracks}" var="track">
+      <tr bgcolor="#FFFFFF">
+        <td><c:out value="${track}"/></td>
+      </tr>
+    </c:forEach>
+    </tbody>
+  </table>
 </div>
 <jsp:include page="../util/footer.jsp"/>
 </body>

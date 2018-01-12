@@ -1,27 +1,30 @@
-#head{
-    background-image: url("images/head.jpg");
-    position: fixed;
-    top: 0;
-    width: 100%;
+#head {
+  background-image: url("images/head.jpg");
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
-#head input{
-    display: inline;
-    padding: 10px;
-    font-size: 20px;
-    font-family: Polibrush;
-    color: rgb(65, 65, 65);
-    background-color:#e5e5e5;
-    outline: none;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    transition:all 0.6s ease;
+
+#head input {
+  display: inline;
+  padding: 10px;
+  font-size: 20px;
+  font-family: Polibrush;
+  color: rgb(65, 65, 65);
+  background-color: #e5e5e5;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  transition: all 0.6s ease;
 }
-#to_main{
-    float: right;
-    display: inline;
+
+#to_main {
+  float: right;
+  display: inline;
 }
-#to_main:hover{
-    color: #e5e5e5 ;
-    background: #292931;
-    cursor: pointer;
+
+#to_main:hover {
+  color: #e5e5e5;
+  background: #292931;
+  cursor: pointer;
 }
