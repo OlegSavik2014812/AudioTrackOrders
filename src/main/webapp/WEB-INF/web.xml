@@ -24,4 +24,8 @@
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
 
+  <error-page>
+    <location>/404.jsp</location>
+  </error-page>
+
 </web-app>
