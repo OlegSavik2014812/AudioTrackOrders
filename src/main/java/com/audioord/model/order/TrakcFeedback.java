@@ -5,14 +5,14 @@ import com.audioord.model.account.User;
 
 import java.util.Date;
 
-public class OrderFeedback extends Entity {
+public class TrakcFeedback extends Entity<Long> {
 
   private User user;
   private TrackOrder order;
   private String comments;
   private Date createdAt;
 
-  public OrderFeedback(User user, TrackOrder order, String comments, Date createdAt) {
+  public TrakcFeedback(User user, TrackOrder order, String comments, Date createdAt) {
     this.user = user;
     this.order = order;
     this.comments = comments;
