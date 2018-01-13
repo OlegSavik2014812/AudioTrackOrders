@@ -4,16 +4,26 @@ import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 
-public class DBPool implements ConnectionSource {
+public class DBPool extends DBPoolBase {
 
   private static final Logger LOG = Logger.getLogger(DBPool.class);
 
+  private static final ReentrantLock LOCK = new ReentrantLock();
+
   /** Pool max connections number */
   private static final int SIZE = 15;
+
+  /** Pool state */
+  private static AtomicBoolean isInitialized = new AtomicBoolean(false);
+
+  /** current pool instance * */
+  private static DBPool instance;
 
   /** available connections */
   private BlockingQueue<Connection> free;
@@ -24,70 +34,74 @@ public class DBPool implements ConnectionSource {
   /** Database connection driver */
   private Driver driver;
 
-  /** Driver class name */
-  private String driverName;
-
-  /** Database username */
-  private String user;
-
-  /** Database password */
-  private String password;
-
-  /** Database connection url */
-  private String url;
-
   private DBPool() {
-    initConfig();
+    super(
+        System.getProperty("db.driver"),
+        System.getProperty("db.username"),
+        System.getProperty("db.password"),
+        System.getProperty("db.url"));
   }
 
-  private void initConfig() {
-    driverName = System.getProperty("db.driver");
-    user = System.getProperty("db.user");
-    password = System.getProperty("db.password");
-    url = System.getProperty("db.url");
+  public static ConnectionSource getInstance() {
+    if (!isInitialized.get()) {
+
+      try {
+        LOCK.lock();
+        if (!isInitialized.get()) {
+          instance = new DBPool();
+          instance.initialize();
+          isInitialized.set(true);
+        }
+      } finally {
+        LOCK.unlock();
+      }
+    }
+    return instance;
   }
 
-  private Driver getJdbcDriver() {
-    String driverClass = System.getProperty("db.driver");
-    if (driverClass == null || driverClass.isEmpty()) {
-      throw new RuntimeException("Missing config db.driver");
+  @Override
+  protected void initialize() {
+    if (!validate()) {
+      throw new RuntimeException("Failed to initialize DBPool");
     }
 
-    Driver d = null;
-
-    // first load driver using forName
     try {
-      Class<?> cls = Class.forName(driverClass);
-      d = (Driver) cls.newInstance();
+
+      free = new ArrayBlockingQueue<>(SIZE);
+      used = new ArrayBlockingQueue<>(SIZE);
+
+      driver = super.loadJdbcDriver();
+
+      for (int i = 0; i < SIZE; i++) {
+        Connection connection = newConnection(driver);
+        free.add(connection);
+      }
+
     } catch (Exception e) {
       LOG.error(e);
     }
-
-    // try load driver using driver manager
-    if (d == null) {
-      try {
-        DriverManager.getDriver(driverClass);
-      } catch (SQLException e) {
-        LOG.error(e);
-      }
-    }
-
-    // fail, could not load
-    if (d == null) {
-      throw new RuntimeException("Missing driver");
-    }
-
-    return d;
   }
 
   @Override
-  public Connection getConnection() throws SQLException, InterruptedException {
-    return null;
+  public Connection getConnection() throws InterruptedException {
+    Connection con = free.poll(1, TimeUnit.SECONDS);
+    used.put(con);
+    return con;
   }
 
   @Override
-  public void returnConnection(Connection con) {}
+  public void returnConnection(Connection con) {
+    if (con == null) {
+      LOG.error("Connection could not be null");
+      return;
+    }
+
+    free.add(con);
+    used.remove(con);
+  }
 
   @Override
-  public void freeConnection(Connection con) {}
+  public void freeConnection(Connection con) {
+    free.remove(con);
+  }
 }
