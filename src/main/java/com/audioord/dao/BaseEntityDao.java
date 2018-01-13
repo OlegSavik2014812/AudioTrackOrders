@@ -10,7 +10,7 @@ public abstract class BaseEntityDao implements EntityDAO {
   private ConnectionSource connectionSource;
 
   public BaseEntityDao() {
-    this.connectionSource = new DBPool();
+    this.connectionSource = null;
   }
 
   public BaseEntityDao(ConnectionSource connectionSource) {

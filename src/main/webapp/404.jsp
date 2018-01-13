@@ -6,6 +6,9 @@
 <html lang="en">
 
 <head>
+  <fmt:requestEncoding value="UTF-8"/>
+  <fmt:setLocale value="ru"/>
+  <fmt:setBundle basename="i18n.MessageBundle_ru"/>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="<c:url value="favicon.ico"/>" type="image/x-icon">
@@ -14,7 +17,7 @@
   <!-- Bootstrap core CSS -->
   <link href="<c:url value="css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
 
-  <title>error page</title>
+  <title><fmt:message key="error.title"/></title>
 </head>
 
 <body>
@@ -42,22 +45,17 @@
   <div class="row">
     <div class="col-md-12">
       <div class="error-template">
-        <h1>Oops!</h1>
-        <h2>404 Not Found</h2>
+        <h1><fmt:message key="error.oops"/></h1>
+        <h2><fmt:message key="error.404notfound"/></h2>
         <div class="error-details">
-          Sorry, an error has occured, Requested page not found!
+          <fmt:message key="error.sorry"/>
         </div>
         <div class="error-actions">
-          <button type="button" class="btn btn-link">Home</button>
+          <button type="button" class="btn btn-link"><fmt:message key="navbar.to_home"/></button>
         </div>
       </div>
-
     </div>
   </div>
 </div>
-
-
 </body>
-
-
 </html>
