@@ -15,7 +15,8 @@ public final class Commands {
   private static Map<String, Command> define(Map<String, Command> commands) {
 
     commands.put(NotFoundCommand.NAME, new NotFoundCommand());
-
+    commands.put(SignInCommand.NAME, new SignInCommand());
+    commands.put(SignUpCommand.NAME, new SignUpCommand());
     return commands;
   }
 

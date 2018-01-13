@@ -4,8 +4,6 @@
 <fmt:requestEncoding value="UTF-8"/>
 <fmt:setLocale value="ru"/>
 <fmt:setBundle basename="i18n.MessageBundle"/>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
   <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse"
@@ -24,10 +22,10 @@
         <a class="nav-link" href="#"><fmt:message key="navbar.to_home"/> <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<c:url value="/action?name=sign_in"/>"><fmt:message key="button.signin"/> </a>
+        <a class="nav-link" href="<c:url value="/pages/SignIn.jsp"/>"><fmt:message key="button.signin"/> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<c:url value="/action?name=sign_up"/> "><fmt:message key="button.signup"/> </a>
+        <a class="nav-link" href="<c:url value="/pages/SignUp.jsp"/> "><fmt:message key="button.signup"/> </a>
       </li>
     </ul>
     <form class="form-inline mt-2 mt-md-0">

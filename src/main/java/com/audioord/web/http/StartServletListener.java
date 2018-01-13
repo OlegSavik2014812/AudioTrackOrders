@@ -31,7 +31,7 @@ public class StartServletListener implements ServletContextListener {
     }
 
     isInitialized = true;
-    LOG.debug("System started successfully");
+    LOG.info("System started successfully");
   }
 
   private URL getConfigUrl() {

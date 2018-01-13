@@ -15,7 +15,7 @@
   <link rel="icon" href="<c:url value="favicon.ico"/>" type="image/x-icon">
 
   <!-- Bootstrap core CSS -->
-  <link href="<c:url value="css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
+  <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
 
   <title><fmt:message key="error.title"/></title>
 </head>
@@ -51,7 +51,7 @@
           <fmt:message key="error.sorry"/>
         </div>
         <div class="error-actions">
-          <button type="button" class="btn btn-link"><fmt:message key="navbar.to_home"/></button>
+          <button type="button" class="btn btn-link" value=><fmt:message key="navbar.to_home"/></button>
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ public class AuthInfo extends Entity<String> {
     this.setId(username);
   }
 
-  public String getLogin() {
+  public String getUserName() {
     return super.getId();
   }
 

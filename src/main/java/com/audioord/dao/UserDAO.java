@@ -28,6 +28,12 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
     return super.getById(id, userMapper, SQL_GET_USER_BY_ID);
   }
 
+  public User getByUsername(String username) {
+
+
+    return null;
+  }
+
   @Override
   public User update(User entity) {
     return null;

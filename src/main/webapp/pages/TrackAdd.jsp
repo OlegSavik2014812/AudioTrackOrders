@@ -6,10 +6,6 @@
   <fmt:requestEncoding value="UTF-8"/>
   <fmt:setLocale value="ru"/>
   <fmt:setBundle basename="i18n.MessageBundle_ru"/>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
   <link rel="icon" href="../../../../favicon.ico">
   <title><fmt:message key="addtrack.title"/></title>
   <!-- Bootstrap core CSS -->
@@ -17,9 +13,10 @@
   <!-- Custom styles for this template -->
 </head>
 <body>
+<c:import url="components/NavBar.jsp"/>
 <div class="container">
   <form class="form-signin">
-    <h2 class="form-signin-heading"><fmt:message key="addtrack.title"/> </h2>
+    <h2 class="form-signin-heading"><fmt:message key="addtrack.title"/></h2>
     <input type="text" id="trackName" class="form-control" placeholder="<fmt:message key="addtrack.name_track"/>"
            required="" autofocus="">
     <input type="text" id="artistName" class="form-control" placeholder="<fmt:message key="addtrack.name_artist"/>">
@@ -29,6 +26,7 @@
     <button class="add_track_btn" type="submit"><fmt:message key="button.add_track"/></button>
   </form>
 </div>
+<c:import url="components/Footer.jsp"/>
 </body>
 </html>
 
