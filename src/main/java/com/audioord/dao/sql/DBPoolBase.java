@@ -87,7 +87,7 @@ public abstract class DBPoolBase implements ConnectionSource {
   protected Connection newConnection(Driver driver) throws SQLException {
     Objects.requireNonNull(driver);
     Properties props = new Properties();
-    props.setProperty("username", getUser());
+    props.setProperty("user", getUser());
     props.setProperty("password", getPassword());
     Connection connection = driver.connect(getUrl(), props);
     return new ConnectionWrapper(connection, this);

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AuthInfoDao extends BaseEntityDao<AuthInfo, String> {
-  public static final String SQL_GET_AUTH_BY_ID = "SELECT";
+  public static final String SQL_GET_AUTH_BY_ID = "SELECT UserName, Password FROM AuthInfo WHERE Username=?";
 
   private EntityMapper<AuthInfo> mapper = new EntityMapper<AuthInfo>() {
     @Override
