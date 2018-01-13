@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class RequestHandler {
 
   private static final Logger LOG = Logger.getLogger(RequestHandler.class);
-  private static final String PRM_COMMAND_NAME = "command_name";
+  private static final String PRM_COMMAND_NAME = "name";
 
   public RequestHandler() {
     super();

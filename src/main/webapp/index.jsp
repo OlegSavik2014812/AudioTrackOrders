@@ -14,11 +14,20 @@
   <title>audioord</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="<c:url value="css/bootstrap.min.css"/>" rel="stylesheet">
+  <link href="<c:url value="css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
   <!-- Custom styles for this page -->
-  <link href="<c:url value="css/audioord.css"/>" rel="stylesheet">
+  <link href="<c:url value="css/audioord.css"/>" rel="stylesheet" type="text/css">
 
 </head>
+
+
+<jsp:include page="pages/NavBar.jsp"/>
+<div class="container-fluid">
+  <div class="row">
+
+
+  </div>
+</div>
 
 
 <body>
