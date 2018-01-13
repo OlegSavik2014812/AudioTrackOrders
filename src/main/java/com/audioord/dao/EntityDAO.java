@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public interface EntityDAO<E extends Entity<K>, K extends Serializable> {
 
-  E getById(K id);
+  E getById(K id) throws DAOException;
 
   E update(E entity);
 

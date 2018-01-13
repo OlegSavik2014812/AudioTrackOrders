@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class DBPool extends DBPoolBase {
+public final class DBPool extends DBPoolBase {
 
   private static final Logger LOG = Logger.getLogger(DBPool.class);
 
@@ -30,9 +30,6 @@ public class DBPool extends DBPoolBase {
 
   /** used connections */
   private BlockingQueue<Connection> used;
-
-  /** Database connection driver */
-  private Driver driver;
 
   private DBPool() {
     super(
@@ -70,10 +67,11 @@ public class DBPool extends DBPoolBase {
       free = new ArrayBlockingQueue<>(SIZE);
       used = new ArrayBlockingQueue<>(SIZE);
 
-      driver = super.loadJdbcDriver();
+      /* Database connection driver */
+      Driver driver = super.loadJdbcDriver();
 
       for (int i = 0; i < SIZE; i++) {
-        Connection connection = newConnection(driver);
+        Connection connection = super.newConnection(driver);
         free.add(connection);
       }
 

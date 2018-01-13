@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-public class ConnectionWrapper implements Connection {
+public final class ConnectionWrapper implements Connection {
 
   private Connection connection;
   private ConnectionSource connectionSource;
