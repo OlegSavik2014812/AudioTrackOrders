@@ -11,7 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
@@ -74,6 +76,35 @@ implements EntityDAO<E, K> {
     }
     return isCreated;
   }
+
+  List<E> findAll(EntityMapper<E> mapper, String sql, Object... params) throws DAOException {
+    Objects.requireNonNull(mapper);
+    List<E> list = new ArrayList<>();
+
+    try {
+      Connection con = connectionSource.getConnection();
+      PreparedStatement st = con.prepareCall(sql);
+      if (params != null && params.length > 0) {
+        for (int i = 0; i < params.length; i++) {
+          Object prm = params[i];
+          st.setObject(i + 1, prm);
+        }
+      }
+      LOG.debug(
+      String.format("Executing query [%s] \n with params %s", sql, Arrays.toString(params)));
+
+      ResultSet rs = st.executeQuery();
+      while (rs.next()) {
+        E obj = mapper.parse(rs);
+        list.add(obj);
+      }
+
+    } catch (PoolException | SQLException e) {
+      throw new DAOException(e);
+    }
+    return list;
+  }
+
 
   protected E find(EntityMapper<E> mapper, String sql, Object... params) throws DAOException {
     Objects.requireNonNull(mapper);

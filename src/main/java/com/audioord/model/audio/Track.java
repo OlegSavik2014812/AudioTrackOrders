@@ -3,20 +3,28 @@ package com.audioord.model.audio;
 import com.audioord.model.Entity;
 
 import java.net.URI;
-import java.util.List;
 
 public class Track extends Entity<Long> {
 
   private String name;
-  private List<String> artists;
+  private String artist;
   private String album;
   private int popularity;
-  private long durationMs;
+  private int price;
   private URI uri;
+  private long duration;
 
-  public Track(String name, List<String> artists, String album) {
+  public long getDuration() {
+    return duration;
+  }
+
+  public void setDuration(long duration) {
+    this.duration = duration;
+  }
+
+  public Track(String name, String artist, String album) {
     this.name = name;
-    this.artists = artists;
+    this.artist = artist;
     this.album = album;
   }
 
@@ -28,12 +36,12 @@ public class Track extends Entity<Long> {
     this.name = name;
   }
 
-  public List<String> getArtists() {
-    return artists;
+  public String getArtist() {
+    return artist;
   }
 
-  public void setArtists(List<String> artists) {
-    this.artists = artists;
+  public void setArtist(String artist) {
+    this.artist = artist;
   }
 
   public String getAlbum() {
@@ -52,12 +60,12 @@ public class Track extends Entity<Long> {
     this.popularity = popularity;
   }
 
-  public long getDurationMs() {
-    return durationMs;
+  public int getPrice() {
+    return price;
   }
 
-  public void setDurationMs(long durationMs) {
-    this.durationMs = durationMs;
+  public void setPrice(int price) {
+    this.price = price;
   }
 
   public URI getUri() {

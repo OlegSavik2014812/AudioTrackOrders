@@ -19,6 +19,15 @@ public class Request {
     return value != null && !value.isEmpty();
   }
 
+  public boolean hasAllParameters(String... params) {
+    for (String param : params) {
+      if (hasParameter(param)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public String getParameter(String paramName) {
     return rawRequest.getParameter(paramName);
   }
