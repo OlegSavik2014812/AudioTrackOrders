@@ -9,12 +9,13 @@ import org.apache.log4j.Logger;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Objects;
 
 public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
-    implements EntityDAO<E, K> {
+implements EntityDAO<E, K> {
 
   private static final Logger LOG = Logger.getLogger(BaseEntityDao.class);
 
@@ -38,7 +39,7 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     boolean isRemoved = false;
 
     try (Connection con = getConnectionSource().getConnection();
-        PreparedStatement st = con.prepareCall(sql)) {
+         PreparedStatement st = con.prepareCall(sql)) {
 
       LOG.debug(String.format("Executing query [%s] \n with params %s", sql, id));
       int i = st.executeUpdate(sql);
@@ -59,11 +60,11 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     boolean isCreated = false;
 
     try (Connection con = getConnectionSource().getConnection();
-        PreparedStatement st = con.prepareCall(sql)) {
+         PreparedStatement st = con.prepareCall(sql)) {
 
       mapper.write(st, entity);
       LOG.debug(
-          String.format("Executing query [%s] \n with entity %s", sql, String.valueOf(entity)));
+      String.format("Executing query [%s] \n with entity %s", sql, String.valueOf(entity)));
 
       int i = st.executeUpdate();
       isCreated = i > 0;
@@ -80,7 +81,7 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     E obj = null;
 
     try (Connection con = connectionSource.getConnection();
-        PreparedStatement st = con.prepareCall(sql)) {
+         PreparedStatement st = con.prepareCall(sql)) {
 
       if (params != null && params.length > 0) {
         for (int i = 0, length = params.length; i < length; i++) {
@@ -90,8 +91,14 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
       }
 
       LOG.debug(
-          String.format("Executing query [%s] \n with params %s", sql, Arrays.toString(params)));
-      obj = mapper.parse(st.executeQuery());
+      String.format("Executing query [%s] \n with params %s", sql, Arrays.toString(params)));
+
+      ResultSet rs = st.executeQuery();
+      if (!rs.isBeforeFirst()) {
+        LOG.debug("No results");
+        return null;
+      }
+      obj = mapper.parse(rs);
 
     } catch (SQLException | PoolException e) {
       throw new DAOException(e);

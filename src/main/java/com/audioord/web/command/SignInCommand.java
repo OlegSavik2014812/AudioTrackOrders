@@ -10,7 +10,6 @@ import com.audioord.web.http.Response;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.util.Enumeration;
 
 public class SignInCommand implements Command {
   public static final String NAME = "sign_in";
@@ -23,15 +22,9 @@ public class SignInCommand implements Command {
   public String execute(Request request, Response response) throws ServletException, IOException, DAOException {
     String userName = request.getParameter("userName");
     String password = request.getParameter("password");
-    Enumeration<String> par = request.raw().getParameterNames();
-//    if (userName == null || userName.isEmpty() || password == null) {
-//      return "/pages/SignIn.jsp";
-//    }
 
     AuthInfo authInfo = authInfoDao.getById(userName);
-//    if (!password.equals(authInfo.getPassword())) {
-//      return "/pages/SignIn.jsp";
-//    }
+
 
     User user = userDAO.getByUsername(authInfo.getUserName());
     if (user != null) {
