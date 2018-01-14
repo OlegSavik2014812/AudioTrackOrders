@@ -94,11 +94,9 @@ implements EntityDAO<E, K> {
       String.format("Executing query [%s] \n with params %s", sql, Arrays.toString(params)));
 
       ResultSet rs = st.executeQuery();
-      if (!rs.isBeforeFirst()) {
-        LOG.debug("No results");
-        return null;
+      if (rs.next()) {
+        obj = mapper.parse(rs);
       }
-      obj = mapper.parse(rs);
 
     } catch (SQLException | PoolException e) {
       throw new DAOException(e);
