@@ -1,9 +1,12 @@
 package com.audioord.dao.sql;
 
+import com.audioord.web.http.StartServletListener;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.Driver;
+import java.sql.SQLException;
+import java.util.Objects;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -31,6 +34,10 @@ public final class DBPool extends DBPoolBase {
   /** used connections */
   private BlockingQueue<Connection> used;
 
+  /**
+   * New DB pool instance that used system props that has been initiated on application startup
+   * {@link StartServletListener}
+   */
   private DBPool() {
     super(
         System.getProperty("db.driver"),
@@ -39,6 +46,11 @@ public final class DBPool extends DBPoolBase {
         System.getProperty("db.url"));
   }
 
+  /**
+   * Thread save pool instance creation, we need to create it once.
+   *
+   * @return {@link ConnectionSource} instance
+   */
   public static ConnectionSource getInstance() {
     if (!isInitialized.get()) {
 
@@ -56,6 +68,7 @@ public final class DBPool extends DBPoolBase {
     return instance;
   }
 
+  /** Internal pool load */
   @Override
   protected void initialize() {
     if (!validate()) {
@@ -75,18 +88,35 @@ public final class DBPool extends DBPoolBase {
         free.add(connection);
       }
 
-    } catch (Exception e) {
+    } catch (SQLException e) {
       LOG.error(e);
     }
   }
 
+  /**
+   * Provides available connection from the pool.
+   *
+   * @return {@link Connection}
+   * @throws PoolException in case of no connections
+   */
   @Override
-  public Connection getConnection() throws InterruptedException {
-    Connection con = free.poll(1, TimeUnit.SECONDS);
-    used.put(con);
+  public Connection getConnection() throws PoolException {
+    Connection con = null;
+    try {
+      con = free.poll(1, TimeUnit.SECONDS);
+      used.put(con);
+    } catch (InterruptedException e) {
+      throw new PoolException(e);
+    }
+
     return con;
   }
 
+  /**
+   * Return connection back in the pool of free connections
+   *
+   * @param con {@link Connection}
+   */
   @Override
   public void returnConnection(Connection con) {
     if (con == null) {
@@ -98,8 +128,20 @@ public final class DBPool extends DBPoolBase {
     used.remove(con);
   }
 
+  /**
+   * Removes connection from the pool, only free connections can be removed.
+   *
+   * @param con {@link Connection}
+   */
   @Override
   public void freeConnection(Connection con) {
+    Objects.requireNonNull(con);
+
     free.remove(con);
+
+    try {
+      if (!con.isClosed()) con.close();
+    } catch (SQLException ignored) {
+    }
   }
 }

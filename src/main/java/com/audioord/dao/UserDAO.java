@@ -9,7 +9,9 @@ import java.sql.SQLException;
 public final class UserDAO extends BaseEntityDao<User, Long> {
 
   private static final String SQL_GET_USER_BY_ID =
-      "SELECT UserName, Role,  FirstName, LastName,  Id FROM User WHERE Id=?";
+      "SELECT UserName, Role,  FirstName, LastName, Id FROM User WHERE Id=?";
+  private static final String SQL_GET_USER_BY_USERNAME =
+      "SELECT UserName, Role,  FirstName, LastName, Id FROM User WHERE UserName=?";
 
   private final EntityMapper<User> userMapper =
       new EntityMapper<User>() {
@@ -28,10 +30,8 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
     return super.getById(id, userMapper, SQL_GET_USER_BY_ID);
   }
 
-  public User getByUsername(String username) {
-
-
-    return null;
+  public User getByUsername(String username) throws DAOException {
+    return super.find(userMapper, SQL_GET_USER_BY_USERNAME, username);
   }
 
   @Override

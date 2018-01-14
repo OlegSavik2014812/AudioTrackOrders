@@ -5,12 +5,18 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * Wraps {@link Connection} to provide ability return it back silently to {@link ConnectionSource}
+ * Better way to work with try with resources
+ *
+ * @see ConnectionWrapper#close()
+ */
 public final class ConnectionWrapper implements Connection {
 
   private Connection connection;
   private ConnectionSource connectionSource;
 
-  public ConnectionWrapper(Connection connection, ConnectionSource connectionSource) {
+  ConnectionWrapper(Connection connection, ConnectionSource connectionSource) {
     this.connection = connection;
     this.connectionSource = connectionSource;
   }
