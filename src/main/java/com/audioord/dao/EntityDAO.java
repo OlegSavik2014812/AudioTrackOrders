@@ -8,7 +8,7 @@ public interface EntityDAO<E extends Entity<K>, K extends Serializable> {
 
   E getById(K id) throws DAOException;
 
-  E update(E entity);
+  E update(E entity) throws DAOException;
 
   boolean delete(K id) throws DAOException;
 

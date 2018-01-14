@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public final class UserDAO extends BaseEntityDao<User, Long> {
 
   public static final String SQL_UPDATE_USER_BY_ID =
-      "UPDATE User SET UserName = ?, Role = ?, FirstName = ?, LastName = ? WHERE order_id = ?";
+      "UPDATE User SET UserName = ?, Role = ?, FirstName = ?, LastName = ? WHERE Id = ?";
 
   private static final String SQL_GET_USER_BY_ID =
       "SELECT UserName, Role,  FirstName, LastName, Id FROM User WHERE Id=?";
@@ -38,8 +38,8 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
         public void write(PreparedStatement st, User user) throws SQLException {
           st.setString(1, user.getUsername());
           st.setObject(2, user.getRole());
-          st.setObject(3, user.getFirstName());
-          st.setObject(4, user.getLastName());
+          st.setString(3, user.getFirstName());
+          st.setString(4, user.getLastName());
         }
       };
 
@@ -53,9 +53,9 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
   }
 
   @Override
-  public User update(User user) {
-
-    return null;
+  public User update(User user) throws DAOException {
+    super.update(user, userMapper, SQL_UPDATE_USER_BY_ID);
+    return getById(user.getId());
   }
 
   @Override

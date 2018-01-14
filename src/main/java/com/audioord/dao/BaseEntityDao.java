@@ -40,6 +40,7 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     try (Connection con = getConnectionSource().getConnection();
         PreparedStatement st = con.prepareCall(sql)) {
 
+      LOG.debug(String.format("Executing query [%s] \n with params %s", sql, id));
       int i = st.executeUpdate(sql);
 
       isRemoved = i > 0;

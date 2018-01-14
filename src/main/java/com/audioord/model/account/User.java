@@ -9,7 +9,6 @@ public class User extends Entity<Long> {
   private String lastName;
   private ROLE role;
 
-
   public User(String username, ROLE role) {
     this.username = username;
     this.role = role;
