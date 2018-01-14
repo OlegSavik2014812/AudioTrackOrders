@@ -11,14 +11,14 @@
   <title><fmt:message key="button.signup"/></title>
 
   <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/audioord.css" rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/audioord.css" rel="stylesheet">
   <!-- Custom styles for this template -->
 </head>
 <body>
 <c:import url="components/NavBar.jsp"/>
 <div class="container">
-  <form class="form-signin" method="post" action="/action">
+  <form class="form-signin" method="post" action="/audioord/action?name=sign_up">
     <h2 class="form-signin-heading"><fmt:message key="signup.please_signup"/></h2>
     <label for="inputEmail" class="sr-only"><fmt:message key="signin.email_address_msg"/> </label>
     <input type="email" name="userName" id="inputEmail" class="form-control"

@@ -2,22 +2,31 @@ package com.audioord.dao;
 
 import com.audioord.model.auth.AuthInfo;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public final class AuthInfoDao extends BaseEntityDao<AuthInfo, String> {
 
   private static final String SQL_GET_AUTH_BY_ID =
-      "SELECT UserName, Password FROM AuthInfo WHERE Username=?";
+  "SELECT UserName, Password FROM AuthInfo WHERE Username = ?";
+  private static final String SQL_UPDATE_AUTH_BY_ID =
+  "UPDATE AuthInfo SET UserName = ?, Password = ? WHERE Username = ?";
 
   private final EntityMapper<AuthInfo> mapper =
-      new EntityMapper<AuthInfo>() {
-        @Override
-        public AuthInfo parse(ResultSet rs) throws SQLException {
-          AuthInfo authInfo = new AuthInfo(rs.getString(1), rs.getString(2));
-          return authInfo;
-        }
-      };
+  new EntityMapper<AuthInfo>() {
+    @Override
+    public AuthInfo parse(ResultSet rs) throws SQLException {
+      AuthInfo authInfo = new AuthInfo(rs.getString(1), rs.getString(2));
+      return authInfo;
+    }
+
+    @Override
+    public void write(PreparedStatement st, AuthInfo entity) throws SQLException {
+      st.setString(1, entity.getUserName());
+      st.setString(2, entity.getPassword());
+    }
+  };
 
   @Override
   public AuthInfo getById(String id) throws DAOException {
@@ -25,8 +34,9 @@ public final class AuthInfoDao extends BaseEntityDao<AuthInfo, String> {
   }
 
   @Override
-  public AuthInfo update(AuthInfo entity) {
-    return null;
+  public AuthInfo update(AuthInfo authInfo) throws DAOException {
+    super.update(authInfo, mapper, SQL_UPDATE_AUTH_BY_ID);
+    return getById(authInfo.getId());
   }
 
   @Override

@@ -19,7 +19,7 @@
 <div class="container">
 
   <div class="row">
-    <form class="form-signin" method="post" action="/action?name=sign_in">
+    <form class="form-signin" method="post" action="/audioord/action?name=sign_in">
       <h2 class="form-signin-heading"><fmt:message key="signin.please_sign"/></h2>
       <label for="inputEmail" class="sr-only"><fmt:message key="signin.email_address_msg"/> </label>
       <input type="email" id="inputEmail" class="form-control"
