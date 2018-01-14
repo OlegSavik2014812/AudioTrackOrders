@@ -22,13 +22,26 @@ public class Request {
   public boolean hasAllParameters(String... params) {
     for (String param : params) {
       if (hasParameter(param)) {
-        return true;
+        continue;
       }
+      return false;
     }
-    return false;
+    return true;
   }
 
   public String getParameter(String paramName) {
     return rawRequest.getParameter(paramName);
+  }
+
+  public void setSessionAttribute(String name, Object v) {
+    rawRequest.getSession().setAttribute(name, v);
+  }
+
+  public void removeSessionAttribute(String name) {
+    rawRequest.getSession().removeAttribute(name);
+  }
+
+  public void invalidateSession() {
+    rawRequest.getSession().invalidate();
   }
 }

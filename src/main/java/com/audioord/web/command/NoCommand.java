@@ -8,6 +8,6 @@ public final class NoCommand implements Command {
   @Override
   public String execute(Request request, Response response) {
     // use home page as default
-    return "/index.jsp";
+    return Pages.INDEX_PAGE ;
   }
 }

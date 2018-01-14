@@ -10,20 +10,23 @@ import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 
 public class SignUpCommand implements Command {
+
   public static final String NAME = "sign_up";
-  private static final String INDEX_PATH = "/index.jsp";
+
   private AuthInfoDao authInfoDao = new AuthInfoDao();
   private UserDAO userDAO = new UserDAO();
 
   @Override
   public String execute(Request request, Response response) throws DAOException {
     if (!request.hasAllParameters("userName", "password")) {
-      return "/pages/SignUp.jsp";
+      return Pages.SIGN_UP_PAGE;
     }
+
     String userName = request.getParameter("userName");
     String password = request.getParameter("password");
     String firstName = request.getParameter("firstName");
     String lastName = request.getParameter("lastName");
+
     AuthInfo authInfo = new AuthInfo(userName, password);
     authInfoDao.create(authInfo);
     User user = new User(userName, ROLE.CLIENT);
@@ -31,6 +34,7 @@ public class SignUpCommand implements Command {
     user.setLastName(lastName);
     request.raw().getSession().setAttribute("user", user);
     userDAO.create(user);
-    return INDEX_PATH;
+
+    return Pages.INDEX_PAGE;
   }
 }

@@ -9,7 +9,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TrackDAO extends BaseEntityDao<Track, Long> {
-  public static final String GET_ALL_TRACKS_SQL = "select track, artist, album , popularity , uri , price, duration from track order by Popularity desc";
+
+  private static final String GET_ALL_TRACKS_SQL = "select track, artist, album , popularity , uri , price, duration from track order by Popularity desc";
 
   private EntityMapper<Track> mapper = new EntityMapper<Track>() {
     @Override
@@ -26,7 +27,7 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
     public void write(PreparedStatement st, Track entity) throws SQLException {
 
     }
-  }
+  };
 
   @Override
   public Track getById(Long id) throws DAOException {
@@ -46,9 +47,5 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   @Override
   public boolean create(Track entity) throws DAOException {
     return false;
-  }
-
-  public List<Track> getAll() {
-    super.findAll(mapper,GET_ALL_TRACKS_SQL,)
   }
 }

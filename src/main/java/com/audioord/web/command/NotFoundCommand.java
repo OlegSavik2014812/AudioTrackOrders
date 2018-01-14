@@ -9,6 +9,6 @@ public final class NotFoundCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) {
-    return "/404.jsp";
+    return Pages.NOT_FOUND_PAGE;
   }
 }
