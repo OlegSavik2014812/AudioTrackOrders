@@ -19,13 +19,13 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#"><fmt:message key="navbar.to_home"/> <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#"><fmt:message key="navbar.to_home"/> <span class="sr-only"></span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<c:url value="/pages/SignIn.jsp"/>"><fmt:message key="button.signin"/> </a>
+        <a class="nav-link" href="<c:url value="/action?name=sign_in"/>"><fmt:message key="button.signin"/> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<c:url value="/pages/SignUp.jsp"/> "><fmt:message key="button.signup"/> </a>
+        <a class="nav-link" href="<c:url value="/action?name=sign_up"/> "><fmt:message key="button.signup"/> </a>
       </li>
     </ul>
     <form class="form-inline mt-2 mt-md-0">

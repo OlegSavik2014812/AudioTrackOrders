@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 
 public class SignInCommand implements Command {
+
   public static final String NAME = "sign_in";
   private static final String INDEX_PATH = "/index.jsp";
 
@@ -22,9 +23,18 @@ public class SignInCommand implements Command {
   public String execute(Request request, Response response) throws ServletException, IOException, DAOException {
     String userName = request.getParameter("userName");
     String password = request.getParameter("password");
+    if (userName == null && password == null) {
+      return "/pages/SignIn.jsp";
+    }
 
     AuthInfo authInfo = authInfoDao.getById(userName);
+    if (authInfo == null) { // unknown user
+      return "/pages/SignIn.jsp";
+    }
 
+    if (!authInfo.getPassword().equals(password)) { // wrong password
+      return "/pages/SignIn.jsp";
+    }
 
     User user = userDAO.getByUsername(authInfo.getUserName());
     if (user != null) {

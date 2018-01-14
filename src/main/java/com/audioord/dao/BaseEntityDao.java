@@ -86,7 +86,7 @@ implements EntityDAO<E, K> {
       if (params != null && params.length > 0) {
         for (int i = 0, length = params.length; i < length; i++) {
           Object prm = params[i];
-          st.setObject(i, prm);
+          st.setObject(i + 1, prm);
         }
       }
 

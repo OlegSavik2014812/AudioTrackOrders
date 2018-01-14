@@ -9,9 +9,9 @@ import java.sql.SQLException;
 public final class AuthInfoDao extends BaseEntityDao<AuthInfo, String> {
 
   private static final String SQL_GET_AUTH_BY_ID =
-  "SELECT UserName, Password FROM AuthInfo WHERE Username = ?";
+  "SELECT UserName, Password FROM AuthInfo WHERE UserName = ?";
   private static final String SQL_UPDATE_AUTH_BY_ID =
-  "UPDATE AuthInfo SET UserName = ?, Password = ? WHERE Username = ?";
+  "UPDATE AuthInfo SET UserName = ?, Password = ? WHERE UserName = ?";
 
   private final EntityMapper<AuthInfo> mapper =
   new EntityMapper<AuthInfo>() {
@@ -30,7 +30,7 @@ public final class AuthInfoDao extends BaseEntityDao<AuthInfo, String> {
 
   @Override
   public AuthInfo getById(String id) throws DAOException {
-    return super.getById(id, mapper, SQL_GET_AUTH_BY_ID);
+    return getById(id, mapper, SQL_GET_AUTH_BY_ID);
   }
 
   @Override
