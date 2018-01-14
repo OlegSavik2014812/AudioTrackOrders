@@ -18,4 +18,9 @@ public class AuthInfo extends Entity<String> {
   public String getPassword() {
     return password;
   }
+
+  @Override
+  public String toString() {
+    return "AuthInfo{" + "password='" + password + '\'' + '}';
+  }
 }
