@@ -17,6 +17,7 @@ public final class Commands {
     commands.put(NotFoundCommand.NAME, new NotFoundCommand());
     commands.put(SignInCommand.NAME, new SignInCommand());
     commands.put(SignUpCommand.NAME, new SignUpCommand());
+    commands.put(SignOutCommand.NAME, new SignOutCommand());
     return commands;
   }
 

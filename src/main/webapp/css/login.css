@@ -1,0 +1,17 @@
+.form-signin {
+  max-width: 330px;
+  margin: 0 auto;
+  padding: 24px 23px 20px;
+  position: relative;
+}
+
+.form-signin-heading {
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 34px;
+}
+
+body {
+  padding-top: 200px;
+  padding-bottom: 40px;
+}
