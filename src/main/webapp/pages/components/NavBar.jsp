@@ -15,22 +15,20 @@
     <img src="<c:url value="/img/logo.png"/>" width="30" height="30">
     <fmt:message key="navbar.head_name"/>
   </a>
-
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+  <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto">
-
       <c:if test="${sessionScope.USER == null }">
-        <c:if test="${pageScope.current == SignIn.jsp}}">
-          <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/action?name=sign_up"/> "><fmt:message key="button.signup"/></a>
-          </li>
-        </c:if>
-        <c:if test="${pageScope.current == SignUp.jsp}">
-          <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/action?name=sign_in"/>"><fmt:message key="button.signin"/></a>
-          </li>
-        </c:if>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<c:url value="/action?name=sign_up"/> "><fmt:message key="button.signup"/></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<c:url value="/action?name=sign_in"/>"><fmt:message key="button.signin"/></a>
+        </li>
+
       </c:if>
+
       <c:if test="${sessionScope.USER != null}">
         <li class="nav-item">
           <a class="nav-link" href="<c:url value="/action?name=sign_out"/> "><fmt:message key="button.signout"/></a>
