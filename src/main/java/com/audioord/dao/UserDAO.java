@@ -12,6 +12,11 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
       "SELECT UserName, Role,  FirstName, LastName, Id FROM User WHERE Id=?";
   private static final String SQL_GET_USER_BY_USERNAME =
       "SELECT UserName, Role,  FirstName, LastName, Id FROM User WHERE UserName=?";
+  private static final String SQL_CREATE_USER =
+      "INSERT INTO User (UserName, Role,  FirstName, LastName) VALUES (?,?,?,?)";
+
+  public static final String SQL_UPDATE_USER =
+  "UPDATE User SET UserName = ?, Role = ?, FirstName = ?, LastName = ? WHERE order_id = ?";
 
   private final EntityMapper<User> userMapper =
       new EntityMapper<User>() {

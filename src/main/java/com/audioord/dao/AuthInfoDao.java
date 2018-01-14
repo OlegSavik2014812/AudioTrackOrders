@@ -5,12 +5,12 @@ import com.audioord.model.auth.AuthInfo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AuthInfoDao extends BaseEntityDao<AuthInfo, String> {
+public final class AuthInfoDao extends BaseEntityDao<AuthInfo, String> {
 
   private static final String SQL_GET_AUTH_BY_ID =
       "SELECT UserName, Password FROM AuthInfo WHERE Username=?";
 
-  private EntityMapper<AuthInfo> mapper =
+  private final EntityMapper<AuthInfo> mapper =
       new EntityMapper<AuthInfo>() {
         @Override
         public AuthInfo parse(ResultSet rs) throws SQLException {
