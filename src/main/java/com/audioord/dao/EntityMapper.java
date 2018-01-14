@@ -2,6 +2,7 @@ package com.audioord.dao;
 
 import com.audioord.model.Entity;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -16,4 +17,6 @@ public interface EntityMapper<T extends Entity> {
    * @throws SQLException in case of nay issues
    */
   T parse(ResultSet rs) throws SQLException;
+
+  void write(PreparedStatement st, T entity) throws SQLException;
 }

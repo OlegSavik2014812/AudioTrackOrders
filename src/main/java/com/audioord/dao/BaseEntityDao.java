@@ -32,6 +32,47 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     return connectionSource;
   }
 
+  protected boolean remove(K id, String sql) throws DAOException {
+    Objects.requireNonNull(id);
+
+    boolean isRemoved = false;
+
+    try (Connection con = getConnectionSource().getConnection();
+        PreparedStatement st = con.prepareCall(sql)) {
+
+      int i = st.executeUpdate(sql);
+
+      isRemoved = i > 0;
+
+    } catch (SQLException | PoolException e) {
+      throw new DAOException(e);
+    }
+
+    return isRemoved;
+  }
+
+  protected boolean update(E entity, EntityMapper<E> mapper, String sql) throws DAOException {
+    Objects.requireNonNull(entity);
+    Objects.requireNonNull(mapper);
+
+    boolean isCreated = false;
+
+    try (Connection con = getConnectionSource().getConnection();
+        PreparedStatement st = con.prepareCall(sql)) {
+
+      mapper.write(st, entity);
+      LOG.debug(
+          String.format("Executing query [%s] \n with entity %s", sql, String.valueOf(entity)));
+
+      int i = st.executeUpdate();
+      isCreated = i > 0;
+
+    } catch (SQLException | PoolException e) {
+      throw new DAOException(e);
+    }
+    return isCreated;
+  }
+
   protected E find(EntityMapper<E> mapper, String sql, Object... params) throws DAOException {
     Objects.requireNonNull(mapper);
 

@@ -10,7 +10,7 @@ public interface EntityDAO<E extends Entity<K>, K extends Serializable> {
 
   E update(E entity);
 
-  boolean delete(K id);
+  boolean delete(K id) throws DAOException;
 
-  boolean create(E entity);
+  boolean create(E entity) throws DAOException;
 }
