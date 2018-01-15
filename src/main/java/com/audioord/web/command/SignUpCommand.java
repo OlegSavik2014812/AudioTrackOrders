@@ -9,6 +9,8 @@ import com.audioord.model.account.User;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 
+import java.util.Objects;
+
 public class SignUpCommand implements Command {
 
   public static final String NAME = "sign_up";
@@ -18,16 +20,22 @@ public class SignUpCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws DAOException {
-    if (!request.hasAllParameters("userName", "password")) {
+    if (!request.hasAllParameters("userName", "password1", "password2")) {
       return Pages.SIGN_UP_PAGE;
     }
 
     String userName = request.getParameter("userName");
-    String password = request.getParameter("password");
     String firstName = request.getParameter("firstName");
     String lastName = request.getParameter("lastName");
 
-    AuthInfo authInfo = new AuthInfo(userName, password);
+    String password1 = request.getParameter("password1");
+    String password2 = request.getParameter("password2");
+
+    if (Objects.equals(password1, password2) && password1.length() >= 4) {
+      return Pages.SIGN_UP_PAGE; // password not confirmed, or have incorrect length
+    }
+
+    AuthInfo authInfo = new AuthInfo(userName, password1);
 
     if (!authInfoDao.create(authInfo)) {
       return Pages.SIGN_UP_PAGE; // could not create auth info, probably username already used
