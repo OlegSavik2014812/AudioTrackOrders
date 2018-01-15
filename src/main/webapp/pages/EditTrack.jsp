@@ -1,16 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
-<head>
+
   <fmt:requestEncoding value="UTF-8"/>
   <fmt:setLocale value="${sessionScope.local}"/>
   <fmt:setBundle basename="i18n.MessageBundle"/>
-  <link rel="icon" href="../../../../favicon.ico">
-  <title><fmt:message key="addtrack.title"/></title>
-  <!-- Bootstrap core CSS -->
-  <link href="../css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom styles for this template -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><fmt:message key="index.title"/></title>
+  <c:import url="components/css_import.jsp"/>
 </head>
 <body>
 <c:import url="components/NavBar.jsp"/>
@@ -26,7 +26,7 @@
     <button class="add_track_btn" type="submit"><fmt:message key="button.add_track"/></button>
   </form>
 </div>
-<c:import url="components/Footer.jsp"/>
+<c:import url="components/js_import.jsp"/>
 </body>
 </html>
 

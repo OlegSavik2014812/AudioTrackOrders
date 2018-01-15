@@ -2,14 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fmt:requestEncoding value="UTF-8"/>
-<fmt:setLocale value="${sessionScope.local}"/>
-<fmt:setBundle basename="i18n.MessageBundle"/>
+  <fmt:requestEncoding value="UTF-8"/>
+  <fmt:setLocale value="${sessionScope.local}"/>
+  <fmt:setBundle basename="i18n.MessageBundle"/>
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <c:import url="components/Meta.jsp"/>
-
+  <title><fmt:message key="index.title"/></title>
+  <c:import url="components/css_import.jsp"/>
   <link href="<c:url value="/css/login.css"/>" rel="stylesheet" type="text/css">
 </head>
 
@@ -60,6 +61,6 @@
     </form>
   </div>
 </div>
-<c:import url="components/Footer.jsp"/>
+<c:import url="components/js_import.jsp"/>
 </body>
 </html>

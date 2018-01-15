@@ -1,8 +1,12 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<fmt:requestEncoding value="UTF-8"/>
-<fmt:setBundle basename="i18n.MessageBundle"/>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+  <fmt:requestEncoding value="UTF-8"/>
+  <fmt:setLocale value="${sessionScope.local}"/>
+  <fmt:setBundle basename="i18n.MessageBundle"/>
+
+
 <h2><fmt:message key="index.most_popular"/></h2>
 <div class="table-responsive">
   <table class="table table-striped">
@@ -29,10 +33,10 @@
         <td><c:out value="${track.price}"/></td>
         <td><c:out value="${track.duration}"/></td>
         <td>
-        <c:if test="${sessionScope.USER!=null}">
-          <input type="checkbox" class="form-check-input" id="checkAdd">
-          <label class="form-check-label" for="checkAdd"><fmt:message key="label.add"/> </label>
-        </c:if>
+          <c:if test="${sessionScope.USER!=null}">
+            <input type="checkbox" class="form-check-input" id="checkAdd">
+            <label class="form-check-label" for="checkAdd"><fmt:message key="label.add"/> </label>
+          </c:if>
         </td>
       </tr>
     </c:forEach>

@@ -1,9 +1,10 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<fmt:requestEncoding value="UTF-8"/>
-<fmt:setBundle basename="i18n.MessageBundle"/>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+  <fmt:requestEncoding value="UTF-8"/>
+  <fmt:setLocale value="${sessionScope.local}"/>
+  <fmt:setBundle basename="i18n.MessageBundle"/>
 
 <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
   <ul class="nav nav-pills flex-column">
@@ -20,7 +21,7 @@
         key="index.best_selling"/> </a>
     </li>
 
-    <c:if test="%{User.Role == 'ROLE.ADMIN'}">
+    <c:if test="${sessionScope.USER.role == 'ADMIN'}">
       <li class="nav-item">
         <a class="nav-link" href="#"><fmt:message key="menu.add_tarck"/></a>
       </li>

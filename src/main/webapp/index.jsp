@@ -1,11 +1,17 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${sessionScope.local}" scope="session"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+  <fmt:requestEncoding value="UTF-8"/>
+  <fmt:setLocale value="${sessionScope.local}"/>
+  <fmt:setBundle basename="i18n.MessageBundle"/>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <c:import url="pages/components/Meta.jsp"/>
+  <title><fmt:message key="index.title"/></title>
+  <c:import url="pages/components/css_import.jsp"/>
 </head>
 <body>
 <c:import url="pages/components/NavBar.jsp"/>
@@ -13,16 +19,11 @@
   <div class="row">
     <c:import url="pages/components/Menu.jsp"/>
     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-      <c:import url="pages/TrackList.jsp"/>
+      <c:import url="pages/components/TrackList.jsp"/>
     </main>
   </div>
 </div>
-
-<%--Bootstrap--%>
-<script src="<c:url value="js/jquery-3.1.1.slim.min.js"/>"></script>
-<script src="<c:url value="js/tether.min.js"/>"></script>
-<script src="<c:url value="js/bootstrap.min.js"/>"></script>
-<script src="<c:url value="js/ie10-viewport-bug-workaround.js"/>"></script>
+<c:import url="pages/components/js_import.jsp"/>
 </body>
 
 </html>

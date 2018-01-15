@@ -1,27 +1,19 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<fmt:requestEncoding value="UTF-8"/>
+<fmt:setLocale value="${sessionScope.local}"/>
+<fmt:setBundle basename="i18n.MessageBundle"/>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <fmt:requestEncoding value="UTF-8"/>
-  <fmt:setLocale value="ru"/>
-  <fmt:setBundle basename="i18n.MessageBundle_ru"/>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="shortcut icon" href="<c:url value="favicon.ico"/>" type="image/x-icon">
-  <link rel="icon" href="<c:url value="favicon.ico"/>" type="image/x-icon">
-
-  <!-- Bootstrap core CSS -->
-  <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
-
   <title><fmt:message key="error.title"/></title>
+  <c:import url="pages/components/css_import.jsp"/>
 </head>
 
 <body>
-
 <%--simple style for error page--%>
 <style>
   body {
@@ -37,8 +29,6 @@
     margin-top: 15px;
     margin-bottom: 15px;
   }
-
-
 </style>
 
 <div class="container">
@@ -51,11 +41,15 @@
           <fmt:message key="error.sorry"/>
         </div>
         <div class="error-actions">
-          <button type="button" class="btn btn-link" value=><fmt:message key="navbar.to_home"/></button>
+
+          <a class="nav-link" href="<c:url value="/"/>"><fmt:message
+            key="navbar.to_home"/></a>
+
         </div>
       </div>
     </div>
   </div>
 </div>
+<c:import url="pages/components/js_import.jsp"/>
 </body>
 </html>
