@@ -18,7 +18,7 @@ public final class Commands {
     commands.put(SignInCommand.NAME, new SignInCommand());
     commands.put(SignUpCommand.NAME, new SignUpCommand());
     commands.put(SignOutCommand.NAME, new SignOutCommand());
-
+    commands.put(TrackListCommand.NAME, new TrackListCommand());
     return commands;
   }
 

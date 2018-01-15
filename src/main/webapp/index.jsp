@@ -12,7 +12,7 @@
   <div class="row">
     <c:import url="pages/components/Menu.jsp"/>
     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-      <c:import url="pages/MostPopular.jsp"/>
+      <c:import url="pages/TrackList.jsp"/>
     </main>
   </div>
 </div>

@@ -13,22 +13,30 @@
       <th><fmt:message key="index.name_artist"/></th>
       <th><fmt:message key="index.name_album"/></th>
       <th><fmt:message key="index.popularity"/></th>
+      <th><fmt:message key="index.uri"/></th>
       <th><fmt:message key="index.price"/></th>
+      <th><fmt:message key="index.duration"/></th>
       <th><fmt:message key="index.add_to_order"/></th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>1,001</td>
-      <td>Lorem</td>
-      <td>ipsum</td>
-      <td>dolor</td>
-      <td>sit</td>
-      <td>
-        <input type="checkbox" class="form-check-input" id="checkAdd">
-        <label class="form-check-label" for="checkAdd"><fmt:message key="label.add"/> </label>
-      </td>
-    </tr>
+    <c:forEach items="${requestScope.TrackList}" var="track">
+      <tr>
+        <td><c:out value="${track.name}"/></td>
+        <td><c:out value="${track.artist}"/></td>
+        <td><c:out value="${track.album}"/></td>
+        <td><c:out value="${track.popularity}"/></td>
+        <td><c:out value="${track.uri}"/></td>
+        <td><c:out value="${track.price}"/></td>
+        <td><c:out value="${track.duration}"/></td>
+        <td>
+        <c:if test="${sessionScope.USER!=null}">
+          <input type="checkbox" class="form-check-input" id="checkAdd">
+          <label class="form-check-label" for="checkAdd"><fmt:message key="label.add"/> </label>
+        </c:if>
+        </td>
+      </tr>
+    </c:forEach>
     </tbody>
   </table>
 </div>

@@ -11,8 +11,8 @@
   <title><fmt:message key="button.signup"/></title>
 
   <!-- Bootstrap core CSS -->
-  <link href="../css/bootstrap.min.css" rel="stylesheet">
-  <link href="../css/audioord.css" rel="stylesheet">
+  <link href="<c:url value="css/bootstrap.min.css"/>" rel="stylesheet">
+  <link href="<c:url value="css/audioord.css"/> " rel="stylesheet">
   <!-- Custom styles for this template -->
 </head>
 <body>

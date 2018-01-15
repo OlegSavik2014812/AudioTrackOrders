@@ -1,6 +1,7 @@
 package com.audioord.web.http;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 public class Request {
 
@@ -27,6 +28,11 @@ public class Request {
       return false;
     }
     return true;
+  }
+
+  public void addAttribute(String name, Object v) {
+    Objects.requireNonNull(v, "NULL attribute not allowed");
+    rawRequest.setAttribute(name, v);
   }
 
   public String getParameter(String paramName) {

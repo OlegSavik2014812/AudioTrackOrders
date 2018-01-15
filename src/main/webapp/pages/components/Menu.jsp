@@ -8,15 +8,17 @@
 
 <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
   <ul class="nav nav-pills flex-column">
-
     <li class="nav-item">
-      <a class="nav-link" href="#"><fmt:message key="index.brand_new"/></a>
+      <a class="nav-link" href="<c:url value="/action?name=filter"/>" name="most_popular"><fmt:message
+        key="index.most_popular"/></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#"><fmt:message key="index.most_popular"/></a>
+      <a class="nav-link" href="<c:url value="/action?name=filter"/>"><fmt:message
+        key="index.brand_new"/></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#"> <fmt:message key="index.best_selling"/> </a>
+      <a class="nav-link" href="<c:url value="/action?name=filter"/>" name="best_selling"><fmt:message
+        key="index.best_selling"/> </a>
     </li>
 
     <c:if test="%{User.Role == 'ROLE.ADMIN'}">
