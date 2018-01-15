@@ -1,7 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:requestEncoding value="UTF-8"/>
-<fmt:setLocale value="ru"/>
 <fmt:setBundle basename="i18n.MessageBundle"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 

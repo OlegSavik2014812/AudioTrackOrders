@@ -2,7 +2,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <fmt:requestEncoding value="UTF-8"/>
-<fmt:setLocale value="ru"/>
 <fmt:setBundle basename="i18n.MessageBundle"/>
 <h2><fmt:message key="index.most_popular"/></h2>
 <div class="table-responsive">

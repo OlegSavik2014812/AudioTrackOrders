@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:requestEncoding value="UTF-8"/>
-<fmt:setLocale value="${sessionScope.local}"/>
+<fmt:setLocale value="${sessionScope.local}" scope="session"/>
 <fmt:setBundle basename="i18n.MessageBundle"/>
 
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
