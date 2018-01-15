@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
-implements EntityDAO<E, K> {
+    implements EntityDAO<E, K> {
 
   private static final Logger LOG = Logger.getLogger(BaseEntityDao.class);
 
@@ -36,12 +36,12 @@ implements EntityDAO<E, K> {
   }
 
   protected boolean remove(K id, String sql) throws DAOException {
-    Objects.requireNonNull(id);
+    Objects.requireNonNull(id, "Param Id could not be null");
 
     boolean isRemoved = false;
 
     try (Connection con = getConnectionSource().getConnection();
-         PreparedStatement st = con.prepareCall(sql)) {
+        PreparedStatement st = con.prepareCall(sql)) {
 
       LOG.debug(String.format("Executing query [%s] \n with params %s", sql, id));
       int i = st.executeUpdate(sql);
@@ -56,17 +56,17 @@ implements EntityDAO<E, K> {
   }
 
   protected boolean update(E entity, EntityMapper<E> mapper, String sql) throws DAOException {
-    Objects.requireNonNull(entity);
-    Objects.requireNonNull(mapper);
+    Objects.requireNonNull(entity, "Param Entity could not be null");
+    Objects.requireNonNull(mapper, "Param Mapper could not be null");
 
     boolean isCreated = false;
 
     try (Connection con = getConnectionSource().getConnection();
-         PreparedStatement st = con.prepareCall(sql)) {
+        PreparedStatement st = con.prepareCall(sql)) {
 
       mapper.write(st, entity);
       LOG.debug(
-      String.format("Executing query [%s] \n with entity %s", sql, String.valueOf(entity)));
+          String.format("Executing query [%s] \n with entity %s", sql, String.valueOf(entity)));
 
       int i = st.executeUpdate();
       isCreated = i > 0;
@@ -78,12 +78,13 @@ implements EntityDAO<E, K> {
   }
 
   List<E> findAll(EntityMapper<E> mapper, String sql, Object... params) throws DAOException {
-    Objects.requireNonNull(mapper);
+    Objects.requireNonNull(mapper, "Param Mapper could not be null");
+
     List<E> list = new ArrayList<>();
 
-    try {
-      Connection con = connectionSource.getConnection();
-      PreparedStatement st = con.prepareCall(sql);
+    try (Connection con = connectionSource.getConnection();
+        PreparedStatement st = con.prepareCall(sql)) {
+
       if (params != null && params.length > 0) {
         for (int i = 0; i < params.length; i++) {
           Object prm = params[i];
@@ -91,7 +92,7 @@ implements EntityDAO<E, K> {
         }
       }
       LOG.debug(
-      String.format("Executing query [%s] \n with params %s", sql, Arrays.toString(params)));
+          String.format("Executing query [%s] \n with params %s", sql, Arrays.toString(params)));
 
       ResultSet rs = st.executeQuery();
       while (rs.next()) {
@@ -105,14 +106,13 @@ implements EntityDAO<E, K> {
     return list;
   }
 
-
   protected E find(EntityMapper<E> mapper, String sql, Object... params) throws DAOException {
     Objects.requireNonNull(mapper);
 
     E obj = null;
 
     try (Connection con = connectionSource.getConnection();
-         PreparedStatement st = con.prepareCall(sql)) {
+        PreparedStatement st = con.prepareCall(sql)) {
 
       if (params != null && params.length > 0) {
         for (int i = 0, length = params.length; i < length; i++) {
@@ -122,7 +122,7 @@ implements EntityDAO<E, K> {
       }
 
       LOG.debug(
-      String.format("Executing query [%s] \n with params %s", sql, Arrays.toString(params)));
+          String.format("Executing query [%s] \n with params %s", sql, Arrays.toString(params)));
 
       ResultSet rs = st.executeQuery();
       if (rs.next()) {

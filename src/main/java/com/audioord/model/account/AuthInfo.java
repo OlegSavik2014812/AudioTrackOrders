@@ -1,4 +1,4 @@
-package com.audioord.model.auth;
+package com.audioord.model.account;
 
 import com.audioord.model.Entity;
 

@@ -22,7 +22,7 @@ public class MainServlet extends HttpServlet {
   protected void service(HttpServletRequest req, HttpServletResponse res)
       throws ServletException, IOException {
     try {
-      doService(req, res);
+      processRequest(req, res);
     } catch (IOException ignore) {
       // ignore, to late for this
     } catch (ThreadDeath td) {
@@ -33,11 +33,7 @@ public class MainServlet extends HttpServlet {
     }
   }
 
-  public void doService(HttpServletRequest req, HttpServletResponse res) throws Exception {
-    doServiceInternal(req, res);
-  }
-
-  private void doServiceInternal(HttpServletRequest req, HttpServletResponse res) {
+  public void processRequest(HttpServletRequest req, HttpServletResponse res) throws Exception {
     RequestHandler requestHandler = new RequestHandler();
     requestHandler.doHandle(req, res, getServletContext());
   }

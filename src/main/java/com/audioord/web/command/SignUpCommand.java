@@ -3,9 +3,9 @@ package com.audioord.web.command;
 import com.audioord.dao.AuthInfoDao;
 import com.audioord.dao.DAOException;
 import com.audioord.dao.UserDAO;
+import com.audioord.model.account.AuthInfo;
 import com.audioord.model.account.ROLE;
 import com.audioord.model.account.User;
-import com.audioord.model.auth.AuthInfo;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 
@@ -28,12 +28,21 @@ public class SignUpCommand implements Command {
     String lastName = request.getParameter("lastName");
 
     AuthInfo authInfo = new AuthInfo(userName, password);
-    authInfoDao.create(authInfo);
+
+    if (!authInfoDao.create(authInfo)) {
+      return Pages.SIGN_UP_PAGE; // could not create auth info, probably username already used
+    }
+
     User user = new User(userName, ROLE.CLIENT);
     user.setFirstName(firstName);
     user.setLastName(lastName);
-    request.raw().getSession().setAttribute("user", user);
-    userDAO.create(user);
+
+    if (!userDAO.create(user)) {
+      return Pages.SIGN_UP_PAGE; // could not create user
+    }
+
+    // add current user to session
+    request.setSessionAttribute("user", user);
 
     return Pages.INDEX_PAGE;
   }

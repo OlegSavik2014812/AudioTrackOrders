@@ -54,7 +54,7 @@ public abstract class DBPoolBase implements ConnectionSource {
 
   // UTIL
 
-  protected Driver loadJdbcDriver() throws SQLException {
+  protected Driver loadJdbcDriver() throws PoolException {
     Objects.requireNonNull(driverName);
 
     Driver d = null;
@@ -78,14 +78,15 @@ public abstract class DBPoolBase implements ConnectionSource {
 
     // fail, could not load
     if (d == null) {
-      throw new SQLException("Missing driver: " + driverName);
+      throw new PoolException("Missing driver: " + driverName);
     }
 
     return d;
   }
 
   protected Connection newConnection(Driver driver) throws SQLException {
-    Objects.requireNonNull(driver);
+    Objects.requireNonNull(driver, "Driver could not be null");
+
     Properties props = new Properties();
     props.setProperty("user", getUser());
     props.setProperty("password", getPassword());

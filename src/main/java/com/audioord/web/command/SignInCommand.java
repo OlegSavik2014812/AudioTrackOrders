@@ -4,7 +4,7 @@ import com.audioord.dao.AuthInfoDao;
 import com.audioord.dao.DAOException;
 import com.audioord.dao.UserDAO;
 import com.audioord.model.account.User;
-import com.audioord.model.auth.AuthInfo;
+import com.audioord.model.account.AuthInfo;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 

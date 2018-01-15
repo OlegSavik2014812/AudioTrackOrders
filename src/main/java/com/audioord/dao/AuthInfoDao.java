@@ -1,6 +1,6 @@
 package com.audioord.dao;
 
-import com.audioord.model.auth.AuthInfo;
+import com.audioord.model.account.AuthInfo;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +14,8 @@ public final class AuthInfoDao extends BaseEntityDao<AuthInfo, String> {
   private static final String SQL_UPDATE_AUTH_BY_ID =
       "UPDATE AuthInfo SET UserName = ?, Password = ? WHERE UserName = ?";
 
-  private static final String SQL_DELETE_AUTH_BY_ID = "DELETE FROM AuthInfo WHERE UserName=?";
+  private static final String SQL_DELETE_AUTH_BY_ID =
+      "DELETE FROM AuthInfo WHERE UserName=?";
 
   private static final String SQL_CREATE_AUTH =
       "INSERT INTO AuthInfo (UserName, Password) VALUES (?, ?)";

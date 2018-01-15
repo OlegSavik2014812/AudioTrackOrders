@@ -1,5 +1,7 @@
 package com.audioord.dao.sql;
 
+import java.sql.Connection;
+
 /** Connection source for DB */
 public interface ConnectionSource {
 
@@ -19,7 +21,9 @@ public interface ConnectionSource {
   void returnConnection(java.sql.Connection con);
 
   /**
+   * Removes connection from connection source
    *
-   * @param con */
+   * @param con {@link Connection}
+   */
   void freeConnection(java.sql.Connection con);
 }
