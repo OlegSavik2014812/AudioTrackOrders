@@ -31,7 +31,7 @@ public class SignUpCommand implements Command {
     String password1 = request.getParameter("password1");
     String password2 = request.getParameter("password2");
 
-    if (Objects.equals(password1, password2) && password1.length() >= 4) {
+    if (!Objects.equals(password1, password2) || password1.length() < 4) {
       return Pages.SIGN_UP_PAGE; // password not confirmed, or have incorrect length
     }
 
