@@ -2,9 +2,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <fmt:requestEncoding value="UTF-8"/>
-  <fmt:setLocale value="${sessionScope.local}"/>
-  <fmt:setBundle basename="i18n.MessageBundle"/>
+<fmt:requestEncoding value="UTF-8"/>
+<fmt:setLocale value="${sessionScope.local}"/>
+<fmt:setBundle basename="i18n.MessageBundle"/>
 
 
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
@@ -46,9 +46,11 @@
         <fmt:message key="localization.language"/>
       </button>
       <div class="dropdown-menu">
-        <a href="<c:url value="/action?name=change_local&local=en"/>" class="dropdown-item"><fmt:message
+        <a href="<c:url value="/action?name=change_local&local=en&page=${pageContext.request.servletPath}"/>"
+           class="dropdown-item"><fmt:message
           key="localization.english"/> </a>
-        <a href="<c:url value="/action?name=change_local&local=ru"/>" class="dropdown-item"><fmt:message
+        <a href="<c:url value="/action?name=change_local&local=ru&page=${pageContext.request.servletPath}"/>"
+           class="dropdown-item"><fmt:message
           key="localization.russian"/> </a>
       </div>
     </div>

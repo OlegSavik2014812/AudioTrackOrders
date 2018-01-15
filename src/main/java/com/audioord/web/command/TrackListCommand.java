@@ -17,24 +17,9 @@ public class TrackListCommand implements Command {
 
   private TrackDAO trackDAO = new TrackDAO();
 
-  private enum TrackFilter {
-    MOST_POPULAR,
-    BEST_SELLING,
-    BRAND_NEW
-  }
-
-  private TrackFilter getFilterParam(Request request) {
-    for (TrackFilter v : TrackFilter.values()) {
-      if (v.name().equalsIgnoreCase(request.getParameter(PRM_FILTER))) {
-        return v;
-      }
-    }
-    return TrackFilter.MOST_POPULAR;
-  }
-
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
-    TrackFilter trackFilter = getFilterParam(request);
+    TrackFilter trackFilter = TrackFilter.fromString(request.getParameter(PRM_FILTER));
 
     List<Track> trackList = new ArrayList<>();
 
@@ -55,5 +40,20 @@ public class TrackListCommand implements Command {
     request.addAttribute("TrackList", trackList);
 
     return Pages.INDEX_PAGE;
+  }
+
+  private enum TrackFilter {
+    MOST_POPULAR,
+    BEST_SELLING,
+    BRAND_NEW;
+
+    public static TrackFilter fromString(String value) {
+      for (TrackFilter v : TrackFilter.values()) {
+        if (v.name().equalsIgnoreCase(value)) {
+          return v;
+        }
+      }
+      return MOST_POPULAR;
+    }
   }
 }
