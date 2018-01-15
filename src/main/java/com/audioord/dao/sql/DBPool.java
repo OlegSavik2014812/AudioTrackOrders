@@ -88,7 +88,7 @@ public final class DBPool extends DBPoolBase {
         free.add(connection);
       }
 
-    } catch (SQLException e) {
+    } catch (SQLException | PoolException e) {
       LOG.error(e);
     }
   }
