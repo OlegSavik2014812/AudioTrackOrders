@@ -19,25 +19,36 @@ public class TrackListCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
+    int page = 1;
+    int recordsPerPage = 10;
+    if (request.raw().getParameter("page") != null) {
+      page = Integer.parseInt(request.getParameter("page"));
+    }
     TrackFilter trackFilter = TrackFilter.fromString(request.getParameter(PRM_FILTER));
 
     List<Track> trackList = new ArrayList<>();
-
+    int noOfRecords = trackDAO.countTracks();
+    int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
     switch (trackFilter) {
       case MOST_POPULAR: {
-        trackList = trackDAO.getMostPopularTracks();
+        trackList = trackDAO.getMostPopularTracks((page - 1) * recordsPerPage,
+        recordsPerPage);
         break;
       }
       case BRAND_NEW: {
-        trackList = trackDAO.getBrandNewTracks();
+        trackList = trackDAO.getBrandNewTracks((page - 1) * recordsPerPage,
+        recordsPerPage);
         break;
       }
       case BEST_SELLING: {
-        trackList = trackDAO.getBestSellingTracks();
+        trackList = trackDAO.getBestSellingTracks((page - 1) * recordsPerPage,
+        recordsPerPage);
         break;
       }
     }
     request.addAttribute("TrackList", trackList);
+    request.addAttribute("noOfPages", noOfPages);
+    request.addAttribute("currentPage", page);
 
     return Pages.INDEX_PAGE;
   }

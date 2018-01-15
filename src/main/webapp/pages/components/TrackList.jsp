@@ -42,4 +42,51 @@
     </c:forEach>
     </tbody>
   </table>
+  <%--For displaying Previous link except for the 1st page --%>
+  <%--For displaying Previous link except for the 1st page --%>
+
+  <c:if test="${currentPage != 1}">
+    <a href="/action?name=track_list&filter=most_popular?page=${currentPage - 1}">Previous</a>
+  </c:if>
+  <%--/action?name=track_list&filter=brand_new--%>
+  <%--For displaying Page numbers.
+  The when condition does not display a link for the current page--%>
+  <table border="1" cellpadding="5" cellspacing="5">
+    <tr>
+      <c:forEach begin="1" end="${noOfPages}" var="i">
+        <c:choose>
+          <c:when test="${currentPage eq i}">
+            <td>${i}</td>
+          </c:when>
+          <c:otherwise>
+            <td><a href="/action?name=track_list&filter=most_popular?page=${i}">${i}</a></td>
+          </c:otherwise>
+        </c:choose>
+      </c:forEach>
+    </tr>
+  </table>
+
+  <ul class="pagination">
+    <c:if test="${currentPage != 1}">
+      <li class="page-item">
+        <a href="/action?name=track_list&filter=most_popular?page=${currentPage - 1}">Previous</a>
+      </li>
+    </c:if>
+    <c:forEach begin="1" end="${noOfPages}" var="i">
+      <c:choose>
+        <c:when test="${currentPage eq i}">
+          <li class="page-item">
+              ${i}
+          </li>
+        </c:when>
+        <c:otherwise>
+          <li class="page-item"><a href="/action?name=track_list&filter=most_popular?page=${i}">${i}</a></li>
+        </c:otherwise>
+      </c:choose>
+    </c:forEach>
+    <%--For displaying Next link --%>
+    <c:if test="${currentPage lt noOfPages}">
+      <li class="page-item"><a href="employee.do?page=${currentPage + 1}">Next</a></li>
+    </c:if>
+  </ul>
 </div>
