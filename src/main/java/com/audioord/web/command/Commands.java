@@ -19,6 +19,7 @@ public final class Commands {
     commands.put(SignUpCommand.NAME, new SignUpCommand());
     commands.put(SignOutCommand.NAME, new SignOutCommand());
     commands.put(TrackListCommand.NAME, new TrackListCommand());
+    commands.put(ChangeLocaleCommand.NAME, new ChangeLocaleCommand());
     return commands;
   }
 

@@ -8,13 +8,11 @@ import java.util.Date;
 public class TrakcFeedback extends Entity<Long> {
 
   private User user;
-  private TrackOrder order;
   private String comments;
   private Date createdAt;
 
-  public TrakcFeedback(User user, TrackOrder order, String comments, Date createdAt) {
+  public TrakcFeedback(User user, String comments, Date createdAt) {
     this.user = user;
-    this.order = order;
     this.comments = comments;
     this.createdAt = createdAt;
   }
@@ -25,14 +23,6 @@ public class TrakcFeedback extends Entity<Long> {
 
   public void setUser(User user) {
     this.user = user;
-  }
-
-  public TrackOrder getOrder() {
-    return order;
-  }
-
-  public void setOrder(TrackOrder order) {
-    this.order = order;
   }
 
   public String getComments() {

@@ -2,22 +2,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:requestEncoding value="UTF-8"/>
 <fmt:setLocale value="ru"/>
-<fmt:setBundle basename="i18n.MessageBundle_ru"/>
+<fmt:setBundle basename="i18n.MessageBundle"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
 <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link" href="<c:url value="/action?name=filter"/>" name="most_popular"><fmt:message
+      <a class="nav-link" href="<c:url value="/action?name=filter&filter=most_popular"/>" name="most_popular"><fmt:message
         key="index.most_popular"/></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="<c:url value="/action?name=filter"/>"><fmt:message
+      <a class="nav-link" href="<c:url value="/action?name=filter&filter=brand_new"/>"><fmt:message
         key="index.brand_new"/></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="<c:url value="/action?name=filter"/>" name="best_selling"><fmt:message
+      <a class="nav-link" href="<c:url value="/action?name=filter&filter=best_selling"/>" name="best_selling"><fmt:message
         key="index.best_selling"/> </a>
     </li>
 

@@ -16,7 +16,7 @@ public interface EntityMapper<T extends Entity> {
    * @return {@link Entity} object
    * @throws SQLException in case of nay issues
    */
-  T parse(ResultSet rs) throws SQLException;
+  T parse(ResultSet rs) throws SQLException, DAOException;
 
   void write(PreparedStatement st, T entity) throws SQLException;
 }

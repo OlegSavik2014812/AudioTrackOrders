@@ -4,8 +4,8 @@
 <html>
 <head>
   <fmt:requestEncoding value="UTF-8"/>
-  <fmt:setLocale value="ru"/>
-  <fmt:setBundle basename="i18n.MessageBundle_ru"/>
+  <fmt:setLocale value="${sessionScope.local}"/>
+  <fmt:setBundle basename="i18n.MessageBundle"/>
   <link rel="icon" href="../../../../favicon.ico">
   <title><fmt:message key="addtrack.title"/></title>
   <!-- Bootstrap core CSS -->

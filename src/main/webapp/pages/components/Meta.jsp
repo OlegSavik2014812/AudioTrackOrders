@@ -3,8 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <fmt:requestEncoding value="UTF-8"/>
-<fmt:setLocale value="ru"/>
-<fmt:setBundle basename="i18n.MessageBundle_ru"/>
+<fmt:setLocale value="${sessionScope.local}"/>
+<fmt:setBundle basename="i18n.MessageBundle"/>
 
 <link rel="shortcut icon" href="<c:url value="/favicon.ico"/>" type="image/x-icon">
 <link rel="icon" href="<c:url value="/favicon.ico"/>" type="image/x-icon">
