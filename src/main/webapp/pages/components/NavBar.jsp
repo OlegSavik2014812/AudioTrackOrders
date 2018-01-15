@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:requestEncoding value="UTF-8"/>
-<fmt:setLocale value="${sessionScope.local}" scope="session"/>
 <fmt:setBundle basename="i18n.MessageBundle"/>
 
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
@@ -37,17 +36,18 @@
           <a class="nav-link" href="<c:url value="/action?name=sign_out"/> "><fmt:message key="button.signout"/></a>
         </li>
       </c:if>
-      <li class="dropdown">
-        <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown">
-          Меню
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="<c:url value="/action?name=change_local&local=en"/> ">EN</a></li>
-          <li><a href="<c:url value="/action?name=change_local&local=ru"/>">RU</a></li>
-        </ul>
-      </li>
     </ul>
+    <div class="btn-group dropleft">
+      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+        <fmt:message key="localization.language"/>
+      </button>
+      <div class="dropdown-menu">
+        <a href="<c:url value="/action?name=change_local&local=en"/>" class="dropdown-item"><fmt:message
+          key="localization.english"/> </a>
+        <a href="<c:url value="/action?name=change_local&local=ru"/>" class="dropdown-item"><fmt:message
+          key="localization.russian"/> </a>
+      </div>
+    </div>
   </div>
-
 </nav>

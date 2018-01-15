@@ -17,32 +17,10 @@ public class TrackListCommand implements Command {
 
   private TrackDAO trackDAO = new TrackDAO();
 
-  @Override
-  public String execute(Request request, Response response) throws IOException, DAOException {
-    TrackFilter trackFilter = getFilterParam(request);
-
-    List<Track> trackList = new ArrayList<>();
-
-    switch (trackFilter) {
-      case MOST_POPULAR:
-        {
-          trackList = trackDAO.getMostPopularTracks();
-          break;
-        }
-      case BRAND_NEW:
-        {
-          trackList = trackDAO.getBrandNewTracks();
-          break;
-        }
-      case BEST_SELLING:
-        {
-          trackList = trackDAO.getBestSellingTracks();
-          break;
-        }
-    }
-    request.addAttribute("TrackList", trackList);
-
-    return Pages.INDEX_PAGE;
+  private enum TrackFilter {
+    MOST_POPULAR,
+    BEST_SELLING,
+    BRAND_NEW
   }
 
   private TrackFilter getFilterParam(Request request) {
@@ -54,9 +32,28 @@ public class TrackListCommand implements Command {
     return TrackFilter.MOST_POPULAR;
   }
 
-  private enum TrackFilter {
-    MOST_POPULAR,
-    BEST_SELLING,
-    BRAND_NEW
+  @Override
+  public String execute(Request request, Response response) throws IOException, DAOException {
+    TrackFilter trackFilter = getFilterParam(request);
+
+    List<Track> trackList = new ArrayList<>();
+
+    switch (trackFilter) {
+      case MOST_POPULAR: {
+        trackList = trackDAO.getMostPopularTracks();
+        break;
+      }
+      case BRAND_NEW: {
+        trackList = trackDAO.getBrandNewTracks();
+        break;
+      }
+      case BEST_SELLING: {
+        trackList = trackDAO.getBestSellingTracks();
+        break;
+      }
+    }
+    request.addAttribute("TrackList", trackList);
+
+    return Pages.INDEX_PAGE;
   }
 }
