@@ -137,18 +137,18 @@ implements EntityDAO<E, K> {
     return find(mapper, sql, id);
   }
 
-  protected int count(String sql) {
+  protected int count(String sql) throws DAOException {
     int count = 0;
-    Connection connection = null;
-    try {
-      connection = connectionSource.getConnection();
-      Statement statement = connection.createStatement();
-      ResultSet resultSet = statement.executeQuery(sql);
+
+    try (Connection con = connectionSource.getConnection();
+         Statement st = con.createStatement()) {
+
+      ResultSet resultSet = st.executeQuery(sql);
       if (resultSet.next()) {
         count = resultSet.getInt(1);
       }
     } catch (SQLException | PoolException e) {
-      e.printStackTrace();
+      throw new DAOException(e);
     }
     return count;
   }
