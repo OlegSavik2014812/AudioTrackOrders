@@ -7,7 +7,6 @@ import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 
 import java.io.IOException;
-import java.net.URI;
 
 public class AdditionNewTrackCommand implements Command {
   public static final String NAME = "add_track";
@@ -16,17 +15,35 @@ public class AdditionNewTrackCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
-    if (!request.hasAllParameters("trackName", "artist", "album")) {
+    if (!request.hasAllParameters("trackName", "artist")) {
       return Pages.ADD_TRACK_PAGE;
     }
     String name = request.getParameter("trackName");
     String artist = request.getParameter("artist");
-    String album = request.getParameter("album");
-    Track track = new Track(name, artist, album);
-    track.setPopularity(Integer.parseInt(request.getParameter("popularity")));
-    track.setDuration(Long.parseLong(request.getParameter("duration")));
-    track.setUri(URI.create(request.getParameter("uri")));
-    track.setPrice(Integer.parseInt(request.getParameter("price")));
+    String popularityParam = request.getParameter("popularity");
+    String durationParam = request.getParameter("duration");
+    String priceParam = request.getParameter("price");
+    int popularity = 0;
+    long duration = 0;
+    int price = 0;
+    if (popularityParam != null && !popularityParam.isEmpty()) {
+      popularity = Integer.parseInt(popularityParam);
+    }
+    if (durationParam != null && !durationParam.isEmpty()) {
+      duration = Long.parseLong(durationParam);
+    }
+    if (priceParam != null && !priceParam.isEmpty()) {
+      price = Integer.parseInt(priceParam);
+    }
+
+    Track track = new Track(name, artist);
+    track.setAlbum(request.getParameter("album"));
+    track.setUri(request.getParameter("uri"));
+    track.setPopularity(popularity);
+    track.setDuration(duration);
+    track.setPrice(price);
+
+
     if (!trackDAO.create(track)) {
       return Pages.ADD_TRACK_PAGE;
     }

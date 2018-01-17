@@ -2,8 +2,6 @@ package com.audioord.model.audio;
 
 import com.audioord.model.Entity;
 
-import java.net.URI;
-
 public class Track extends Entity<Long> {
 
   private String name;
@@ -11,7 +9,7 @@ public class Track extends Entity<Long> {
   private String album;
   private int popularity;
   private int price;
-  private URI uri;
+  private String uri;
   private long duration;
 
   public long getDuration() {
@@ -22,10 +20,9 @@ public class Track extends Entity<Long> {
     this.duration = duration;
   }
 
-  public Track(String name, String artist, String album) {
+  public Track(String name, String artist) {
     this.name = name;
     this.artist = artist;
-    this.album = album;
   }
 
   public String getName() {
@@ -68,11 +65,11 @@ public class Track extends Entity<Long> {
     this.price = price;
   }
 
-  public URI getUri() {
+  public String getUri() {
     return uri;
   }
 
-  public void setUri(URI uri) {
+  public void setUri(String uri) {
     this.uri = uri;
   }
 }

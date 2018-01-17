@@ -37,8 +37,8 @@
         <td><c:out value="${track.price}"/></td>
         <td><c:out value="${track.duration}"/></td>
         <td>
-          <c:if test="${sessionScope.USER!=null}">
-            <input type="checkbox" class="form-check-input" id="checkAdd">
+          <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='CLIENT'}">
+            <input type="checkbox" class="form-check-input" id="checkAdd" name="check" value="add">
             <label class="form-check-label" for="checkAdd"><fmt:message key="label.add"/> </label>
           </c:if>
         </td>

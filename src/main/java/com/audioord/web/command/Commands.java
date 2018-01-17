@@ -25,7 +25,7 @@ public final class Commands {
     return commands;
   }
 
-  public static boolean hasCommand(String commandName) {
+  private static boolean hasCommand(String commandName) {
     return COMMAND_MAP.containsKey(commandName);
   }
 

@@ -23,7 +23,7 @@
 
   <div class="row">
 
-    <form class="" method="POST" action="action">
+    <form class="" method="POST" action="../action?name=add_track">
       <input type="hidden" name="name" value="add_track">
 
       <h2 class="form-signin-heading"><fmt:message key="addtrack.title"/></h2>
@@ -49,8 +49,7 @@
           <fmt:message key="addtrack.name_album"/>
         </label>
         <input type="text" id="album" name="album" class="form-control"
-               placeholder="<fmt:message key="addtrack.name_album"/>"
-               required="">
+               placeholder="<fmt:message key="addtrack.name_album"/>">
       </div>
 
       <div class="form-group">

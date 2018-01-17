@@ -28,9 +28,10 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   new EntityMapper<Track>() {
     @Override
     public Track parse(ResultSet rs) throws SQLException {
-      Track track = new Track(rs.getString(1), rs.getString(2), rs.getString(3));
+      Track track = new Track(rs.getString(1), rs.getString(2));
+      track.setAlbum(rs.getString(3));
       track.setPopularity(rs.getInt(4));
-      track.setUri(URI.create(rs.getString(5)));
+      track.setUri(rs.getString(5));
       track.setPrice(rs.getInt(6));
       track.setDuration(rs.getLong(7));
       return track;
