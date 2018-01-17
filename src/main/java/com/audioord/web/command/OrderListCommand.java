@@ -13,7 +13,7 @@ import java.util.List;
 
 public class OrderListCommand implements Command {
   public static final String NAME = "order_list";
-  private static final String PRM_ORDER_STATUS = "filter";
+  private static final String PRM_ORDER_STATUS = "status";
   private TrackDAO trackDAO = new TrackDAO();
 
   @Override

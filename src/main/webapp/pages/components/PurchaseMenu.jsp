@@ -9,15 +9,15 @@
 <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link" href="<c:url value="/action?name=order_list&filter=COMPLETED"/>"><fmt:message
+      <a class="nav-link" href="<c:url value="/action?name=order_list&status=COMPLETED"/>"><fmt:message
         key="purchasemenu.completed"/></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="<c:url value="/action?name=order_list&filter=REJECTED"/>"><fmt:message
+      <a class="nav-link" href="<c:url value="/action?name=order_list&status=REJECTED"/>"><fmt:message
         key="purchasemenu.rejected"/></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="<c:url value="/action?name=order_list&filter=SUBMITTED"/>"><fmt:message
+      <a class="nav-link" href="<c:url value="/action?name=order_list&status=SUBMITTED"/>"><fmt:message
         key="purchasemenu.submitted"/> </a>
     </li>
 
