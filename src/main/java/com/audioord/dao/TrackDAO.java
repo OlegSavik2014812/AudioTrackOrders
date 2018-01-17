@@ -73,7 +73,7 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
     return findAll(mapper, SQL_GET_USER_ORDERED_TRACKS, params);
   }
 
-  public int countTracks() {
+  public int countTracks() throws DAOException {
     return count(SQL_GET_ALL);
   }
 }
