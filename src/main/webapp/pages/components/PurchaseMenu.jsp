@@ -13,7 +13,8 @@
         key="purchasemenu.completed"/></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="<c:url value="/action?name=order_list&filter=SUBMITTED"/>"><fmt:message
+      <a class="nav-link" href="<c:url value="/action?name=order_list&filter=SUBMITTED"/>">
+        <fmt:message key="purchasemenu.submitted"/></a>
       <a class="nav-link" href="<c:url value="/action?name=order_list&status=REJECTED"/>"><fmt:message
         key="purchasemenu.rejected"/></a>
     </li>

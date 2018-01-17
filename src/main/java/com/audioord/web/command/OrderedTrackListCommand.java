@@ -26,7 +26,7 @@ public class OrderedTrackListCommand implements Command {
       return Pages.SIGN_IN_PAGE;
     }
 
-    List<Track> trackList = null;
+    List<Track> trackList;
     String username = user.getUsername();
     switch (status) {
       case COMPLETED: {
