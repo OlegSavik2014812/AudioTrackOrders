@@ -4,6 +4,7 @@ import com.audioord.dao.DAOException;
 import com.audioord.dao.TrackDAO;
 import com.audioord.model.account.User;
 import com.audioord.model.audio.Track;
+import com.audioord.model.order.OrderStatus;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 
@@ -12,36 +13,35 @@ import java.util.List;
 
 public class OrderListCommand implements Command {
   public static final String NAME = "order_list";
-  private static final String ORDER_FILTER = "filter";
+  private static final String PRM_ORDER_STATUS = "filter";
   private TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
-    OrderListFilter orderListFilter = OrderListFilter.fromString(request.getParameter(ORDER_FILTER));
-    String filter = orderListFilter.toString();
+    OrderStatus status = OrderStatus.valueOf(request.getParameter(PRM_ORDER_STATUS));
 
     User user = request.getSessionAttribute("USER", User.class);
     if (user == null) {
       // user not authorized
-      return Pages.SIGN_IN_PAGE  ;
+      return Pages.SIGN_IN_PAGE;
     }
 
     List<Track> trackList = null;
     String username = user.getUsername();
-    switch (orderListFilter) {
+    switch (status) {
       case COMPLETED: {
-        trackList = trackDAO.getUserTrackss(username, filter);
+        trackList = trackDAO.getUserTracks(username, status);
         break;
       }
       case REJECTED: {
-        trackList = trackDAO.getUserTrackss(username, filter);
+        trackList = trackDAO.getUserTracks(username, status);
         break;
       }
       case SUBMITTED: {
-        trackList = trackDAO.getUserTrackss(username, filter);
+        trackList = trackDAO.getUserTracks(username, status);
         break;
       }
-      case ALL: {
+      default: {
         trackList = trackDAO.getAllUserTracks(username);
       }
     }
@@ -50,19 +50,5 @@ public class OrderListCommand implements Command {
     return Pages.PURCHASES_PAGE;
   }
 
-  private enum OrderListFilter {
-    REJECTED,
-    COMPLETED,
-    SUBMITTED,
-    ALL;
 
-    public static OrderListFilter fromString(String value) {
-      for (OrderListFilter v : OrderListFilter.values()) {
-        if (v.name().equalsIgnoreCase(value)) {
-          return v;
-        }
-      }
-      return ALL;
-    }
-  }
 }

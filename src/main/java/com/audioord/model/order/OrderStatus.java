@@ -1,7 +1,8 @@
 package com.audioord.model.order;
 
 public enum OrderStatus {
-  SUBMITED, // client submit new order
+
+  SUBMITTED, // client submit new order
 
   REJECTED, // admin can reject order
 

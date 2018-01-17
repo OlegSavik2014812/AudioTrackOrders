@@ -1,6 +1,7 @@
 package com.audioord.dao;
 
 import com.audioord.model.audio.Track;
+import com.audioord.model.order.OrderStatus;
 
 import java.net.URI;
 import java.sql.PreparedStatement;
@@ -69,15 +70,15 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
     return findAll(mapper, SQL_GET_BRAND_NEW_TRACK, page, count);
   }
 
-  public List<Track> getAllUserTracks(Object... params) throws DAOException {
-    return findAll(mapper, SQL_GET_ALL_USER_ORDERED_TRACKS, params);
+  public List<Track> getAllUserTracks(String username) throws DAOException {
+    return findAll(mapper, SQL_GET_ALL_USER_ORDERED_TRACKS, username);
   }
 
   public int countTracks() throws DAOException {
     return count(SQL_GET_ALL);
   }
 
-  public List<Track> getUserTrackss(Object... params) throws DAOException {
-    return findAll(mapper, SQL_GET_USER_TRACKS, params);
+  public List<Track> getUserTracks(String username, OrderStatus status) throws DAOException {
+    return findAll(mapper, SQL_GET_USER_TRACKS, username, status.name());
   }
 }
