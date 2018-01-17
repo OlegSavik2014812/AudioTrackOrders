@@ -21,7 +21,7 @@ public class TrackListCommand implements Command {
   public String execute(Request request, Response response) throws IOException, DAOException {
     int page = 1;
     int recordsPerPage = 10;
-    if (request.raw().getParameter("page") != null) {
+    if (request.getParameter("page") != null) {
       page = Integer.parseInt(request.getParameter("page"));
     }
     TrackFilter trackFilter = TrackFilter.fromString(request.getParameter(PRM_FILTER));

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TrackDAO extends BaseEntityDao<Track, Long> {
-  private static final String SQL_GET_ALL = "select count(*) from track";
+  private static final String SQL_GET_ALL = "select count(id) from track";
   private static final String SQL_GET_BEST_SELLING_TRACKS =
   "select track.track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track,trackorder where track.Id = trackorder.IdTrack group by track.Track order by count(trackorder.IdTrack) desc limit ?, ?";
 
@@ -57,16 +57,16 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
     return false;
   }
 
-  public List<Track> getMostPopularTracks(Object... params) throws DAOException {
-    return findAll(mapper, SQL_GET_MOST_POPULAR_TRACKS, params);
+  public List<Track> getMostPopularTracks(int page, int count) throws DAOException {
+    return findAll(mapper, SQL_GET_MOST_POPULAR_TRACKS, page, count);
   }
 
-  public List<Track> getBestSellingTracks(Object... params) throws DAOException {
-    return findAll(mapper, SQL_GET_BEST_SELLING_TRACKS, params);
+  public List<Track> getBestSellingTracks(int page, int count) throws DAOException {
+    return findAll(mapper, SQL_GET_BEST_SELLING_TRACKS, page, count);
   }
 
-  public List<Track> getBrandNewTracks(Object... params) throws DAOException {
-    return findAll(mapper, SQL_GET_BRAND_NEW_TRACK, params);
+  public List<Track> getBrandNewTracks(int page, int count) throws DAOException {
+    return findAll(mapper, SQL_GET_BRAND_NEW_TRACK, page, count);
   }
 
   public List<Track> getUserTracks(Object... params) throws DAOException {
