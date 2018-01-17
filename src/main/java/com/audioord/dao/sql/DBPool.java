@@ -47,7 +47,7 @@ public final class DBPool extends DBPoolBase {
   }
 
   /**
-   * Thread save pool instance creation, we need to create it once.
+   * Pool instance creation, we need to create it once.
    *
    * @return {@link ConnectionSource} instance
    */

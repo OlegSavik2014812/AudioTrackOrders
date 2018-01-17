@@ -2,6 +2,7 @@ package com.audioord.web.command;
 
 import com.audioord.dao.DAOException;
 import com.audioord.dao.TrackDAO;
+import com.audioord.model.account.User;
 import com.audioord.model.audio.Track;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
@@ -18,25 +19,33 @@ public class OrderListCommand implements Command {
   public String execute(Request request, Response response) throws IOException, DAOException {
     OrderListFilter orderListFilter = OrderListFilter.fromString(request.getParameter(ORDER_FILTER));
     String filter = orderListFilter.toString();
-    String userName = String.valueOf(request.raw().getSession().getAttribute("username"));
+
+    User user = request.getSessionAttribute("USER", User.class);
+    if (user == null) {
+      // user not authorized
+      return Pages.INDEX_PAGE;
+    }
+
     List<Track> trackList = null;
+    String username = user.getUsername();
     switch (orderListFilter) {
       case COMPLETED: {
-        trackList = trackDAO.getUserTrackss(userName, filter);
+        trackList = trackDAO.getUserTrackss(username, filter);
         break;
       }
       case REJECTED: {
-        trackList = trackDAO.getUserTrackss(userName, filter);
+        trackList = trackDAO.getUserTrackss(username, filter);
         break;
       }
       case SUBMITTED: {
-        trackList = trackDAO.getUserTrackss(userName, filter);
+        trackList = trackDAO.getUserTrackss(username, filter);
         break;
       }
       case ALL: {
-        trackList = trackDAO.getAllUserTracks(userName);
+        trackList = trackDAO.getAllUserTracks(username);
       }
     }
+
     request.addAttribute("TrackList", trackList);
     return Pages.PURCHASES_PAGE;
   }

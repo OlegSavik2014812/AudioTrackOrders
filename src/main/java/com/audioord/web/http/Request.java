@@ -43,6 +43,10 @@ public class Request {
     rawRequest.getSession().setAttribute(name, v);
   }
 
+  public <T> T getSessionAttribute(String name, Class<T> type) {
+    return type.cast(rawRequest.getSession().getAttribute(name));
+  }
+
   public void removeSessionAttribute(String name) {
     rawRequest.getSession().removeAttribute(name);
   }
