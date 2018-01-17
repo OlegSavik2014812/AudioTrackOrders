@@ -14,7 +14,6 @@ public class TrackListCommand implements Command {
 
   public static final String NAME = "track_list";
   private static final String PRM_FILTER = "filter";
-
   private TrackDAO trackDAO = new TrackDAO();
 
   @Override

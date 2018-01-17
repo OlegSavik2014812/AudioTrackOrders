@@ -18,8 +18,8 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
 
   private static final String SQL_GET_MOST_POPULAR_TRACKS =
   "select track, artist, album , popularity , uri , price, duration from track order by Popularity desc limit ?, ?";
-  private static final String SQL_GET_USER_ORDERED_TRACKS = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track,purchase,user,trackorder where track.Id = purchase.IdUser and trackorder.IdPurchase = purchase.Id and track.Id = trackorder.IdTrack and user.UserName = ? order by Popularity desc";
-
+  private static final String SQL_GET_ALL_USER_ORDERED_TRACKS = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName = ? order by Popularity desc";
+  private static final String SQL_GET_USER_TRACKS = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName =? and purchase.Status=? order by Popularity desc";
   private EntityMapper<Track> mapper =
   new EntityMapper<Track>() {
     @Override
@@ -69,11 +69,15 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
     return findAll(mapper, SQL_GET_BRAND_NEW_TRACK, page, count);
   }
 
-  public List<Track> getUserTracks(Object... params) throws DAOException {
-    return findAll(mapper, SQL_GET_USER_ORDERED_TRACKS, params);
+  public List<Track> getAllUserTracks(Object... params) throws DAOException {
+    return findAll(mapper, SQL_GET_ALL_USER_ORDERED_TRACKS, params);
   }
 
   public int countTracks() throws DAOException {
     return count(SQL_GET_ALL);
+  }
+
+  public List<Track> getUserTrackss(Object... params) throws DAOException {
+    return findAll(mapper, SQL_GET_USER_TRACKS, params);
   }
 }

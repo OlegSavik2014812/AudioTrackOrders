@@ -11,8 +11,10 @@
   <c:import url="components/css_import.jsp"/>
 </head>
 <body>
+<c:import url="components/NavBar.jsp"/>
 <div class="container-fluid">
   <div class="row">
+    <c:import url="components/PurchaseMenu.jsp"/>
     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
       <c:import url="components/TrackList.jsp"/>
     </main>
