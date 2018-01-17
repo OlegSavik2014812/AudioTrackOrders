@@ -29,7 +29,7 @@
         </li>
       </c:if>
 
-      <c:if test="${sessionScope.USER != null}">
+      <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='CLIENT'}">
 
         <li class="nav-item">
           <a class="nav-link" href="#"><fmt:message key="index.hello"/><c:out
@@ -40,7 +40,20 @@
         </li>
         <li>
         <li class="nav-item">
-          <a class="nav-link" href="<c:url value="/action?name=order_list"/> "><fmt:message key="button.order_list"/></a>
+          <a class="nav-link" href="<c:url value="/action?name=order_list"/> "><fmt:message
+            key="button.order_list"/></a>
+        </li>
+      </c:if>
+      <c:if test="${sessionScope.USER!=null &&sessionScope.USER.role=='ADMIN'}">
+        <li class="nav-item">
+          <a class="nav-link" href="#"><fmt:message key="index.hello"/><c:out
+            value="${sessionScope.USER.username}"/></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<c:url value="/action?name=sign_out"/> "><fmt:message key="button.signout"/></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<c:url value="" /> "><fmt:message key="button.purchases"/> </a>
         </li>
       </c:if>
     </ul>

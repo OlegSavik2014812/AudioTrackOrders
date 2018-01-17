@@ -23,10 +23,7 @@
 
     <c:if test="${sessionScope.USER.role == 'ADMIN'}">
       <li class="nav-item">
-        <a class="nav-link" href="#"><fmt:message key="menu.add_tarck"/></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><fmt:message key="menu.add_discount"/></a>
+        <a class="nav-link" href="pages/AddTrack.jsp"><fmt:message key="menu.add_tarck"/></a>
       </li>
     </c:if>
   </ul>

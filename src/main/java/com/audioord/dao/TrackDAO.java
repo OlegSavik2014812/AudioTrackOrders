@@ -21,6 +21,9 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   "select track, artist, album , popularity , uri , price, duration from track order by Popularity desc limit ?, ?";
   private static final String SQL_GET_ALL_USER_ORDERED_TRACKS = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName = ? order by Popularity desc";
   private static final String SQL_GET_USER_TRACKS = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName =? and purchase.Status=? order by Popularity desc";
+  private static final String SQL_ADD_TRACK = "insert into Track(Track,Artist, Album, Popularity,URI,Price,Duration)values(?,?,?,?,?,?,?)";
+
+
   private EntityMapper<Track> mapper =
   new EntityMapper<Track>() {
     @Override
@@ -35,6 +38,13 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
 
     @Override
     public void write(PreparedStatement st, Track entity) throws SQLException {
+      st.setString(1, entity.getName());
+      st.setString(2, entity.getArtist());
+      st.setString(3, entity.getAlbum());
+      st.setInt(4, entity.getPopularity());
+      st.setObject(5, entity.getUri());
+      st.setDouble(6, entity.getPrice());
+      st.setLong(7, entity.getDuration());
     }
   };
 
@@ -55,7 +65,7 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
 
   @Override
   public boolean create(Track entity) throws DAOException {
-    return false;
+    return update(entity, mapper, SQL_ADD_TRACK);
   }
 
   public List<Track> getMostPopularTracks(int page, int count) throws DAOException {

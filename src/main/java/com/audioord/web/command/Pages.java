@@ -8,6 +8,7 @@ public final class Pages {
   public static final String EDIT_TRACK_PAGE = "/pages/EditTrack.jsp";
   public static final String NOT_FOUND_PAGE = "/404.jsp";
   public static final String PURCHASES_PAGE = "/pages/Purchases.jsp";
+  public static final String ADD_TRACK_PAGE = "/pages/AddTrack.jsp";
 
   private Pages() {
     super();

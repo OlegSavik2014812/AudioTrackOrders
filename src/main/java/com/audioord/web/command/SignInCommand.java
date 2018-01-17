@@ -42,7 +42,6 @@ public class SignInCommand implements Command {
     User user = userDAO.getByUsername(authInfo.getUserName());
     if (user != null) {
       request.setSessionAttribute("USER", user);
-      request.setSessionAttribute("username",userName);
     }
 
     return Pages.INDEX_PAGE;

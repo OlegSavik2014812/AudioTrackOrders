@@ -2,12 +2,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <fmt:requestEncoding value="UTF-8"/>
-  <fmt:setLocale value="${sessionScope.local}"/>
-  <fmt:setBundle basename="i18n.MessageBundle"/>
+<fmt:requestEncoding value="UTF-8"/>
+<fmt:setLocale value="${sessionScope.local}"/>
+<fmt:setBundle basename="i18n.MessageBundle"/>
 
 
-<h2><fmt:message key="index.most_popular"/></h2>
+<div>
+  <h2><fmt:message key="index.most_popular"/></h2>
+</div>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -19,7 +21,9 @@
       <th><fmt:message key="index.uri"/></th>
       <th><fmt:message key="index.price"/></th>
       <th><fmt:message key="index.duration"/></th>
-      <th><fmt:message key="index.add_to_order"/></th>
+      <c:if test="${sessionScope.USER!=null}">
+        <th><a href="<c:url value=""></c:url> "> <fmt:message key="index.add_to_order"/></a></th>
+      </c:if>
     </tr>
     </thead>
     <tbody>
