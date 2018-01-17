@@ -13,23 +13,10 @@
         key="purchasemenu.completed"/></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="<c:url value="/action?name=order_list&filter=SUBMITTED"/>">
+      <a class="nav-link" href="<c:url value="/action?name=order_list&status=SUBMITTED"/>">
         <fmt:message key="purchasemenu.submitted"/></a>
       <a class="nav-link" href="<c:url value="/action?name=order_list&status=REJECTED"/>"><fmt:message
         key="purchasemenu.rejected"/></a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="<c:url value="/action?name=order_list&status=SUBMITTED"/>"><fmt:message
-        key="purchasemenu.submitted"/> </a>
-    </li>
-
-    <c:if test="${sessionScope.USER.role == 'ADMIN'}">
-      <li class="nav-item">
-        <a class="nav-link" href="#"><fmt:message key="menu.add_tarck"/></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><fmt:message key="menu.add_discount"/></a>
-      </li>
-    </c:if>
   </ul>
 </nav>
