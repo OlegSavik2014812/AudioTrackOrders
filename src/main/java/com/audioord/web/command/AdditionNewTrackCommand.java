@@ -11,6 +11,7 @@ import java.net.URI;
 
 public class AdditionNewTrackCommand implements Command {
   public static final String NAME = "add_track";
+
   private TrackDAO trackDAO = new TrackDAO();
 
   @Override

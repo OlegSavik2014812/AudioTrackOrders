@@ -50,7 +50,7 @@ public class SignUpCommand implements Command {
     }
 
     // add current user to session
-    request.setSessionAttribute("USER", user);
+    request.setSessionAttribute("USER", user);  
 
     return Pages.INDEX_PAGE;
   }

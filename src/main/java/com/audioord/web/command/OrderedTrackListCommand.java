@@ -13,15 +13,15 @@ import java.util.List;
 
 public class OrderedTrackListCommand implements Command {
   public static final String NAME = "order_list";
-  private static final String ORDER_STATUS_FILTER = "status";
+  private static final String PRM_ORDER_STATUS = "status";
   private TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
     OrderStatus status = OrderStatus.COMPLETED;
-    String statusLine = request.getParameter(ORDER_STATUS_FILTER);
+    String statusLine = request.getParameter(PRM_ORDER_STATUS);
     if (statusLine != null && !statusLine.isEmpty()) {
-      status = OrderStatus.valueOf(request.getParameter(ORDER_STATUS_FILTER));
+      status = OrderStatus.valueOf(request.getParameter(PRM_ORDER_STATUS));
     }
     User user = request.getSessionAttribute("USER", User.class);
     if (user == null) {
