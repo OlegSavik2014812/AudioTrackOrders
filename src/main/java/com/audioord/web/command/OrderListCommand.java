@@ -23,7 +23,7 @@ public class OrderListCommand implements Command {
     User user = request.getSessionAttribute("USER", User.class);
     if (user == null) {
       // user not authorized
-      return Pages.INDEX_PAGE;
+      return Pages.SIGN_IN_PAGE  ;
     }
 
     List<Track> trackList = null;
