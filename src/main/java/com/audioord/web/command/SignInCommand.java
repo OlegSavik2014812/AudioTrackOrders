@@ -3,8 +3,8 @@ package com.audioord.web.command;
 import com.audioord.dao.AuthInfoDao;
 import com.audioord.dao.DAOException;
 import com.audioord.dao.UserDAO;
-import com.audioord.model.account.User;
 import com.audioord.model.account.AuthInfo;
+import com.audioord.model.account.User;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 
@@ -42,6 +42,7 @@ public class SignInCommand implements Command {
     User user = userDAO.getByUsername(authInfo.getUserName());
     if (user != null) {
       request.setSessionAttribute("USER", user);
+      request.setSessionAttribute("username",userName);
     }
 
     return Pages.INDEX_PAGE;

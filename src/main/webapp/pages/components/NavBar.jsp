@@ -38,6 +38,10 @@
         <li class="nav-item">
           <a class="nav-link" href="<c:url value="/action?name=sign_out"/> "><fmt:message key="button.signout"/></a>
         </li>
+        <li>
+        <li class="nav-item">
+          <a class="nav-link" href="<c:url value="/action?name=order_list"/> "><fmt:message key="button.order_list"/></a>
+        </li>
       </c:if>
     </ul>
     <div class="btn-group dropleft">

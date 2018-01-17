@@ -110,26 +110,21 @@ implements EntityDAO<E, K> {
 
     try (Connection con = connectionSource.getConnection();
          PreparedStatement st = con.prepareCall(sql)) {
-
       if (params != null && params.length > 0) {
         for (int i = 0, length = params.length; i < length; i++) {
           Object prm = params[i];
           st.setObject(i + 1, prm);
         }
       }
-
       LOG.debug(
       String.format("Executing query [%s] \n with params %s", sql, Arrays.toString(params)));
-
       ResultSet rs = st.executeQuery();
       if (rs.next()) {
         obj = mapper.parse(rs);
       }
-
     } catch (SQLException | PoolException e) {
       throw new DAOException(e);
     }
-
     return obj;
   }
 
