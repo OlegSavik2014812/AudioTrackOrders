@@ -8,6 +8,7 @@ public class User extends Entity<Long> {
   private String firstName;
   private String lastName;
   private ROLE role;
+  private int idDiscount;
 
   public User(String username, ROLE role) {
     this.username = username;
@@ -44,5 +45,13 @@ public class User extends Entity<Long> {
 
   public void setRole(ROLE role) {
     this.role = role;
+  }
+
+  public int getIdDiscount() {
+    return idDiscount;
+  }
+
+  public void setIdDiscount(int idDiscount) {
+    this.idDiscount = idDiscount;
   }
 }

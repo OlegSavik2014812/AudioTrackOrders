@@ -18,12 +18,11 @@ public final class Commands {
     commands.put(SignOutCommand.NAME, new SignOutCommand());
     commands.put(NotFoundCommand.NAME, new NotFoundCommand());
     commands.put(TrackListCommand.NAME, new TrackListCommand());
-    commands.put(OrderTracksCommand.NAME, new OrderTracksCommand());
     commands.put(ChangeLocaleCommand.NAME, new ChangeLocaleCommand());
     commands.put(AdditionNewTrackCommand.NAME, new AdditionNewTrackCommand());
     commands.put(OrderedTrackListCommand.NAME, new OrderedTrackListCommand());
-    commands.put(AdditionTrackFeedbackCommand.NAME, new AdditionTrackFeedbackCommand());
     commands.put(SearchTrackCommand.NAME, new SearchTrackCommand());
+    commands.put(AdditionDiscountCommand.NAME, new AdditionDiscountCommand());
     return commands;
   }
 

@@ -1,30 +1,29 @@
 package com.audioord.model.order;
 
 import com.audioord.model.Entity;
-import com.audioord.model.account.User;
 
 import java.util.Date;
 
 public class OrderDiscount extends Entity<Long> {
 
-  private User user;
+  private long id;
   private double discountPercent;
   private Date effectiveFrom;
   private Date effectiveTo;
 
-  public OrderDiscount(User user, double discountPercent, Date effectiveFrom, Date effectiveTo) {
-    this.user = user;
+  public OrderDiscount(double discountPercent, Date effectiveFrom, Date effectiveTo) {
     this.discountPercent = discountPercent;
     this.effectiveFrom = effectiveFrom;
     this.effectiveTo = effectiveTo;
   }
 
-  public User getUser() {
-    return user;
+  @Override
+  public Long getId() {
+    return id;
   }
 
-  public void setUser(User user) {
-    this.user = user;
+  public void setId(long id) {
+    this.id = id;
   }
 
   public double getDiscountPercent() {

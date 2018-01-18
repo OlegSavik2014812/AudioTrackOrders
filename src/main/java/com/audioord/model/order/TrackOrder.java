@@ -1,8 +1,8 @@
 package com.audioord.model.order;
 
 import com.audioord.model.Entity;
-import com.audioord.model.audio.Track;
 import com.audioord.model.account.User;
+import com.audioord.model.audio.Track;
 
 import java.util.Date;
 import java.util.List;
