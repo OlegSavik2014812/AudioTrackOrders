@@ -6,14 +6,14 @@ import com.audioord.model.audio.Track;
 
 import java.util.Date;
 
-public class TrakcFeedback extends Entity<Long> {
+public class TrackFeedback extends Entity<Long> {
 
   private User user;
   private String comments;
   private Date createdAt;
   private Track track;
 
-  public TrakcFeedback(User user, String comments, Track track) {
+  public TrackFeedback(User user, String comments, Track track) {
     this.user = user;
     this.comments = comments;
     this.track = track;

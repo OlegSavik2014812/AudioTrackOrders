@@ -18,7 +18,6 @@ public class TrackListCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
-    String mass[] = request.raw().getParameterValues("check");
     int page = 1;
     int recordsPerPage = 10;
     if (request.getParameter("page") != null) {

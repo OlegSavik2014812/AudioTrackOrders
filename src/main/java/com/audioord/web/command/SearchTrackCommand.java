@@ -7,19 +7,20 @@ import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SearchTrackCommand implements Command {
   public static final String NAME = "search_track";
+  private static final String PRM_SEARCH = "trackname";
   private TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
-    List<Track> trackList = new ArrayList<>();
-    String name = request.getParameter("trackname");
-    trackList.add(trackDAO.getByName(name));
+    List<Track> trackList;
+    String parameter = request.getParameter(PRM_SEARCH);
+    trackList = trackDAO.getByParam(parameter);
     request.addAttribute("TrackList", trackList);
     return Pages.INDEX_PAGE;
   }
 }
+

@@ -58,25 +58,15 @@
       </c:if>
     </ul>
 
-    <div class="input-group mb-1">
-      <form method="get" action="action">
-        <input type="hidden" name="name" value="search_track">
-        <div class="input-group-prepend">
-          <button type="submit" class="btn btn-outline-secondary">Action</button>
-          <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="sr-only">Toggle Dropdown</span>
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#"><fmt:message key="search.track_name"/></a>
-            <a class="dropdown-item" href="#"><fmt:message key="search.artist_name"/></a>
-            <a class="dropdown-item" href="#"><fmt:message key="serach.album_name"/></a>
-            <a class="dropdown-item" href="#"><fmt:message key="serach.package_name"/> </a>
-          </div>
-        </div>
-        <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" name="trackname">
-      </form>
-    </div>
+    <form method="get" action="action">
+      <input type="hidden" name="name" value="search_track">
+      <div class="input-group mb-1">
+
+        <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" name="trackname"
+               placeholder="<fmt:message key="search.enter_track_name"/>">
+        <button type="submit" class="btn btn-outline-secondary"><fmt:message key="button.search"/></button>
+      </div>
+    </form>
 
     <div class="btn-group dropleft">
       <div class=""></div>

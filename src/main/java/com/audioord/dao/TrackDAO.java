@@ -68,8 +68,8 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
     return update(entity, mapper, SQL_ADD_TRACK);
   }
 
-  public Track getByName(String name) throws DAOException {
-    return find(mapper, SQL_SEARCH_BY_TRACK_NAME, name);
+  public List<Track> getByParam(String param) throws DAOException {
+    return findAll(mapper, SQL_SEARCH_BY_TRACK_NAME, param);
   }
 
   public List<Track> getMostPopularTracks(int page, int count) throws DAOException {
