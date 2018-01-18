@@ -18,41 +18,22 @@ public class OrderedTrackListCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
-    OrderStatus status = OrderStatus.COMPLETED;
-    String statusLine = request.getParameter(PRM_ORDER_STATUS);
-    if (statusLine != null && !statusLine.isEmpty()) {
-      status = OrderStatus.valueOf(request.getParameter(PRM_ORDER_STATUS));
-    }
     User user = request.getSessionAttribute("USER", User.class);
     if (user == null) {
       // user not authorized
       return Pages.SIGN_IN_PAGE;
     }
+    String username = user.getUsername();
 
     List<Track> trackList;
-    String username = user.getUsername();
-    switch (status) {
-      case COMPLETED: {
-        trackList = trackDAO.getUserTracks(username, status);
-        break;
-      }
-      case REJECTED: {
-        trackList = trackDAO.getUserTracks(username, status);
-        break;
-      }
-      case SUBMITTED: {
-        trackList = trackDAO.getUserTracks(username, status);
-        break;
-      }
-      default: {
-        trackList = trackDAO.getAllUserTracks(username);
-        break;
-      }
+    OrderStatus status = OrderStatus.fromString(request.getParameter(PRM_ORDER_STATUS));
+    if (status != null) {
+      trackList = trackDAO.getUserTracks(username, status);
+    } else {
+      trackList = trackDAO.getAllUserTracks(username);
     }
 
     request.addAttribute("TrackList", trackList);
     return Pages.PURCHASES_PAGE;
   }
-
-
 }

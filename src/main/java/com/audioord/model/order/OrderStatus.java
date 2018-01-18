@@ -6,5 +6,15 @@ public enum OrderStatus {
 
   REJECTED, // admin can reject order
 
-  COMPLETED // finished order, eg. can download tracks
+  COMPLETED; // finished order, eg. can download tracks
+
+  public static OrderStatus fromString(String s) {
+    for (OrderStatus status : values()) {
+      if (status.name().equalsIgnoreCase(s)) {
+        return status;
+      }
+    }
+    return null;
+  }
+
 }
