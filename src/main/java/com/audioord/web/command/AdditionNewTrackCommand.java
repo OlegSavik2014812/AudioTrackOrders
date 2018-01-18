@@ -24,13 +24,13 @@ public class AdditionNewTrackCommand implements Command {
     String durationParam = request.getParameter("duration");
     String priceParam = request.getParameter("price");
     int popularity = 0;
-    long duration = 0;
+    double duration = 0;
     int price = 0;
     if (popularityParam != null && !popularityParam.isEmpty()) {
       popularity = Integer.parseInt(popularityParam);
     }
     if (durationParam != null && !durationParam.isEmpty()) {
-      duration = Long.parseLong(durationParam);
+      duration = Double.parseDouble(durationParam);
     }
     if (priceParam != null && !priceParam.isEmpty()) {
       price = Integer.parseInt(priceParam);

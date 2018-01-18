@@ -13,15 +13,17 @@ public final class Commands {
   }
 
   private static Map<String, Command> define(Map<String, Command> commands) {
-
-    commands.put(NotFoundCommand.NAME, new NotFoundCommand());
     commands.put(SignInCommand.NAME, new SignInCommand());
     commands.put(SignUpCommand.NAME, new SignUpCommand());
     commands.put(SignOutCommand.NAME, new SignOutCommand());
+    commands.put(NotFoundCommand.NAME, new NotFoundCommand());
     commands.put(TrackListCommand.NAME, new TrackListCommand());
+    commands.put(OrderTracksCommand.NAME, new OrderTracksCommand());
     commands.put(ChangeLocaleCommand.NAME, new ChangeLocaleCommand());
-    commands.put(OrderedTrackListCommand.NAME, new OrderedTrackListCommand());
     commands.put(AdditionNewTrackCommand.NAME, new AdditionNewTrackCommand());
+    commands.put(OrderedTrackListCommand.NAME, new OrderedTrackListCommand());
+    commands.put(AdditionTrackFeedbackCommand.NAME, new AdditionTrackFeedbackCommand());
+    commands.put(SearchTrackCommand.NAME, new SearchTrackCommand());
     return commands;
   }
 

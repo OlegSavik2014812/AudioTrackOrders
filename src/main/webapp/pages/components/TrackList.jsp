@@ -21,8 +21,8 @@
       <th><fmt:message key="index.uri"/></th>
       <th><fmt:message key="index.price"/></th>
       <th><fmt:message key="index.duration"/></th>
-      <c:if test="${sessionScope.USER!=null}">
-        <th><a href="<c:url value=""></c:url> "> <fmt:message key="index.add_to_order"/></a></th>
+      <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='CLIENT'}">
+        <th><a href="<c:url value="/action?name=order_tracks"/> "> <fmt:message key="index.add_to_order"/></a></th>
       </c:if>
     </tr>
     </thead>
@@ -38,7 +38,7 @@
         <td><c:out value="${track.duration}"/></td>
         <td>
           <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='CLIENT'}">
-            <input type="checkbox" class="form-check-input" id="checkAdd" name="check" value="add">
+            <input type="checkbox" class="form-check-input" id="checkAdd" name="check" value="${track.name}">
             <label class="form-check-label" for="checkAdd"><fmt:message key="label.add"/> </label>
           </c:if>
         </td>

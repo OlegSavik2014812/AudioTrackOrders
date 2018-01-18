@@ -3,7 +3,6 @@ package com.audioord.dao;
 import com.audioord.model.audio.Track;
 import com.audioord.model.order.OrderStatus;
 
-import java.net.URI;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +21,7 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   private static final String SQL_GET_ALL_USER_ORDERED_TRACKS = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName = ? order by Popularity desc";
   private static final String SQL_GET_USER_TRACKS = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName =? and purchase.Status=? order by Popularity desc";
   private static final String SQL_ADD_TRACK = "insert into Track(Track,Artist, Album, Popularity,URI,Price,Duration)values(?,?,?,?,?,?,?)";
-
+  private static final String SQL_SEARCH_BY_TRACK_NAME = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track where Track = ?";
 
   private EntityMapper<Track> mapper =
   new EntityMapper<Track>() {
@@ -45,13 +44,13 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
       st.setInt(4, entity.getPopularity());
       st.setObject(5, entity.getUri());
       st.setDouble(6, entity.getPrice());
-      st.setLong(7, entity.getDuration());
+      st.setDouble(7, entity.getDuration());
     }
   };
 
   @Override
   public Track getById(Long id) throws DAOException {
-    return null;
+    return getById(id, mapper, SQL_SEARCH_BY_TRACK_NAME);
   }
 
   @Override
@@ -67,6 +66,10 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   @Override
   public boolean create(Track entity) throws DAOException {
     return update(entity, mapper, SQL_ADD_TRACK);
+  }
+
+  public Track getByName(String name) throws DAOException {
+    return find(mapper, SQL_SEARCH_BY_TRACK_NAME, name);
   }
 
   public List<Track> getMostPopularTracks(int page, int count) throws DAOException {

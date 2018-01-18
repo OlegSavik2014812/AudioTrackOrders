@@ -83,8 +83,8 @@
         <input type="text" id="duration" name="duration" class="form-control"
                placeholder="<fmt:message key="addtrack.duration"/> ">
       </div>
-
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
+      <button class="btn btn-lg btn-primary btn-block" type="submit" data-toggle="modal"
+              data-target=".bd-example-modal-sm">
         <fmt:message key="addtrack.add"/>
       </button>
 
@@ -94,6 +94,14 @@
 
 </div>
 
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <fmt:message key="info.add_track_success"/>
+    </div>
+  </div>
+</div>
 <c:import url="components/js_import.jsp"/>
 
 </body>

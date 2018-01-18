@@ -2,6 +2,7 @@ package com.audioord.model.order;
 
 import com.audioord.model.Entity;
 import com.audioord.model.account.User;
+import com.audioord.model.audio.Track;
 
 import java.util.Date;
 
@@ -10,11 +11,12 @@ public class TrakcFeedback extends Entity<Long> {
   private User user;
   private String comments;
   private Date createdAt;
+  private Track track;
 
-  public TrakcFeedback(User user, String comments, Date createdAt) {
+  public TrakcFeedback(User user, String comments, Track track) {
     this.user = user;
     this.comments = comments;
-    this.createdAt = createdAt;
+    this.track = track;
   }
 
   public User getUser() {
@@ -39,5 +41,13 @@ public class TrakcFeedback extends Entity<Long> {
 
   public void setCreatedAt(Date createdAt) {
     this.createdAt = createdAt;
+  }
+
+  public Track getTrack() {
+    return track;
+  }
+
+  public void setTrack(Track track) {
+    this.track = track;
   }
 }

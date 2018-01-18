@@ -10,13 +10,13 @@ public class Track extends Entity<Long> {
   private int popularity;
   private int price;
   private String uri;
-  private long duration;
+  private double duration;
 
-  public long getDuration() {
+  public double getDuration() {
     return duration;
   }
 
-  public void setDuration(long duration) {
+  public void setDuration(double duration) {
     this.duration = duration;
   }
 
