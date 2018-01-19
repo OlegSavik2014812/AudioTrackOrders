@@ -3,7 +3,6 @@ package com.audioord.model.account;
 import com.audioord.model.Entity;
 
 public class User extends Entity<Long> {
-  private long id;
   private String username;
   private String firstName;
   private String lastName;
@@ -17,11 +16,12 @@ public class User extends Entity<Long> {
 
   @Override
   public Long getId() {
-    return id;
+    return super.getId();
   }
 
-  public void setId(int id) {
-    this.id = id;
+  @Override
+  public void setId(Long id) {
+    super.setId(id);
   }
 
   public String getUsername() {
