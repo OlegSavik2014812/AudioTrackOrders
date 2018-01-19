@@ -2,7 +2,9 @@ package com.audioord.model.audio;
 
 import com.audioord.model.Entity;
 
-public class Track extends Entity<Long> {
+import java.io.Serializable;
+
+public class Track extends Entity<Long> implements Serializable {
 
   private String name;
   private String artist;

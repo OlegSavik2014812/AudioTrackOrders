@@ -26,7 +26,7 @@
     <form class="" method="POST" action="../action?name=add_discount">
       <input type="hidden" name="name" value="add_track">
 
-      <h2 class="form-signin-heading"><fmt:message key="addtrack.title"/></h2>
+      <h2 class="form-signin-heading"><fmt:message key="add.discount.addition_discount"/></h2>
 
       <div class="form-group">
         <label for="percent" class="sr-only">
