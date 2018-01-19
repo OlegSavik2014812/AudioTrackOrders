@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AdditionOrderCommand implements Command {
+public class EditOrderCommand implements Command {
   public static final String NAME = "make_order";
   private TrackDAO trackDAO = new TrackDAO();
   private TrackOrderDAO trackOrderDAO = new TrackOrderDAO();

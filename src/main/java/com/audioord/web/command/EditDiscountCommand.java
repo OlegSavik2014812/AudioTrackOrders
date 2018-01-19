@@ -11,7 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AdditionDiscountCommand implements Command {
+public class EditDiscountCommand implements Command {
   public static final String NAME = "add_discount";
   private OrderDiscountDAO orderDiscountDAO = new OrderDiscountDAO();
   private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");

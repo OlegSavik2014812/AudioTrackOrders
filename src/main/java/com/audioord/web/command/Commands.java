@@ -19,11 +19,11 @@ public final class Commands {
     commands.put(NotFoundCommand.NAME, new NotFoundCommand());
     commands.put(TrackListCommand.NAME, new TrackListCommand());
     commands.put(ChangeLocaleCommand.NAME, new ChangeLocaleCommand());
-    commands.put(AdditionNewTrackCommand.NAME, new AdditionNewTrackCommand());
+    commands.put(EditNewTrackCommand.NAME, new EditNewTrackCommand());
     commands.put(OrderedTrackListCommand.NAME, new OrderedTrackListCommand());
     commands.put(SearchTrackCommand.NAME, new SearchTrackCommand());
-    commands.put(AdditionDiscountCommand.NAME, new AdditionDiscountCommand());
-    commands.put(AdditionOrderCommand.NAME, new AdditionOrderCommand());
+    commands.put(EditDiscountCommand.NAME, new EditDiscountCommand());
+    commands.put(EditOrderCommand.NAME, new EditOrderCommand());
     return commands;
   }
 
