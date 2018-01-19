@@ -1,0 +1,13 @@
+insert into purchase(TotalPrice,Status,IdUser)values(12,'COMPLETED',1);
+insert into purchase(TotalPrice,Status,IdUser,Date)values(23,'COMPLETED',3,'2015-12-12');
+insert into purchase(TotalPrice,Status,IdUser)values(12,'COMPLETED',2);
+insert into purchase(TotalPrice,Status,IdUser,Date)values(24,'COMPLETED',4,'2000-01-01');
+insert into purchase(TotalPrice,Status,IdUser)values(54,'COMPLETED',2);
+insert into purchase(TotalPrice,Status,IdUser)values(1,'COMPLETED',3);
+insert into purchase(TotalPrice,Status,IdUser)values(5,'COMPLETED',6);
+insert into purchase(TotalPrice,Status,IdUser)values(6,'COMPLETED',11);
+insert into purchase(TotalPrice,Status,IdUser)values(9,'REJECTED',12);
+insert into purchase(TotalPrice,Status,IdUser)values(11,'REJECTED',15);
+insert into purchase(TotalPrice,Status,IdUser)values(13,'REJECTED',14);
+insert into purchase(TotalPrice,Status,IdUser)values(21,'SUBMITTED',8);
+insert into purchase(TotalPrice,Status,IdUser)values(13,'SUBMITTED',9);
