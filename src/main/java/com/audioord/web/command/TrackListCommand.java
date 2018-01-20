@@ -13,41 +13,42 @@ import java.util.List;
 public class TrackListCommand implements Command {
 
   public static final String NAME = "track_list";
-  private static final String PRM_FILTER = "filter";
+  private static final String PRM_SORT = "sort";
+  private static final String PRM_PAGE = "page";
+
   private TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
     int page = 1;
     int recordsPerPage = 10;
-    if (request.getParameter("page") != null) {
-      page = Integer.parseInt(request.getParameter("page"));
+    if (request.hasParameter(PRM_PAGE)) {
+      page = Integer.parseInt(request.getParameter(PRM_PAGE));
     }
-    TrackFilter trackFilter = TrackFilter.fromString(request.getParameter(PRM_FILTER));
+
+    TrackSort trackSort = TrackSort.fromString(request.getParameter(PRM_SORT));
 
     List<Track> trackList = new ArrayList<>();
     int noOfRecords = trackDAO.countTracks();
     int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-    switch (trackFilter) {
+    switch (trackSort) {
       case MOST_POPULAR: {
         trackList = trackDAO.getMostPopularTracks((page - 1) * recordsPerPage,
         recordsPerPage);
-        request.addAttribute("Name","most_popular");
         break;
       }
       case BRAND_NEW: {
         trackList = trackDAO.getBrandNewTracks((page - 1) * recordsPerPage,
         recordsPerPage);
-        request.addAttribute("Name","brand_new");
         break;
       }
       case BEST_SELLING: {
         trackList = trackDAO.getBestSellingTracks((page - 1) * recordsPerPage,
         recordsPerPage);
-        request.addAttribute("Name","best_selling");
         break;
       }
     }
+    request.addAttribute("sort", trackSort.name());
     request.addAttribute("TrackList", trackList);
     request.addAttribute("noOfPages", noOfPages);
     request.addAttribute("currentPage", page);
@@ -55,13 +56,13 @@ public class TrackListCommand implements Command {
     return Pages.INDEX_PAGE;
   }
 
-  private enum TrackFilter {
+  private enum TrackSort {
     MOST_POPULAR,
     BEST_SELLING,
     BRAND_NEW;
 
-    public static TrackFilter fromString(String value) {
-      for (TrackFilter v : TrackFilter.values()) {
+    public static TrackSort fromString(String value) {
+      for (TrackSort v : TrackSort.values()) {
         if (v.name().equalsIgnoreCase(value)) {
           return v;
         }

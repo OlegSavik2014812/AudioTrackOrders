@@ -10,15 +10,15 @@
 <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link" href="<c:url value="/action?name=track_list&filter=most_popular"/>"><fmt:message
+      <a class="nav-link" href="<c:url value="/action?name=track_list&sort=most_popular"/>"><fmt:message
         key="index.most_popular"/></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="<c:url value="/action?name=track_list&filter=brand_new"/>"><fmt:message
+      <a class="nav-link" href="<c:url value="/action?name=track_list&sort=brand_new"/>"><fmt:message
         key="index.brand_new"/></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="<c:url value="/action?name=track_list&filter=best_selling"/>"><fmt:message
+      <a class="nav-link" href="<c:url value="/action?name=track_list&sort=best_selling"/>"><fmt:message
         key="index.best_selling"/> </a>
     </li>
   </ul>

@@ -9,20 +9,33 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TrackDAO extends BaseEntityDao<Track, Long> {
-  private static final String SQL_GET_ALL = "select count(id) from track";
+
+  private static final String SQL_GET_ALL =
+  "select count(id) from track";
+
   private static final String SQL_GET_BEST_SELLING_TRACKS =
-  "select track.track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration,track.id from track,trackorder where track.Id = trackorder.IdTrack group by track.Track order by count(trackorder.IdTrack) desc limit ?, ?";
+  "SELECT t.track, t.artist, t.album, t.popularity, t.uri, t.price, t.duration, t.id, (SELECT count(o.Id) FROM TrackOrder o WHERE t.Id = o.IdTrack) AS numOrdered FROM track t ORDER BY numOrdered DESC limit ?, ?";
 
   private static final String SQL_GET_BRAND_NEW_TRACK =
-  "select track, artist, album , popularity , uri , price, duration,track.id from track order by id desc limit ?, ?";
+  "select track, artist, album, popularity, uri , price, duration, id from track order by id desc limit ?, ?";
 
   private static final String SQL_GET_MOST_POPULAR_TRACKS =
-  "select track, artist, album , popularity , uri , price, duration,track.id from track order by Popularity desc limit ?, ?";
-  private static final String SQL_GET_ALL_USER_ORDERED_TRACKS = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration ,track.id from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName = ? order by Popularity desc";
-  private static final String SQL_GET_USER_TRACKS = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration ,track.id from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName =? and purchase.Status=? order by Popularity desc";
-  private static final String SQL_ADD_TRACK = "insert into Track(Track,Artist, Album, Popularity,URI,Price,Duration)values(?,?,?,?,?,?,?)";
-  private static final String SQL_SEARCH_BY_TRACK_NAME = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration, track.id from track where Track = ?";
-  private static final String SQL_ADD_ORDERED_TRACK = "insert into TrackOrder(IdTrack,IdPurchase)values(?,?)";
+  "select track, artist, album, popularity, uri, price, duration, id from track order by Popularity desc limit ?, ?";
+
+  private static final String SQL_GET_ALL_USER_ORDERED_TRACKS =
+  "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration ,track.id from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName = ? order by Popularity desc";
+
+  private static final String SQL_GET_USER_TRACKS =
+  "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration ,track.id from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName =? and purchase.Status=? order by Popularity desc";
+
+  private static final String SQL_ADD_TRACK =
+  "insert into Track(Track,Artist, Album, Popularity,URI,Price,Duration)values(?,?,?,?,?,?,?)";
+
+  private static final String SQL_SEARCH_BY_TRACK_NAME =
+  "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration, track.id from track where Track = ?";
+
+  private static final String SQL_ADD_ORDERED_TRACK =
+  "insert into TrackOrder(IdTrack,IdPurchase)values(?,?)";
 
   private final EntityMapper<Track> mapper =
   new EntityMapper<Track>() {
