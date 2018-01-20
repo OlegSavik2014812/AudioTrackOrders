@@ -22,6 +22,7 @@ public class OrderDiscountDAO extends BaseEntityDao<OrderDiscount, Long> {
       Date dateEnd = new Date(dateUtilEnd.getTime());
       OrderDiscount discount = new OrderDiscount(discountPercent, dateBegin, dateEnd);
       return discount;
+
     }
 
     @Override
