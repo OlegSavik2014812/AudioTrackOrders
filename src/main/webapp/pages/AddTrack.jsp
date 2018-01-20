@@ -1,9 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:requestEncoding value="UTF-8"/>
-<fmt:setLocale value="${sessionScope.local}"/>
-<fmt:setBundle basename="i18n.MessageBundle"/>
+
+  <fmt:requestEncoding value="UTF-8"/>
+  <fmt:setLocale value="${sessionScope.local}"/>
+  <fmt:setBundle basename="i18n.MessageBundle"/>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +13,6 @@
   <title>
     <fmt:message key="index.title"/>
   </title>
-
   <c:import url="components/css_import.jsp"/>
   <link href="<c:url value="/css/login.css"/>" rel="stylesheet" type="text/css">
 

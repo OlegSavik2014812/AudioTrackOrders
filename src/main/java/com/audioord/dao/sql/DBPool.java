@@ -20,7 +20,7 @@ public final class DBPool extends DBPoolBase {
   private static final ReentrantLock LOCK = new ReentrantLock();
 
   /** Pool max connections number */
-  private static final int SIZE = 15;
+  private static final int SIZE = 8;
 
   /** Pool state */
   private static AtomicBoolean isInitialized = new AtomicBoolean(false);

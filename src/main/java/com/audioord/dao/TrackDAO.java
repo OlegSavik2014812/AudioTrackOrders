@@ -97,6 +97,4 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   public List<Track> getUserTracks(String username, OrderStatus status) throws DAOException {
     return findAll(mapper, SQL_GET_USER_TRACKS, username, status.name());
   }
-
-
 }

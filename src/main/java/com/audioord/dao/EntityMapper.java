@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/** Simple ResultSet mapper allow to fill {@link Entity} */
+/**
+ * Simple ResultSet mapper allow to fill {@link Entity}
+ */
 public interface EntityMapper<T extends Entity> {
 
   /**
@@ -18,5 +20,12 @@ public interface EntityMapper<T extends Entity> {
    */
   T parse(ResultSet rs) throws SQLException, DAOException;
 
+  /**
+   * Read entity to prepare statement
+   *
+   * @param st {@link PreparedStatement}
+   * @param entity {@link Entity}
+   * @throws SQLException
+   */
   void write(PreparedStatement st, T entity) throws SQLException;
 }
