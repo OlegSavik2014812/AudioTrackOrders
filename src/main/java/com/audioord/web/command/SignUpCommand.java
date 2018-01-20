@@ -35,10 +35,14 @@ public class SignUpCommand implements Command {
       return Pages.SIGN_UP_PAGE; // password not confirmed, or have incorrect length
     }
 
+    if (authInfoDao.getById(userName) != null) {
+      return Pages.SIGN_UP_PAGE; // user already exists
+    }
+
     AuthInfo authInfo = new AuthInfo(userName, password1);
 
     if (!authInfoDao.create(authInfo)) {
-      return Pages.SIGN_UP_PAGE; // could not create auth info, probably username already used
+      return Pages.SIGN_UP_PAGE; // could not create auth info
     }
 
     User user = new User(userName, ROLE.CLIENT);
@@ -50,7 +54,7 @@ public class SignUpCommand implements Command {
     }
 
     // add current user to session
-    request.setSessionAttribute("USER", user);  
+    request.setSessionAttribute("USER", user);
 
     return Pages.INDEX_PAGE;
   }

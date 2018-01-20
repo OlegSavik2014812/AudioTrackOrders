@@ -6,7 +6,7 @@ public class AuthInfo extends Entity<String> {
 
   private String password;
 
-  public AuthInfo(String password, String username) {
+  public AuthInfo(String username, String password) {
     this.password = password;
     this.setId(username);
   }

@@ -26,7 +26,7 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
   private final EntityMapper<User> userMapper = new EntityMapper<User>() {
     @Override
     public User parse(ResultSet rs) throws SQLException {
-      User user = new User(rs.getString(1), ROLE.valueOf(rs.getString(2)));
+      User user = new User(rs.getString(1), ROLE.fromString(rs.getString(2)));
       user.setFirstName(rs.getString(3));
       user.setLastName(rs.getString(4));
       user.setId(rs.getLong(5));
@@ -36,7 +36,7 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
     @Override
     public void write(PreparedStatement st, User user) throws SQLException {
       st.setString(1, user.getUsername());
-      st.setObject(2, user.getRole());
+      st.setString(2, user.getRole().name());
       st.setString(3, user.getFirstName());
       st.setString(4, user.getLastName());
     }
