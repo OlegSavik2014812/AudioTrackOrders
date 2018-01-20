@@ -32,16 +32,19 @@ public class TrackListCommand implements Command {
       case MOST_POPULAR: {
         trackList = trackDAO.getMostPopularTracks((page - 1) * recordsPerPage,
         recordsPerPage);
+        request.addAttribute("Name","most_popular");
         break;
       }
       case BRAND_NEW: {
         trackList = trackDAO.getBrandNewTracks((page - 1) * recordsPerPage,
         recordsPerPage);
+        request.addAttribute("Name","brand_new");
         break;
       }
       case BEST_SELLING: {
         trackList = trackDAO.getBestSellingTracks((page - 1) * recordsPerPage,
         recordsPerPage);
+        request.addAttribute("Name","best_selling");
         break;
       }
     }

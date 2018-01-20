@@ -1,11 +1,13 @@
 package com.audioord.web.command;
 
 import com.audioord.dao.DAOException;
+import com.audioord.dao.OrderedTrackDAO;
 import com.audioord.dao.TrackDAO;
 import com.audioord.dao.TrackOrderDAO;
 import com.audioord.model.account.User;
 import com.audioord.model.audio.Track;
 import com.audioord.model.order.OrderStatus;
+import com.audioord.model.order.OrderedTrack;
 import com.audioord.model.order.TrackOrder;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
@@ -19,6 +21,7 @@ public class EditOrderCommand implements Command {
   public static final String NAME = "make_order";
   private TrackDAO trackDAO = new TrackDAO();
   private TrackOrderDAO trackOrderDAO = new TrackOrderDAO();
+  private OrderedTrackDAO orderedTrackDAO = new OrderedTrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException, ClassNotFoundException {
@@ -32,12 +35,19 @@ public class EditOrderCommand implements Command {
       totalPrice += track.getPrice();
       tracks.add(track);
     }
-    TrackOrder trackOrder = new TrackOrder(tracks, user, date, OrderStatus.SUBMITTED);
+    TrackOrder trackOrder = new TrackOrder(user, date, OrderStatus.SUBMITTED);
     trackOrder.setTotalPrice(totalPrice);
+
+
     if (!trackOrderDAO.create(trackOrder)) {
       return Pages.INDEX_PAGE;
     }
 
+    TrackOrder trackOrder1 = trackOrderDAO.getLastCreated();
+
+    for (Track track : tracks) {
+      orderedTrackDAO.create(new OrderedTrack(trackOrder1.getId(), track.getId()));
+    }
     return Pages.INDEX_PAGE;
   }
 }

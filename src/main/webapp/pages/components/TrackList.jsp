@@ -8,7 +8,16 @@
 
 
 <div>
-  <h2><fmt:message key="index.most_popular"/></h2>
+  <c:if test="${requestScope.Name=='most_popular'}">
+    <h2><fmt:message key="index.most_popular"/></h2>
+  </c:if>
+  <c:if test="${requestScope.Name=='brand_new'}">
+    <h2><fmt:message key="index.brand_new"/></h2>
+  </c:if>
+  <c:if test="${requestScope.Name=='best_selling'}">
+    <h2><fmt:message key="index.best_selling"/></h2>
+  </c:if>
+
 </div>
 <div class="table-responsive">
   <div class="table table-striped">

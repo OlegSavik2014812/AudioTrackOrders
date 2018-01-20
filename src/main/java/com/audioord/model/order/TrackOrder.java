@@ -2,33 +2,22 @@ package com.audioord.model.order;
 
 import com.audioord.model.Entity;
 import com.audioord.model.account.User;
-import com.audioord.model.audio.Track;
 
 import java.util.Date;
-import java.util.List;
 
 public class TrackOrder extends Entity<Long> {
 
-  private List<Track> tracks;
   private User user;
   private Date dateOrdered;
   private double totalPrice;
   private OrderStatus status;
 
-  public TrackOrder(List<Track> tracks, User user, Date dateOrdered, OrderStatus status) {
-    this.tracks = tracks;
+  public TrackOrder(User user, Date dateOrdered, OrderStatus status) {
     this.user = user;
     this.dateOrdered = dateOrdered;
     this.status = status;
   }
 
-  public List<Track> getTracks() {
-    return tracks;
-  }
-
-  public void setTracks(List<Track> tracks) {
-    this.tracks = tracks;
-  }
 
   public User getUser() {
     return user;
@@ -55,7 +44,7 @@ public class TrackOrder extends Entity<Long> {
   }
 
   public boolean isPaid() {
-    return tracks != null && !tracks.isEmpty() && totalPrice > 0;
+    return totalPrice > 0;
   }
 
   public OrderStatus getStatus() {
