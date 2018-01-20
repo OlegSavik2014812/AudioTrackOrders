@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TrackOrderDAO extends BaseEntityDao<TrackOrder, Long> {
-  EntityMapper<TrackOrder> mapper = new EntityMapper<TrackOrder>() {
+
+
+  private final EntityMapper<TrackOrder> mapper = new EntityMapper<TrackOrder>() {
     @Override
     public TrackOrder parse(ResultSet rs) throws SQLException, DAOException {
       return null;

@@ -6,7 +6,6 @@ import java.util.Date;
 
 public class OrderDiscount extends Entity<Long> {
 
-
   private double discountPercent;
   private Date effectiveFrom;
   private Date effectiveTo;
@@ -15,16 +14,6 @@ public class OrderDiscount extends Entity<Long> {
     this.discountPercent = discountPercent;
     this.effectiveFrom = effectiveFrom;
     this.effectiveTo = effectiveTo;
-  }
-
-  @Override
-  public void setId(Long id) {
-    super.setId(id);
-  }
-
-  @Override
-  public Long getId() {
-    return super.getId();
   }
 
   public double getDiscountPercent() {

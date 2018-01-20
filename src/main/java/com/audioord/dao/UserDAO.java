@@ -9,39 +9,38 @@ import java.sql.SQLException;
 
 public final class UserDAO extends BaseEntityDao<User, Long> {
 
-  public static final String SQL_UPDATE_USER_BY_ID =
-      "UPDATE User SET UserName = ?, Role = ?, FirstName = ?, LastName = ? WHERE Id = ?";
+  private static final String SQL_UPDATE_USER_BY_ID =
+  "UPDATE User SET UserName = ?, Role = ?, FirstName = ?, LastName = ? WHERE Id = ?";
 
   private static final String SQL_GET_USER_BY_ID =
-      "SELECT UserName, Role,  FirstName, LastName, Id FROM User WHERE Id=?";
+  "SELECT UserName, Role,  FirstName, LastName, Id FROM User WHERE Id=?";
 
   private static final String SQL_GET_USER_BY_USERNAME =
-      "SELECT UserName, Role,  FirstName, LastName, Id FROM User WHERE UserName=?";
+  "SELECT UserName, Role,  FirstName, LastName, Id FROM User WHERE UserName=?";
 
   private static final String SQL_CREATE_USER =
-      "INSERT INTO User (UserName, Role,  FirstName, LastName) VALUES (?,?,?,?)";
+  "INSERT INTO User (UserName, Role,  FirstName, LastName) VALUES (?,?,?,?)";
 
   private static final String SQL_DELETE_USER_BY_ID = "DELETE FROM User WHERE Id=?";
 
-  private final EntityMapper<User> userMapper =
-      new EntityMapper<User>() {
-        @Override
-        public User parse(ResultSet rs) throws SQLException {
-          User user = new User(rs.getString(1), ROLE.valueOf(rs.getString(2)));
-          user.setFirstName(rs.getString(3));
-          user.setLastName(rs.getString(4));
-          user.setId(rs.getLong(5));
-          return user;
-        }
+  private final EntityMapper<User> userMapper = new EntityMapper<User>() {
+    @Override
+    public User parse(ResultSet rs) throws SQLException {
+      User user = new User(rs.getString(1), ROLE.valueOf(rs.getString(2)));
+      user.setFirstName(rs.getString(3));
+      user.setLastName(rs.getString(4));
+      user.setId(rs.getLong(5));
+      return user;
+    }
 
-        @Override
-        public void write(PreparedStatement st, User user) throws SQLException {
-          st.setString(1, user.getUsername());
-          st.setObject(2, user.getRole());
-          st.setString(3, user.getFirstName());
-          st.setString(4, user.getLastName());
-        }
-      };
+    @Override
+    public void write(PreparedStatement st, User user) throws SQLException {
+      st.setString(1, user.getUsername());
+      st.setObject(2, user.getRole());
+      st.setString(3, user.getFirstName());
+      st.setString(4, user.getLastName());
+    }
+  };
 
   @Override
   public User getById(Long id) throws DAOException {

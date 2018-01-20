@@ -9,7 +9,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TrackDAO extends BaseEntityDao<Track, Long> {
-  private static final String SQL_GET_ALL = "select count(id) from track";
+
+  private static final String SQL_GET_ALL =
+  "select count(id) from track";
+
   private static final String SQL_GET_BEST_SELLING_TRACKS =
   "select track.track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track,trackorder where track.Id = trackorder.IdTrack group by track.Track order by count(trackorder.IdTrack) desc limit ?, ?";
 
@@ -18,13 +21,21 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
 
   private static final String SQL_GET_MOST_POPULAR_TRACKS =
   "select track, artist, album , popularity , uri , price, duration from track order by Popularity desc limit ?, ?";
-  private static final String SQL_GET_ALL_USER_ORDERED_TRACKS = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName = ? order by Popularity desc";
-  private static final String SQL_GET_USER_TRACKS = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName =? and purchase.Status=? order by Popularity desc";
-  private static final String SQL_ADD_TRACK = "insert into Track(Track,Artist, Album, Popularity,URI,Price,Duration)values(?,?,?,?,?,?,?)";
-  private static final String SQL_SEARCH_BY_TRACK_NAME = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track where Track = ?";
 
-  private EntityMapper<Track> mapper =
-  new EntityMapper<Track>() {
+  private static final String SQL_GET_ALL_USER_ORDERED_TRACKS =
+  "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName = ? order by Popularity desc";
+
+  private static final String SQL_GET_USER_TRACKS =
+  "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName =? and purchase.Status=? order by Popularity desc";
+
+  private static final String SQL_ADD_TRACK =
+  "insert into Track(Track,Artist, Album, Popularity,URI,Price,Duration)values(?,?,?,?,?,?,?)";
+
+  private static final String SQL_SEARCH_BY_TRACK_NAME =
+  "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration from track where Track = ?";
+
+  private final EntityMapper<Track> mapper = new EntityMapper<Track>() {
+
     @Override
     public Track parse(ResultSet rs) throws SQLException {
       Track track = new Track(rs.getString(1), rs.getString(2));

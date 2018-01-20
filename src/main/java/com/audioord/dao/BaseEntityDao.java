@@ -13,8 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
-implements EntityDAO<E, K> {
+public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable> implements EntityDAO<E, K> {
 
   private static final Logger LOG = Logger.getLogger(BaseEntityDao.class);
 
@@ -74,7 +73,7 @@ implements EntityDAO<E, K> {
     return isCreated;
   }
 
-  List<E> findAll(EntityMapper<E> mapper, String sql, Object... params) throws DAOException {
+  protected List<E> findAll(EntityMapper<E> mapper, String sql, Object... params) throws DAOException {
     Objects.requireNonNull(mapper, "Param Mapper could not be null");
 
     List<E> list = new ArrayList<>();

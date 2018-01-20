@@ -9,10 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TrackFeedbackDAO extends BaseEntityDao<TrackFeedback, Long> {
-  private static final String SQL_CREATE_TRACK_FEEDBACK = "insert into TrackFeedback(Comment, IdTrack,IdUser)values(?, ?,?)";
 
+  private static final String SQL_CREATE_TRACK_FEEDBACK =
+  "insert into TrackFeedback(Comment, IdTrack, IdUser)values(?, ?,?)";
 
-  private EntityMapper<TrackFeedback> mapper = new EntityMapper<TrackFeedback>() {
+  private final EntityMapper<TrackFeedback> mapper = new EntityMapper<TrackFeedback>() {
+
     @Override
     public TrackFeedback parse(ResultSet rs) throws SQLException, DAOException {
       String comment = rs.getString(1);

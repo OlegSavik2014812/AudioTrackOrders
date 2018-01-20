@@ -8,10 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class OrderDiscountDAO extends BaseEntityDao<OrderDiscount, Long> {
-  private static final String SQL_CREATE_DISCOUNT = "insert into Discount(Percent, DateBegin,DateEnd)values(?,?,?)";
 
+  private static final String SQL_CREATE_DISCOUNT =
+  "insert into Discount(Percent, DateBegin,DateEnd)values(?,?,?)";
 
-  EntityMapper<OrderDiscount> mapper = new EntityMapper<OrderDiscount>() {
+  private final EntityMapper<OrderDiscount> mapper = new EntityMapper<OrderDiscount>() {
+
     @Override
     public OrderDiscount parse(ResultSet rs) throws SQLException, DAOException {
       java.util.Date dateUtilBegin = (java.util.Date) rs.getObject(3);
