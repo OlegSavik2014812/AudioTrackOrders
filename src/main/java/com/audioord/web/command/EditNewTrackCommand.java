@@ -2,6 +2,8 @@ package com.audioord.web.command;
 
 import com.audioord.dao.DAOException;
 import com.audioord.dao.TrackDAO;
+import com.audioord.model.account.ROLE;
+import com.audioord.model.account.User;
 import com.audioord.model.audio.Track;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
@@ -15,6 +17,10 @@ public class EditNewTrackCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
+    boolean check = request.getSessionAttribute("USER", User.class).getRole().equals(ROLE.ADMIN);
+    if (!check) {
+      return Pages.INDEX_PAGE;
+    }
     if (!request.hasAllParameters("trackName", "artist")) {
       return Pages.ADD_TRACK_PAGE;
     }

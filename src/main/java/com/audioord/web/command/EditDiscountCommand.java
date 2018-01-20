@@ -2,6 +2,8 @@ package com.audioord.web.command;
 
 import com.audioord.dao.DAOException;
 import com.audioord.dao.OrderDiscountDAO;
+import com.audioord.model.account.ROLE;
+import com.audioord.model.account.User;
 import com.audioord.model.order.OrderDiscount;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
@@ -18,6 +20,10 @@ public class EditDiscountCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
+    boolean check = request.getSessionAttribute("USER", User.class).getRole().equals(ROLE.ADMIN);
+    if (!check) {
+      return Pages.INDEX_PAGE;
+    }
     double percent;
     Date effectiveFrom = null;
     Date effectiveTo = null;

@@ -2,6 +2,7 @@ package com.audioord.web.command;
 
 import com.audioord.dao.DAOException;
 import com.audioord.dao.TrackDAO;
+import com.audioord.model.account.ROLE;
 import com.audioord.model.account.User;
 import com.audioord.model.audio.Track;
 import com.audioord.model.order.OrderStatus;
@@ -18,6 +19,10 @@ public class OrderedTrackListCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
+    boolean check = request.getSessionAttribute("USER", User.class).getRole().equals(ROLE.CLIENT);
+    if (!check) {
+      return Pages.INDEX_PAGE;
+    }
     User user = request.getSessionAttribute("USER", User.class);
     if (user == null) {
       // user not authorized
