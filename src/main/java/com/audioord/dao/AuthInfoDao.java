@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public final class AuthInfoDao extends BaseEntityDao<AuthInfo, String> {
 
   private static final String SQL_GET_AUTH_BY_ID =
-      "SELECT Password, UserName  FROM AuthInfo WHERE UserName = ?";
+      "SELECT UserName, Password  FROM AuthInfo WHERE UserName = ?";
 
   private static final String SQL_UPDATE_AUTH_BY_ID =
       "UPDATE AuthInfo SET UserName = ?, Password = ? WHERE UserName = ?";

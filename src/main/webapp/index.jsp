@@ -2,9 +2,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <fmt:requestEncoding value="UTF-8"/>
-  <fmt:setLocale value="${sessionScope.local}"/>
-  <fmt:setBundle basename="i18n.MessageBundle"/>
+<fmt:requestEncoding value="UTF-8"/>
+<fmt:setLocale value="${sessionScope.local}"/>
+<fmt:setBundle basename="i18n.MessageBundle"/>
 
 
 <!DOCTYPE html>
@@ -18,9 +18,11 @@
 <div class="container-fluid">
   <div class="row">
     <c:import url="pages/components/Menu.jsp"/>
+
     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
       <c:import url="pages/components/TrackList.jsp"/>
     </main>
+
   </div>
 </div>
 <c:import url="pages/components/js_import.jsp"/>

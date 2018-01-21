@@ -131,7 +131,7 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     return find(mapper, sql, id);
   }
 
-  protected int count(String sql) throws DAOException {
+  protected int countAll(String sql) throws DAOException {
     int count = 0;
 
     try (Connection con = connectionSource.getConnection();
@@ -140,6 +140,30 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
       ResultSet resultSet = st.executeQuery(sql);
       if (resultSet.next()) {
         count = resultSet.getInt(1);
+      }
+    } catch (SQLException | PoolException e) {
+      throw new DAOException(e);
+    }
+    return count;
+  }
+
+  protected int countSpecial(String sql, Object... params) throws DAOException {
+    int count = 0;
+    E obj = null;
+
+    try (Connection con = connectionSource.getConnection();
+         PreparedStatement st = con.prepareCall(sql)) {
+      if (params != null && params.length > 0) {
+        for (int i = 0, length = params.length; i < length; i++) {
+          Object prm = params[i];
+          st.setObject(i + 1, prm);
+        }
+      }
+      LOG.debug(
+      String.format("Executing query [%s] \n with params %s", sql, Arrays.toString(params)));
+      ResultSet rs = st.executeQuery();
+      if (rs.next()) {
+        count = rs.getInt(1);
       }
     } catch (SQLException | PoolException e) {
       throw new DAOException(e);

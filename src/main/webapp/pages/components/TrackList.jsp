@@ -10,48 +10,51 @@
 <div class="container">
   <div class="row">
     <div class="col-4">
-      <nav>
-        <ul class="pagination pagination-sm">
-          <%--PREVIOUS--%>
-          <c:choose>
-            <c:when test="${currentPage != 1}">
-              <li class="page-item">
-                <a class="page-link"
-                   href="<c:url value="/action?name=track_list&sort=${sort}&page=${currentPage - 1}"/> ">Previous</a>
-              </li>
-            </c:when>
-            <c:otherwise>
-              <li class="page-item disabled"><a class="page-link">Previous</a></li>
-            </c:otherwise>
-          </c:choose>
-          <%--PAGES--%>
-          <c:forEach begin="1" end="${noOfPages}" var="i">
+      <form action="action" method="post">
+        <input type="hidden" name="name" value="make_order">
+        <nav>
+          <ul class="pagination pagination-sm">
+            <%--PREVIOUS--%>
             <c:choose>
-              <c:when test="${currentPage eq i}">
-                <li class="page-item active"><a class="page-link disabled">${i}</a></li>
-              </c:when>
-              <c:otherwise>
+              <c:when test="${currentPage != 1}">
                 <li class="page-item">
                   <a class="page-link"
-                     href="<c:url value="/action?name=track_list&sort=${sort}&page=${i}"/>">${i}</a>
+                     href="<c:url value="/action?name=track_list&sort=${sort}&page=${currentPage - 1}"/> ">Previous</a>
                 </li>
+              </c:when>
+              <c:otherwise>
+                <li class="page-item disabled"><a class="page-link">Previous</a></li>
               </c:otherwise>
             </c:choose>
-          </c:forEach>
-          <%--NEXT--%>
-          <c:choose>
-            <c:when test="${currentPage lt noOfPages}">
-              <li class="page-item">
-                <a class="page-link"
-                   href="<c:url value="/action?name=track_list&sort=${sort}&page=${currentPage + 1}"/>">Next</a>
-              </li>
-            </c:when>
-            <c:otherwise>
-              <li class="page-item disabled"><a class="page-link">Next</a></li>
-            </c:otherwise>
-          </c:choose>
-        </ul>
-      </nav>
+            <%--PAGES--%>
+            <c:forEach begin="1" end="${noOfPages}" var="i">
+              <c:choose>
+                <c:when test="${currentPage eq i}">
+                  <li class="page-item active"><a class="page-link disabled">${i}</a></li>
+                </c:when>
+                <c:otherwise>
+                  <li class="page-item">
+                    <a class="page-link"
+                       href="<c:url value="/action?name=track_list&sort=${sort}&page=${i}"/>">${i}</a>
+                  </li>
+                </c:otherwise>
+              </c:choose>
+            </c:forEach>
+            <%--NEXT--%>
+            <c:choose>
+              <c:when test="${currentPage lt noOfPages}">
+                <li class="page-item">
+                  <a class="page-link"
+                     href="<c:url value="/action?name=track_list&sort=${sort}&page=${currentPage + 1}"/>">Next</a>
+                </li>
+              </c:when>
+              <c:otherwise>
+                <li class="page-item disabled"><a class="page-link">Next</a></li>
+              </c:otherwise>
+            </c:choose>
+          </ul>
+        </nav>
+      </form>
     </div>
   </div>
 
@@ -95,8 +98,8 @@
           </tr>
         </c:forEach>
         </tbody>
-
       </table>
+      </form>
     </div>
   </div>
 </div>

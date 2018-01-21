@@ -28,7 +28,7 @@
       <div class="form-group">
         <label for="username" class="sr-only"><fmt:message key="signin.email_address_msg"/> </label>
         <input type="text" name="userName" id="username" class="form-control"
-               placeholder="<fmt:message key="signin.email_address_msg"/> " required="" autofocus="">
+               placeholder="<fmt:message key="signin.email_address_msg"/> " required pattern="" autofocus="">
       </div>
 
       <div class="form-group">
