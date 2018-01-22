@@ -26,12 +26,19 @@
       <h2 class="form-signin-heading"><fmt:message key="signup.please_signup"/></h2>
 
       <div class="form-group">
-        <label for="username" onblur="checkExist()" class="sr-only"><fmt:message
-          key="signin.email_address_msg"/> </label><span id="isE">Checl</span>
+        <label for="username" class="sr-only"><fmt:message
+          key="signin.email_address_msg"/> </label>
+        <span>
+        <c:if test="${requestScope.error=='exist'}">
+          <div class="alert alert-danger">
+            <strong><fmt:message key="error.user_already_exist"/></strong>
+          </div>
+        </c:if>
+      </span>
         <input type="text" name="userName" id="username" class="form-control"
-               placeholder="<fmt:message key="signin.email_address_msg"/> " required pattern="" autofocus="">
+               placeholder="<fmt:message key="signin.email_address_msg"/> " required
+               pattern=^[a-zA-Z][a-zA-Z0-9-_\.]{4,20}$ autofocus="">
       </div>
-
       <div class="form-group">
         <label for="inputPassword1" class="sr-only"><fmt:message key="signin.password"/> </label>
         <input type="password" id="inputPassword1" name="password1" class="form-control"
@@ -48,13 +55,13 @@
 
       <div class="form-group">
         <label for="inputFirstName" class="sr-only"><fmt:message key="signup.firstname"/> </label>
-        <input type="text" id="inputFirstName" name="firstName" class="form-control"
+        <input type="text" id="inputFirstName" name="firstName" class="form-control" pattern=^[A-Z][a-z\.]{1,20}$
                placeholder="<fmt:message key="signup.firstname"/> ">
       </div>
 
       <div class="form-group">
         <label for="inputLastName" class="sr-only"><fmt:message key="signup.lastname"/> </label>
-        <input type="text" id="inputLastName" name="lastName" class="form-control"
+        <input type="text" id="inputLastName" name="lastName" class="form-control" pattern=^[A-Z][a-z\.]{1,20}$
                placeholder="<fmt:message key="signup.lastname"/> ">
       </div>
 
@@ -63,31 +70,7 @@
     </form>
   </div>
 </div>
-<script>
-  function checkExist() {
-    var xmlhttp = new XMLHttpRequest();
-    var username = document.forms["sign_up_form"]["userName"].value;
-    console.log(username);
-    var url = "exist.jsp?userName" + username;
-    console.log(url);
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-        if (xmlhttp.responseText === "Exists")
-          document.getElementById("isE").style.color = "red";
-        else
-          document.getElementById("isE").style.color = "green";
-        document.getElementById("isE").innerHTML = xmlhttp.responseText;
-      }
-
-    };
-    try {
-      xmlhttp.open("GET", url, true);
-      xmlhttp.send();
-    } catch (e) {
-      alert("unable to connect to server");
-    }
-  }
-</script>
+<c:import url="../js/validate.jsp"/>
 <c:import url="components/js_import.jsp"/>
 </body>
 </html>

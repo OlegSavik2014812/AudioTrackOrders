@@ -36,6 +36,7 @@ public class SignUpCommand implements Command {
     }
 
     if (authInfoDao.getById(userName) != null) {
+      request.addAttribute("error", "exist");
       return Pages.SIGN_UP_PAGE; // user already exists
     }
 
@@ -49,9 +50,11 @@ public class SignUpCommand implements Command {
     user.setFirstName(firstName);
     user.setLastName(lastName);
 
+
     if (!userDAO.create(user)) {
       return Pages.SIGN_UP_PAGE; // could not create user
     }
+
 
     // add current user to session
     request.setSessionAttribute("USER", user);

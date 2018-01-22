@@ -63,6 +63,7 @@ public class OrderedTrackListCommand implements Command {
     request.addAttribute("TrackList", trackList);
     request.addAttribute("noOfPages", noOfPages);
     request.addAttribute("currentPage", page);
+    request.addAttribute("pageName", "order");
     return Pages.PURCHASES_PAGE;
   }
 }
