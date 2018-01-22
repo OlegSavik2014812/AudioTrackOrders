@@ -14,7 +14,6 @@ public class PagingTag extends SimpleTagSupport {
   private String uri;
   private int currPage;
   private int totalPages;
-  private int maxLinks = 10;
 
   public void setUri(String uri) {
     this.uri = uri;
@@ -32,62 +31,60 @@ public class PagingTag extends SimpleTagSupport {
     return getJspContext().getOut();
   }
 
+  private boolean isLastPage() {
+    return currPage == totalPages;
+  }
+
+  private boolean isFirstPage() {
+    return currPage == 1;
+  }
+
   @Override
   public void doTag() throws JspException, IOException {
-    Writer out = getWriter();
-
-    boolean lastPage = currPage == totalPages;
-    int pgStart = Math.max(currPage - maxLinks / 2, 1);
-    int pgEnd = pgStart + maxLinks;
-    if (pgEnd > totalPages + 1) {
-      int diff = pgEnd - totalPages;
-      pgStart -= diff - 1;
-      if (pgStart < 1)
-        pgStart = 1;
-      pgEnd = totalPages + 1;
-    }
     try {
-      out.write("<ul class=\"pagination pagination-sm\">");
+      displayTag(getWriter());
+    } catch (Exception e) {
+      LOG.error("Error processing page tag", e);
+    }
+  }
 
-      if (currPage > 1)
-        out.write(constructLink(currPage - 1, "Previous", "page-item"));
+  private void displayTag(Writer out) throws Exception {
+    out.write("<nav><ul class='pagination pagination-sm'>");
+    displayButtonPrevious(out);
+    displayPages(out);
+    displayButtonNext(out);
+    out.write("</nav></ul>");
+  }
 
-      for (int i = pgStart; i < pgEnd; i++) {
-        if (i == currPage)
-          out.write("<li class=\"page-item" + (lastPage && i == totalPages ? " paginatorLast" : "") + "\">" + currPage + "</li>");
-        else
-          out.write(constructLink(i));
+  private void displayButtonPrevious(Writer out) throws IOException {
+    if (isFirstPage()) {
+      out.write("<li class='page-item disabled'><a class='page-link'>Previous</a></li>");
+    } else {
+      out.write("<li class='page-item'><a class='page-link' href='");
+      out.write(uri.replace("##", String.valueOf(currPage - 1)));
+      out.write("'>Previous</a></li>");
+    }
+  }
+
+  private void displayPages(Writer out) throws IOException {
+    for (int i = 1; i <= totalPages; i++) {
+      if (currPage == i) {
+        out.write("<li class='page-item active'><a class='page-link disabled'>" + i + "</a></li>");
+      } else {
+        out.write("<li class='page-item'><a class='page-link' href='");
+        out.write(uri.replace("##", String.valueOf(i)));
+        out.write("'>" + i + "</a></li>");
       }
-
-      if (!lastPage)
-        out.write(constructLink(currPage + 1, "Next", "page-item"));
-
-      out.write("</ul>");
-
-    } catch (java.io.IOException ex) {
-      throw new JspException("Error in Paginator tag", ex);
     }
   }
 
-    private String constructLink(int page) {
-    return constructLink(page, String.valueOf(page), "page-item");
-  }
-
-  private String constructLink(int page, String text, String className) {
-    StringBuilder link = new StringBuilder("<li");
-    if (className != null) {
-      link.append(" class=\"");
-      link.append(className);
-      link.append("\"");
+  private void displayButtonNext(Writer out) throws IOException {
+    if (isLastPage()) {
+      out.write("<li class='page-item disabled'><a class='page-link'>Next</a></li>");
+    } else {
+      out.write("<li class='page-item'><a class='page-link' href='");
+      out.write(uri.replace("##", String.valueOf(currPage + 1)));
+      out.write("'>Next</a></li>");
     }
-    link.append(">")
-    .append("<a href=\"")
-    .append(uri.replace("##", String.valueOf(page)))
-    .append("\">")
-    .append(text)
-    .append("</a></li>");
-    return link.toString();
   }
-
-
 }

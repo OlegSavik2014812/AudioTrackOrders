@@ -11,15 +11,8 @@
 <div class="container">
   <div class="row">
     <div class="col-4">
-      <form action="action" method="post">
-        <input type="hidden" name="name" value="make_order">
-        <nav>
-          <ul class="pagination pagination-sm">
-            <c:url value="/action?name=track_list&sort=${sort}&page=##" var="searchUri"/>
-            <tags:Paging uri="${searchUri}" currPage="${currentPage}" totalPages="${noOfPages}"/>
-          </ul>
-        </nav>
-      </form>
+      <c:url value="/action?name=track_list&sort=${sort}&page=##" var="searchUri"/>
+      <tags:Paging uri="${searchUri}" currPage="${currentPage}" totalPages="${noOfPages}"/>
     </div>
   </div>
   <div class="row">
