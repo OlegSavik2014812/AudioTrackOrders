@@ -1,11 +1,15 @@
 package com.audioord.web;
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.io.Writer;
 
 public class PagingTag extends SimpleTagSupport {
+
+  private static final Logger LOG = Logger.getLogger(PagingTag.class);
 
   private String uri;
   private int currPage;
@@ -31,4 +35,6 @@ public class PagingTag extends SimpleTagSupport {
   public void doTag() throws JspException, IOException {
     super.doTag();
   }
+
+
 }
