@@ -16,7 +16,8 @@
         <nav>
           <ul class="pagination pagination-sm">
             <c:url value="/action?name=track_list&sort=${sort}&page=##" var="searchUri"/>
-            <tags:Paging uri="${searchUri}" currPage="${currentPage}" totalPages="${noOfPage}"/>
+            <tags:Paging uri="${searchUri}" currPage="${currentPage}" totalPages="${noOfPages}"/>
+          </ul>
         </nav>
       </form>
     </div>

@@ -47,20 +47,20 @@ public class PagingTag extends SimpleTagSupport {
       pgEnd = totalPages + 1;
     }
     try {
-      out.write("<ul class=\"paginatorList\">");
+      out.write("<ul class=\"pagination pagination-sm\">");
 
       if (currPage > 1)
-        out.write(constructLink(currPage - 1, "Previous", "paginatorPrev"));
+        out.write(constructLink(currPage - 1, "Previous", "page-item"));
 
       for (int i = pgStart; i < pgEnd; i++) {
         if (i == currPage)
-          out.write("<li class=\"paginatorCurr" + (lastPage && i == totalPages ? " paginatorLast" : "") + "\">" + currPage + "</li>");
+          out.write("<li class=\"page-item" + (lastPage && i == totalPages ? " paginatorLast" : "") + "\">" + currPage + "</li>");
         else
           out.write(constructLink(i));
       }
 
       if (!lastPage)
-        out.write(constructLink(currPage + 1, "Next", "paginatorNext paginatorLast"));
+        out.write(constructLink(currPage + 1, "Next", "page-item"));
 
       out.write("</ul>");
 
@@ -69,8 +69,8 @@ public class PagingTag extends SimpleTagSupport {
     }
   }
 
-  private String constructLink(int page) {
-    return constructLink(page, String.valueOf(page), null);
+    private String constructLink(int page) {
+    return constructLink(page, String.valueOf(page), "page-item");
   }
 
   private String constructLink(int page, String text, String className) {
