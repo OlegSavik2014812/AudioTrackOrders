@@ -24,6 +24,7 @@ public final class Commands {
     commands.put(SearchTrackCommand.NAME, new SearchTrackCommand());
     commands.put(EditDiscountCommand.NAME, new EditDiscountCommand());
     commands.put(EditOrderCommand.NAME, new EditOrderCommand());
+    commands.put(SearchUserCommand.NAME, new SearchTrackCommand());
     return commands;
   }
 

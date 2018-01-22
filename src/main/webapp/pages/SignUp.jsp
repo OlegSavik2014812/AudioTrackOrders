@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-  <fmt:requestEncoding value="UTF-8"/>
-  <fmt:setLocale value="${sessionScope.local}"/>
-  <fmt:setBundle basename="i18n.MessageBundle"/>
+<fmt:requestEncoding value="UTF-8"/>
+<fmt:setLocale value="${sessionScope.local}"/>
+<fmt:setBundle basename="i18n.MessageBundle"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,14 +19,15 @@
 
 <div class="container">
   <div class="row">
-    <form class="form-signin" method="POST" action="action">
+    <form class="form-signin" method="POST" action="action" name="sign_up_form">
       <input type="hidden" name="name" value="sign_up">
 
 
       <h2 class="form-signin-heading"><fmt:message key="signup.please_signup"/></h2>
 
       <div class="form-group">
-        <label for="username" class="sr-only"><fmt:message key="signin.email_address_msg"/> </label>
+        <label for="username" onblur="checkExist()" class="sr-only"><fmt:message
+          key="signin.email_address_msg"/> </label><span id="isE">Checl</span>
         <input type="text" name="userName" id="username" class="form-control"
                placeholder="<fmt:message key="signin.email_address_msg"/> " required pattern="" autofocus="">
       </div>
@@ -57,10 +58,36 @@
                placeholder="<fmt:message key="signup.lastname"/> ">
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="button.signup"/></button>
+      <button class="btn btn-lg btn-primary btn-block" id="submitButton" type="submit"><fmt:message
+        key="button.signup"/></button>
     </form>
   </div>
 </div>
+<script>
+  function checkExist() {
+    var xmlhttp = new XMLHttpRequest();
+    var username = document.forms["sign_up_form"]["userName"].value;
+    console.log(username);
+    var url = "exist.jsp?userName" + username;
+    console.log(url);
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+        if (xmlhttp.responseText === "Exists")
+          document.getElementById("isE").style.color = "red";
+        else
+          document.getElementById("isE").style.color = "green";
+        document.getElementById("isE").innerHTML = xmlhttp.responseText;
+      }
+
+    };
+    try {
+      xmlhttp.open("GET", url, true);
+      xmlhttp.send();
+    } catch (e) {
+      alert("unable to connect to server");
+    }
+  }
+</script>
 <c:import url="components/js_import.jsp"/>
 </body>
 </html>

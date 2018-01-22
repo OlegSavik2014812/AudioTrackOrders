@@ -16,6 +16,9 @@ public class SearchTrackCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
+    if (!request.hasAllParameters(PRM_SEARCH)) {
+      return Pages.INDEX_PAGE;
+    }
     List<Track> trackList;
     String parameter = request.getParameter(PRM_SEARCH);
     trackList = trackDAO.getByParam(parameter);

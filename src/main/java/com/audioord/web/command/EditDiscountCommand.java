@@ -35,7 +35,7 @@ public class EditDiscountCommand implements Command {
       effectiveFrom = simpleDateFormat.parse(request.getParameter("effectiveFrom"));
       effectiveTo = simpleDateFormat.parse(request.getParameter("effectiveTo"));
     } catch (ParseException e) {
-      e.printStackTrace();
+
     }
 
     OrderDiscount orderDiscount = new OrderDiscount(percent, effectiveFrom, effectiveTo);
