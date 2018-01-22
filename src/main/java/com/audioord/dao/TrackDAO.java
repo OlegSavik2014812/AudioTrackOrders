@@ -109,8 +109,8 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
     return findAll(mapper, SQL_GET_BRAND_NEW_TRACK, page, count);
   }
 
-  public List<Track> getAllUserTracks(String username, int page, int recorsPerPage) throws DAOException {
-    return findAll(mapper, SQL_GET_ALL_USER_ORDERED_TRACKS, username, page, recorsPerPage);
+  public List<Track> getAllUserTracks(String username, int page, int recordsPerPage) throws DAOException {
+    return findAll(mapper, SQL_GET_ALL_USER_ORDERED_TRACKS, username, page, recordsPerPage);
   }
 
   public int countAllTracks() throws DAOException {

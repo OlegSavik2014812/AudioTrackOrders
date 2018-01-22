@@ -16,7 +16,7 @@
           <ul class="pagination pagination-sm">
             <%--PREVIOUS--%>
             <c:choose>
-              <c:when test="${currentPage != 1}">
+              <c:when test="${currentPage > 1}">
                 <li class="page-item">
                   <a class="page-link"
                      href="<c:url value="/action?name=track_list&sort=${sort}&page=${currentPage - 1}"/> ">Previous</a>

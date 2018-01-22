@@ -20,13 +20,10 @@ public class TrackListCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
-      int page = 1;
-      int recordsPerPage = 8;
+    int page = 1;
+    int recordsPerPage = 8;
     if (request.hasParameter(PRM_PAGE)) {
       page = Integer.parseInt(request.getParameter(PRM_PAGE));
-    }
-    if (page<0){
-      return Pages.INDEX_PAGE;
     }
 
     TrackSort trackSort = TrackSort.fromString(request.getParameter(PRM_SORT));
@@ -38,22 +35,20 @@ public class TrackListCommand implements Command {
       case MOST_POPULAR: {
         trackList = trackDAO.getMostPopularTracks((page - 1) * recordsPerPage,
         recordsPerPage);
-        request.addAttribute("Name","most_popular");
         break;
       }
       case BRAND_NEW: {
         trackList = trackDAO.getBrandNewTracks((page - 1) * recordsPerPage,
         recordsPerPage);
-        request.addAttribute("Name","brand_new");
         break;
       }
       case BEST_SELLING: {
         trackList = trackDAO.getBestSellingTracks((page - 1) * recordsPerPage,
         recordsPerPage);
-        request.addAttribute("Name","best_selling");
         break;
       }
     }
+
     request.addAttribute("sort", trackSort.name());
     request.addAttribute("TrackList", trackList);
     request.addAttribute("noOfPages", noOfPages);
