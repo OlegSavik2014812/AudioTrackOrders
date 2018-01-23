@@ -68,9 +68,14 @@
 
   <div class="row">
     <div class="col-12">
-      <c:url value="/action?name=track_list&sort=${sort}&page=##" var="searchUri"/>
-      <tags:Paging uri="${searchUri}" currPage="${currentPage}" totalPages="${noOfPages}"/>
+      <c:if test="${requestScope.pageName=='order'}">
+        <c:url value="/action?name=order_list&status=${status}&page=##&user=${requestScope.user}" var="searchUri"/>
+        <tags:Paging uri="${searchUri}" currPage="${currentPage}" totalPages="${noOfPages}"/>
+      </c:if>
+      <c:if test="${requestScope.pageName=='index'}">
+        <c:url value="/action?name=track_list&sort=${sort}&page=##" var="searchUri"/>
+        <tags:Paging uri="${searchUri}" currPage="${currentPage}" totalPages="${noOfPages}"/>
+      </c:if>
     </div>
   </div>
-
 </div>

@@ -2,9 +2,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <fmt:requestEncoding value="UTF-8"/>
-  <fmt:setLocale value="${sessionScope.local}"/>
-  <fmt:setBundle basename="i18n.MessageBundle"/>
+<fmt:requestEncoding value="UTF-8"/>
+<fmt:setLocale value="${sessionScope.local}"/>
+<fmt:setBundle basename="i18n.MessageBundle"/>
 
 
 <!DOCTYPE html>
@@ -19,6 +19,9 @@
   <div class="row">
     <c:import url="components/PurchaseMenu.jsp"/>
     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+      <c:if test="${sessionScope.USER!=null && sessionScope.USER.role=='ADMIN' }">
+        ${requestScope.user}
+      </c:if>
       <c:import url="components/TrackList.jsp"/>
     </main>
   </div>
