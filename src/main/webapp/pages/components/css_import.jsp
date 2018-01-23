@@ -7,3 +7,5 @@
 <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
 <!-- Custom styles for this page -->
 <link href="<c:url value="/css/audioord.css"/>" rel="stylesheet" type="text/css">
+<!-- Icons -->
+<link href="<c:url value="/css/open-iconic-bootstrap.css"/>" rel="stylesheet" type="text/css">

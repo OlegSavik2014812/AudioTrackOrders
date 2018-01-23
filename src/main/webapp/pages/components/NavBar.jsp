@@ -65,10 +65,10 @@
             <fmt:message key="localization.language"/>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-            <a href="<c:url value="/action?name=change_local&local=en&page=${pageContext.request.servletPath}"/>"
+            <a href="<c:url value="/action?name=change_local&local=en_US&page=${pageContext.request.servletPath}"/>"
                class="dropdown-item"><fmt:message
               key="localization.english"/> </a>
-            <a href="<c:url value="/action?name=change_local&local=ru&page=${pageContext.request.servletPath}"/>"
+            <a href="<c:url value="/action?name=change_local&local=ru_RU&page=${pageContext.request.servletPath}"/>"
                class="dropdown-item"><fmt:message
               key="localization.russian"/> </a>
           </div>

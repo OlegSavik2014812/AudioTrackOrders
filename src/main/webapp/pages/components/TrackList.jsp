@@ -31,14 +31,8 @@
           <th scope="col"><fmt:message key="index.name_artist"/></th>
           <th scope="col"><fmt:message key="index.name_album"/></th>
           <th scope="col"><fmt:message key="index.popularity"/></th>
-          <th scope="col"><fmt:message key="index.uri"/></th>
-          <th scope="col"><fmt:message key="index.price"/></th>
           <th scope="col"><fmt:message key="index.duration"/></th>
-
-          <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='CLIENT'}">
-            <th scope="col"><input type="submit" value="<fmt:message key="index.add_to_order"/>"></th>
-          </c:if>
-
+          <th scope="col"><fmt:message key="index.price"/></th>
         </tr>
         </thead>
         <tbody>
@@ -48,16 +42,18 @@
             <td><c:out value="${track.artist}"/></td>
             <td><c:out value="${track.album}"/></td>
             <td><c:out value="${track.popularity}"/></td>
-            <td><c:out value="${track.uri}"/></td>
-            <td><c:out value="${track.price}"/></td>
-            <td><c:out value="${track.duration}"/></td>
-
-            <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='CLIENT'}">
-              <td>
-                <input type="checkbox" class="form-check-input" id="checkAdd" name="check" value="${track.name}">
-                <label class="form-check-label" for="checkAdd"><fmt:message key="label.add"/> </label>
-              </td>
-            </c:if>
+            <td>
+              ${track.duration}
+            </td>
+            <td>
+              <fmt:formatNumber value="${track.price}" type="currency"/>
+              <c:out value=""/>
+              <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='CLIENT'}">
+                <a href="<c:url value="/action?name=add_cart&track_id=${track.id} "/>">
+                  <span class="oi oi-cart"></span>
+                </a>
+              </c:if>
+            </td>
           </tr>
         </c:forEach>
         </tbody>
@@ -66,10 +62,13 @@
     </div>
   </div>
 
+
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 ">
+
       <c:url value="/action?name=track_list&sort=${sort}&page=##" var="searchUri"/>
       <tags:Paging uri="${searchUri}" currPage="${currentPage}" totalPages="${noOfPages}"/>
+
     </div>
   </div>
 
