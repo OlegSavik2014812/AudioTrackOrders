@@ -37,12 +37,21 @@
         <tbody>
         <c:forEach items="${UserList}" var="user">
           <tr>
+
             <td><c:out value="${user.id}"/></td>
             <td><c:out value="${user.username}"/></td>
             <td><c:out value="${user.firstName}"/></td>
             <td><c:out value="${user.lastName}"/></td>
+            <c:if test="${sessionScope.USER.role == 'ADMIN'}">
+              <td><a class="nav-link" href="action?name=order_list&user=${user.username}">
+                <fmt:message key="userlist.show_orders"/>
+              </a></td>
+            </c:if>
           </tr>
+
+
         </c:forEach>
+
         </tbody>
       </table>
     </div>

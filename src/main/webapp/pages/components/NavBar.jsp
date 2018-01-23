@@ -2,9 +2,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <fmt:requestEncoding value="UTF-8"/>
-  <fmt:setLocale value="${sessionScope.local}"/>
-  <fmt:setBundle basename="i18n.MessageBundle"/>
+<fmt:requestEncoding value="UTF-8"/>
+<fmt:setLocale value="${sessionScope.local}"/>
+<fmt:setBundle basename="i18n.MessageBundle"/>
 
 
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
@@ -53,7 +53,8 @@
           <a class="nav-link" href="<c:url value="/action?name=sign_out"/> "><fmt:message key="button.signout"/></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<c:url value="" /> "><fmt:message key="button.purchases"/> </a>
+          <a class="nav-link" href="<c:url value="/action?name=user_list&page=1" /> "><fmt:message
+            key="navbar.userlist"/> </a>
         </li>
       </c:if>
     </ul>
