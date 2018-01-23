@@ -25,7 +25,6 @@ public class TrackListCommand implements Command {
     if (request.hasParameter(PRM_PAGE)) {
       page = Integer.parseInt(request.getParameter(PRM_PAGE));
     }
-
     TrackSort trackSort = TrackSort.fromString(request.getParameter(PRM_SORT));
 
     List<Track> trackList = new ArrayList<>();

@@ -4,6 +4,7 @@ import com.audioord.dao.AuthInfoDao;
 import com.audioord.dao.DAOException;
 import com.audioord.dao.UserDAO;
 import com.audioord.model.account.AuthInfo;
+import com.audioord.model.account.ROLE;
 import com.audioord.model.account.User;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
@@ -43,6 +44,11 @@ public class SignInCommand implements Command {
     if (user != null) {
       request.setSessionAttribute("USER", user);
     }
+
+    if (user.getRole().equals(ROLE.ADMIN)) {
+      response.raw().sendRedirect("/audioord/action?name=user_list&page=1");
+    }
+
 
     return Pages.INDEX_PAGE;
   }

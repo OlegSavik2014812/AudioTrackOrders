@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TrackDAO extends BaseEntityDao<Track, Long> {
 
-  private static final String SQL_GET_ALL =
+  private static final String SQL_COUNT_ALL =
   "select count(id) from track";
 
   private static final String SQL_GET_BEST_SELLING_TRACKS =
@@ -114,7 +114,7 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   }
 
   public int countAllTracks() throws DAOException {
-    return countAll(SQL_GET_ALL);
+    return countAll(SQL_COUNT_ALL);
   }
 
   public List<Track> getUserTracks(String username, OrderStatus status, int page, int noOfPages) throws DAOException {

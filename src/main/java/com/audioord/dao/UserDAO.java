@@ -6,6 +6,7 @@ import com.audioord.model.account.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public final class UserDAO extends BaseEntityDao<User, Long> {
 
@@ -22,6 +23,10 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
   "INSERT INTO User (UserName, Role,  FirstName, LastName) VALUES (?,?,?,?)";
 
   private static final String SQL_DELETE_USER_BY_ID = "DELETE FROM User WHERE Id=?";
+
+  private static final String SQL_COUNT_ALL =
+  "select count(id) from user";
+  private static final String SQL_GET_ALL = "select UserName, Role,  FirstName, LastName, Id  from user order by Id desc limit ?, ?";
 
   private final EntityMapper<User> userMapper = new EntityMapper<User>() {
     @Override
@@ -65,5 +70,13 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
   @Override
   public boolean create(User user) throws DAOException {
     return super.update(user, userMapper, SQL_CREATE_USER);
+  }
+
+  public int countAllUsers() throws DAOException {
+    return countAll(SQL_COUNT_ALL);
+  }
+
+  public List<User> getAllUsers(int page, int noOfPages) throws DAOException {
+    return super.findAll(userMapper, SQL_GET_ALL, page, noOfPages);
   }
 }
