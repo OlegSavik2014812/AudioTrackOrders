@@ -42,7 +42,9 @@ public class PagingTag extends SimpleTagSupport {
   @Override
   public void doTag() throws JspException, IOException {
     try {
-      displayTag(getWriter());
+      if (totalPages > 0) {
+        displayTag(getWriter());
+      }
     } catch (Exception e) {
       LOG.error("Error processing page tag", e);
     }

@@ -14,7 +14,10 @@
   <c:import url="pages/components/css_import.jsp"/>
 </head>
 <body>
+
+
 <c:import url="pages/components/NavBar.jsp"/>
+
 <div class="container-fluid">
   <div class="row">
     <c:import url="pages/components/Menu.jsp"/>
