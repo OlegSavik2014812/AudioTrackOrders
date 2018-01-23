@@ -13,11 +13,15 @@
   <div class="row">
     <div class="col-4 ml-auto">
       <div class="input-group">
-        <input type="text" class="form-control form-control-sm" aria-describedby="sizing-addon1"
-               placeholder="Search for...">
-        <span class="input-group-btn" id="sizing-addon1">
-        <button class="btn btn-sm btn-secondary" type="button">Go!</button>
+        <form method="get" class="form-inline">
+          <input type="hidden" name="name" value="search_track">
+          <div class="form-group mx-sm-3"><input type="text" class="form-control form-control-sm"
+                                                 aria-describedby="sizing-addon1" name="trackname"
+                                                 placeholder="<fmt:message key="search.enter_track_name"/>"></div>
+          <span class="input-group-btn" id="sizing-addon1">
+        <button class="btn btn-sm btn-secondary" type="submit"><fmt:message key="button.search"/> </button>
       </span>
+        </form>
       </div>
     </div>
   </div>
@@ -43,7 +47,7 @@
             <td><c:out value="${track.album}"/></td>
             <td><c:out value="${track.popularity}"/></td>
             <td>
-              ${track.duration}
+                ${track.duration}
             </td>
             <td>
               <fmt:formatNumber value="${track.price}" type="currency"/>
