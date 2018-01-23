@@ -9,13 +9,20 @@
 
 
 <div class="container">
+
   <div class="row">
-    <div class="col-4">
-      <c:url value="/action?name=track_list&sort=${sort}&page=##" var="searchUri"/>
-      <tags:Paging uri="${searchUri}" currPage="${currentPage}" totalPages="${noOfPages}"/>
+    <div class="col-4 ml-auto">
+      <div class="input-group">
+        <input type="text" class="form-control form-control-sm" aria-describedby="sizing-addon1"
+               placeholder="Search for...">
+        <span class="input-group-btn" id="sizing-addon1">
+        <button class="btn btn-sm btn-secondary" type="button">Go!</button>
+      </span>
+      </div>
     </div>
   </div>
-  <div class="row">
+
+  <div class="row mt-4">
     <div class="col-12">
       <table class="table table-striped">
         <thead>
@@ -51,12 +58,19 @@
                 <label class="form-check-label" for="checkAdd"><fmt:message key="label.add"/> </label>
               </td>
             </c:if>
-
           </tr>
         </c:forEach>
         </tbody>
       </table>
-      </form>
+
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-12">
+      <c:url value="/action?name=track_list&sort=${sort}&page=##" var="searchUri"/>
+      <tags:Paging uri="${searchUri}" currPage="${currentPage}" totalPages="${noOfPages}"/>
+    </div>
+  </div>
+
 </div>
