@@ -7,18 +7,26 @@ import com.audioord.model.order.TrackOrder;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class TrackOrderDAO extends BaseEntityDao<TrackOrder, Long> {
+  private static final String SQL_COUNT_ALL = "select count(id) from purchase";
+  private static final String SQL_COUNT_STATUS_ALL = "select count(id) from purchase where status = ?";
   private static final String SQL_CREATE_TRACKORDER = "insert into purchase(TotalPrice,Status,IdUser)values(?,?,?)";
-  private static final String SQL_FIND_TRACKORDER_BY_ID = "select * from purchase where Id = ?";
+  private static final String SQL_FIND_TRACK_ORDER_BY_ID = "select Id,TotalPrice,Status,IdUser,Date from purchase where Id = ?";
   private static final String SQL_GET_LAST_CREATED = "SELECT Id,TotalPrice,Status,IdUser,Date FROM purchase ORDER BY id DESC LIMIT 1";
+  private static final String SQL_GET_ALL_STATUS_ORDERS = "select Id,TotalPrice,Status,IdUser,Date from purchase where Status=? order by Date desc  limit ?, ?";
+  private static final String SQL_GET_ALL_ORDERS = "select Id,TotalPrice,Status,IdUser,Date from purchase order by Date desc  limit ?, ?";
+  private static final String SQL_SUBMIT_TRACK_ORDER = "update purchase set Status='SUBMITTED' where Id = ?";
+  private static final String SQL_REJECT_TRACK_ORDER = "update purchase set Status='REJECTED' where Id = ?";
+
   private final EntityMapper<TrackOrder> mapper = new EntityMapper<TrackOrder>() {
     @Override
     public TrackOrder parse(ResultSet rs) throws SQLException, DAOException {
       UserDAO userDAO = new UserDAO();
 
       User user = userDAO.getById((long) rs.getInt(4));
-      TrackOrder trackOrder = new TrackOrder(user, rs.getDate(5), OrderStatus.fromString(rs.getString(3)) );
+      TrackOrder trackOrder = new TrackOrder(user, rs.getDate(5), OrderStatus.fromString(rs.getString(3)));
       trackOrder.setTotalPrice(rs.getDouble(2));
       trackOrder.setId(rs.getLong(1));
       return trackOrder;
@@ -34,7 +42,7 @@ public class TrackOrderDAO extends BaseEntityDao<TrackOrder, Long> {
 
   @Override
   public TrackOrder getById(Long id) throws DAOException {
-    return null;
+    return find(mapper, SQL_FIND_TRACK_ORDER_BY_ID, id);
   }
 
   @Override
@@ -55,4 +63,29 @@ public class TrackOrderDAO extends BaseEntityDao<TrackOrder, Long> {
   public TrackOrder getLastCreated() throws DAOException {
     return find(mapper, SQL_GET_LAST_CREATED);
   }
+
+  public int countAllOrders() throws DAOException {
+    return countAll(SQL_COUNT_ALL);
+  }
+
+  public int countAllSpecialOrders(OrderStatus orderStatus) throws DAOException {
+    return countSpecial(SQL_COUNT_STATUS_ALL, orderStatus.name());
+  }
+
+  public List<TrackOrder> getAllSpaecialOrders(OrderStatus orderStatus, int page, int noOfPages) throws DAOException {
+    return findAll(mapper, SQL_GET_ALL_STATUS_ORDERS, orderStatus.name(), page, noOfPages);
+  }
+
+  public List<TrackOrder> getAllOrders(int page, int noOfPages) throws DAOException {
+    return findAll(mapper, SQL_GET_ALL_ORDERS, page, noOfPages);
+  }
+
+  public boolean submitTrackOrder(TrackOrder trackOrder) throws DAOException {
+    return update(trackOrder, mapper, SQL_SUBMIT_TRACK_ORDER);
+  }
+
+  public boolean rejectTrackOrder(TrackOrder trackOrder) throws DAOException {
+    return update(trackOrder, mapper, SQL_REJECT_TRACK_ORDER);
+  }
 }
+

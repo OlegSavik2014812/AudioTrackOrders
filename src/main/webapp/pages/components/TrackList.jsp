@@ -6,10 +6,7 @@
 <fmt:requestEncoding value="UTF-8"/>
 <fmt:setLocale value="${sessionScope.local}"/>
 <fmt:setBundle basename="i18n.MessageBundle"/>
-
-
 <div class="container">
-
   <div class="row">
     <div class="col-4 ml-auto">
       <div class="input-group">
@@ -25,7 +22,6 @@
       </div>
     </div>
   </div>
-
   <div class="row mt-4">
     <div class="col-12">
       <table class="table table-striped">

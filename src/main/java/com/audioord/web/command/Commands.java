@@ -26,6 +26,9 @@ public final class Commands {
     commands.put(EditOrderCommand.NAME, new EditOrderCommand());
     commands.put(SearchUserCommand.NAME, new SearchTrackCommand());
     commands.put(UserListCommand.NAME, new UserListCommand());
+    commands.put(OrdersListCommand.NAME, new OrdersListCommand());
+    commands.put(SubmitOrderCommand.NAME, new SubmitOrderCommand());
+    commands.put(RejectOrderCommand.NAME, new RejectOrderCommand());
     return commands;
   }
 

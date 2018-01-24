@@ -48,9 +48,15 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
               <a class="dropdown-item" href="#">Action</a>
+              <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='CLIENT'}">
+                <a class="dropdown-item" href="<c:url value="/action?name=order_list&page=1"/>">
+                  <fmt:message key="button.order_list"/></a>
+              </c:if>
               <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='ADMIN'}">
                 <a class="dropdown-item" href="<c:url value="/action?name=user_list&page=1"/> "><fmt:message
                   key="navbar.userlist"/></a>
+                <a class="dropdown-item" href="<c:url value="/action?name=purchases_list&page=1"/> "><fmt:message
+                  key="navbar.purchases"/></a>
               </c:if>
               <a class="dropdown-item" href="<c:url value="/action?name=sign_out"/> "><fmt:message
                 key="button.signout"/></a>
