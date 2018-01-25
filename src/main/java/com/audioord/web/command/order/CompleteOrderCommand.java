@@ -1,17 +1,19 @@
-package com.audioord.web.command;
+package com.audioord.web.command.order;
 
 import com.audioord.dao.DAOException;
 import com.audioord.dao.TrackOrderDAO;
 import com.audioord.model.account.ROLE;
 import com.audioord.model.account.User;
 import com.audioord.model.order.TrackOrder;
+import com.audioord.web.command.Command;
+import com.audioord.web.command.Pages;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 
 import java.io.IOException;
 
-public class RejectOrderCommand implements Command {
-  public static final String NAME = "reject_order";
+public class CompleteOrderCommand implements Command {
+  public static final String NAME = "submit_order";
   private static final String PRM_ID_ORDER = "id_order";
   private TrackOrderDAO trackOrderDAO = new TrackOrderDAO();
 
@@ -32,10 +34,9 @@ public class RejectOrderCommand implements Command {
     if (trackOrder == null) {
       return Pages.ALL_PURCHASES;
     }
-    if (!trackOrderDAO.rejectTrackOrder(trackOrder)) {
+    if (!trackOrderDAO.submitTrackOrder(trackOrder)) {
       return Pages.ALL_PURCHASES;
     }
-    return Pages.ALL_PURCHASES;
+    return "/action?name=purchases_list&page=1";
   }
 }
-

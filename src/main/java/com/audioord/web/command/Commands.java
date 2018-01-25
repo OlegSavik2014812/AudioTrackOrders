@@ -1,5 +1,16 @@
 package com.audioord.web.command;
 
+import com.audioord.web.command.auth.SignInCommand;
+import com.audioord.web.command.auth.SignOutCommand;
+import com.audioord.web.command.auth.SignUpCommand;
+import com.audioord.web.command.order.CompleteOrderCommand;
+import com.audioord.web.command.order.EditDiscountCommand;
+import com.audioord.web.command.order.OrdersListCommand;
+import com.audioord.web.command.order.RejectOrderCommand;
+import com.audioord.web.command.track.*;
+import com.audioord.web.command.user.SearchUserCommand;
+import com.audioord.web.command.user.UserListCommand;
+
 import java.util.HashMap;
 import java.util.Map;
 

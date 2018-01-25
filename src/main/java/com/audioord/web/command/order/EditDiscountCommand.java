@@ -1,10 +1,12 @@
-package com.audioord.web.command;
+package com.audioord.web.command.order;
 
 import com.audioord.dao.DAOException;
 import com.audioord.dao.OrderDiscountDAO;
 import com.audioord.model.account.ROLE;
 import com.audioord.model.account.User;
 import com.audioord.model.order.OrderDiscount;
+import com.audioord.web.command.Command;
+import com.audioord.web.command.Pages;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 

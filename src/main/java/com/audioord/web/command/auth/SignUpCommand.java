@@ -1,4 +1,4 @@
-package com.audioord.web.command;
+package com.audioord.web.command.auth;
 
 import com.audioord.dao.AuthInfoDao;
 import com.audioord.dao.DAOException;
@@ -6,6 +6,8 @@ import com.audioord.dao.UserDAO;
 import com.audioord.model.account.AuthInfo;
 import com.audioord.model.account.ROLE;
 import com.audioord.model.account.User;
+import com.audioord.web.command.Command;
+import com.audioord.web.command.Pages;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 
