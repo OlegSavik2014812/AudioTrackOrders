@@ -32,7 +32,7 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   "insert into Track(Track,Artist, Album, Popularity,URI,Price,Duration)values(?,?,?,?,?,?,?)";
 
   private static final String SQL_SEARCH_BY_TRACK_NAME =
-  "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration, track.id from track where Track = ?";
+  "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration, track.id from track where Track like(?)";
 
   private static final String SQL_ADD_ORDERED_TRACK =
   "insert into TrackOrder(IdTrack,IdPurchase)values(?,?)";
@@ -93,8 +93,8 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
     return update(entity, mapper, SQL_ADD_TRACK);
   }
 
-  public List<Track> getByParam(String param) throws DAOException {
-    return findAll(mapper, SQL_SEARCH_BY_TRACK_NAME, param);
+  public List<Track> findTracks(String trackName) throws DAOException {
+    return findAll(mapper, SQL_SEARCH_BY_TRACK_NAME, trackName + "%");
   }
 
   public List<Track> getMostPopularTracks(int page, int count) throws DAOException {

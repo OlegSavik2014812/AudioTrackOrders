@@ -7,21 +7,22 @@
 <fmt:setLocale value="${sessionScope.local}"/>
 <fmt:setBundle basename="i18n.MessageBundle"/>
 <div class="container">
+
   <div class="row">
     <div class="col-4 ml-auto">
-      <div class="input-group">
-        <form method="get" class="form-inline">
-          <input type="hidden" name="name" value="search_track">
-          <div class="form-group mx-sm-3"><input type="text" class="form-control form-control-sm"
-                                                 aria-describedby="sizing-addon1" name="trackname"
-                                                 placeholder="<fmt:message key="search.enter_track_name"/>"></div>
+      <form method="GET" action="action">
+        <input type="hidden" name="name" value="search_track"/>
+        <div class="input-group">
+          <input type="text" name="track_name" class="form-control form-control-sm" aria-describedby="sizing-addon1" required
+                 placeholder="<fmt:message key="search.enter_track_name"/>"/>
           <span class="input-group-btn" id="sizing-addon1">
-        <button class="btn btn-sm btn-secondary" type="submit"><fmt:message key="button.search"/> </button>
-      </span>
-        </form>
-      </div>
+            <button class="btn btn-sm btn-secondary" type="submit"><fmt:message key="button.search"/></button>
+          </span>
+        </div>
+      </form>
     </div>
   </div>
+
   <div class="row mt-4">
     <div class="col-12">
       <table class="table table-striped">
@@ -58,17 +59,14 @@
         </c:forEach>
         </tbody>
       </table>
-
     </div>
   </div>
 
 
   <div class="row">
     <div class="col-12 ">
-
       <c:url value="/action?name=track_list&sort=${sort}&page=##" var="searchUri"/>
       <tags:Paging uri="${searchUri}" currPage="${currentPage}" totalPages="${noOfPages}"/>
-
     </div>
   </div>
 

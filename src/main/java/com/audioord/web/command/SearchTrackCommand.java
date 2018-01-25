@@ -10,8 +10,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class SearchTrackCommand implements Command {
+
   public static final String NAME = "search_track";
-  private static final String PRM_SEARCH = "trackname";
+  private static final String PRM_SEARCH = "track_name";
   private TrackDAO trackDAO = new TrackDAO();
 
   @Override
@@ -19,10 +20,10 @@ public class SearchTrackCommand implements Command {
     if (!request.hasAllParameters(PRM_SEARCH)) {
       return Pages.INDEX_PAGE;
     }
-    List<Track> trackList;
-    String parameter = request.getParameter(PRM_SEARCH);
-    trackList = trackDAO.getByParam(parameter);
-    request.addAttribute("TrackList", trackList);
+
+    String trackName = request.getParameter(PRM_SEARCH);
+    List<Track> tracks = trackDAO.findTracks(trackName);
+    request.addAttribute("TrackList", tracks);
     return Pages.INDEX_PAGE;
   }
 }
