@@ -23,7 +23,7 @@ public final class Commands {
     commands.put(OrderedTrackListCommand.NAME, new OrderedTrackListCommand());
     commands.put(SearchTrackCommand.NAME, new SearchTrackCommand());
     commands.put(EditDiscountCommand.NAME, new EditDiscountCommand());
-    commands.put(EditOrderCommand.NAME, new EditOrderCommand());
+    commands.put(AddTrackCartCommand.NAME, new AddTrackCartCommand());
     commands.put(SearchUserCommand.NAME, new SearchUserCommand());
     commands.put(UserListCommand.NAME, new UserListCommand());
     commands.put(OrdersListCommand.NAME, new OrdersListCommand());

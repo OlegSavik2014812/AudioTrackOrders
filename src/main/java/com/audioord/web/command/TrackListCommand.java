@@ -54,7 +54,7 @@ public class TrackListCommand implements Command {
     request.addAttribute("currentPage", page);
     request.addAttribute("pageName", "index");
 
-    return Pages.INDEX_PAGE;
+    return Pages.TRACK_LIST_PAGE;
   }
 
   private enum TrackSort {

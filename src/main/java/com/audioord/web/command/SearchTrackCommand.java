@@ -18,13 +18,13 @@ public class SearchTrackCommand implements Command {
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
     if (!request.hasAllParameters(PRM_SEARCH)) {
-      return Pages.INDEX_PAGE;
+      return Pages.TRACK_LIST_PAGE;
     }
 
     String trackName = request.getParameter(PRM_SEARCH);
     List<Track> tracks = trackDAO.findTracks(trackName);
     request.addAttribute("TrackList", tracks);
-    return Pages.INDEX_PAGE;
+    return Pages.TRACK_LIST_PAGE;
   }
 }
 

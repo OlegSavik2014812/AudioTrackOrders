@@ -6,6 +6,7 @@ import com.audioord.model.order.OrderStatus;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 public class TrackDAO extends BaseEntityDao<Track, Long> {
@@ -94,7 +95,11 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   }
 
   public List<Track> findTracks(String trackName) throws DAOException {
-    return findAll(mapper, SQL_SEARCH_BY_TRACK_NAME, trackName + "%");
+    String s = trackName.replaceAll("%", "");
+    if (!s.isEmpty()) {
+      return findAll(mapper, SQL_SEARCH_BY_TRACK_NAME, s + "%");
+    }
+    return Collections.emptyList();
   }
 
   public List<Track> getMostPopularTracks(int page, int count) throws DAOException {
