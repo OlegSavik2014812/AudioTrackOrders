@@ -16,7 +16,7 @@ public class ChangeLocaleCommand implements Command {
     String lang = request.getParameter(PRM_LOCALE);
     if (lang == null || lang.isEmpty()) {
       // need to stay on current page in case locale value is not provided
-      return "";
+      return Pages.INDEX_PAGE;
     }
     request.setSessionAttribute(PRM_LOCALE, lang);
 
