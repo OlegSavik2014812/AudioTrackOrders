@@ -10,20 +10,21 @@ import java.io.IOException;
 
 public class SearchUserCommand implements Command {
   public static final String NAME = "search_user";
+  private static final String PRM_USERNAME = "userName";
   private UserDAO userDAO = new UserDAO();
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException, ClassNotFoundException {
-    if (!request.hasAllParameters("userName")) {
-      return Pages.INDEX_PAGE;
+    if (!request.hasAllParameters(PRM_USERNAME)) {
+      return "/";
     }
-    String userName = request.getParameter("userName");
+    String userName = request.getParameter(PRM_USERNAME);
     if (userName.isEmpty()) {
-      return Pages.INDEX_PAGE;
+      return "/";
     }
     User user = userDAO.getByUsername(userName);
     if (user == null) {
-      return Pages.INDEX_PAGE;
+      return "/";
     }
     request.raw().setAttribute("user", user);
     return Pages.INDEX_PAGE;

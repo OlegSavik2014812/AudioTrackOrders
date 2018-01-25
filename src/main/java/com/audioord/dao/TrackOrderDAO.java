@@ -17,7 +17,7 @@ public class TrackOrderDAO extends BaseEntityDao<TrackOrder, Long> {
   private static final String SQL_GET_LAST_CREATED = "SELECT Id,TotalPrice,Status,IdUser,Date FROM purchase ORDER BY id DESC LIMIT 1";
   private static final String SQL_GET_ALL_STATUS_ORDERS = "select Id,TotalPrice,Status,IdUser,Date from purchase where Status=? order by Date desc  limit ?, ?";
   private static final String SQL_GET_ALL_ORDERS = "select Id,TotalPrice,Status,IdUser,Date from purchase order by Date desc  limit ?, ?";
-  private static final String SQL_SUBMIT_TRACK_ORDER = "update purchase set status ='SUBMITTED' where totalPrice = ? and status = ? and IdUser = ?";
+  private static final String SQL_SUBMIT_TRACK_ORDER = "update purchase set status ='COMPLETED' where totalPrice = ? and status = ? and IdUser = ?";
   private static final String SQL_REJECT_TRACK_ORDER = "update purchase set status ='REJECTED' where totalPrice = ? and status = ? and IdUser = ?";
 
   private final EntityMapper<TrackOrder> mapper = new EntityMapper<TrackOrder>() {
