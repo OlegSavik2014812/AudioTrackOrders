@@ -10,7 +10,7 @@ import com.audioord.web.http.Response;
 
 import java.io.IOException;
 
-public class SubmitOrderCommand implements Command {
+public class CompleteOrderCommand implements Command {
   public static final String NAME = "submit_order";
   private static final String PRM_ID_ORDER = "id_order";
   private TrackOrderDAO trackOrderDAO = new TrackOrderDAO();
@@ -35,6 +35,6 @@ public class SubmitOrderCommand implements Command {
     if (!trackOrderDAO.submitTrackOrder(trackOrder)) {
       return Pages.ALL_PURCHASES;
     }
-    return Pages.ALL_PURCHASES;
+    return "/action?name=purchases_list&page=1";
   }
 }
