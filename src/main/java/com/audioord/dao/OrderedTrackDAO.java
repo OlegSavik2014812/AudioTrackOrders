@@ -17,8 +17,8 @@ public class OrderedTrackDAO extends BaseEntityDao<OrderedTrack, Long> {
 
     @Override
     public void write(PreparedStatement st, OrderedTrack entity) throws SQLException {
-      st.setInt(1, entity.getTrackId());
-      st.setInt(2, entity.getPurchaseId());
+      st.setLong(1, entity.getTrackId());
+      st.setLong(2, entity.getPurchaseId());
     }
   };
 

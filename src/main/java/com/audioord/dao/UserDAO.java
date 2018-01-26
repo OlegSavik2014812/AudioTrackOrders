@@ -26,7 +26,9 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
 
   private static final String SQL_COUNT_ALL =
   "select count(id) from user";
-  private static final String SQL_GET_ALL = "select UserName, Role,  FirstName, LastName, Id  from user order by Id desc limit ?, ?";
+
+  private static final String SQL_GET_ALL =
+  "select UserName, Role,  FirstName, LastName, Id  from user order by Id desc limit ?, ?";
 
   private final EntityMapper<User> userMapper = new EntityMapper<User>() {
     @Override

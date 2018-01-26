@@ -3,32 +3,28 @@ package com.audioord.model.order;
 import com.audioord.model.Entity;
 
 public class OrderedTrack extends Entity<Long> {
-  private int purchaseId;
-  private int trackId;
+
+  private Long purchaseId;
+  private Long trackId;
 
   public OrderedTrack(Long purchaseId, Long trackId) {
-    this.purchaseId = Math.toIntExact(purchaseId);
-    this.trackId = Math.toIntExact(trackId);
+    this.purchaseId = purchaseId;
+    this.trackId = trackId;
   }
 
-  @Override
-  public Long getId() {
-    return super.getId();
-  }
-
-  public int getPurchaseId() {
+  public Long getPurchaseId() {
     return purchaseId;
   }
 
-  public void setPurchaseId(int purchaseId) {
+  public void setPurchaseId(Long purchaseId) {
     this.purchaseId = purchaseId;
   }
 
-  public int getTrackId() {
+  public Long getTrackId() {
     return trackId;
   }
 
-  public void setTrackId(int trackId) {
+  public void setTrackId(Long trackId) {
     this.trackId = trackId;
   }
 }

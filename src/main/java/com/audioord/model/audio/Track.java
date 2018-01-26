@@ -1,18 +1,22 @@
 package com.audioord.model.audio;
 
 import com.audioord.model.Entity;
+import com.audioord.web.cart.CartItem;
 
-import java.io.Serializable;
-
-public class Track extends Entity<Long> implements Serializable {
+public class Track extends Entity<Long> implements CartItem {
 
   private String name;
   private String artist;
   private String album;
   private int popularity;
-  private int price;
+  private double price;
   private String uri;
   private double duration;
+
+  public Track(String name, String artist) {
+    this.name = name;
+    this.artist = artist;
+  }
 
   public double getDuration() {
     return duration;
@@ -20,11 +24,6 @@ public class Track extends Entity<Long> implements Serializable {
 
   public void setDuration(double duration) {
     this.duration = duration;
-  }
-
-  public Track(String name, String artist) {
-    this.name = name;
-    this.artist = artist;
   }
 
   public String getName() {
@@ -59,11 +58,11 @@ public class Track extends Entity<Long> implements Serializable {
     this.popularity = popularity;
   }
 
-  public int getPrice() {
+  public double getPrice() {
     return price;
   }
 
-  public void setPrice(int price) {
+  public void setPrice(double price) {
     this.price = price;
   }
 
@@ -73,5 +72,20 @@ public class Track extends Entity<Long> implements Serializable {
 
   public void setUri(String uri) {
     this.uri = uri;
+  }
+
+  @Override
+  public Long getItemId() {
+    return getId();
+  }
+
+  @Override
+  public String getDisplayName() {
+    return getName();
+  }
+
+  @Override
+  public double getCost() {
+    return getPrice();
   }
 }
