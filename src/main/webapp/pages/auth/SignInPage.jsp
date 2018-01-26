@@ -10,11 +10,11 @@
 <html lang="en">
 <head>
   <title><fmt:message key="index.title"/></title>
-  <c:import url="components/css_import.jsp"/>
+  <c:import url="../css_import.jsp"/>
   <link href="<c:url value="/css/login.css"/>" rel="stylesheet" type="text/css">
 </head>
 <body>
-<c:import url="components/NavBar.jsp"/>
+<c:import url="../NavBar.jsp"/>
 
 <div class="container">
   <div class="row">
@@ -49,6 +49,6 @@
 
   </div>
 </div>
-<c:import url="components/js_import.jsp"/>
+<c:import url="../js_import.jsp"/>
 </body>
 </html>

@@ -13,7 +13,7 @@ public class SignOutCommand implements Command {
   public static final String NAME = "sign_out";
 
   @Override
-  public String execute(Request request, Response response) throws IOException, DAOException {
+  public String execute(Request request, Response response) throws DAOException, IOException {
 
     request.invalidateSession();
     request.removeSessionAttribute("USER");

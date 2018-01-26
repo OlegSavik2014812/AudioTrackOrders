@@ -10,7 +10,7 @@
 <html lang="en">
 <head>
   <title><fmt:message key="error.title"/></title>
-  <c:import url="pages/components/css_import.jsp"/>
+  <c:import url="/pages/css_import.jsp"/>
 </head>
 
 <body>
@@ -50,6 +50,6 @@
     </div>
   </div>
 </div>
-<c:import url="pages/components/js_import.jsp"/>
+<c:import url="/pages/js_import.jsp"/>
 </body>
 </html>

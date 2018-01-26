@@ -73,6 +73,25 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     return isCreated;
   }
 
+  protected List<E> getByIds(EntityMapper<E> mapper, String sql, List<K> ids) throws DAOException {
+    Objects.requireNonNull(mapper, "Param Mapper could not be null");
+
+    List<E> list = new ArrayList<>();
+
+    try (Connection con = connectionSource.getConnection();
+         PreparedStatement st = con.prepareCall(sql)) {
+
+      st.setArray(1, con.createArrayOf("id", ids.toArray()));
+
+
+    } catch (PoolException | SQLException e) {
+      throw new DAOException(e);
+    }
+    return list;
+
+  }
+
+
   protected List<E> findAll(EntityMapper<E> mapper, String sql, Object... params) throws DAOException {
     Objects.requireNonNull(mapper, "Param Mapper could not be null");
 

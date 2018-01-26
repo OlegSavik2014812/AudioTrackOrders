@@ -36,6 +36,7 @@
           </li>
         </c:if>
       </ul>
+
       <%--USER ITEMS--%>
       <ul class="navbar-nav">
         <c:if test="${sessionScope.USER != null }">
@@ -47,22 +48,30 @@
                 ${sessionScope.USER.username}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-              <a class="dropdown-item" href="#">Action</a>
+
+                <%--USER CART--%>
               <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='CLIENT'}">
-                <a class="dropdown-item" href="<c:url value="/action?name=order_list&page=1"/>">
-                  <fmt:message key="button.order_list"/></a>
+                <a class="dropdown-item" href="<c:url value="/action?name=view_cart"/>">Корзина</a>
               </c:if>
+
+                <%--ADMIN USER LIST--%>
               <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='ADMIN'}">
                 <a class="dropdown-item" href="<c:url value="/action?name=user_list&page=1"/> "><fmt:message
                   key="navbar.userlist"/></a>
+
+                <%--ADMIN ORDERS--%>
                 <a class="dropdown-item" href="<c:url value="/action?name=purchases_list&page=1"/> "><fmt:message
                   key="navbar.purchases"/></a>
+
               </c:if>
+
+                <%--SING OUT--%>
               <a class="dropdown-item" href="<c:url value="/action?name=sign_out"/> "><fmt:message
                 key="button.signout"/></a>
             </div>
           </li>
         </c:if>
+
         <%--LOCALE--%>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1"

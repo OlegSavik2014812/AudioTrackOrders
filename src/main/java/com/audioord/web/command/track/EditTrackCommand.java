@@ -12,9 +12,10 @@ import com.audioord.web.http.Response;
 
 import java.io.IOException;
 
-public class EditNewTrackCommand implements Command {
-  public static final String NAME = "add_track";
+// todo: upload mp3 file
+public class EditTrackCommand implements Command {
 
+  public static final String NAME = "add_track";
   private TrackDAO trackDAO = new TrackDAO();
 
   @Override

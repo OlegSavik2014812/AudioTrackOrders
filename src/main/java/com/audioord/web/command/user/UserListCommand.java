@@ -18,7 +18,7 @@ public class UserListCommand implements Command {
   private UserDAO userDAO = new UserDAO();
 
   @Override
-  public String execute(Request request, Response response) throws IOException, DAOException, ClassNotFoundException {
+  public String execute(Request request, Response response) throws IOException, DAOException {
     boolean check = request.getSessionAttribute("USER", User.class).getRole().equals(ROLE.ADMIN);
     if (!check) {
       return Pages.INDEX_PAGE;

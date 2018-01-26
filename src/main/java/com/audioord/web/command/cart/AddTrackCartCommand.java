@@ -1,4 +1,4 @@
-package com.audioord.web.command.track;
+package com.audioord.web.command.cart;
 
 import com.audioord.dao.DAOException;
 import com.audioord.dao.TrackDAO;
@@ -15,12 +15,13 @@ import java.io.IOException;
 public class AddTrackCartCommand implements Command {
 
   public static final String NAME = "add_cart";
-  public static final String CART_ATTR = "cart";
+  private static final String PRM_CART = "cart";
   private static final String PRM_TRACK_ID = "track_id";
+
   private TrackDAO trackDAO = new TrackDAO();
 
   @Override
-  public String execute(Request request, Response response) throws IOException, DAOException, ClassNotFoundException {
+  public String execute(Request request, Response response) throws IOException, DAOException {
     if (!request.hasParameter(PRM_TRACK_ID)) {
       return Pages.TRACK_LIST_PAGE;
     }
@@ -36,10 +37,10 @@ public class AddTrackCartCommand implements Command {
     }
 
     // put selected track to user session cart
-    Cart cart = request.getSessionAttribute(CART_ATTR, Cart.class);
+    Cart cart = request.getSessionAttribute(PRM_CART, Cart.class);
     if (cart == null) {
       cart = new ShopCart();
-      request.setSessionAttribute("cart", cart);
+      request.setSessionAttribute(PRM_CART, cart);
     }
     cart.addCartItem(track);
 

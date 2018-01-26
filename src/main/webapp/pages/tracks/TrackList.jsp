@@ -6,6 +6,8 @@
 <fmt:requestEncoding value="UTF-8"/>
 <fmt:setLocale value="${sessionScope.local}"/>
 <fmt:setBundle basename="i18n.MessageBundle"/>
+
+
 <div class="container">
 
   <div class="row">
@@ -49,7 +51,6 @@
             </td>
             <td>
               <fmt:formatNumber value="${track.price}" type="currency"/>
-              <c:out value=""/>
               <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='CLIENT'}">
                 <c:url value="/action?name=add_cart&track_id=${track.id}" var="addUri"/>
                 <a href="#" onclick="executeTrackAdd('${addUri}');">

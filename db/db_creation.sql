@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `audio_orders`.`Purchase` (
   ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `audio_orders`.`TrackOrder`
+-- Table `audio_orders`.`Order`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `audio_orders`.`TrackOrder` (
   `IdTrack`    INT(11) NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `audio_orders`.`TrackOrder` (
   INDEX `fk_TrackOrder_Track1_idx` (`IdTrack` ASC),
   CONSTRAINT `fk_TrackOrder_Purchase1`
   FOREIGN KEY (`IdPurchase`)
-  REFERENCES `audio_orders`.`Purchase` (`Id`)
+  REFERENCES `audio_orders`.`Order` (`Id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_TrackOrder_Track1`

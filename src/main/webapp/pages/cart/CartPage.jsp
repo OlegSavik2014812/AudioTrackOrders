@@ -10,22 +10,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title><fmt:message key="purchase.title"/></title>
-  <c:import url="components/css_import.jsp"/>
+  <title>Корзина</title>
+  <c:import url="../css_import.jsp"/>
 </head>
 <body>
-<c:import url="components/NavBar.jsp"/>
+
+
+<c:import url="../NavBar.jsp"/>
+
 <div class="container-fluid">
   <div class="row">
-    <c:import url="components/PurchasedTrackMenu.jsp"/>
+    <c:import url="Menu.jsp"/>
+
     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-      <c:if test="${sessionScope.USER!=null && sessionScope.USER.role=='ADMIN' }">
-        ${requestScope.user}
-      </c:if>
-      <c:import url="components/TrackList.jsp"/>
+      <c:import url="CartList.jsp"/>
     </main>
+
   </div>
 </div>
-<c:import url="components/js_import.jsp"/>
+<c:import url="../js_import.jsp"/>
 </body>
+
 </html>

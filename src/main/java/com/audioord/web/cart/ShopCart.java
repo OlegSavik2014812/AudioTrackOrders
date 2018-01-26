@@ -1,19 +1,25 @@
 package com.audioord.web.cart;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 public class ShopCart implements Cart {
 
-  private Collection<CartItem> cartItems;
+  private List<CartItem> cartItems;
 
   public ShopCart() {
     this.cartItems = new ArrayList<>();
   }
 
-  public ShopCart(Collection<CartItem> cartItems) {
+  public ShopCart(List<CartItem> cartItems) {
     this.cartItems = cartItems;
+  }
+
+  @Override
+  public Iterator<CartItem> iterator() {
+    return cartItems.iterator();
   }
 
   @Override
@@ -39,7 +45,7 @@ public class ShopCart implements Cart {
   @Override
   public double getTotalCost() {
     double totalCost = 0;
-    if (hasItems()) {
+    if (getHasItems()) {
       for (CartItem cartItem : cartItems) {
         totalCost += cartItem.getCost();
       }
@@ -48,11 +54,11 @@ public class ShopCart implements Cart {
   }
 
   @Override
-  public Iterator<CartItem> iterator() {
-    return cartItems.iterator();
+  public List<CartItem> getList() {
+    return Collections.unmodifiableList(cartItems);
   }
 
-  public boolean hasItems() {
+  public boolean getHasItems() {
     return cartItems != null && !cartItems.isEmpty();
   }
 

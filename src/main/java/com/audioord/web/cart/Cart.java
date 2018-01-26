@@ -1,6 +1,8 @@
 package com.audioord.web.cart;
 
 
+import java.util.List;
+
 public interface Cart extends Iterable<CartItem> {
 
   void addCartItem(CartItem c);
@@ -12,5 +14,9 @@ public interface Cart extends Iterable<CartItem> {
   int getItemsTotalCount();
 
   double getTotalCost();
+
+  List<CartItem> getList();
+
+  boolean getHasItems();
 
 }

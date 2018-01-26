@@ -34,7 +34,6 @@
                 <span class="oi oi-circle-x"></span>
               </a>
             </td>
-
           </tr>
         </c:forEach>
         </tbody>

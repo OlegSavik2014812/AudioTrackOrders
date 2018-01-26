@@ -8,7 +8,6 @@ import com.audioord.web.command.Pages;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +20,10 @@ public class TrackListCommand implements Command {
   private TrackDAO trackDAO = new TrackDAO();
 
   @Override
-  public String execute(Request request, Response response) throws IOException, DAOException {
+  public String execute(Request request, Response response) throws DAOException {
     int page = 1;
     int recordsPerPage = 8;
+
     if (request.hasParameter(PRM_PAGE)) {
       page = Integer.parseInt(request.getParameter(PRM_PAGE));
     }
@@ -54,7 +54,6 @@ public class TrackListCommand implements Command {
     request.addAttribute("TrackList", trackList);
     request.addAttribute("noOfPages", noOfPages);
     request.addAttribute("currentPage", page);
-    request.addAttribute("pageName", "index");
 
     return Pages.TRACK_LIST_PAGE;
   }

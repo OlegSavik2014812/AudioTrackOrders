@@ -8,5 +8,5 @@ import java.io.IOException;
 
 public interface Command {
 
-  String execute(Request request, Response response) throws IOException, DAOException, ClassNotFoundException;
+  String execute(Request request, Response response) throws DAOException, IOException;
 }
