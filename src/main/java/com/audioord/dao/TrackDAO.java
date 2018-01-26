@@ -29,6 +29,8 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   private static final String SQL_GET_USER_TRACKS =
   "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration ,track.id from track,purchase,trackorder,user where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id and purchase.IdUser = user.Id and user.UserName =? and purchase.Status=? order by Popularity desc limit ?, ?";
 
+  private static final String SQL_GET_TRACK_BY_ID = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration ,track.id from track where track.id=?";
+
   private static final String SQL_ADD_TRACK =
   "insert into Track(Track,Artist, Album, Popularity,URI,Price,Duration)values(?,?,?,?,?,?,?)";
 
@@ -76,7 +78,7 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
 
   @Override
   public Track getById(Long id) throws DAOException {
-    return getById(id, mapper, SQL_SEARCH_BY_TRACK_NAME);
+    return getById(id, mapper, SQL_GET_TRACK_BY_ID);
   }
 
   @Override

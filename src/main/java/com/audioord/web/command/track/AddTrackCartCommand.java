@@ -3,6 +3,8 @@ package com.audioord.web.command.track;
 import com.audioord.dao.DAOException;
 import com.audioord.dao.TrackDAO;
 import com.audioord.model.audio.Track;
+import com.audioord.web.cart.Cart;
+import com.audioord.web.cart.ShopCart;
 import com.audioord.web.command.Command;
 import com.audioord.web.command.Pages;
 import com.audioord.web.http.Request;
@@ -32,6 +34,14 @@ public class AddTrackCartCommand implements Command {
     if (track == null) {
       return Pages.TRACK_LIST_PAGE;
     }
+
+    // put selected track to user session cart
+    Cart cart = request.getSessionAttribute(CART_ATTR, Cart.class);
+    if (cart == null) {
+      cart = new ShopCart();
+      request.setSessionAttribute("cart", cart);
+    }
+    cart.addCartItem(track);
 
     return Pages.TRACK_LIST_PAGE;
   }

@@ -1,23 +1,19 @@
 package com.audioord.web.cart;
 
-import com.audioord.model.account.User;
-
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 public class ShopCart implements Cart {
 
-  private List<CartItem> cartItems;
-  private User user;
+  private Collection<CartItem> cartItems;
 
-  public ShopCart(List<CartItem> cartItems, User user) {
-    this.cartItems = cartItems;
-    this.user = user;
+  public ShopCart() {
+    this.cartItems = new ArrayList<>();
   }
 
-  @Override
-  public User getCartUser() {
-    return user;
+  public ShopCart(Collection<CartItem> cartItems) {
+    this.cartItems = cartItems;
   }
 
   @Override

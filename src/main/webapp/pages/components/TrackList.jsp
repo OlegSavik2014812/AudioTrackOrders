@@ -13,7 +13,8 @@
       <form method="GET" action="action">
         <input type="hidden" name="name" value="search_track"/>
         <div class="input-group">
-          <input type="text" name="track_name" class="form-control form-control-sm" aria-describedby="sizing-addon1" required
+          <input type="text" name="track_name" class="form-control form-control-sm" aria-describedby="sizing-addon1"
+                 required
                  placeholder="<fmt:message key="search.enter_track_name"/>"/>
           <span class="input-group-btn" id="sizing-addon1">
             <button class="btn btn-sm btn-secondary" type="submit"><fmt:message key="button.search"/></button>
@@ -50,7 +51,8 @@
               <fmt:formatNumber value="${track.price}" type="currency"/>
               <c:out value=""/>
               <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='CLIENT'}">
-                <a href="<c:url value="/action?name=add_cart&track_id=${track.id} "/>">
+                <c:url value="/action?name=add_cart&track_id=${track.id}" var="addUri"/>
+                <a href="#" onclick="executeTrackAdd('${addUri}');">
                   <span class="oi oi-cart"></span>
                 </a>
               </c:if>
@@ -62,11 +64,22 @@
     </div>
   </div>
 
-
   <div class="row">
     <div class="col-12 ">
       <c:url value="/action?name=track_list&sort=${sort}&page=##" var="searchUri"/>
       <tags:Paging uri="${searchUri}" currPage="${currentPage}" totalPages="${noOfPages}"/>
+    </div>
+  </div>
+
+
+  <div id="addModal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+       aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body">
+          <fmt:message key="addtrack.cart"/>
+        </div>
+      </div>
     </div>
   </div>
 
