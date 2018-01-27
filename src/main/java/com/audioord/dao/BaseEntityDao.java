@@ -51,6 +51,27 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     return isRemoved;
   }
 
+
+  protected K create(E entity, EntityMapper<E> mapper, String sql) throws DAOException {
+    K id = null;
+    try (Connection con = connectionSource.getConnection();
+         PreparedStatement st = con.prepareCall(sql)) {
+
+      mapper.write(st, entity);
+      LOG.debug(String.format("Executing query [%s] \n with entity %s", sql, String.valueOf(entity)));
+      st.executeUpdate();
+      ResultSet rs = st.getGeneratedKeys();
+      if (rs.next()) {
+        return (K) Long.valueOf(rs.getLong(1));
+      }
+
+    } catch (SQLException | PoolException e) {
+      throw new DAOException(e);
+    }
+
+    return id;
+  }
+
   protected boolean update(E entity, EntityMapper<E> mapper, String sql) throws DAOException {
     Objects.requireNonNull(entity, "Param Entity could not be null");
     Objects.requireNonNull(mapper, "Param Mapper could not be null");
@@ -81,14 +102,21 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     try (Connection con = connectionSource.getConnection();
          PreparedStatement st = con.prepareCall(sql)) {
 
-      st.setArray(1, con.createArrayOf("id", ids.toArray()));
+      for (int i = 0; i < ids.size(); i++) {
+        st.setObject(i + 1, ids.get(i));
+      }
 
+      ResultSet rs = st.executeQuery();
+      while (rs.next()) {
+        E obj = mapper.parse(rs);
+        list.add(obj);
+      }
 
     } catch (PoolException | SQLException e) {
       throw new DAOException(e);
     }
-    return list;
 
+    return list;
   }
 
 
@@ -166,7 +194,7 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     return count;
   }
 
-  protected int countSpecial(String sql, Object... params) throws DAOException {
+  protected int countAll(String sql, Object... params) throws DAOException {
     int count = 0;
     E obj = null;
 

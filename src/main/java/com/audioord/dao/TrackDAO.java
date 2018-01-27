@@ -1,7 +1,6 @@
 package com.audioord.dao;
 
 import com.audioord.model.audio.Track;
-import com.audioord.model.order.OrderStatus;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,38 +11,28 @@ import java.util.List;
 public class TrackDAO extends BaseEntityDao<Track, Long> {
 
   private static final String SQL_COUNT_ALL =
-  "select count(id) from track";
+  "SELECT count(id) FROM track";
 
   private static final String SQL_GET_BEST_SELLING_TRACKS =
-  "SELECT t.track, t.artist, t.album, t.popularity, t.uri, t.price, t.duration, t.id, (SELECT count(o.Id) FROM Order o WHERE t.Id = o.IdTrack) AS numOrdered FROM track t ORDER BY numOrdered DESC limit ?, ?";
+  "SELECT track, artist, album, popularity, uri, price, duration, id, (SELECT count(Id) FROM TrackOrder WHERE Id = IdTrack) AS numOrdered FROM track ORDER BY numOrdered DESC LIMIT ?, ?";
 
   private static final String SQL_GET_BRAND_NEW_TRACK =
-  "select track, artist, album, popularity, uri , price, duration, id from track order by id desc limit ?, ?";
+  "SELECT track, artist, album, popularity, uri, price, duration, id FROM track ORDER BY id DESC LIMIT ?, ?";
 
   private static final String SQL_GET_MOST_POPULAR_TRACKS =
-  "select track, artist, album, popularity, uri, price, duration, id from track order by Popularity desc limit ?, ?";
+  "SELECT track, artist, album, popularity, uri, price, duration, id FROM track ORDER BY Popularity DESC LIMIT ?, ?";
 
-  private static final String SQL_GET_TRACK_BY_ID = "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration ,track.id from track where track.id=?";
+  private static final String SQL_GET_TRACK_BY_ID =
+  "SELECT track, artist, album, popularity, uri, price, duration, id FROM track where track.id=?";
 
   private static final String SQL_GET_BY_IDS =
-  "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration ,track.id from track where track.id in ?";
+  "SELECT track, artist, album, popularity, uri, price, duration, id FROM track where track.id in (##)";
 
   private static final String SQL_ADD_TRACK =
-  "insert into Track(Track,Artist, Album, Popularity,URI,Price,Duration)values(?,?,?,?,?,?,?)";
+  "INSERT INTO Track (track, artist, album, popularity, uri, price, duration, id) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
   private static final String SQL_SEARCH_BY_TRACK_NAME =
-  "select track.Track, track.artist, track.album , track.popularity , track.uri , track.price, track.duration, track.id from track where Track like(?)";
-
-  private static final String SQL_COUNT_ALL_USER_TRACKS = "select count(track.Id)\n" +
-  "from track,purchase,trackorder,user \n" +
-  "where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id \n" +
-  "and purchase.IdUser = user.Id and user.UserName =?";
-
-  private static final String SQL_COUNT_USER_TRACK_WITH_STATUS = "select count(track.Id)\n" +
-  "from track,purchase,trackorder,user \n" +
-  "where Track.Id = trackorder.IdTrack and trackorder.IdPurchase = purchase.Id \n" +
-  "and purchase.IdUser = user.Id and user.UserName =? and purchase.Status= ?";
-
+  "SELECT track, artist, album, popularity, uri, price, duration, id FROM track WHERE Track LIKE (?)";
 
   private final EntityMapper<Track> mapper =
   new EntityMapper<Track>() {
@@ -78,12 +67,12 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
 
   @Override
   public Track update(Track entity) throws DAOException {
-    return null;
+    return null; // TODO:
   }
 
   @Override
   public boolean delete(Long id) throws DAOException {
-    return false;
+    return false; // TODO:
   }
 
   @Override
@@ -100,7 +89,8 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   }
 
   public List<Track> getTracksByIds(List<Long> ids) throws DAOException {
-    return getByIds(mapper, SQL_GET_BY_IDS, ids);
+    String placeholder = String.join(",", Collections.nCopies(ids.size(), "?"));
+    return getByIds(mapper, SQL_GET_BY_IDS.replace("##", placeholder), ids);
   }
 
   public List<Track> getMostPopularTracks(int page, int count) throws DAOException {
@@ -117,13 +107,5 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
 
   public int countAllTracks() throws DAOException {
     return countAll(SQL_COUNT_ALL);
-  }
-
-  public int countAllUserTracks(String name) throws DAOException {
-    return countSpecial(SQL_COUNT_ALL_USER_TRACKS, name);
-  }
-
-  public int countUserSpecialTracks(String username, OrderStatus status) throws DAOException {
-    return countSpecial(SQL_COUNT_USER_TRACK_WITH_STATUS, username, status);
   }
 }
