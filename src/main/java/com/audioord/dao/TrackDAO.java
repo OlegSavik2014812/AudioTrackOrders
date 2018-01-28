@@ -1,6 +1,7 @@
 package com.audioord.dao;
 
 import com.audioord.model.audio.Track;
+import com.audioord.model.order.Order;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,6 +34,9 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
 
   private static final String SQL_SEARCH_BY_TRACK_NAME =
   "SELECT track, artist, album, popularity, uri, price, duration, id FROM track WHERE Track LIKE (?)";
+
+  private static final String SQL_GET_ORDER_TRACKS =
+  "SELECT  t.Track, t.Artist, t.Album, t.Popularity, t.URI,  t.Price, t.Duration, t.Id FROM TrackOrder o JOIN Track t ON o.IdTrack = t.Id WHERE o.IdOrder = ?";
 
   private final EntityMapper<Track> mapper =
   new EntityMapper<Track>() {
@@ -78,6 +82,10 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   @Override
   public boolean create(Track entity) throws DAOException {
     return update(entity, mapper, SQL_ADD_TRACK);
+  }
+
+  public List<Track> getTracksByOrder(Order order) throws DAOException {
+    return findAll(mapper, SQL_GET_ORDER_TRACKS, order.getId());
   }
 
   public List<Track> findTracks(String trackName) throws DAOException {
