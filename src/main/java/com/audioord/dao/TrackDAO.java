@@ -47,7 +47,7 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
       track.setPopularity(rs.getInt(4));
       track.setUri(rs.getString(5));
       track.setPrice(rs.getInt(6));
-      track.setDuration(rs.getLong(7));
+      track.setDuration(rs.getTime(7));
       track.setId(rs.getLong(8));
       return track;
     }
@@ -60,7 +60,7 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
       st.setInt(4, entity.getPopularity());
       st.setObject(5, entity.getUri());
       st.setDouble(6, entity.getPrice());
-      st.setDouble(7, entity.getDuration());
+      st.setTime(7, entity.getDuration());
     }
   };
 

@@ -1,6 +1,6 @@
 package com.audioord.model.account;
 
-public enum ROLE {
+public enum Role {
 
   ADMIN, // site administrator
 
@@ -8,8 +8,8 @@ public enum ROLE {
 
   UNKNOWN; // guest user
 
-  public static ROLE fromString(String s) {
-    for (ROLE role : values()) {
+  public static Role fromString(String s) {
+    for (Role role : values()) {
       if (role.name().equalsIgnoreCase(s)) {
         return role;
       }

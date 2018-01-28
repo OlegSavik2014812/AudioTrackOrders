@@ -1,16 +1,15 @@
 package com.audioord.dao;
 
 import com.audioord.dao.sql.PoolException;
-import com.audioord.model.account.ROLE;
+import com.audioord.model.account.Role;
 import com.audioord.model.account.User;
 import com.audioord.model.audio.Track;
 import com.audioord.model.order.Order;
 import com.audioord.model.order.OrderStatus;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Date;
+import java.util.List;
 
 public class OrderDAO extends BaseEntityDao<Order, Long> {
 
@@ -23,10 +22,13 @@ public class OrderDAO extends BaseEntityDao<Order, Long> {
   private static final String SQL_CREATE_TRACK_ORDER =
   "INSERT INTO TrackOrder (IdTrack, IdOrder) VALUES (?, ?)";
 
+  private static final String SQL_GET_ORDERS_BY_DATE =
+  "SELECT u.Username, u.Role, u.Id, u.FirstName, u.LastName, o.Date, o.Id, o.Status, o.TotalPrice FROM `Order` o JOIN USER u ON u.Id = o.IdUser WHERE o.DATE >= ? AND o.Date <= ?";
+
   private final EntityMapper<Order> mapper = new EntityMapper<Order>() {
     @Override
     public Order parse(ResultSet rs) throws SQLException, DAOException {
-      User user = new User(rs.getString(1), ROLE.fromString(rs.getString(2)));
+      User user = new User(rs.getString(1), Role.fromString(rs.getString(2)));
       user.setId(rs.getLong(3));
       user.setFirstName(rs.getString(4));
       user.setLastName(rs.getString(5));
@@ -49,21 +51,7 @@ public class OrderDAO extends BaseEntityDao<Order, Long> {
 
   @Override
   public Order getById(Long id) throws DAOException {
-    try (Connection con = getConnectionSource().getConnection();
-         PreparedStatement st = con.prepareCall(SQL_GET_ORDER_BY_ID)) {
-      st.setObject(1, id);
-      ResultSet rs = st.executeQuery();
-
-      while (rs.next()) {
-
-
-      }
-
-    } catch (SQLException | PoolException e) {
-      throw new DAOException(e);
-    }
-
-    return null;
+    return getById(id, mapper, SQL_GET_ORDER_BY_ID);
   }
 
   @Override
@@ -94,5 +82,11 @@ public class OrderDAO extends BaseEntityDao<Order, Long> {
     } catch (SQLException | PoolException e) {
       throw new DAOException(e);
     }
+  }
+
+  public List<Order> getOrders(Date from, Date to) throws DAOException {
+    Timestamp timestampFrom = new Timestamp(from.getTime());
+    Timestamp timestampTo = new Timestamp(to.getTime());
+    return findAll(mapper, SQL_GET_ORDERS_BY_DATE, timestampFrom, timestampTo);
   }
 }

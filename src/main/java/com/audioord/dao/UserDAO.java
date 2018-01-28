@@ -1,6 +1,6 @@
 package com.audioord.dao;
 
-import com.audioord.model.account.ROLE;
+import com.audioord.model.account.Role;
 import com.audioord.model.account.User;
 
 import java.sql.PreparedStatement;
@@ -22,18 +22,19 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
   private static final String SQL_CREATE_USER =
   "INSERT INTO User (UserName, Role,  FirstName, LastName) VALUES (?,?,?,?)";
 
-  private static final String SQL_DELETE_USER_BY_ID = "DELETE FROM User WHERE Id=?";
+  private static final String SQL_DELETE_USER_BY_ID =
+  "DELETE FROM User WHERE Id=?";
 
   private static final String SQL_COUNT_ALL =
-  "select count(id) from user";
+  "SELECT count(id) FROM user";
 
   private static final String SQL_GET_ALL =
-  "select UserName, Role,  FirstName, LastName, Id  from user order by Id desc limit ?, ?";
+  "SELECT UserName, Role, FirstName, LastName, Id FROM user ORDER BY Id DESC LIMIT ?, ?";
 
   private final EntityMapper<User> userMapper = new EntityMapper<User>() {
     @Override
     public User parse(ResultSet rs) throws SQLException {
-      User user = new User(rs.getString(1), ROLE.fromString(rs.getString(2)));
+      User user = new User(rs.getString(1), Role.fromString(rs.getString(2)));
       user.setFirstName(rs.getString(3));
       user.setLastName(rs.getString(4));
       user.setId(rs.getLong(5));

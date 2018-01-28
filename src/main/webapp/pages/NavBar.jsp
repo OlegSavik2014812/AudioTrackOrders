@@ -23,6 +23,13 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
       <ul class="navbar-nav mr-auto">
+        <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='ADMIN'}">
+          <a class="nav-item nav-link" href="<c:url value="/action?name=track_edit"/>">Добавить музыку</a>
+        </c:if>
+
+        <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='CLIENT'}">
+          <a class="nav-item nav-link" href="<c:url value="/action?name=track_edit"/>">Моя музыка</a>
+        </c:if>
       </ul>
 
       <%--LOGIN LOGOUT--%>
@@ -47,8 +54,8 @@
               <i class=""></i>
                 ${sessionScope.USER.username}
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
 
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                 <%--USER CART--%>
               <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='CLIENT'}">
                 <a class="dropdown-item" href="<c:url value="/action?name=view_cart"/>">Корзина</a>
@@ -60,9 +67,8 @@
                   key="navbar.userlist"/></a>
 
                 <%--ADMIN ORDERS--%>
-                <a class="dropdown-item" href="<c:url value="/action?name=purchases_list&page=1"/> "><fmt:message
+                <a class="dropdown-item" href="<c:url value="/action?name=order_list&page=1"/> "><fmt:message
                   key="navbar.purchases"/></a>
-
               </c:if>
 
                 <%--SING OUT--%>

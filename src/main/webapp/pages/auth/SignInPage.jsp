@@ -22,7 +22,6 @@
     <form class="form-signin" method="POST" action="action">
       <input type="hidden" name="name" value="sign_in"/>
 
-
       <h2 class="form-signin-heading"><fmt:message key="signin.please_sign"/></h2>
 
       <div class="form-group">
@@ -45,8 +44,8 @@
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         <fmt:message key="button.signin"/>
       </button>
-    </form>
 
+    </form>
   </div>
 </div>
 <c:import url="../js_import.jsp"/>

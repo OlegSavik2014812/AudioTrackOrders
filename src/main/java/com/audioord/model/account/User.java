@@ -2,14 +2,16 @@ package com.audioord.model.account;
 
 import com.audioord.model.Entity;
 
+import java.util.Objects;
+
 public class User extends Entity<Long> {
 
   private String username;
   private String firstName;
   private String lastName;
-  private ROLE role;
+  private Role role;
 
-  public User(String username, ROLE role) {
+  public User(String username, Role role) {
     this.username = username;
     this.role = role;
   }
@@ -38,12 +40,38 @@ public class User extends Entity<Long> {
     this.lastName = lastName;
   }
 
-  public ROLE getRole() {
+  public Role getRole() {
     return role;
   }
 
-  public void setRole(ROLE role) {
+  public void setRole(Role role) {
     this.role = role;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof User)) return false;
+    if (!super.equals(o)) return false;
+    User user = (User) o;
+    return Objects.equals(username, user.username) &&
+    Objects.equals(firstName, user.firstName) &&
+    Objects.equals(lastName, user.lastName) &&
+    role == user.role;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), username, firstName, lastName, role);
+  }
+
+  @Override
+  public String toString() {
+    return "User{" +
+    "username='" + username + '\'' +
+    ", firstName='" + firstName + '\'' +
+    ", lastName='" + lastName + '\'' +
+    ", role=" + role +
+    '}';
+  }
 }

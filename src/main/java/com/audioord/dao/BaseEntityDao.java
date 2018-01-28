@@ -51,7 +51,6 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     return isRemoved;
   }
 
-
   protected K create(E entity, EntityMapper<E> mapper, String sql) throws DAOException {
     K id = null;
     try (Connection con = connectionSource.getConnection();
@@ -118,7 +117,6 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
 
     return list;
   }
-
 
   protected List<E> findAll(EntityMapper<E> mapper, String sql, Object... params) throws DAOException {
     Objects.requireNonNull(mapper, "Param Mapper could not be null");

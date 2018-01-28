@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-  <fmt:requestEncoding value="UTF-8"/>
-  <fmt:setLocale value="${sessionScope.local}"/>
-  <fmt:setBundle basename="i18n.MessageBundle"/>
+<fmt:requestEncoding value="UTF-8"/>
+<fmt:setLocale value="${sessionScope.local}"/>
+<fmt:setBundle basename="i18n.MessageBundle"/>
 
 
 <!DOCTYPE html>
@@ -13,16 +13,12 @@
   <title>
     <fmt:message key="index.title"/>
   </title>
-
-  <c:import url="../components/css_import.jsp"/>
+  <c:import url="../css_import.jsp"/>
   <link href="<c:url value="/css/login.css"/>" rel="stylesheet" type="text/css">
-
 </head>
 
-<body><c:import url="../components/NavBar.jsp"/>
-
+<body><c:import url="../NavBar.jsp"/>
 <div class="container">
-
   <div class="row">
 
     <form class="" method="POST" action="../action?name=add_discount">
@@ -42,7 +38,7 @@
         <label for="effectiveFrom" class="sr-only">
           <fmt:message key="add.discount.date_begin"/>
         </label>
-        <input type="date"  id="effectiveFrom" name="effectiveFrom" class="form-control"
+        <input type="date" id="effectiveFrom" name="effectiveFrom" class="form-control"
                placeholder="<fmt:message key="add.discount.enter_date"/>" required="">
       </div>
 
@@ -60,9 +56,7 @@
       </button>
 
     </form>
-
   </div>
-
 </div>
 
 <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
@@ -73,8 +67,7 @@
     </div>
   </div>
 </div>
-<c:import url="../components/js_import.jsp"/>
+<c:import url="../js_import.jsp"/>
 
 </body>
-
 </html>

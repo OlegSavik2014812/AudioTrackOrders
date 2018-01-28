@@ -2,7 +2,7 @@ package com.audioord.web.command.track;
 
 import com.audioord.dao.DAOException;
 import com.audioord.dao.TrackDAO;
-import com.audioord.model.account.ROLE;
+import com.audioord.model.account.Role;
 import com.audioord.model.account.User;
 import com.audioord.model.audio.Track;
 import com.audioord.web.command.Command;
@@ -20,7 +20,7 @@ public class EditTrackCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
-    boolean check = request.getSessionAttribute("USER", User.class).getRole().equals(ROLE.ADMIN);
+    boolean check = request.getSessionAttribute("USER", User.class).getRole().equals(Role.ADMIN);
     if (!check) {
       return Pages.INDEX_PAGE;
     }
@@ -49,7 +49,7 @@ public class EditTrackCommand implements Command {
     track.setAlbum(request.getParameter("album"));
     track.setUri(request.getParameter("uri"));
     track.setPopularity(popularity);
-    track.setDuration(duration);
+//    track.setDuration(duration);
     track.setPrice(price);
 
 

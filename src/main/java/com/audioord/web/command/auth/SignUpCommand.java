@@ -4,7 +4,7 @@ import com.audioord.dao.AuthInfoDao;
 import com.audioord.dao.DAOException;
 import com.audioord.dao.UserDAO;
 import com.audioord.model.account.AuthInfo;
-import com.audioord.model.account.ROLE;
+import com.audioord.model.account.Role;
 import com.audioord.model.account.User;
 import com.audioord.web.command.Command;
 import com.audioord.web.command.Pages;
@@ -48,7 +48,7 @@ public class SignUpCommand implements Command {
       return Pages.SIGN_UP_PAGE; // could not create auth info
     }
 
-    User user = new User(userName, ROLE.CLIENT);
+    User user = new User(userName, Role.CLIENT);
     user.setFirstName(firstName);
     user.setLastName(lastName);
 
