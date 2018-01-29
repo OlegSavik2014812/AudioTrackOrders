@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public final class DateUtil {
@@ -14,6 +15,13 @@ public final class DateUtil {
 
   private DateUtil() {
     super();
+  }
+
+  public static Date addDays(Date dateTo, int days) {
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(dateTo);
+    cal.add(Calendar.DATE, days);
+    return cal.getTime();
   }
 
   public static Date parseDate(String str) {

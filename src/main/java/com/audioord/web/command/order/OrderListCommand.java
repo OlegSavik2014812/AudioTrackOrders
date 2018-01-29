@@ -13,7 +13,6 @@ import com.audioord.web.http.Response;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class OrderListCommand implements Command {
 
@@ -37,7 +36,7 @@ public class OrderListCommand implements Command {
     }
 
     if (dateFrom == null) {
-      dateFrom = new Date(dateTo.getTime() - TimeUnit.DAYS.toMillis(1));
+      dateFrom = DateUtil.addDays(dateTo, -2);
     }
 
     List<Order> orders = orderDAO.getOrders(dateFrom, dateTo);

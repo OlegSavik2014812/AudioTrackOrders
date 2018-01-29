@@ -47,7 +47,7 @@
             <td><c:out value="${track.album}"/></td>
             <td><c:out value="${track.popularity}"/></td>
             <td>
-                ${track.duration}
+              <fmt:formatDate type = "time" value="${track.duration}" timeStyle="short" pattern="MM:SS"/>
             </td>
             <td>
               <fmt:formatNumber value="${track.price}" type="currency"/>
