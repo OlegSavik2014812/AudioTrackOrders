@@ -47,6 +47,9 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
       st.setString(2, user.getRole().name());
       st.setString(3, user.getFirstName());
       st.setString(4, user.getLastName());
+      if (user.getId() != null) {
+        st.setLong(5, user.getId());
+      }
     }
   };
 

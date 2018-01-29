@@ -4,6 +4,7 @@ package com.audioord.web.command.order;
 import com.audioord.dao.DAOException;
 import com.audioord.dao.OrderDAO;
 import com.audioord.model.order.Order;
+import com.audioord.model.order.OrderStatus;
 import com.audioord.utils.DateUtil;
 import com.audioord.web.command.Command;
 import com.audioord.web.command.Pages;
@@ -21,6 +22,7 @@ public class OrderListCommand implements Command {
   private static final String PRM_DATE_FROM = "date_from";
   private static final String PRM_DATE_TO = "date_to";
   private static final String PRM_ORDERS = "orders";
+  private static final String PRM_SORT = "sort";
 
 
   private OrderDAO orderDAO = new OrderDAO();
@@ -30,16 +32,21 @@ public class OrderListCommand implements Command {
 
     Date dateFrom = DateUtil.parseDate(request.getParameter(PRM_DATE_FROM));
     Date dateTo = DateUtil.parseDate(request.getParameter(PRM_DATE_TO));
+    OrderStatus status = OrderStatus.fromString(request.getParameter(PRM_SORT));
 
     if (dateTo == null) {
       dateTo = new Date();
     }
-
     if (dateFrom == null) {
       dateFrom = DateUtil.addDays(dateTo, -2);
     }
 
-    List<Order> orders = orderDAO.getOrders(dateFrom, dateTo);
+    List<Order> orders;
+    if (status == null) {
+      orders = orderDAO.getOrders(dateFrom, dateTo);
+    } else {
+      orders = orderDAO.getOrders(dateFrom, dateTo, status);
+    }
 
     request.addAttribute(PRM_ORDERS, orders);
 

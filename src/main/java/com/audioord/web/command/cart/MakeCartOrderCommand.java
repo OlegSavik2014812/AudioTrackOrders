@@ -35,7 +35,7 @@ public class MakeCartOrderCommand implements Command {
   public String execute(Request request, Response response) throws DAOException, IOException {
     Cart cart = request.getSessionAttribute(PRM_CART, Cart.class);
     // check if we have items in cart
-    if (!cart.getHasItems()) {
+    if (cart == null || !cart.getHasItems()) {
       return Pages.INDEX_PAGE;
     }
 

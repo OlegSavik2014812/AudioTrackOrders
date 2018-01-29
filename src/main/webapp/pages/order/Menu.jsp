@@ -10,7 +10,7 @@
 
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link" href="<c:url value="/action?name=order_list&sort=COMPLETED"/>">
+      <a class="nav-link" href="<c:url value="/action?name=order_list"/>">
         Все
       </a>
     </li>

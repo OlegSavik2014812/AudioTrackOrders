@@ -25,8 +25,11 @@ public class OrderDAO extends BaseEntityDao<Order, Long> {
   private static final String SQL_GET_ORDERS_BY_DATE =
   "SELECT u.Username, u.Role, u.Id, u.FirstName, u.LastName, o.Date, o.Id, o.Status, o.TotalPrice FROM `Order` o JOIN USER u ON u.Id = o.IdUser WHERE o.DATE >= ? AND o.Date <= ?";
 
+  private static final String SQL_GET_ORDERS_BY_DATE_AND_STATUS =
+  "SELECT u.Username, u.Role, u.Id, u.FirstName, u.LastName, o.Date, o.Id, o.Status, o.TotalPrice FROM `Order` o JOIN USER u ON u.Id = o.IdUser WHERE o.DATE >= ? AND o.Date <= ? AND o.Status=?";
+
   private static final String SQL_UPDATE_USER_BY_ID =
-  "UPDATE `Order` SET Status = ? WHERE Id = ?";
+  "UPDATE `Order` SET TotalPrice =?, Status = ?, IdUser=?, Date=? WHERE Id = ?";
 
   private final EntityMapper<Order> mapper = new EntityMapper<Order>() {
     @Override
@@ -45,8 +48,13 @@ public class OrderDAO extends BaseEntityDao<Order, Long> {
 
     @Override
     public void write(PreparedStatement st, Order entity) throws SQLException {
-      st.setString(1, entity.getStatus().name());
-      st.setLong(2, entity.getId());
+      st.setDouble(1, entity.getTotalPrice());
+      st.setString(2, entity.getStatus().name());
+      st.setLong(3, entity.getUser().getId());
+      st.setDate(4, new java.sql.Date(entity.getDateOrdered().getTime()));
+      if (entity.getId() != null) {
+        st.setLong(5, entity.getId());
+      }
     }
   };
 
@@ -86,9 +94,15 @@ public class OrderDAO extends BaseEntityDao<Order, Long> {
     }
   }
 
+  public List<Order> getOrders(Date from, Date to, OrderStatus status) throws DAOException {
+    Timestamp timestampFrom = new Timestamp(from.getTime());
+    Timestamp timestampTo = new Timestamp(to.getTime());
+    return findAll(mapper, SQL_GET_ORDERS_BY_DATE_AND_STATUS, timestampFrom.toString(), timestampTo.toString(), status.name());
+  }
+
   public List<Order> getOrders(Date from, Date to) throws DAOException {
     Timestamp timestampFrom = new Timestamp(from.getTime());
     Timestamp timestampTo = new Timestamp(to.getTime());
-    return findAll(mapper, SQL_GET_ORDERS_BY_DATE, timestampFrom, timestampTo);
+    return findAll(mapper, SQL_GET_ORDERS_BY_DATE, timestampFrom.toString(), timestampTo.toString());
   }
 }
