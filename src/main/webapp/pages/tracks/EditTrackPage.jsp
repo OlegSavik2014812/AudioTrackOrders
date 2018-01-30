@@ -62,7 +62,7 @@
           <div class="mb-3">
             <label for="name">Track name</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="name" name="name" value="${track.artist}" required>
+              <input type="text" class="form-control" id="name" name="trackName" value="${track.artist}" required>
                 <%--<div class="invalid-feedback" style="width: 100%;">--%>
                 <%--Your username is required.--%>
                 <%--</div>--%>

@@ -24,7 +24,7 @@ public class EditTrackCommand implements Command {
       return Pages.ADD_TRACK_PAGE;
     }
 
-    track.setName(request.getParameter("name"));
+    track.setName(request.getParameter("trackName"));
     track.setAlbum(request.getParameter("album"));
     track.setArtist(request.getParameter("artist"));
     track.setPrice(Double.parseDouble(request.getParameter("price")));
