@@ -1,0 +1,10 @@
+.custom-file-control.selected:lang(en)::after {
+  content: "" !important;
+}
+.custom-file {
+  overflow: hidden;
+  width: 100%;
+}
+.custom-file-control {
+  white-space: nowrap;
+}

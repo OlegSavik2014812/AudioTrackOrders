@@ -14,97 +14,97 @@
     <fmt:message key="index.title"/>
   </title>
   <c:import url="../css_import.jsp"/>
-  <link href="<c:url value="/css/login.css"/>" rel="stylesheet" type="text/css">
+  <link href="<c:url value="/css/fileinput.css"/>" rel="stylesheet" type="text/css">
 
 </head>
 
-<body><c:import url="../NavBar.jsp"/>
+<body>
+<c:import url="../NavBar.jsp"/>
 
 <div class="container">
+  <div class="py-5 text-center">
+    <span class="oi oi-musical-note" style="color: #5cb3fd; font-size: x-large;"></span>
+    <h2>Добавить песню</h2>
+  </div>
 
   <div class="row">
 
-    <form class="" method="POST" action="../action?name=add_track">
-      <input type="hidden" name="name" value="add_track">
+    <%--<form class="needs-validation" novalidate="">--%>
+    <div class="col-md-4 order-md-2 mb-4">
 
-      <h2 class="form-signin-heading"><fmt:message key="addtrack.title"/></h2>
+      <div class="card">
 
-      <div class="form-group">
-        <label for="trackname" class="sr-only">
-          <fmt:message key="addtrack.name_track"/>
-        </label>
-        <input type="text" id="trackname" name="trackName" class="form-control"
-               placeholder="<fmt:message key="addtrack.name_track"/> " required="" autofocus="">
+        <img class="card-img-top" src="<c:url value="/img/cd-cover.jpg"/>" height="356">
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="artist" class="sr-only">
-          <fmt:message key="addtrack.name_artist"/>
-        </label>
-        <input type="text" id="artist" name="artist" class="form-control"
-               placeholder="<fmt:message key="addtrack.name_artist"/>" required="">
-      </div>
+    <div class="col-md-8 order-md-1 ">
+      <%--Track Upload Form action--%>
+      <c:if test="${requestScope.track == null}">
+        <c:url value="/action?name=upload_track" var="uploadUrl"/>
+        <form action="${uploadUrl}" method="POST" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label class="custom-file" id="customFile">
+              <input type="file" class="custom-file-input" id="file" name="file" aria-describedby="fileHelp" required>
+              <span class="custom-file-control form-control-file"></span>
+            </label>
+          </div>
+          <hr class="mb-4"/>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Загрузить</button>
+        </form>
+      </c:if>
 
-      <div class="form-group">
-        <label for="album" class="sr-only">
-          <fmt:message key="addtrack.name_album"/>
-        </label>
-        <input type="text" id="album" name="album" class="form-control"
-               placeholder="<fmt:message key="addtrack.name_album"/>">
-      </div>
+      <%--Track  Edit & Save action--%>
+      <c:if test="${requestScope.track != null}">
+        <c:url value="/action?name=add_track" var="addUrl"/>
+        <form action="${addUrl}" method="POST">
 
-      <div class="form-group">
-        <label for="popularity" class="sr-only">
-          <fmt:message key="addtrack.popularity"/>
-        </label>
-        <input type="text" id="popularity" name="popularity" class="form-control"
-               placeholder="<fmt:message key="addtrack.popularity"/> ">
-      </div>
+          <div class="mb-3">
+            <label for="name">Track name</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="name" name="name" value="${requestScope.track.artist}">
+                <%--<div class="invalid-feedback" style="width: 100%;">--%>
+                <%--Your username is required.--%>
+                <%--</div>--%>
+            </div>
+          </div>
 
-      <div class="form-group">
-        <label for="uri" class="sr-only">
-          <fmt:message key="addtrack.uri"/>
-        </label>
-        <input type="text" id="uri" name="uri" class="form-control"
-               placeholder="<fmt:message key="addtrack.uri"/> ">
-      </div>
+          <div class=" row">
+            <div class="col-md-6 mb-3">
+              <label for="artist">Artist</label>
+              <input type="text" class="form-control" id="artist" name="artist" value="${requestScope.track.artist}">
+                <%--<div class="invalid-feedback">--%>
+                <%--Valid first name is required.--%>
+                <%--</div>--%>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="album">Album</label>
+              <input type="text" class="form-control" id="album" name="album" value="${requestScope.track.album}">
+                <%--<div class="invalid-feedback">--%>
+                <%--Valid last name is required.--%>
+                <%--</div>--%>
+            </div>
+          </div>
 
-      <div class="form-group">
-        <label for="price" class="sr-only">
-          <fmt:message key="addtrack.price"/>
-        </label>
-        <input type="text" id="price" name="price" class="form-control"
-               placeholder="<fmt:message key="addtrack.price"/> ">
-      </div>
+          <div class="mb-3">
+            <label for="price">Price</label>
+            <div class="input-group">
+              <input type="number" class="form-control" id="price" name="price" required>
+                <%--<div class="invalid-feedback" style="width: 100%;">--%>
+                <%--Your username is required.--%>
+                <%--</div>--%>
+            </div>
+          </div>
 
-      <div class="form-group">
-        <label for="duration" class="sr-only">
-          <fmt:message key="addtrack.duration"/>
-        </label>
-        <input type="text" id="duration" name="duration" class="form-control"
-               placeholder="<fmt:message key="addtrack.duration"/> ">
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" data-toggle="modal"
-              data-target=".bd-example-modal-sm">
-        <fmt:message key="addtrack.add"/>
-      </button>
-
-    </form>
-
-  </div>
-
-</div>
-
-<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <fmt:message key="info.add_track_success"/>
+          <hr class="mb-4"/>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Добавить</button>
+        </form>
+      </c:if>
     </div>
   </div>
 </div>
-<c:import url="../js_import.jsp"/>
 
+<c:import url="../js_import.jsp"/>
 </body>
 
 </html>

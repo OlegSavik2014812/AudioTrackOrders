@@ -16,6 +16,9 @@ public class Track extends Entity<Long> implements CartItem {
   private String uri;
   private Time duration;
 
+  public Track() {
+  }
+
   public Track(String name, String artist) {
     this.name = name;
     this.artist = artist;

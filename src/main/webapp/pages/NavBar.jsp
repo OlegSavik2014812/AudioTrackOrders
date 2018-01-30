@@ -24,7 +24,7 @@
 
       <ul class="navbar-nav mr-auto">
         <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='ADMIN'}">
-          <a class="nav-item nav-link" href="<c:url value="/action?name=track_edit"/>">Добавить музыку</a>
+          <a class="nav-item nav-link" href="<c:url value="/action?name=add_track"/>">Добавить музыку</a>
         </c:if>
 
         <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='CLIENT'}">

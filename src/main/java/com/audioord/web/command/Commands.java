@@ -8,8 +8,10 @@ import com.audioord.web.command.cart.MakeCartOrderCommand;
 import com.audioord.web.command.cart.ViewTrackCartCommand;
 import com.audioord.web.command.order.OrderListCommand;
 import com.audioord.web.command.order.OrderStatusEdit;
+import com.audioord.web.command.track.EditTrackCommand;
 import com.audioord.web.command.track.SearchTrackCommand;
 import com.audioord.web.command.track.TrackListCommand;
+import com.audioord.web.command.track.UploadTrackCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +32,9 @@ public final class Commands {
     commands.put(SignInCommand.NAME, new SignInCommand());
     commands.put(SignUpCommand.NAME, new SignUpCommand());
     commands.put(SignOutCommand.NAME, new SignOutCommand());
+    // track
+    commands.put(EditTrackCommand.NAME, new EditTrackCommand());
+    commands.put(UploadTrackCommand.NAME, new UploadTrackCommand());
     //track list
     commands.put(TrackListCommand.NAME, new TrackListCommand());
     commands.put(SearchTrackCommand.NAME, new SearchTrackCommand());

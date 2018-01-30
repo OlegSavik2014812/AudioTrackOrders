@@ -7,3 +7,4 @@
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/js/ie10-viewport-bug-workaround.js"/>"></script>
 <script src="<c:url value="/js/ajaxcommand.js"/>"></script>
+<script src="<c:url value="/js/fileinput.js"/>"></script>
