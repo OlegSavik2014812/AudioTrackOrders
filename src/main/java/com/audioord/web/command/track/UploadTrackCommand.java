@@ -40,7 +40,7 @@ public class UploadTrackCommand implements Command {
     }
 
     // add track meta to request for editing
-    request.addAttribute(PRM_TRACK, track);
+    request.setSessionAttribute(PRM_TRACK, track);
     return Pages.ADD_TRACK_PAGE;
   }
 

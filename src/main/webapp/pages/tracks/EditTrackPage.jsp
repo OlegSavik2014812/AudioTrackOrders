@@ -40,7 +40,7 @@
 
     <div class="col-md-8 order-md-1 ">
       <%--Track Upload Form action--%>
-      <c:if test="${requestScope.track == null}">
+      <c:if test="${track == null}">
         <c:url value="/action?name=upload_track" var="uploadUrl"/>
         <form action="${uploadUrl}" method="POST" enctype="multipart/form-data">
           <div class="mb-3">
@@ -55,14 +55,14 @@
       </c:if>
 
       <%--Track  Edit & Save action--%>
-      <c:if test="${requestScope.track != null}">
+      <c:if test="${track != null}">
         <c:url value="/action?name=add_track" var="addUrl"/>
         <form action="${addUrl}" method="POST">
 
           <div class="mb-3">
             <label for="name">Track name</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="name" name="name" value="${requestScope.track.artist}">
+              <input type="text" class="form-control" id="name" name="name" value="${track.artist}" required>
                 <%--<div class="invalid-feedback" style="width: 100%;">--%>
                 <%--Your username is required.--%>
                 <%--</div>--%>
@@ -72,14 +72,14 @@
           <div class=" row">
             <div class="col-md-6 mb-3">
               <label for="artist">Artist</label>
-              <input type="text" class="form-control" id="artist" name="artist" value="${requestScope.track.artist}">
+              <input type="text" class="form-control" id="artist" name="artist" value="${track.artist}" required>
                 <%--<div class="invalid-feedback">--%>
                 <%--Valid first name is required.--%>
                 <%--</div>--%>
             </div>
             <div class="col-md-6 mb-3">
               <label for="album">Album</label>
-              <input type="text" class="form-control" id="album" name="album" value="${requestScope.track.album}">
+              <input type="text" class="form-control" id="album" name="album" value="${track.album}" required>
                 <%--<div class="invalid-feedback">--%>
                 <%--Valid last name is required.--%>
                 <%--</div>--%>

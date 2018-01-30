@@ -19,7 +19,7 @@ public class EditTrackCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
-    Track track = request.getAttribute(PRM_TRACK, Track.class);
+    Track track = request.getSessionAttribute(PRM_TRACK, Track.class);
     if (track == null) {
       return Pages.ADD_TRACK_PAGE;
     }
@@ -30,7 +30,7 @@ public class EditTrackCommand implements Command {
     track.setPrice(Double.parseDouble(request.getParameter("price")));
 
     if (trackDAO.create(track)) {
-      request.raw().removeAttribute(PRM_TRACK);
+      request.removeSessionAttribute(PRM_TRACK);
     }
 
     return Pages.ADD_TRACK_PAGE;
