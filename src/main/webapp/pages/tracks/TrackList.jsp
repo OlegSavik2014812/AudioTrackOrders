@@ -12,7 +12,8 @@
 
   <div class="row">
     <div class="col-4 ml-auto">
-      <form method="GET" action="action">
+
+      <form method="POST" action="action">
         <input type="hidden" name="name" value="search_track"/>
         <div class="input-group">
           <input type="text" name="track_name" class="form-control form-control-sm" aria-describedby="sizing-addon1"
@@ -23,6 +24,7 @@
           </span>
         </div>
       </form>
+
     </div>
   </div>
 
@@ -47,7 +49,9 @@
             <td><c:out value="${track.album}"/></td>
             <td><c:out value="${track.popularity}"/></td>
             <td>
-              <fmt:formatDate type = "time" value="${track.duration}" timeStyle="short" pattern="MM:SS"/>
+              <jsp:useBean id="dateValue" class="java.util.Date"/>
+              <jsp:setProperty name="dateValue" property="time" value="${track.duration}"/>
+              <fmt:formatDate value="${dateValue}" pattern="mm:ss"/>
             </td>
             <td>
               <fmt:formatNumber value="${track.price}" type="currency"/>

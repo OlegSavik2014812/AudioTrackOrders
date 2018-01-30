@@ -9,3 +9,5 @@
 <link href="<c:url value="/css/audioord.css"/>" rel="stylesheet" type="text/css">
 <!-- Icons -->
 <link href="<c:url value="/css/open-iconic-bootstrap.css"/>" rel="stylesheet" type="text/css">
+<%--Encoding--%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>

@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class EditTrackCommand implements Command {
 
-  public static final String NAME = "add_track";
+  public static final String NAME = "edit_track";
   private static final String PRM_TRACK = "track";
 
   private TrackDAO trackDAO = new TrackDAO();

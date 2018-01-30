@@ -97,7 +97,7 @@
           </div>
 
           <hr class="mb-4"/>
-          <button class="btn btn-primary btn-lg btn-block" type="submit">Добавить</button>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Сохранить</button>
         </form>
       </c:if>
     </div>
