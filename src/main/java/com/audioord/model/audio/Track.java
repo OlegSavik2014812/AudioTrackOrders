@@ -3,7 +3,6 @@ package com.audioord.model.audio;
 import com.audioord.model.Entity;
 import com.audioord.web.cart.CartItem;
 
-import java.sql.Time;
 import java.util.Objects;
 
 public class Track extends Entity<Long> implements CartItem {
@@ -14,7 +13,7 @@ public class Track extends Entity<Long> implements CartItem {
   private int popularity;
   private double price;
   private String uri;
-  private Time duration;
+  private long duration;
 
   public Track() {
   }
@@ -24,11 +23,11 @@ public class Track extends Entity<Long> implements CartItem {
     this.artist = artist;
   }
 
-  public Time getDuration() {
+  public long getDuration() {
     return duration;
   }
 
-  public void setDuration(Time duration) {
+  public void setDuration(long duration) {
     this.duration = duration;
   }
 

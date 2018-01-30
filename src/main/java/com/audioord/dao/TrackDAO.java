@@ -30,7 +30,7 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   "SELECT track, artist, album, popularity, uri, price, duration, id FROM track where track.id in (##)";
 
   private static final String SQL_ADD_TRACK =
-  "INSERT INTO Track (track, artist, album, popularity, uri, price, duration, id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  "INSERT INTO Track (track, artist, album, popularity, uri, price, duration) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
   private static final String SQL_SEARCH_BY_TRACK_NAME =
   "SELECT track, artist, album, popularity, uri, price, duration, id FROM track WHERE Track LIKE (?)";
@@ -47,7 +47,7 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
       track.setPopularity(rs.getInt(4));
       track.setUri(rs.getString(5));
       track.setPrice(rs.getInt(6));
-      track.setDuration(rs.getTime(7));
+      track.setDuration(rs.getLong(7));
       track.setId(rs.getLong(8));
       return track;
     }
@@ -60,7 +60,7 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
       st.setInt(4, entity.getPopularity());
       st.setObject(5, entity.getUri());
       st.setDouble(6, entity.getPrice());
-      st.setTime(7, entity.getDuration());
+      st.setLong(7, entity.getDuration());
     }
   };
 

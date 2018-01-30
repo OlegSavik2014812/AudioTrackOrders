@@ -13,8 +13,6 @@ import org.apache.commons.fileupload.FileItem;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Time;
-import java.util.concurrent.TimeUnit;
 
 public class UploadTrackCommand implements Command {
 
@@ -62,7 +60,7 @@ public class UploadTrackCommand implements Command {
       }
 
       track.setUri(f.getPath());
-      track.setDuration(new Time(mp3file.getLengthInMilliseconds()));
+      track.setDuration(mp3file.getLengthInMilliseconds());
       return true;
     } catch (IOException | UnsupportedTagException | InvalidDataException e) {
       return false;
