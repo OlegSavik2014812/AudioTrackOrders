@@ -1,4 +1,4 @@
-package com.audioord.web;
+package com.audioord.web.filter;
 
 import javax.servlet.*;
 import java.io.IOException;
