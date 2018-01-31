@@ -33,7 +33,6 @@ public class EditTrackCommand implements Command {
       return Pages.ADD_TRACK_PAGE; // could not update track info
     }
 
-
     return Pages.ADD_TRACK_PAGE;
   }
 

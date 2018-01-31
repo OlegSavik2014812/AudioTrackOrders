@@ -41,6 +41,9 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   private static final String SQL_UPDATE_TRACK_BY_ID =
   "UPDATE Track SET Track = ?, Artist = ?, Album = ?, Popularity = ?, URI = ?, Price = ?, Duration = ? WHERE Id = ?";
 
+  private static final String SQL_DELETE_TRACK_BY_ID =
+  "DELETE FROM Track WHERE Id = ?";
+
 
   private final EntityMapper<Track> mapper =
   new EntityMapper<Track>() {
@@ -84,7 +87,7 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
 
   @Override
   public boolean delete(Long id) throws DAOException {
-    return false; // TODO:
+    return remove(id, SQL_DELETE_TRACK_BY_ID);
   }
 
   @Override
