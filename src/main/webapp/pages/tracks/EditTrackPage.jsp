@@ -58,6 +58,7 @@
       <c:if test="${track != null}">
         <c:url value="/action?name=edit_track" var="addUrl"/>
         <form action="${addUrl}" method="POST">
+          <input type="hidden" name="trackId" value="${track.id}">
 
           <div class="mb-3">
             <label for="name"><fmt:message key="edittrack.track_name"/> </label>

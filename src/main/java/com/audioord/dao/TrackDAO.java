@@ -38,6 +38,10 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   private static final String SQL_GET_ORDER_TRACKS =
   "SELECT  t.Track, t.Artist, t.Album, t.Popularity, t.URI,  t.Price, t.Duration, t.Id FROM TrackOrder o JOIN Track t ON o.IdTrack = t.Id WHERE o.IdOrder = ?";
 
+  private static final String SQL_UPDATE_TRACK_BY_ID =
+  "UPDATE Track SET Track = ?, Artist = ?, Album = ?, Popularity = ?, URI = ?, Price = ?, Duration = ? WHERE Id = ?";
+
+
   private final EntityMapper<Track> mapper =
   new EntityMapper<Track>() {
     @Override
@@ -61,6 +65,9 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
       st.setObject(5, entity.getUri());
       st.setDouble(6, entity.getPrice());
       st.setLong(7, entity.getDuration());
+      if (entity.getId() != null) {
+        st.setLong(8, entity.getId());
+      }
     }
   };
 
@@ -71,7 +78,8 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
 
   @Override
   public Track update(Track entity) throws DAOException {
-    return null; // TODO:
+    update(entity, mapper, SQL_UPDATE_TRACK_BY_ID);
+    return getById(entity.getId());
   }
 
   @Override
@@ -81,7 +89,12 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
 
   @Override
   public boolean create(Track entity) throws DAOException {
-    return update(entity, mapper, SQL_ADD_TRACK);
+    Long id = create(entity, mapper, SQL_ADD_TRACK);
+    if (id == null) {
+      return false;
+    }
+    entity.setId(id);
+    return true;
   }
 
   public List<Track> getTracksByOrder(Order order) throws DAOException {

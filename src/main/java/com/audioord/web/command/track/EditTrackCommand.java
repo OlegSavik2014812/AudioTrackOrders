@@ -13,25 +13,26 @@ import java.io.IOException;
 public class EditTrackCommand implements Command {
 
   public static final String NAME = "edit_track";
-  private static final String PRM_TRACK = "track";
-
   private TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
-    Track track = request.getSessionAttribute(PRM_TRACK, Track.class);
-    if (track == null) {
+    if (!request.hasAllParameters("trackId", "trackName", "album", "artist", "price")) {
       return Pages.ADD_TRACK_PAGE;
     }
 
+    long trackId = Long.parseLong(request.getParameter("trackId"));
+    Track track = trackDAO.getById(trackId);
     track.setName(request.getParameter("trackName"));
     track.setAlbum(request.getParameter("album"));
     track.setArtist(request.getParameter("artist"));
     track.setPrice(Double.parseDouble(request.getParameter("price")));
 
-    if (trackDAO.create(track)) {
-      request.removeSessionAttribute(PRM_TRACK);
+    track = trackDAO.update(track);
+    if (track == null) {
+      return Pages.ADD_TRACK_PAGE; // could not update track info
     }
+
 
     return Pages.ADD_TRACK_PAGE;
   }

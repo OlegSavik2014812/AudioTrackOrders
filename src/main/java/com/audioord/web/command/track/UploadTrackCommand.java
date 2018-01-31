@@ -2,6 +2,7 @@ package com.audioord.web.command.track;
 
 
 import com.audioord.dao.DAOException;
+import com.audioord.dao.TrackDAO;
 import com.audioord.model.audio.Track;
 import com.audioord.utils.FileUtils;
 import com.audioord.web.command.Command;
@@ -19,6 +20,7 @@ public class UploadTrackCommand implements Command {
   public static final String NAME = "upload_track";
   private static final String UPLOAD_DIR_PATH = "WEB-INF/uploads";
   private static final String PRM_TRACK = "track";
+  private TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {
@@ -38,8 +40,12 @@ public class UploadTrackCommand implements Command {
       return Pages.ADD_TRACK_PAGE;
     }
 
+    if (!trackDAO.create(track)) {
+      return Pages.ADD_TRACK_PAGE;
+    }
+
     // add track meta to request for editing
-    request.setSessionAttribute(PRM_TRACK, track);
+    request.addAttribute(PRM_TRACK, track);
     return Pages.ADD_TRACK_PAGE;
   }
 
