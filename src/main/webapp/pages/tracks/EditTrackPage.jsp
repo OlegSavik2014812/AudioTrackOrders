@@ -56,7 +56,7 @@
 
       <%--Track  Edit & Save action--%>
       <c:if test="${track != null}">
-        <c:url value="/action?name=add_track" var="addUrl"/>
+        <c:url value="/action?name=edit_track" var="addUrl"/>
         <form action="${addUrl}" method="POST">
 
           <div class="mb-3">
