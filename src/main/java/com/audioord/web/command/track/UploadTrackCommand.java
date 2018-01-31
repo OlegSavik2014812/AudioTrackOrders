@@ -7,6 +7,7 @@ import com.audioord.model.audio.Track;
 import com.audioord.utils.FileUtils;
 import com.audioord.web.command.Command;
 import com.audioord.web.command.Pages;
+import com.audioord.web.http.FileServlet;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 import com.mpatric.mp3agic.*;
@@ -18,8 +19,8 @@ import java.io.IOException;
 public class UploadTrackCommand implements Command {
 
   public static final String NAME = "upload_track";
-  private static final String UPLOAD_DIR_PATH = "WEB-INF/uploads";
   private static final String PRM_TRACK = "track";
+
   private TrackDAO trackDAO = new TrackDAO();
 
   @Override
@@ -65,7 +66,7 @@ public class UploadTrackCommand implements Command {
         track.setAlbum(tag.getAlbum());
       }
 
-      track.setUri(f.getPath());
+      track.setUri(f.getName());
       track.setDuration(mp3file.getLengthInMilliseconds());
       return true;
     } catch (IOException | UnsupportedTagException | InvalidDataException e) {
@@ -74,6 +75,6 @@ public class UploadTrackCommand implements Command {
   }
 
   private String getUploadDirPath(Request req) {
-    return req.raw().getServletContext().getRealPath(UPLOAD_DIR_PATH);
+    return req.raw().getServletContext().getRealPath(FileServlet.UPLOAD_DIR_PATH);
   }
 }

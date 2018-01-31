@@ -15,7 +15,6 @@
 </head>
 <body>
 
-
 <c:import url="../NavBar.jsp"/>
 
 <div class="container-fluid ">
@@ -36,7 +35,6 @@
     </div>
   </div>
 
-
   <div class="row">
     <div class="container">
       <div class="col-12">
@@ -46,6 +44,7 @@
             <th scope="col">#</th>
             <th scope="col">Название</th>
             <th scope="col">Исполнитель</th>
+            <th scope="col"></th>
             <th scope="col"></th>
           </tr>
           </thead>
@@ -60,6 +59,11 @@
                 <jsp:setProperty name="dateValue" property="time" value="${track.duration}"/>
                 <fmt:formatDate value="${dateValue}" pattern="mm:ss"/>
               </td>
+              <td>
+                <a href="<c:url value="/file/${track.uri}"/>">
+                  <span class="oi oi-data-transfer-download"></span>
+                </a>
+              </td>
             </tr>
           </c:forEach>
           </tbody>
@@ -68,7 +72,7 @@
     </div>
   </div>
 </div>
+
 <c:import url="../js_import.jsp"/>
 </body>
-
 </html>

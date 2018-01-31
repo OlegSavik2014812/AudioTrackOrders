@@ -39,6 +39,7 @@
           <th scope="col"><fmt:message key="tracklist.popularity"/></th>
           <th scope="col"><fmt:message key="tracklist.duration"/></th>
           <th scope="col"><fmt:message key="tracklist.price"/></th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -55,6 +56,8 @@
             </td>
             <td>
               <fmt:formatNumber value="${track.price}" type="currency"/>
+            </td>
+            <td>
               <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='CLIENT'}">
                 <c:url value="/action?name=add_cart&track_id=${track.id}" var="addUri"/>
                 <a href="#" onclick="executeTrackAdd('${addUri}');">
