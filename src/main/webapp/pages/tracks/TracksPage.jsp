@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title><fmt:message key="index.title"/></title>
+  <title><fmt:message key="tracklist.title"/></title>
   <c:import url="../css_import.jsp"/>
 </head>
 <body>

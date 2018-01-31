@@ -28,7 +28,7 @@ public class OrderDAO extends BaseEntityDao<Order, Long> {
   private static final String SQL_GET_ORDERS_BY_DATE_AND_STATUS =
   "SELECT u.Username, u.Role, u.Id, u.FirstName, u.LastName, o.Date, o.Id, o.Status, o.TotalPrice FROM `Order` o JOIN USER u ON u.Id = o.IdUser WHERE o.DATE >= ? AND o.Date <= ? AND o.Status=?";
 
-  private static final String SQL_UPDATE_USER_BY_ID =
+  private static final String SQL_UPDATE_ORDER_BY_ID =
   "UPDATE `Order` SET TotalPrice =?, Status = ?, IdUser=?, Date=? WHERE Id = ?";
 
   private final EntityMapper<Order> mapper = new EntityMapper<Order>() {
@@ -65,7 +65,7 @@ public class OrderDAO extends BaseEntityDao<Order, Long> {
 
   @Override
   public Order update(Order entity) throws DAOException {
-    update(entity, mapper, SQL_UPDATE_USER_BY_ID);
+    update(entity, mapper, SQL_UPDATE_ORDER_BY_ID);
     return getById(entity.getId());
   }
 

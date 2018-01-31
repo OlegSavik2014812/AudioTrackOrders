@@ -73,7 +73,7 @@
 
                 <%--SING OUT--%>
               <a class="dropdown-item" href="<c:url value="/action?name=sign_out"/> "><fmt:message
-                key="button.signout"/></a>
+                key="navbar.signout"/></a>
             </div>
           </li>
         </c:if>

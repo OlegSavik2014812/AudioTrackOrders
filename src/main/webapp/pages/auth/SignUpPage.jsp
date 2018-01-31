@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title><fmt:message key="index.title"/></title>
+  <title><fmt:message key="signup.title"/></title>
   <c:import url="../css_import.jsp"/>
   <link href="<c:url value="/css/login.css"/>" rel="stylesheet" type="text/css">
 </head>
@@ -26,24 +26,24 @@
 
       <div class="form-group">
         <label for="username" class="sr-only">
-          <fmt:message key="signin.email_address_msg"/>
+          <fmt:message key="signup.enter_username"/>
         </label>
         <input type="text" name="userName" id="username" class="form-control"
-               placeholder="<fmt:message key="signin.email_address_msg"/> " required=""
+               placeholder="<fmt:message key="signup.enter_username"/> " required=""
                pattern=^[a-zA-Z][a-zA-Z0-9-_\.]{4,20}$ autofocus="">
       </div>
 
       <div class="form-group">
-        <label for="inputPassword1" class="sr-only"><fmt:message key="signin.password"/> </label>
+        <label for="inputPassword1" class="sr-only"><fmt:message key="signup.enter_password"/> </label>
         <input type="password" id="inputPassword1" name="password1" class="form-control"
-               placeholder="<fmt:message key="signin.password"/>"
+               placeholder="<fmt:message key="signin.enter_password"/>"
                required="">
       </div>
 
       <div class="form-group">
-        <label for="inputPassword2" class="sr-only"><fmt:message key="signin.password"/> </label>
+        <label for="inputPassword2" class="sr-only"><fmt:message key="signup.confirm_password"/> </label>
         <input type="password" id="inputPassword2" name="password2" class="form-control"
-               placeholder="<fmt:message key="signin.password"/>"
+               placeholder="<fmt:message key="signup.confirm_password"/>"
                required="">
       </div>
 

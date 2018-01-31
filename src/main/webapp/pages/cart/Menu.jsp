@@ -16,14 +16,14 @@
     <c:if test="${sessionScope.cart.hasItems}">
       <li class="nav-item">
         <a class="nav-link" href="<c:url value="/action?name=cart_order"/>">
-          заказать
+          <fmt:message key="menu.order"/>
         </a>
       </li>
 
       <%--filter most selling tracks --%>
       <li class="nav-item">
         <a class="nav-link" href="<c:url value="/action?name=cart_order&clear=true"/>">
-          отменить заказ
+          <fmt:message key="menu.cancel"/>
         </a>
       </li>
     </c:if>

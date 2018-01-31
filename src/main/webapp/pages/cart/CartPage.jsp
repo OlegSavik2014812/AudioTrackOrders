@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Корзина</title>
+  <title><fmt:message key="cart.title"/> </title>
   <c:import url="../css_import.jsp"/>
 </head>
 <body>

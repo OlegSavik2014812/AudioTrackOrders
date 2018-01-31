@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title><fmt:message key="index.title"/></title>
+  <title><fmt:message key="signin.title"/></title>
   <c:import url="../css_import.jsp"/>
   <link href="<c:url value="/css/login.css"/>" rel="stylesheet" type="text/css">
 </head>
@@ -22,22 +22,22 @@
     <form class="form-signin" method="POST" action="action">
       <input type="hidden" name="name" value="sign_in"/>
 
-      <h2 class="form-signin-heading"><fmt:message key="signin.please_sign"/></h2>
+      <h2 class="form-signin-heading"><fmt:message key="signin.head_msg"/></h2>
 
       <div class="form-group">
         <label for="username" class="sr-only">
-          <fmt:message key="signin.email_address_msg"/>
+          <fmt:message key="signin.enter_username"/>
         </label>
         <input type="text" id="username" class="form-control" name="userName"
-               placeholder="<fmt:message key="signin.email_address_msg"/> " required="" autofocus="">
+               placeholder="<fmt:message key="signin.enter_username"/> " required="" autofocus="">
       </div>
 
       <div class="form-group">
         <label for="inputPassword" class="sr-only">
-          <fmt:message key="signin.password"/>
+          <fmt:message key="signin.enter_password"/>
         </label>
         <input type="password" name="password" id="inputPassword" class="form-control"
-               placeholder="<fmt:message key="signin.password"/>"
+               placeholder="<fmt:message key="signin.enter_password"/>"
                required="">
       </div>
 

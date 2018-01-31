@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Заказы</title>
+  <title><fmt:message key="order.title"/></title>
   <c:import url="../css_import.jsp"/>
 </head>
 <body>

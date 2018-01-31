@@ -15,11 +15,11 @@
       <table class="table table-striped">
         <thead>
         <tr>
-          <th scope="col">User</th>
-          <th scope="col">Date</th>
-          <th scope="col">Price</th>
-          <th scope="col">Tracks</th>
-          <th scope="col">Status</th>
+          <th scope="col"><fmt:message key="orderlist.user"/></th>
+          <th scope="col"><fmt:message key="orderlist.date"/></th>
+          <th scope="col"><fmt:message key="orderlist.price"/></th>
+          <th scope="col"><fmt:message key="orderlist.tracks"/></th>
+          <th scope="col"><fmt:message key="orderlist.status"/></th>
         </tr>
         </thead>
         <tbody>
@@ -61,23 +61,25 @@
                   <div class="btn-group">
                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                      <span class="oi oi-box"></span> в ожидании
+                      <span class="oi oi-box"></span> <fmt:message key="orderlist.submitted"/>
                     </button>
                     <div class="dropdown-menu">
                       <c:url value="/action?name=order_edit&order_id=${item.id}&status=REJECTED" var="urlOrderReject"/>
-                      <c:url value="/action?name=order_edit&order_id=${item.id}&status=COMPLETED" var="urlOrderComplete"/>
-                      <a class="dropdown-item" href="${urlOrderReject}">Отменть</a>
-                      <a class="dropdown-item" href="${urlOrderComplete}">Подтвердить</a>
+                      <c:url value="/action?name=order_edit&order_id=${item.id}&status=COMPLETED"
+                             var="urlOrderComplete"/>
+                      <a class="dropdown-item" href="${urlOrderReject}"><fmt:message key="orderlist.reject"/> </a>
+                      <a class="dropdown-item" href="${urlOrderComplete}"><fmt:message
+                        key="orderlist.complete"/> </a>
                     </div>
                   </div>
                 </c:when>
 
                 <c:when test="${item.status == 'REJECTED'}">
-                  <span class="oi oi-x"></span> отмененен
+                  <span class="oi oi-x"></span> <fmt:message key="orderlist.rejected"/>
                 </c:when>
 
                 <c:when test="${item.status == 'COMPLETED'}">
-                  <span class="oi oi-check"></span> завершен
+                  <span class="oi oi-check"></span> <fmt:message key="orderlist.completed"/>
                 </c:when>
               </c:choose>
             </td>

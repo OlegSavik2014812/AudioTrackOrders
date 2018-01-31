@@ -11,7 +11,7 @@
 <html lang="en">
 <head>
   <title>
-    <fmt:message key="index.title"/>
+    <fmt:message key="edituser.title"/>
   </title>
   <c:import url="../css_import.jsp"/>
   <link href="<c:url value="/css/login.css"/>" rel="stylesheet" type="text/css">
@@ -24,35 +24,35 @@
     <form class="" method="POST" action="../action?name=add_discount">
       <input type="hidden" name="name" value="add_track">
 
-      <h2 class="form-signin-heading"><fmt:message key="add.discount.addition_discount"/></h2>
+      <h2 class="form-signin-heading"><fmt:message key="editdiscount.add_dicount"/></h2>
 
       <div class="form-group">
         <label for="percent" class="sr-only">
-          <fmt:message key="add.discount.percent"/>
+          <fmt:message key="editdiscount.percent"/>
         </label>
         <input type="text" id="percent" name="percent" class="form-control"
-               placeholder="<fmt:message key="add.discount.enter_percent"/> " required="" autofocus="">
+               placeholder="<fmt:message key="editdiscount.enter_percent"/> " required="" autofocus="">
       </div>
 
       <div class="form-group">
         <label for="effectiveFrom" class="sr-only">
-          <fmt:message key="add.discount.date_begin"/>
+          <fmt:message key="editdiscount.date_begin"/>
         </label>
         <input type="date" id="effectiveFrom" name="effectiveFrom" class="form-control"
-               placeholder="<fmt:message key="add.discount.enter_date"/>" required="">
+               placeholder="<fmt:message key="editdiscount.date_begin"/>" required="">
       </div>
 
       <div class="form-group">
         <label for="effectiveTo" class="sr-only">
-          <fmt:message key="add.discount.date_end"/>
+          <fmt:message key="editdiscount.date_end"/>
         </label>
         <input type="date" id="effectiveTo" name="effectiveTo" class="form-control"
-               placeholder="<fmt:message key="add.discount.enter_date"/>">
+               placeholder="<fmt:message key="editdiscount.date_end"/>">
       </div>
 
       <button class="btn btn-lg btn-primary btn-block" type="submit" data-toggle="modal"
               data-target=".bd-example-modal-sm">
-        <fmt:message key="add.discount.add"/>
+        <fmt:message key="editdiscount.add"/>
       </button>
 
     </form>
@@ -63,7 +63,7 @@
      aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
-      <fmt:message key="info.add_track_success"/>
+
     </div>
   </div>
 </div>

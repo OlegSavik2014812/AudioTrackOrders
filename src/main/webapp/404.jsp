@@ -43,7 +43,7 @@
         <div class="error-actions">
 
           <a class="nav-link" href="<c:url value="/"/>"><fmt:message
-            key="navbar.to_home"/></a>
+            key="error.to_home"/></a>
 
         </div>
       </div>

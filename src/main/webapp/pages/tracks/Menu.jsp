@@ -14,21 +14,21 @@
     <%--filter by popularity--%>
     <li class="nav-item">
       <a class="nav-link" href="<c:url value="/action?name=track_list&sort=most_popular"/>">
-        <fmt:message key="index.most_popular"/>
+        <fmt:message key="menu.most_popular"/>
       </a>
     </li>
 
     <%--filter by date--%>
     <li class="nav-item">
       <a class="nav-link" href="<c:url value="/action?name=track_list&sort=brand_new"/>">
-        <fmt:message key="index.brand_new"/>
+        <fmt:message key="menu.brand_new"/>
       </a>
     </li>
 
     <%--filter most selling tracks --%>
     <li class="nav-item">
       <a class="nav-link" href="<c:url value="/action?name=track_list&sort=best_selling"/>">
-        <fmt:message key="index.best_selling"/>
+        <fmt:message key="menu.best_selling"/>
       </a>
     </li>
   </ul>

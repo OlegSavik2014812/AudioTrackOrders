@@ -11,7 +11,7 @@
 <html lang="en">
 <head>
   <title>
-    <fmt:message key="index.title"/>
+    <fmt:message key="edittrack.title"/>
   </title>
   <c:import url="../css_import.jsp"/>
   <link href="<c:url value="/css/fileinput.css"/>" rel="stylesheet" type="text/css">
@@ -24,7 +24,7 @@
 <div class="container">
   <div class="py-5 text-center">
     <span class="oi oi-musical-note" style="color: #5cb3fd; font-size: x-large;"></span>
-    <h2>Добавить песню</h2>
+    <h2><fmt:message key="edittrack.title.add_track"/></h2>
   </div>
 
   <div class="row">
@@ -50,7 +50,7 @@
             </label>
           </div>
           <hr class="mb-4"/>
-          <button class="btn btn-primary btn-lg btn-block" type="submit">Загрузить</button>
+          <button class="btn btn-primary btn-lg btn-block" type="submit"><fmt:message key="edittrack.upload"/></button>
         </form>
       </c:if>
 
@@ -60,9 +60,9 @@
         <form action="${addUrl}" method="POST">
 
           <div class="mb-3">
-            <label for="name">Track name</label>
+            <label for="name"><fmt:message key="edittrack.track_name"/> </label>
             <div class="input-group">
-              <input type="text" class="form-control" id="name" name="trackName" value="${track.artist}" required>
+              <input type="text" class="form-control" id="name" name="trackName" value="${track.name}" required>
                 <%--<div class="invalid-feedback" style="width: 100%;">--%>
                 <%--Your username is required.--%>
                 <%--</div>--%>
@@ -71,14 +71,14 @@
 
           <div class=" row">
             <div class="col-md-6 mb-3">
-              <label for="artist">Artist</label>
+              <label for="artist"><fmt:message key="edittrack.artist_name"/> </label>
               <input type="text" class="form-control" id="artist" name="artist" value="${track.artist}" required>
                 <%--<div class="invalid-feedback">--%>
                 <%--Valid first name is required.--%>
                 <%--</div>--%>
             </div>
             <div class="col-md-6 mb-3">
-              <label for="album">Album</label>
+              <label for="album"><fmt:message key="index.album_name"/> </label>
               <input type="text" class="form-control" id="album" name="album" value="${track.album}" required>
                 <%--<div class="invalid-feedback">--%>
                 <%--Valid last name is required.--%>
@@ -87,7 +87,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="price">Price</label>
+            <label for="price"><fmt:message key="edittrack.price"/> </label>
             <div class="input-group">
               <input type="number" class="form-control" id="price" name="price" required>
                 <%--<div class="invalid-feedback" style="width: 100%;">--%>
@@ -97,7 +97,7 @@
           </div>
 
           <hr class="mb-4"/>
-          <button class="btn btn-primary btn-lg btn-block" type="submit">Сохранить</button>
+          <button class="btn btn-primary btn-lg btn-block" type="submit"><fmt:message key="edittrack.save"/></button>
         </form>
       </c:if>
     </div>

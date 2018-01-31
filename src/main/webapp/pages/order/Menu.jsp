@@ -11,25 +11,25 @@
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
       <a class="nav-link" href="<c:url value="/action?name=order_list"/>">
-        Все
+        <fmt:message key="menu.all"/>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="<c:url value="/action?name=order_list&sort=COMPLETED"/>">
-        Завершенные
+        <fmt:message key="menu.completed"/>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="<c:url value="/action?name=order_list&sort=SUBMITTED"/>">
-        В ожидании
+        <fmt:message key="menu.submitted"/>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="<c:url value="/action?name=order_list&sort=REJECTED"/>">
-        Отменненые
+        <fmt:message key="menu.rejected"/>
       </a>
     </li>
   </ul>

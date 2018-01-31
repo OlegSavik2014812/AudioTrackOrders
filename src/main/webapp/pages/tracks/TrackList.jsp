@@ -20,7 +20,7 @@
                  required
                  placeholder="<fmt:message key="search.enter_track_name"/>"/>
           <span class="input-group-btn" id="sizing-addon1">
-            <button class="btn btn-sm btn-secondary" type="submit"><fmt:message key="button.search"/></button>
+            <button class="btn btn-sm btn-secondary" type="submit"><fmt:message key="search.button"/></button>
           </span>
         </div>
       </form>
@@ -33,12 +33,12 @@
       <table class="table table-striped">
         <thead>
         <tr>
-          <th scope="col"><fmt:message key="index.name_track"/></th>
-          <th scope="col"><fmt:message key="index.name_artist"/></th>
-          <th scope="col"><fmt:message key="index.name_album"/></th>
-          <th scope="col"><fmt:message key="index.popularity"/></th>
-          <th scope="col"><fmt:message key="index.duration"/></th>
-          <th scope="col"><fmt:message key="index.price"/></th>
+          <th scope="col"><fmt:message key="tracklist.track_name"/></th>
+          <th scope="col"><fmt:message key="tracklist.artist_name"/></th>
+          <th scope="col"><fmt:message key="tracklist.album_name"/></th>
+          <th scope="col"><fmt:message key="tracklist.popularity"/></th>
+          <th scope="col"><fmt:message key="tracklist.duration"/></th>
+          <th scope="col"><fmt:message key="tracklist.price"/></th>
         </tr>
         </thead>
         <tbody>
