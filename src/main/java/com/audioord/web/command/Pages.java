@@ -11,10 +11,13 @@ public final class Pages {
 
   public static final String TRACK_LIST_PAGE = "/pages/tracks/TracksPage.jsp";
   public static final String ADD_TRACK_PAGE = "/pages/tracks/EditTrackPage.jsp";
+  public static final String USER_TRACKS_PAGE = "/pages/tracks/UserTracksPage.jsp";
 
   public static final String CART_LIST_PAGE = "/pages/cart/CartPage.jsp";
 
   public static final String ORDER_LIST_PAGE = "/pages/order/OrderPage.jsp";
+
+
 
 
   // public static final String PURCHASES_PAGE = "/pages/UserPurchasedTracks.jsp";

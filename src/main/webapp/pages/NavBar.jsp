@@ -28,7 +28,7 @@
         </c:if>
 
         <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='CLIENT'}">
-          <a class="nav-item nav-link" href="<c:url value="/action?name=my_tracks"/>">Моя музыка</a>
+          <a class="nav-item nav-link" href="<c:url value="/action?name=user_tracks"/>">Моя музыка</a>
         </c:if>
       </ul>
 

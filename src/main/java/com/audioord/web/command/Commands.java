@@ -8,10 +8,7 @@ import com.audioord.web.command.cart.MakeCartOrderCommand;
 import com.audioord.web.command.cart.ViewTrackCartCommand;
 import com.audioord.web.command.order.OrderListCommand;
 import com.audioord.web.command.order.OrderStatusEdit;
-import com.audioord.web.command.track.EditTrackCommand;
-import com.audioord.web.command.track.SearchTrackCommand;
-import com.audioord.web.command.track.TrackListCommand;
-import com.audioord.web.command.track.UploadTrackCommand;
+import com.audioord.web.command.track.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,21 +25,23 @@ public final class Commands {
   private static Map<String, Command> define(Map<String, Command> commands) {
     commands.put(NotFoundCommand.NAME, new NotFoundCommand());
     commands.put(ChangeLocaleCommand.NAME, new ChangeLocaleCommand());
-    //auth
+    // auth
     commands.put(SignInCommand.NAME, new SignInCommand());
     commands.put(SignUpCommand.NAME, new SignUpCommand());
     commands.put(SignOutCommand.NAME, new SignOutCommand());
     // track
     commands.put(EditTrackCommand.NAME, new EditTrackCommand());
     commands.put(UploadTrackCommand.NAME, new UploadTrackCommand());
-    //track list
+    // track list
     commands.put(TrackListCommand.NAME, new TrackListCommand());
     commands.put(SearchTrackCommand.NAME, new SearchTrackCommand());
-    //cart
+    // user tracks
+    commands.put(UserTracksCommand.NAME, new UserTracksCommand());
+    // cart
     commands.put(AddTrackCartCommand.NAME, new AddTrackCartCommand());
     commands.put(ViewTrackCartCommand.NAME, new ViewTrackCartCommand());
     commands.put(MakeCartOrderCommand.NAME, new MakeCartOrderCommand());
-    //order
+    // order
     commands.put(OrderListCommand.NAME, new OrderListCommand());
     commands.put(OrderStatusEdit.NAME, new OrderStatusEdit());
 

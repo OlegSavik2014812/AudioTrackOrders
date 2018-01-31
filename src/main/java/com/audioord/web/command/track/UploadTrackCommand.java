@@ -54,14 +54,14 @@ public class UploadTrackCommand implements Command {
       Mp3File mp3file = new Mp3File(f);
       if (mp3file.hasId3v1Tag()) {
         ID3v1 tag = mp3file.getId3v1Tag();
-        track.setName(tag.getTitle());
-        track.setArtist(tag.getArtist());
+        track.setName(tag.getTitle() != null ? "unknown" : tag.getTitle());
+        track.setArtist(tag.getArtist() != null ? "unknown" : tag.getArtist());
         track.setAlbum(tag.getAlbum());
 
       } else if (mp3file.hasId3v2Tag()) {
         ID3v2 tag = mp3file.getId3v2Tag();
-        track.setName(tag.getTitle());
-        track.setArtist(tag.getArtist());
+        track.setName(tag.getTitle() != null ? "unknown" : tag.getTitle());
+        track.setArtist(tag.getArtist() != null ? "unknown" : tag.getArtist());
         track.setAlbum(tag.getAlbum());
       }
 
