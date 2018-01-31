@@ -44,6 +44,9 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   private static final String SQL_DELETE_TRACK_BY_ID =
   "DELETE FROM Track WHERE Id = ?";
 
+  private static final String SQL_GET_USER_TRACKS =
+  "SELECT t.Track, t.Artist, t.Album, t.Popularity, t.URI, t.Price, t.Duration, t.Id FROM `Order` o JOIN TrackOrder tr ON o.Id = tr.IdOrder JOIN Track t ON tr.IdTrack = t.Id WHERE IdUser = ? AND o.Status = 'COMPLETED'";
+
 
   private final EntityMapper<Track> mapper =
   new EntityMapper<Track>() {
@@ -131,5 +134,9 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
 
   public int countAllTracks() throws DAOException {
     return countAll(SQL_COUNT_ALL);
+  }
+
+  public List<Track> getAllUserTracks(Long userId) throws DAOException {
+    return findAll(mapper, SQL_GET_USER_TRACKS, userId);
   }
 }
