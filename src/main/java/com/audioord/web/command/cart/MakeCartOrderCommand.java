@@ -60,6 +60,11 @@ public class MakeCartOrderCommand implements Command {
 
     // clear cart after order save
     if (orderDAO.create(trackOrder)) {
+      for (Track track : tracks) {
+        int popularity = track.getPopularity();
+        track.setPopularity(popularity + 1);
+        trackDAO.update(track);
+      }
       cart.clearCart();
     }
 
