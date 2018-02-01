@@ -1,6 +1,7 @@
 package com.audioord.web.security;
 
 public class Security {
+
   public static boolean isAllowedToAdmin(String commandName) {
     boolean isAllowed = false;
     for (AdminCommand adminCommand : AdminCommand.values()) {
@@ -9,11 +10,8 @@ public class Security {
         break;
       }
     }
-    for (CommonCommand commonCommand : CommonCommand.values()) {
-      if (commandName.equals(commonCommand.toString().toLowerCase())) {
-        isAllowed = true;
-        break;
-      }
+    if (!isAllowed) {
+      isAllowed = isAllowedToGuest(commandName);
     }
     return isAllowed;
   }
@@ -26,10 +24,8 @@ public class Security {
         break;
       }
     }
-    for (CommonCommand commonCommand : CommonCommand.values()) {
-      if (commandName.equals(commonCommand.toString().toLowerCase())) {
-        isAllowed = true;
-      break;}
+    if (!isAllowed) {
+      isAllowed = isAllowedToGuest(commandName);
     }
     return isAllowed;
   }
