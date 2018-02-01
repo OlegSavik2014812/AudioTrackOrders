@@ -20,7 +20,7 @@ public class MainServlet extends HttpServlet {
 
   @Override
   protected void service(HttpServletRequest req, HttpServletResponse res)
-      throws ServletException, IOException {
+  throws ServletException, IOException {
     try {
       processRequest(req, res);
     } catch (IOException ignore) {

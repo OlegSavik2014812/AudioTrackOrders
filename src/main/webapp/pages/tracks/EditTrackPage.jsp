@@ -46,7 +46,7 @@
           <div class="mb-3">
             <label class="custom-file" id="customFile">
               <input type="file" class="custom-file-input" id="file" name="file" aria-describedby="fileHelp" required>
-              <span class="custom-file-control form-control-file"></span>
+              <span class="custom-file-control form-control-file"> </span>
             </label>
           </div>
           <hr class="mb-4"/>

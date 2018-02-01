@@ -30,6 +30,10 @@
       <param-value>UTF-8</param-value>
     </init-param>
   </filter>
+  <filter>
+    <filter-name>SecurityFilter</filter-name>
+    <filter-class>com.audioord.web.filter.SecurityFilter</filter-class>
+  </filter>
 
   <filter-mapping>
     <filter-name>AuthFilter</filter-name>
@@ -38,6 +42,10 @@
 
   <filter-mapping>
     <filter-name>CharsetFilter</filter-name>
+    <servlet-name>Main</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>SecurityFilter</filter-name>
     <servlet-name>Main</servlet-name>
   </filter-mapping>
 
@@ -52,6 +60,9 @@
 
   <error-page>
     <location>/404.jsp</location>
+  </error-page>
+  <error-page>
+    <location>/403.jsp</location>
   </error-page>
 
 </web-app>

@@ -5,6 +5,7 @@ public final class Pages {
   public static final String INDEX_PAGE = "/index.jsp";
 
   public static final String NOT_FOUND_PAGE = "/404.jsp";
+  public static final String FORBIDDEN_PAGE = "/403.jsp";
 
   public static final String SIGN_IN_PAGE = "/pages/auth/SignInPage.jsp";
   public static final String SIGN_UP_PAGE = "/pages/auth/SignUpPage.jsp";
