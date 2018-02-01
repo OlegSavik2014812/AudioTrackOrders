@@ -66,6 +66,7 @@
     </form>
   </div>
 </div>
+
 <c:import url="../js_import.jsp"/>
 </body>
 </html>
