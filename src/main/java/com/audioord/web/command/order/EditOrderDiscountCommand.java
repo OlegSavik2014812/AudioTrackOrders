@@ -21,6 +21,7 @@ public class EditOrderDiscountCommand implements Command {
   private static final String PRM_USER = "username";
   private static final String PRM_DATE_FROM = "date_from";
   private static final String PRM_DATE_TO = "date_to";
+  private static final String PRM_PERCENT = "USER";
 
   private final OrderDiscountDAO orderDiscountDAO = new OrderDiscountDAO();
   private final UserDAO userDAO = new UserDAO();
@@ -34,7 +35,7 @@ public class EditOrderDiscountCommand implements Command {
       return Pages.USER_LIST_PAGE;
     }
 
-    double percent = Double.parseDouble(request.getParameter("percent"));
+    double percent = Double.parseDouble(request.getParameter(PRM_PERCENT));
     Date dateFrom = DateUtil.parseDate(request.getParameter(PRM_DATE_FROM), simpleDateFormat);
     Date dateTo = DateUtil.parseDate(request.getParameter(PRM_DATE_TO), simpleDateFormat);
     OrderDiscount orderDiscount = new OrderDiscount(percent, dateFrom, dateTo, user);

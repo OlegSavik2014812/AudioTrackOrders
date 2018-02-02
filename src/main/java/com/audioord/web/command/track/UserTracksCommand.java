@@ -15,16 +15,17 @@ import java.util.List;
 public class UserTracksCommand implements Command {
 
   public static final String NAME = "user_tracks";
-
+  private static final String ATTRIBUTE_USER = "USER";
+  private static final String ATTRIBUTE_USER_TRACKS = "tracks";
   private final TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {
-    User user = request.getSessionAttribute("USER", User.class);
+    User user = request.getSessionAttribute(ATTRIBUTE_USER, User.class);
 
     List<Track> allUserTracks = trackDAO.getAllUserTracks(user.getId());
 
-    request.addAttribute("tracks", allUserTracks);
+    request.addAttribute(ATTRIBUTE_USER_TRACKS, allUserTracks);
     return Pages.USER_TRACKS_PAGE;
   }
 }

@@ -11,12 +11,13 @@ import java.io.IOException;
 public class SignOutCommand implements Command {
 
   public static final String NAME = "sign_out";
+  private static final String ATTRIBUTE_USER = "USER";
 
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {
 
     request.invalidateSession();
-    request.removeSessionAttribute("USER");
+    request.removeSessionAttribute(ATTRIBUTE_USER);
 
     return Pages.INDEX_PAGE;
   }

@@ -28,13 +28,14 @@ public class MakeCartOrderCommand implements Command {
   private static final String PRM_CART = "cart";
   private static final String PRM_USER = "USER";
   private static final String PRM_CLEAR = "clear";
+  private static final String ATTRIBUTE_BONUS = "BONUS";
 
   private final OrderDAO orderDAO = new OrderDAO();
   private final TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {
-    OrderDiscount orderDiscount = request.getSessionAttribute("BONUS", OrderDiscount.class);
+    OrderDiscount orderDiscount = request.getSessionAttribute(ATTRIBUTE_BONUS, OrderDiscount.class);
 
     Cart cart = request.getSessionAttribute(PRM_CART, Cart.class);
     // check if we have items in cart

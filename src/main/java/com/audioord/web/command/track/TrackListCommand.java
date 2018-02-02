@@ -17,6 +17,10 @@ public class TrackListCommand implements Command {
   private static final String PRM_SORT = "sort";
   private static final String PRM_PAGE = "page";
 
+  private static final String ATTRIBUTE_SORT = "sort";
+  private static final String ATTRIBUTE_TRACK_LIST = "TrackList";
+  private static final String ATTRIBUTE_NUMBER_OF_PAGES = "noOfPages";
+  private static final String ATTRIBUTE_CURRENT_PAGE = "currentPage";
   private final TrackDAO trackDAO = new TrackDAO();
 
   @Override
@@ -50,10 +54,10 @@ public class TrackListCommand implements Command {
       }
     }
 
-    request.addAttribute("sort", trackSort.name());
-    request.addAttribute("TrackList", trackList);
-    request.addAttribute("noOfPages", noOfPages);
-    request.addAttribute("currentPage", page);
+    request.addAttribute(ATTRIBUTE_SORT, trackSort.name());
+    request.addAttribute(ATTRIBUTE_TRACK_LIST, trackList);
+    request.addAttribute(ATTRIBUTE_NUMBER_OF_PAGES, noOfPages);
+    request.addAttribute(ATTRIBUTE_CURRENT_PAGE, page);
 
     return Pages.TRACK_LIST_PAGE;
   }

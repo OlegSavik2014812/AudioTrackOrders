@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.Properties;
 
 public class StartServletListener implements ServletContextListener {
-
+  private static final String CONFIG = "config.properties";
   private static final Logger LOG = Logger.getLogger(StartServletListener.class);
 
   private static boolean isInitialized = false;
@@ -35,9 +35,10 @@ public class StartServletListener implements ServletContextListener {
   }
 
   private URL getConfigUrl() {
-    return getClass().getClassLoader().getResource("config.properties");
+    return getClass().getClassLoader().getResource(CONFIG);
   }
 
   @Override
-  public void contextDestroyed(ServletContextEvent servletContextEvent) {}
+  public void contextDestroyed(ServletContextEvent servletContextEvent) {
+  }
 }

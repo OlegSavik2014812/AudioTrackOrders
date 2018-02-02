@@ -17,21 +17,28 @@ public class SignUpCommand implements Command {
 
   public static final String NAME = "sign_up";
 
+  private static final String PRM_USERNAME = "userName";
+  private static final String PRM_PASSWORD1 = "password1";
+  private static final String PRM_PASSWORD2 = "password2";
+  private static final String PRM_FIRST_NAME = "firstName";
+  private static final String PRM_LAST_NAME = "lastName";
+  private static final String ATTRIBUTE_USER = "USER";
+
   private final AuthInfoDao authInfoDao = new AuthInfoDao();
   private final UserDAO userDAO = new UserDAO();
 
   @Override
   public String execute(Request request, Response response) throws DAOException {
-    if (!request.hasAllParameters("userName", "password1", "password2")) {
+    if (!request.hasAllParameters(PRM_USERNAME, PRM_PASSWORD1, PRM_PASSWORD2)) {
       return Pages.SIGN_UP_PAGE;
     }
 
-    String userName = request.getParameter("userName");
-    String firstName = request.getParameter("firstName");
-    String lastName = request.getParameter("lastName");
+    String userName = request.getParameter(PRM_USERNAME);
+    String firstName = request.getParameter(PRM_FIRST_NAME);
+    String lastName = request.getParameter(PRM_LAST_NAME);
 
-    String password1 = request.getParameter("password1");
-    String password2 = request.getParameter("password2");
+    String password1 = request.getParameter(PRM_PASSWORD1);
+    String password2 = request.getParameter(PRM_PASSWORD2);
 
     if (!Objects.equals(password1, password2) || password1.length() < 4) {
       return Pages.SIGN_UP_PAGE; // password not confirmed, or have incorrect length
@@ -59,7 +66,7 @@ public class SignUpCommand implements Command {
 
 
     // add current user to session
-    request.setSessionAttribute("USER", user);
+    request.setSessionAttribute(ATTRIBUTE_USER, user);
 
     return Pages.INDEX_PAGE;
   }

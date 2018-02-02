@@ -13,20 +13,25 @@ import java.io.IOException;
 public class EditTrackCommand implements Command {
 
   public static final String NAME = "edit_track";
+  private static final String PRM_TRACK_ID = "trackId";
+  private static final String PRM_TRACK_NAME = "trackId";
+  private static final String PRM_TRACK_ALBUM = "trackId";
+  private static final String PRM_TRACK_ARTIST = "trackId";
+  private static final String PRM_TRACK_PRICE = "trackId";
   private final TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
-    if (!request.hasAllParameters("trackId", "trackName", "album", "artist", "price")) {
+    if (!request.hasAllParameters(PRM_TRACK_ID, PRM_TRACK_NAME, PRM_TRACK_ALBUM, PRM_TRACK_ARTIST, PRM_TRACK_PRICE)) {
       return Pages.ADD_TRACK_PAGE;
     }
 
-    long trackId = Long.parseLong(request.getParameter("trackId"));
+    long trackId = Long.parseLong(request.getParameter(PRM_TRACK_ID));
     Track track = trackDAO.getById(trackId);
-    track.setName(request.getParameter("trackName"));
-    track.setAlbum(request.getParameter("album"));
-    track.setArtist(request.getParameter("artist"));
-    track.setPrice(Double.parseDouble(request.getParameter("price")));
+    track.setName(request.getParameter(PRM_TRACK_NAME));
+    track.setAlbum(request.getParameter(PRM_TRACK_ALBUM));
+    track.setArtist(request.getParameter(PRM_TRACK_ARTIST));
+    track.setPrice(Double.parseDouble(request.getParameter(PRM_TRACK_PRICE)));
 
     track = trackDAO.update(track);
     if (track == null) {

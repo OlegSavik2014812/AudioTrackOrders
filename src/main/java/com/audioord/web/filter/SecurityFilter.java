@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class SecurityFilter implements Filter {
+  private static final String ATTRIBUTE_USER = "USER";
+  private static final String PRM_COMMAND_NAME="name";
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -19,9 +21,9 @@ public class SecurityFilter implements Filter {
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain next) throws IOException, ServletException {
     HttpServletRequest request = (HttpServletRequest) servletRequest;
     HttpServletResponse response = (HttpServletResponse) servletResponse;
-    User user = (User) request.getSession().getAttribute("USER");
+    User user = (User) request.getSession().getAttribute(ATTRIBUTE_USER);
 
-    String commandName = request.getParameter("name");
+    String commandName = request.getParameter(PRM_COMMAND_NAME);
     if (commandName == null && commandName.isEmpty()) {
       forwardForbiddenError(request, response);
     }

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class AuthFilter implements Filter {
-
+  private static final String ATTRIBUTE_USER = "USER";
   private String signInPath = "";
   private String signUpPath = "";
 
@@ -22,7 +22,7 @@ public class AuthFilter implements Filter {
     HttpServletResponse response = (HttpServletResponse) res;
     HttpSession session = request.getSession(false);
     // user already logged in
-    boolean loggedIn = session != null && session.getAttribute("USER") != null;
+    boolean loggedIn = session != null && session.getAttribute(ATTRIBUTE_USER) != null;
 
     next.doFilter(request, response);
   }

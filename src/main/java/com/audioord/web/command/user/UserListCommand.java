@@ -15,6 +15,9 @@ public class UserListCommand implements Command {
 
   public static final String NAME = "user_list";
   private static final String PRM_PAGE = "page";
+  private static final String ATTRIBUTE_USER_LIST = "UserList";
+  private static final String ATTRIBUTE_NUMBER_OF_PAGES = "noOfPages";
+  private static final String ATTRIBUTE_CURRENT_PAGE = "currentPage";
 
   private final UserDAO userDAO = new UserDAO();
 
@@ -31,9 +34,9 @@ public class UserListCommand implements Command {
     int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
     userList = userDAO.getAllUsers((page - 1) * recordsPerPage, recordsPerPage);
 
-    request.addAttribute("UserList", userList);
-    request.addAttribute("noOfPages", noOfPages);
-    request.addAttribute("currentPage", page);
+    request.addAttribute(ATTRIBUTE_USER_LIST, userList);
+    request.addAttribute(ATTRIBUTE_NUMBER_OF_PAGES, noOfPages);
+    request.addAttribute(ATTRIBUTE_CURRENT_PAGE, page);
     return Pages.USER_LIST_PAGE;
   }
 }

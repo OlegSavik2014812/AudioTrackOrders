@@ -15,6 +15,7 @@ public class SearchTrackCommand implements Command {
 
   public static final String NAME = "search_track";
   private static final String PRM_SEARCH = "track_name";
+  private static final String ATTRIBUTE_TRACK_LIST = "TrackList";
   private final TrackDAO trackDAO = new TrackDAO();
 
   @Override
@@ -25,7 +26,7 @@ public class SearchTrackCommand implements Command {
 
     String trackName = request.getParameter(PRM_SEARCH);
     List<Track> tracks = trackDAO.findTracks(trackName);
-    request.addAttribute("TrackList", tracks);
+    request.addAttribute(ATTRIBUTE_TRACK_LIST, tracks);
     return Pages.TRACK_LIST_PAGE;
   }
 }

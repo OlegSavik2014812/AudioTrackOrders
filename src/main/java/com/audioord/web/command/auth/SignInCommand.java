@@ -17,6 +17,10 @@ import java.io.IOException;
 public class SignInCommand implements Command {
 
   public static final String NAME = "sign_in";
+  private static final String PRM_USERNAME = "userName";
+  private static final String PRM_PASSWORD = "password";
+  private static final String ATTRIBUTE_USER = "USER";
+  private static final String ATTRIBUTE_BONUS = "BONUS";
 
   private final AuthInfoDao authInfoDao = new AuthInfoDao();
   private final UserDAO userDAO = new UserDAO();
@@ -24,12 +28,12 @@ public class SignInCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
-    if (!request.hasAllParameters("userName", "password")) {
+    if (!request.hasAllParameters(PRM_USERNAME, PRM_PASSWORD)) {
       return Pages.SIGN_IN_PAGE;
     }
 
-    String userName = request.getParameter("userName");
-    String password = request.getParameter("password");
+    String userName = request.getParameter(PRM_USERNAME);
+    String password = request.getParameter(PRM_PASSWORD);
 
     if (userName.isEmpty() || password.isEmpty()) { // required fields
       return Pages.SIGN_IN_PAGE;
@@ -47,8 +51,8 @@ public class SignInCommand implements Command {
     User user = userDAO.getByUsername(authInfo.getUserName());
     OrderDiscount orderDiscount = orderDiscountDAO.getByUserId(user.getId());
     if (user != null) {
-      request.setSessionAttribute("USER", user);
-      request.setSessionAttribute("BONUS", orderDiscount);
+      request.setSessionAttribute(ATTRIBUTE_USER, user);
+      request.setSessionAttribute(ATTRIBUTE_BONUS, orderDiscount);
     }
 
     return Pages.INDEX_PAGE;
