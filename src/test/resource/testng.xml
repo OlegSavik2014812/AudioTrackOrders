@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="main-suite">
+  <test name="SecurityTest">
+    <classes>
+      <class name="com.audioord.web.security.SecurityTest"/>
+    </classes>
+  </test>
+
+</suite>

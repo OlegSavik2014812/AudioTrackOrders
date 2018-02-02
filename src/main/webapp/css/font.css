@@ -1,0 +1,8 @@
+.head_name {
+  font-family: Polibrush;
+}
+
+@font-face {
+  font-family: Polibrush;
+  src: url(/font/BebasNeue.otf);
+}
