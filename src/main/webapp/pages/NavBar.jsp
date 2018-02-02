@@ -15,7 +15,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a class="navbar-brand" href="<c:url value="/action?name=track_list&sort=MOST_POPULAR&page=1"/>">
+    <a class="navbar-brand head_name" href="<c:url value="/action?name=track_list&sort=MOST_POPULAR&page=1"/>">
       <img src="<c:url value="/img/logo.png"/>" width="30" height="30">
       <fmt:message key="navbar.head_name"/>
     </a>
@@ -32,7 +32,8 @@
           <a class="nav-item nav-link" href="<c:url value="/action?name=user_tracks"/>"><fmt:message
             key="navbar.my_music"/> </a>
           <c:if test="${sessionScope.BONUS!=null}">
-          <a class="nav-item nav-link" href="#"><fmt:message key="navbar.user_discount"/> ${sessionScope.BONUS.discountPercent}</a>
+            <a class="nav-item nav-link" href="#"><fmt:message
+              key="navbar.user_discount"/> ${sessionScope.BONUS.discountPercent} %</a>
           </c:if>
         </c:if>
       </ul>
