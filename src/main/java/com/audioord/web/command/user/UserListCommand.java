@@ -12,10 +12,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class UserListCommand implements Command {
-  public static final String NAME = "user_list";
 
-  private UserDAO userDAO = new UserDAO();
+  public static final String NAME = "user_list";
   private static final String PRM_PAGE = "page";
+
+  private final UserDAO userDAO = new UserDAO();
 
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {

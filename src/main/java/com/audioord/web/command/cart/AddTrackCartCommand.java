@@ -18,7 +18,7 @@ public class AddTrackCartCommand implements Command {
   private static final String PRM_CART = "cart";
   private static final String PRM_TRACK_ID = "track_id";
 
-  private TrackDAO trackDAO = new TrackDAO();
+  private final TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {

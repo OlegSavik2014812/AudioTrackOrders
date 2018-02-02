@@ -9,6 +9,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public final class UserDAO extends BaseEntityDao<User, Long> {
+  private static final String USER_TABLE_COLUMN_ID = "Id";
+  private static final String USER_TABLE_COLUMN_USERNAME = "Username";
+  private static final String USER_TABLE_COLUMN_ROLE = "Role";
+  private static final String USER_TABLE_COLUMN_FIRST_NAME = "FirstName";
+  private static final String USER_TABLE_COLUMN_LAST_NAME = "LastName";
 
   private static final String SQL_UPDATE_USER_BY_ID =
   "UPDATE User SET UserName = ?, Role = ?, FirstName = ?, LastName = ? WHERE Id = ?";
@@ -34,10 +39,10 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
   private final EntityMapper<User> userMapper = new EntityMapper<User>() {
     @Override
     public User parse(ResultSet rs) throws SQLException {
-      User user = new User(rs.getString(1), Role.fromString(rs.getString(2)));
-      user.setFirstName(rs.getString(3));
-      user.setLastName(rs.getString(4));
-      user.setId(rs.getLong(5));
+      User user = new User(rs.getString(USER_TABLE_COLUMN_USERNAME), Role.fromString(rs.getString(USER_TABLE_COLUMN_ROLE)));
+      user.setFirstName(rs.getString(USER_TABLE_COLUMN_FIRST_NAME));
+      user.setLastName(rs.getString(USER_TABLE_COLUMN_LAST_NAME));
+      user.setId(rs.getLong(USER_TABLE_COLUMN_ID));
       return user;
     }
 

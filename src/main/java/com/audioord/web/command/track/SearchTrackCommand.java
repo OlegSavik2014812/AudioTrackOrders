@@ -15,7 +15,7 @@ public class SearchTrackCommand implements Command {
 
   public static final String NAME = "search_track";
   private static final String PRM_SEARCH = "track_name";
-  private TrackDAO trackDAO = new TrackDAO();
+  private final TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {

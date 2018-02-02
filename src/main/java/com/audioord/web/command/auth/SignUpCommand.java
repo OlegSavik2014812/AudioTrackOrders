@@ -17,8 +17,8 @@ public class SignUpCommand implements Command {
 
   public static final String NAME = "sign_up";
 
-  private AuthInfoDao authInfoDao = new AuthInfoDao();
-  private UserDAO userDAO = new UserDAO();
+  private final AuthInfoDao authInfoDao = new AuthInfoDao();
+  private final UserDAO userDAO = new UserDAO();
 
   @Override
   public String execute(Request request, Response response) throws DAOException {

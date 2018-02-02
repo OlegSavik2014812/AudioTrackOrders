@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public final class AuthInfoDao extends BaseEntityDao<AuthInfo, String> {
+  private static final String AUTH_INFO_TABLE_COLUMN_USERNAME = "UserName";
+  private static final String AUTH_INFO_TABLE_COLUMN_PASSWORD = "Password";
+
 
   private static final String SQL_GET_AUTH_BY_ID =
   "SELECT UserName, Password  FROM AuthInfo WHERE UserName = ?";
@@ -23,7 +26,7 @@ public final class AuthInfoDao extends BaseEntityDao<AuthInfo, String> {
   private final EntityMapper<AuthInfo> mapper = new EntityMapper<AuthInfo>() {
     @Override
     public AuthInfo parse(ResultSet rs) throws SQLException {
-      return new AuthInfo(rs.getString(1), rs.getString(2));
+      return new AuthInfo(rs.getString(AUTH_INFO_TABLE_COLUMN_USERNAME), rs.getString(AUTH_INFO_TABLE_COLUMN_PASSWORD));
     }
 
     @Override

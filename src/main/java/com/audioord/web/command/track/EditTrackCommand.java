@@ -13,7 +13,7 @@ import java.io.IOException;
 public class EditTrackCommand implements Command {
 
   public static final String NAME = "edit_track";
-  private TrackDAO trackDAO = new TrackDAO();
+  private final TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {

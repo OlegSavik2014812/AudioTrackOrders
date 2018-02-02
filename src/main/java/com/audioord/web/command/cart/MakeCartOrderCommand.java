@@ -29,8 +29,8 @@ public class MakeCartOrderCommand implements Command {
   private static final String PRM_USER = "USER";
   private static final String PRM_CLEAR = "clear";
 
-  private OrderDAO orderDAO = new OrderDAO();
-  private TrackDAO trackDAO = new TrackDAO();
+  private final OrderDAO orderDAO = new OrderDAO();
+  private final TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {

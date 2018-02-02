@@ -17,9 +17,11 @@ import java.util.Date;
 
 public class EditOrderDiscountCommand implements Command {
   public static final String NAME = "add_discount";
+
   private static final String PRM_USER = "username";
   private static final String PRM_DATE_FROM = "date_from";
   private static final String PRM_DATE_TO = "date_to";
+
   private final OrderDiscountDAO orderDiscountDAO = new OrderDiscountDAO();
   private final UserDAO userDAO = new UserDAO();
   private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

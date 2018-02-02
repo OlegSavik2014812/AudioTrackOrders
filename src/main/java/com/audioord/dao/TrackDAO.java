@@ -10,7 +10,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class TrackDAO extends BaseEntityDao<Track, Long> {
-
+  private static final String TRACK_TABLE_COLUMN_NAME = "track";
+  private static final String TRACK_TABLE_COLUMN_ARTIST = "artist";
+  private static final String TRACK_TABLE_COLUMN_ALBUM = "album";
+  private static final String TRACK_TABLE_COLUMN_POPULARITY = "popularity";
+  private static final String TRACK_TABLE_COLUMN_URI = "uri";
+  private static final String TRACK_TABLE_COLUMN_PRICE = "price";
+  private static final String TRACK_TABLE_COLUMN_DURATION = "duration";
+  private static final String TRACK_TABLE_COLUMN_ID = "id";
   private static final String SQL_COUNT_ALL =
   "SELECT count(id) FROM track";
 
@@ -52,13 +59,13 @@ public class TrackDAO extends BaseEntityDao<Track, Long> {
   new EntityMapper<Track>() {
     @Override
     public Track parse(ResultSet rs) throws SQLException {
-      Track track = new Track(rs.getString(1), rs.getString(2));
-      track.setAlbum(rs.getString(3));
-      track.setPopularity(rs.getInt(4));
-      track.setUri(rs.getString(5));
-      track.setPrice(rs.getInt(6));
-      track.setDuration(rs.getLong(7));
-      track.setId(rs.getLong(8));
+      Track track = new Track(rs.getString(TRACK_TABLE_COLUMN_NAME), rs.getString(TRACK_TABLE_COLUMN_ARTIST));
+      track.setAlbum(rs.getString(TRACK_TABLE_COLUMN_ALBUM));
+      track.setPopularity(rs.getInt(TRACK_TABLE_COLUMN_POPULARITY));
+      track.setUri(rs.getString(TRACK_TABLE_COLUMN_URI));
+      track.setPrice(rs.getInt(TRACK_TABLE_COLUMN_PRICE));
+      track.setDuration(rs.getLong(TRACK_TABLE_COLUMN_DURATION));
+      track.setId(rs.getLong(TRACK_TABLE_COLUMN_ID));
       return track;
     }
 

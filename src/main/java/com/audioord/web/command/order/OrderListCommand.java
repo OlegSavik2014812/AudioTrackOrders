@@ -25,7 +25,7 @@ public class OrderListCommand implements Command {
   private static final String PRM_SORT = "sort";
 
 
-  private OrderDAO orderDAO = new OrderDAO();
+  private final OrderDAO orderDAO = new OrderDAO();
 
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {

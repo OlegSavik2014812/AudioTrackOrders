@@ -10,18 +10,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class OrderDiscountDAO extends BaseEntityDao<OrderDiscount, Long> {
+  private static final String USER_TABLE_COLUMN_USERNAME = "Username";
+  private static final String USER_TABLE_COLUMN_ROLE = "Role";
+  private static final String USER_TABLE_COLUMN_FIRST_NAME = "FirstName";
+  private static final String USER_TABLE_COLUMN_LAST_NAME = "LastName";
+
+  private static final String DISCOUNT_TABLE_COLUMN_PERCENT = "Percent";
+  private static final String DISCOUNT_TABLE_COLUMN_DATE_FROM = "DateFrom";
+  private static final String DISCOUNT_TABLE_COLUMN_DATE_TO = "DateTo";
+
   private static final String SQL_CREATE_DISCOUNT = "insert into discount(Percent ,DateFrom,DateTo,IdUser) values(?,?,?,?)";
-  private static final String SQL_GET_DISCOUNT_BY_USER_ID = "SELECT u.Id, u.Username, u.Role,  u.FirstName, u.LastName, d.Percent, d.DateFrom , d.DateTo FROM discount d JOIN USER u ON u.Id = d.IdUser where d.IdUser = ?";
+  private static final String SQL_GET_DISCOUNT_BY_USER_ID = "SELECT u.Id as UserId, u.Username, u.Role,  u.FirstName, u.LastName, d.Percent, d.DateFrom , d.DateTo FROM discount d JOIN USER u ON u.Id = d.IdUser where d.IdUser = ?";
 
   private EntityMapper<OrderDiscount> mapper = new EntityMapper<OrderDiscount>() {
     @Override
     public OrderDiscount parse(ResultSet rs) throws SQLException, DAOException {
-      User user = new User(rs.getString(2), Role.fromString(rs.getString(3)));
-      user.setFirstName(rs.getString(4));
-      user.setLastName(rs.getString(5));
-      double percent = rs.getDouble(6);
-      java.util.Date dateFrom = rs.getDate(7);
-      java.util.Date dateTo = rs.getDate(8);
+      User user = new User(rs.getString(USER_TABLE_COLUMN_USERNAME), Role.fromString(rs.getString(USER_TABLE_COLUMN_ROLE)));
+      user.setFirstName(rs.getString(USER_TABLE_COLUMN_FIRST_NAME));
+      user.setLastName(rs.getString(USER_TABLE_COLUMN_LAST_NAME));
+      double percent = rs.getDouble(DISCOUNT_TABLE_COLUMN_PERCENT);
+      java.util.Date dateFrom = rs.getDate(DISCOUNT_TABLE_COLUMN_DATE_FROM);
+      java.util.Date dateTo = rs.getDate(DISCOUNT_TABLE_COLUMN_DATE_TO);
       return new OrderDiscount(percent, dateFrom, dateTo, user);
     }
 

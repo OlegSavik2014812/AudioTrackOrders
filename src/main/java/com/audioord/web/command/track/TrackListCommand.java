@@ -17,7 +17,7 @@ public class TrackListCommand implements Command {
   private static final String PRM_SORT = "sort";
   private static final String PRM_PAGE = "page";
 
-  private TrackDAO trackDAO = new TrackDAO();
+  private final TrackDAO trackDAO = new TrackDAO();
 
   @Override
   public String execute(Request request, Response response) throws DAOException {
