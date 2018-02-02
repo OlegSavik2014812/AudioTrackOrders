@@ -5,5 +5,4 @@
       <class name="com.audioord.web.security.SecurityTest"/>
     </classes>
   </test>
-
 </suite>
