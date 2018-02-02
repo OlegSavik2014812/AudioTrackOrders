@@ -24,11 +24,16 @@
 
       <ul class="navbar-nav mr-auto">
         <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='ADMIN'}">
-          <a class="nav-item nav-link" href="<c:url value="/action?name=upload_track"/>">Добавить музыку</a>
+          <a class="nav-item nav-link" href="<c:url value="/action?name=upload_track"/>"><fmt:message
+            key="navbar.add_music"/> </a>
         </c:if>
 
         <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='CLIENT'}">
-          <a class="nav-item nav-link" href="<c:url value="/action?name=user_tracks"/>">Моя музыка</a>
+          <a class="nav-item nav-link" href="<c:url value="/action?name=user_tracks"/>"><fmt:message
+            key="navbar.my_music"/> </a>
+          <c:if test="${sessionScope.BONUS!=null}">
+          <a class="nav-item nav-link" href="#"><fmt:message key="navbar.user_discount"/> ${sessionScope.BONUS.discountPercent}</a>
+          </c:if>
         </c:if>
       </ul>
 
@@ -58,7 +63,8 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                 <%--USER CART--%>
               <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='CLIENT'}">
-                <a class="dropdown-item" href="<c:url value="/action?name=view_cart"/>">Корзина</a>
+                <a class="dropdown-item" href="<c:url value="/action?name=view_cart"/>"><fmt:message
+                  key="navbar.basket"/> </a>
               </c:if>
 
                 <%--ADMIN USER LIST--%>

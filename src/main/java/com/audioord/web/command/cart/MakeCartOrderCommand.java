@@ -7,6 +7,7 @@ import com.audioord.dao.TrackDAO;
 import com.audioord.model.account.User;
 import com.audioord.model.audio.Track;
 import com.audioord.model.order.Order;
+import com.audioord.model.order.OrderDiscount;
 import com.audioord.model.order.OrderStatus;
 import com.audioord.web.cart.Cart;
 import com.audioord.web.cart.CartItem;
@@ -33,6 +34,8 @@ public class MakeCartOrderCommand implements Command {
 
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {
+    OrderDiscount orderDiscount = request.getSessionAttribute("BONUS", OrderDiscount.class);
+
     Cart cart = request.getSessionAttribute(PRM_CART, Cart.class);
     // check if we have items in cart
     if (cart == null || !cart.getHasItems()) {
@@ -53,9 +56,11 @@ public class MakeCartOrderCommand implements Command {
 
     User user = request.getSessionAttribute(PRM_USER, User.class);
     // make new order
+    double percent = (100 - orderDiscount.getDiscountPercent()) / 100;
+
     Order trackOrder = new Order(user, new Date());
     trackOrder.setStatus(OrderStatus.SUBMITTED);
-    trackOrder.setTotalPrice(cart.getTotalCost());
+    trackOrder.setTotalPrice(cart.getTotalCost() * percent);
     trackOrder.setTracks(tracks);
 
     // clear cart after order save

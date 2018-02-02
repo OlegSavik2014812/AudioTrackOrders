@@ -18,7 +18,7 @@ public final class Pages {
 
   public static final String ORDER_LIST_PAGE = "/pages/order/OrderPage.jsp";
 
-
+  public static final String USER_LIST_PAGE = "/pages/user/UserListPage.jsp";
 
 
   // public static final String PURCHASES_PAGE = "/pages/UserPurchasedTracks.jsp";

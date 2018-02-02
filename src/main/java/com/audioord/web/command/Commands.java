@@ -6,9 +6,11 @@ import com.audioord.web.command.auth.SignUpCommand;
 import com.audioord.web.command.cart.AddTrackCartCommand;
 import com.audioord.web.command.cart.MakeCartOrderCommand;
 import com.audioord.web.command.cart.ViewTrackCartCommand;
+import com.audioord.web.command.order.EditOrderDiscountCommand;
 import com.audioord.web.command.order.OrderListCommand;
 import com.audioord.web.command.order.OrderStatusEdit;
 import com.audioord.web.command.track.*;
+import com.audioord.web.command.user.UserListCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,7 +46,10 @@ public final class Commands {
     // order
     commands.put(OrderListCommand.NAME, new OrderListCommand());
     commands.put(OrderStatusEdit.NAME, new OrderStatusEdit());
-
+    //user list
+    commands.put(UserListCommand.NAME, new UserListCommand());
+    //user
+    commands.put(EditOrderDiscountCommand.NAME, new EditOrderDiscountCommand());
     return commands;
   }
 

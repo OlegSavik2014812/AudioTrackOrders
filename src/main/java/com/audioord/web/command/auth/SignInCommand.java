@@ -2,9 +2,11 @@ package com.audioord.web.command.auth;
 
 import com.audioord.dao.AuthInfoDao;
 import com.audioord.dao.DAOException;
+import com.audioord.dao.OrderDiscountDAO;
 import com.audioord.dao.UserDAO;
 import com.audioord.model.account.AuthInfo;
 import com.audioord.model.account.User;
+import com.audioord.model.order.OrderDiscount;
 import com.audioord.web.command.Command;
 import com.audioord.web.command.Pages;
 import com.audioord.web.http.Request;
@@ -18,6 +20,7 @@ public class SignInCommand implements Command {
 
   private final AuthInfoDao authInfoDao = new AuthInfoDao();
   private final UserDAO userDAO = new UserDAO();
+  private final OrderDiscountDAO orderDiscountDAO = new OrderDiscountDAO();
 
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
@@ -42,8 +45,10 @@ public class SignInCommand implements Command {
     }
 
     User user = userDAO.getByUsername(authInfo.getUserName());
+    OrderDiscount orderDiscount = orderDiscountDAO.getByUserId(user.getId());
     if (user != null) {
       request.setSessionAttribute("USER", user);
+      request.setSessionAttribute("BONUS", orderDiscount);
     }
 
     return Pages.INDEX_PAGE;
