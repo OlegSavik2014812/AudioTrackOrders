@@ -14,10 +14,10 @@ public class EditTrackCommand implements Command {
 
   public static final String NAME = "edit_track";
   private static final String PRM_TRACK_ID = "trackId";
-  private static final String PRM_TRACK_NAME = "trackId";
-  private static final String PRM_TRACK_ALBUM = "trackId";
-  private static final String PRM_TRACK_ARTIST = "trackId";
-  private static final String PRM_TRACK_PRICE = "trackId";
+  private static final String PRM_TRACK_NAME = "trackName";
+  private static final String PRM_TRACK_ALBUM = "album";
+  private static final String PRM_TRACK_ARTIST = "artist";
+  private static final String PRM_TRACK_PRICE = "price";
   private final TrackDAO trackDAO = new TrackDAO();
 
   @Override
