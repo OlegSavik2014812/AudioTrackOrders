@@ -13,8 +13,8 @@
       <table class="table table-striped">
         <thead>
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Price</th>
+          <th scope="col"><fmt:message key="cart.name"/> </th>
+          <th scope="col"><fmt:message key="cart.price"/> </th>
         </tr>
         </thead>
         <tbody>
