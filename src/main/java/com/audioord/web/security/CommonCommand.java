@@ -7,5 +7,6 @@ public enum CommonCommand {
   SEARCH_TRACK,
   SIGN_IN,
   SIGN_UP,
-  SIGN_OUT
+  SIGN_OUT,
+  FEEDBACK_LIST
 }

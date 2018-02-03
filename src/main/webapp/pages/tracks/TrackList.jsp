@@ -33,6 +33,7 @@
       <table class="table table-striped">
         <thead>
         <tr>
+          <th></th>
           <th scope="col"><fmt:message key="tracklist.track_name"/></th>
           <th scope="col"><fmt:message key="tracklist.artist_name"/></th>
           <th scope="col"><fmt:message key="tracklist.album_name"/></th>
@@ -45,6 +46,9 @@
         <tbody>
         <c:forEach items="${TrackList}" var="track">
           <tr>
+            <td><a href="<c:url value="/action?name=feedback_list&track_id=${track.id}" />">
+              <span class="oi oi-list"></span>
+            </a></td>
             <td><c:out value="${track.name}"/></td>
             <td><c:out value="${track.artist}"/></td>
             <td><c:out value="${track.album}"/></td>

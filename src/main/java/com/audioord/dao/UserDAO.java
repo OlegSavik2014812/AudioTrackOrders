@@ -31,10 +31,10 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
   "DELETE FROM User WHERE Id=?";
 
   private static final String SQL_COUNT_ALL =
-  "SELECT count(id) FROM user";
+  "SELECT count(id) FROM user where Role = 'CLIENT'";
 
   private static final String SQL_GET_ALL =
-  "SELECT UserName, Role, FirstName, LastName, Id FROM user ORDER BY Id DESC LIMIT ?, ?";
+  "SELECT UserName, Role, FirstName, LastName, Id FROM user where Role = 'CLIENT' ORDER BY Id DESC LIMIT ?, ?";
 
   private final EntityMapper<User> userMapper = new EntityMapper<User>() {
     @Override

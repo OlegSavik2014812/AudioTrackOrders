@@ -95,7 +95,7 @@
               <input type="date" id="date_to" class="form-control" name="date_to"
                      placeholder="<fmt:message key="editdiscount.date_end"/> " required="" autofocus="">
             </div>
-            <button  onclick="form_submit()" type="submit" class="btn btn-secondary" data-dismiss="modal"><fmt:message
+            <button  onclick="form_submit_discount()" type="submit" class="btn btn-secondary" data-dismiss="modal"><fmt:message
               key="editdiscount.add"/></button>
           </form>
         </div>
@@ -104,7 +104,7 @@
   </div>
 </div>
 <script type="text/javascript">
-  function form_submit() {
+  function form_submit_discount() {
     document.getElementById("add_discount").submit();
   }
 </script>

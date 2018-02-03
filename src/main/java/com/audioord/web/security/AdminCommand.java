@@ -6,5 +6,6 @@ public enum AdminCommand {
   ORDER_EDIT,
   UPLOAD_TRACK,
   USER_LIST,
-  ADD_DISCOUNT
+  ADD_DISCOUNT,
+  EDIT_FEEDBACK
 }
