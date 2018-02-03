@@ -43,6 +43,11 @@
           <h2 class="blog-post-title text-center"><c:out value="${feedback.user.username}"/></h2>
           <p class="blog-post-meta text-center"><c:out value="${feedback.createdAt}"/></p>
           <p class="text-center"><c:out value="${feedback.comments}"/></p>
+          <c:if test="${sessionScope.USER.role=='ADMIN'}">
+            <a href="<c:url value="/action?name=delete_feedback&feedback_id=${feedback.id}"/>">
+              <span class="oi oi-action-undo"></span>
+            </a>
+          </c:if>
         </div>
         <hr/>
       </div>

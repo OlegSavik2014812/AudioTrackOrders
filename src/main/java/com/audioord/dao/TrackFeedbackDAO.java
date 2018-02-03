@@ -35,6 +35,7 @@ public class TrackFeedbackDAO extends BaseEntityDao<TrackFeedback, Long> {
   "t.Id as TrackId, t.Track, t.Artist,t.Album ,t.Popularity , t.URI,t.Price,t.Duration \n" +
   "from feedback f join user u on f.IdUser=u.Id join track t on f.IdTrack = t.Id\n" +
   "where t.Id = ?";
+  private static final String SQL_DELETE_FEEDBACK = "delete from feedback where Id = ?";
 
   EntityMapper<TrackFeedback> mapper = new EntityMapper<TrackFeedback>() {
     @Override
@@ -54,6 +55,7 @@ public class TrackFeedbackDAO extends BaseEntityDao<TrackFeedback, Long> {
 
       TrackFeedback trackFeedback = new TrackFeedback(user, rs.getString(FEEDBACK_TABLE_COLUMN_COMMENT), track);
       trackFeedback.setCreatedAt(rs.getDate(FEEDBACK_TABLE_COLUMN_DATE_CREATED));
+      trackFeedback.setId(rs.getLong(FEEDBACK_TABLE_COLUMN_FEEDBACK_ID));
       return trackFeedback;
     }
 
@@ -78,7 +80,7 @@ public class TrackFeedbackDAO extends BaseEntityDao<TrackFeedback, Long> {
 
   @Override
   public boolean delete(Long id) throws DAOException {
-    return false;
+    return remove(id, SQL_DELETE_FEEDBACK);
   }
 
   @Override
@@ -89,4 +91,5 @@ public class TrackFeedbackDAO extends BaseEntityDao<TrackFeedback, Long> {
   public List<TrackFeedback> getFeedbacksByTrackId(Long trackId) throws DAOException {
     return findAll(mapper, SQL_GET_ALL_FEEDBACKS_BY_TRACK_ID, trackId);
   }
+
 }

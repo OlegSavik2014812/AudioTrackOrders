@@ -6,6 +6,7 @@ import com.audioord.web.command.auth.SignUpCommand;
 import com.audioord.web.command.cart.AddTrackCartCommand;
 import com.audioord.web.command.cart.MakeCartOrderCommand;
 import com.audioord.web.command.cart.ViewTrackCartCommand;
+import com.audioord.web.command.feedback.DeleteTrackFeedbackCommand;
 import com.audioord.web.command.feedback.EditTrackFeedbackCommand;
 import com.audioord.web.command.feedback.FeedbackListCommand;
 import com.audioord.web.command.order.EditOrderDiscountCommand;
@@ -52,8 +53,10 @@ public final class Commands {
     commands.put(UserListCommand.NAME, new UserListCommand());
     //user
     commands.put(EditOrderDiscountCommand.NAME, new EditOrderDiscountCommand());
+    //feedback
     commands.put(EditTrackFeedbackCommand.NAME, new EditTrackFeedbackCommand());
     commands.put(FeedbackListCommand.NAME, new FeedbackListCommand());
+    commands.put(DeleteTrackFeedbackCommand.NAME, new DeleteTrackFeedbackCommand());
     return commands;
   }
 

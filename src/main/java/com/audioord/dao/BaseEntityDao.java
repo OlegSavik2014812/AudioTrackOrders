@@ -40,7 +40,8 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
          PreparedStatement st = con.prepareCall(sql)) {
 
       LOG.debug(String.format("Executing query [%s] \n with params %s", sql, id));
-      int i = st.executeUpdate(sql);
+      st.setObject(1, id);
+      int i = st.executeUpdate();
 
       isRemoved = i > 0;
 
