@@ -15,6 +15,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Class describes the object-command, which assigns discount to chosen user and returns to user list page
+ * implementation of {@link Command}
+ */
 public class EditOrderDiscountCommand implements Command {
   public static final String NAME = "add_discount";
 
@@ -27,6 +31,17 @@ public class EditOrderDiscountCommand implements Command {
   private final UserDAO userDAO = new UserDAO();
   private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+  /**
+   * There is initialization of user with session param
+   * then validation of input params for {@link OrderDiscount }object and its creation
+   * if command is successful, then creation of {@link OrderDiscount} object and redirection to user list page
+   *
+   * @param request  {@link Request}
+   * @param response {@link Response}
+   * @return string name of page
+   * @throws IOException  in case, when params incorrect
+   * @throws DAOException {@link DAOException}
+   */
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {
 

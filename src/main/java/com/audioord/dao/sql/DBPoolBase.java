@@ -13,16 +13,24 @@ public abstract class DBPoolBase implements ConnectionSource {
 
   private static final Logger LOG = Logger.getLogger(DBPoolBase.class);
 
-  /** Driver class name */
+  /**
+   * Driver class name
+   */
   private String driverName;
 
-  /** Database username */
+  /**
+   * Database username
+   */
   private String user;
 
-  /** Database password */
+  /**
+   * Database password
+   */
   private String password;
 
-  /** Database connection url */
+  /**
+   * Database connection url
+   */
   private String url;
 
   DBPoolBase(String driverName, String user, String password, String url) {

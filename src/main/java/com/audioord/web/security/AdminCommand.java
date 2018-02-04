@@ -1,5 +1,8 @@
 package com.audioord.web.security;
 
+/**
+ * enum, provides system with admin command names
+ */
 public enum AdminCommand {
   EDIT_TRACK,
   ORDER_LIST,

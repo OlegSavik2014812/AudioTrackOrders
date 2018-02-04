@@ -11,15 +11,32 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Class describes object, handle {@link HttpServletRequest} and {@link HttpServletResponse}
+ * extract from request command name and redirect to it
+ */
 public class RequestHandler {
 
   private static final Logger LOG = Logger.getLogger(RequestHandler.class);
   private static final String PRM_COMMAND_NAME = "name";
 
+  /**
+   * default constructor
+   */
   public RequestHandler() {
     super();
   }
 
+  /**
+   * There is handling service, which extract command name string from input request
+   * it's validate command name, in bad case logs error
+   * if command name is valid, it's extract {@link Command} object from {@link Commands} util class
+   * and execute it and forward to the corresponding page
+   *
+   * @param req  {@link HttpServletRequest}
+   * @param resp {@link HttpServletResponse}
+   * @param ctx  {@link ServletContext}
+   */
   public void doHandle(HttpServletRequest req, HttpServletResponse resp, ServletContext ctx) {
 
     final Request request = new Request(req);

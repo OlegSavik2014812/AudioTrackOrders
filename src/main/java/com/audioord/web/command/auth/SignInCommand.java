@@ -13,7 +13,12 @@ import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 
 import java.io.IOException;
+import java.io.Serializable;
 
+/**
+ * Class describes the object-command, the execution of which sign in user in system,
+ * implementation of {@link Command}
+ */
 public class SignInCommand implements Command {
 
   public static final String NAME = "sign_in";
@@ -26,6 +31,23 @@ public class SignInCommand implements Command {
   private final UserDAO userDAO = new UserDAO();
   private final OrderDiscountDAO orderDiscountDAO = new OrderDiscountDAO();
 
+  /**
+   * if the command succeeds, the page goes to the page
+   * the input parameters are checked - the username and password received from the request
+   * <p>
+   * if the parameters are checked, then the variables are initialized
+   * the parameters are passed to the method {@link AuthInfoDao#getById(Serializable)} and
+   * the {@link AuthInfo} object is initialized
+   * the {@link User} object is initialized, using {@link UserDAO#getByUsername(String)} with input param
+   * {@link AuthInfo#getUserName()}
+   * after that params of {@link User} object passed to session
+   *
+   * @param request  {@link Request}
+   * @param response {@link Response}
+   * @return string name of page
+   * @throws IOException  in case, when params incorrect
+   * @throws DAOException {@link DAOException}
+   */
   @Override
   public String execute(Request request, Response response) throws IOException, DAOException {
     if (!request.hasAllParameters(PRM_USERNAME, PRM_PASSWORD)) {

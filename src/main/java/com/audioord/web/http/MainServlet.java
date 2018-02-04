@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Front application controller.
+ */
+
+
 public class MainServlet extends HttpServlet {
 
   private static final long serialVersionUID = -1L;
@@ -18,6 +23,15 @@ public class MainServlet extends HttpServlet {
     super();
   }
 
+  /**
+   * There is main processing service, put input {@link HttpServletRequest} and {@link HttpServletResponse}
+   * to {@link MainServlet#processRequest(HttpServletRequest, HttpServletResponse)}
+   *
+   * @param req {@link HttpServletRequest}
+   * @param res {@link HttpServletResponse}
+   * @throws ServletException in case, when it encounters difficulty.
+   * @throws IOException      in case, when input is invalid
+   */
   @Override
   protected void service(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException {
@@ -33,6 +47,14 @@ public class MainServlet extends HttpServlet {
     }
   }
 
+  /**
+   * There is initialization of {@link RequestHandler} handler, which used to handle {@link HttpServletRequest}
+   * and {@link HttpServletResponse}
+   *
+   * @param req {@link HttpServletRequest}
+   * @param res {@link HttpServletResponse}
+   * @throws Exception in case of errors in subsequent method calls
+   */
   public void processRequest(HttpServletRequest req, HttpServletResponse res) throws Exception {
     RequestHandler requestHandler = new RequestHandler();
     requestHandler.doHandle(req, res, getServletContext());

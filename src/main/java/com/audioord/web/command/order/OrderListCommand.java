@@ -15,6 +15,11 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Class describes the object-command, which shows order list with different status in time period
+ * and returns to order list page
+ * implementation of {@link Command}
+ */
 public class OrderListCommand implements Command {
 
   public static final String NAME = "order_list";
@@ -27,6 +32,16 @@ public class OrderListCommand implements Command {
 
   private final OrderDAO orderDAO = new OrderDAO();
 
+  /**
+   * There is a validation and parsing of input params for list of {@link Order}
+   * if command is successful, then creation of list of {@link Order} and redirection to order list page
+   *
+   * @param request  {@link Request}
+   * @param response {@link Response}
+   * @return string name of page
+   * @throws IOException  in case, when params incorrect
+   * @throws DAOException {@link DAOException}
+   */
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {
 

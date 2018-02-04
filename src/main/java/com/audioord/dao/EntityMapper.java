@@ -12,20 +12,21 @@ import java.sql.SQLException;
 public interface EntityMapper<T extends Entity> {
 
   /**
-   * Parse ResultSet and put values in to Entity.
+   * Parse ResultSet and put values in to {@link Entity}.
    *
    * @param rs ResultSet
    * @return {@link Entity} object
-   * @throws SQLException in case of nay issues
+   * @throws SQLException {@link SQLException}
+   * @throws DAOException {@link DAOException}
    */
   T parse(ResultSet rs) throws SQLException, DAOException;
 
   /**
-   * Read entity to prepare statement
+   * fill {@link PreparedStatement} with {@link Entity} info
    *
-   * @param st {@link PreparedStatement}
+   * @param st     {@link PreparedStatement}
    * @param entity {@link Entity}
-   * @throws SQLException
+   * @throws SQLException {@link SQLException}
    */
   void write(PreparedStatement st, T entity) throws SQLException;
 }

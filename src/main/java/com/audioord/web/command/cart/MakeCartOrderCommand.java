@@ -21,6 +21,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Class describes the object-command, which put ordered tracks from cart to order
+ * accept order, create {@link Order} object and returns to index page
+ * implementation of {@link Command}
+ */
 public class MakeCartOrderCommand implements Command {
 
   public static final String NAME = "cart_order";
@@ -33,10 +38,23 @@ public class MakeCartOrderCommand implements Command {
   private final OrderDAO orderDAO = new OrderDAO();
   private final TrackDAO trackDAO = new TrackDAO();
 
+  /**
+   * the {@link Cart} object gets out of the session, and if it has items, then the link is assigned to it
+   * then  gets a {@link OrderDiscount} object, and if it is valid, then assignment of variable occurs to discount using
+   * {@link OrderDiscount#getDiscountPercent()}
+   * Afterwards, the parameters for the {@link Order} object are validated
+   * if prams are valid, then an object is created, and the {@link Cart} object is cleaned up
+   * <p>
+   * if the command is successful, then creation of new {@link Order} object and redirection to index page
+   *
+   * @param request  {@link Request}
+   * @param response {@link Response}
+   * @return string name of page
+   * @throws IOException  in case, when params incorrect
+   * @throws DAOException {@link DAOException}
+   */
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {
-    OrderDiscount orderDiscount = request.getSessionAttribute(ATTRIBUTE_BONUS, OrderDiscount.class);
-
     Cart cart = request.getSessionAttribute(PRM_CART, Cart.class);
     // check if we have items in cart
     if (cart == null || !cart.getHasItems()) {
@@ -57,7 +75,11 @@ public class MakeCartOrderCommand implements Command {
 
     User user = request.getSessionAttribute(PRM_USER, User.class);
     // make new order
-    double percent = (100 - orderDiscount.getDiscountPercent()) / 100;
+    OrderDiscount orderDiscount = request.getSessionAttribute(ATTRIBUTE_BONUS, OrderDiscount.class);
+    double percent = 1d;
+    if (orderDiscount != null) {
+      percent = (100 - orderDiscount.getDiscountPercent()) / 100;
+    }
 
     Order trackOrder = new Order(user, new Date());
     trackOrder.setStatus(OrderStatus.SUBMITTED);

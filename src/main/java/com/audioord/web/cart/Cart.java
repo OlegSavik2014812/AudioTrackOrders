@@ -1,5 +1,8 @@
 package com.audioord.web.cart;
 
+/**
+ * interface, provides implementation with additional methods
+ */
 
 import java.util.List;
 

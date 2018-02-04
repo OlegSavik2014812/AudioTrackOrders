@@ -8,12 +8,22 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
+/**
+ * Class describes ServletContextListener, the execution of which parses system config file to connect to database
+ * implementation of {@link ServletContextListener}
+ */
 public class StartServletListener implements ServletContextListener {
   private static final String CONFIG = "config.properties";
   private static final Logger LOG = Logger.getLogger(StartServletListener.class);
 
   private static boolean isInitialized = false;
 
+  /**
+   * There is parsing configuration properties
+   * It' s load, put config to {@link Properties} object and set them as props for servlet
+   *
+   * @param servletContextEvent {@link ServletContextListener}
+   */
   @Override
   public void contextInitialized(ServletContextEvent servletContextEvent) {
     if (isInitialized) {
@@ -38,6 +48,9 @@ public class StartServletListener implements ServletContextListener {
     return getClass().getClassLoader().getResource(CONFIG);
   }
 
+  /**
+   * @param servletContextEvent {@link ServletContextEvent}
+   */
   @Override
   public void contextDestroyed(ServletContextEvent servletContextEvent) {
   }

@@ -11,6 +11,10 @@ import com.audioord.web.http.Response;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Class describes the object-command, which shows all registered users and returns to user list page
+ * implementation of {@link Command}
+ */
 public class UserListCommand implements Command {
 
   public static final String NAME = "user_list";
@@ -21,6 +25,18 @@ public class UserListCommand implements Command {
 
   private final UserDAO userDAO = new UserDAO();
 
+  /**
+   * The input parameters for paging are checked if they are not valid. then the default value is initialized
+   * then the object list is created
+   * * if command executed successfully, then creation of list of {@link User} objects
+   * and redirection to user list page
+   *
+   * @param request  {@link Request}
+   * @param response {@link Response}
+   * @return string name of page
+   * @throws IOException  in case, when params incorrect
+   * @throws DAOException {@link DAOException}
+   */
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {
     int page = 1;
@@ -33,6 +49,9 @@ public class UserListCommand implements Command {
     int noOfRecords = userDAO.countAllUsers();
     int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
     userList = userDAO.getAllUsers((page - 1) * recordsPerPage, recordsPerPage);
+    if (userList == null || userList.isEmpty()) {
+      return Pages.INDEX_PAGE;
+    }
 
     request.addAttribute(ATTRIBUTE_USER_LIST, userList);
     request.addAttribute(ATTRIBUTE_NUMBER_OF_PAGES, noOfPages);

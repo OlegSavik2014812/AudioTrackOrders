@@ -8,6 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Simple util class, used to perform operations on a date
+ */
+
 public final class DateUtil {
 
   private static final Logger LOG = Logger.getLogger(DateUtil.class);
@@ -17,6 +21,13 @@ public final class DateUtil {
     super();
   }
 
+  /**
+   * adds to the input date the number of days and returns it
+   *
+   * @param dateTo input date
+   * @param days   number of days
+   * @return formatted date
+   */
   public static Date addDays(Date dateTo, int days) {
     Calendar cal = Calendar.getInstance();
     cal.setTime(dateTo);
@@ -24,10 +35,23 @@ public final class DateUtil {
     return cal.getTime();
   }
 
+  /**
+   * Parse date from String type to Date type using formatter of {@link DateUtil}
+   *
+   * @param str parsed string
+   * @return formatted date
+   */
   public static Date parseDate(String str) {
     return parseDate(str, formatter);
   }
 
+  /**
+   * Parse date from String type to Date type using input formatter
+   *
+   * @param str    parsed string
+   * @param format input formatter
+   * @return formatted date
+   */
   public static Date parseDate(String str, SimpleDateFormat format) {
     if (str == null || str.isEmpty()) {
       return null;

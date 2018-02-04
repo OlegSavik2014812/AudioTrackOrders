@@ -2,7 +2,7 @@
 <suite name="main-suite">
   <test name="SecurityTest">
     <classes>
-      <class name="com.audioord.web.security.SecurityTest"/>
+      <class name="com.audioord.web.security.CommandSecurityTest"/>
     </classes>
   </test>
 </suite>

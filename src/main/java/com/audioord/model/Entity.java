@@ -3,6 +3,9 @@ package com.audioord.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * abstract class, which provides inheritors with additional methods
+ */
 public abstract class Entity<T extends Serializable> implements Serializable {
 
   private static final long serialVersionUID = -2565570290688784024L;

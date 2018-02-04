@@ -7,6 +7,9 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.io.Writer;
 
+/**
+ * Class describing object, which sets logic to custom tag
+ */
 public class PagingTag extends SimpleTagSupport {
 
   private static final Logger LOG = Logger.getLogger(PagingTag.class);
@@ -15,14 +18,23 @@ public class PagingTag extends SimpleTagSupport {
   private int currPage;
   private int totalPages;
 
+  /**
+   * @param uri uri
+   */
   public void setUri(String uri) {
     this.uri = uri;
   }
 
+  /**
+   * @param currPage current page number
+   */
   public void setCurrPage(int currPage) {
     this.currPage = currPage;
   }
 
+  /**
+   * @param totalPages total page number
+   */
   public void setTotalPages(int totalPages) {
     this.totalPages = totalPages;
   }
@@ -39,6 +51,12 @@ public class PagingTag extends SimpleTagSupport {
     return currPage == 1;
   }
 
+  /**
+   * There is logic of custom tag, which provides long lis of info with paging
+   *
+   * @throws JspException {@link JspException}
+   * @throws IOException  {@link IOException}
+   */
   @Override
   public void doTag() throws JspException, IOException {
     try {
@@ -49,6 +67,7 @@ public class PagingTag extends SimpleTagSupport {
       LOG.error("Error processing page tag", e);
     }
   }
+
 
   private void displayTag(Writer out) throws Exception {
     out.write("<nav><ul class='pagination pagination-sm'>");

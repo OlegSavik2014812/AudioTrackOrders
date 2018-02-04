@@ -1,5 +1,9 @@
 package com.audioord.dao;
 
+/**
+ * Custom DAO exception, extends {@link Exception},that provides information on a database access
+ * error or other errors
+ */
 public class DAOException extends Exception {
 
   public DAOException(String message) {

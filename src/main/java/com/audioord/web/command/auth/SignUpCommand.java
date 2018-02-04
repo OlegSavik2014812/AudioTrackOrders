@@ -11,8 +11,14 @@ import com.audioord.web.command.Pages;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 
+import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Class describes the object-command, which add new client to the system
+ * and put his info to session.
+ * * implementation of {@link Command}
+ */
 public class SignUpCommand implements Command {
 
   public static final String NAME = "sign_up";
@@ -27,6 +33,18 @@ public class SignUpCommand implements Command {
   private final AuthInfoDao authInfoDao = new AuthInfoDao();
   private final UserDAO userDAO = new UserDAO();
 
+  /**
+   * the input parameters are checked - the username and password received from the request
+   * if the parameters are checked, then the variables are initialized
+   * the parameters are validate using method {@link AuthInfoDao#getById(Serializable)}
+   * then a new {@link AuthInfo} object and {@link User} object is created with using valide params
+   * if the command successful, user added to system and redirected to index page
+   *
+   * @param request  {@link Request}
+   * @param response {@link Response}
+   * @return string name of page
+   * @throws DAOException {@link DAOException}
+   */
   @Override
   public String execute(Request request, Response response) throws DAOException {
     if (!request.hasAllParameters(PRM_USERNAME, PRM_PASSWORD1, PRM_PASSWORD2)) {

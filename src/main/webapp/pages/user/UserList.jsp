@@ -31,7 +31,6 @@
               <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='ADMIN'}">
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="button_user"
                         data-target="#editDiscountModal">
-
                   <span class="oi oi-plus"></span>
                 </button>
               </c:if>
@@ -55,7 +54,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><fmt:message key="editdiscount.modal_title"/></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -95,8 +94,9 @@
               <input type="date" id="date_to" class="form-control" name="date_to"
                      placeholder="<fmt:message key="editdiscount.date_end"/> " required="" autofocus="">
             </div>
-            <button  onclick="form_submit_discount()" type="submit" class="btn btn-secondary" data-dismiss="modal"><fmt:message
-              key="editdiscount.add"/></button>
+            <button onclick="form_submit_discount()" type="submit" class="btn btn-secondary" data-dismiss="modal">
+              <fmt:message
+                key="editdiscount.add"/></button>
           </form>
         </div>
       </div>

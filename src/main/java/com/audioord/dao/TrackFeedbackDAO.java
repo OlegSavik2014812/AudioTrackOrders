@@ -1,16 +1,21 @@
 package com.audioord.dao;
 
+import com.audioord.model.Entity;
 import com.audioord.model.account.Role;
 import com.audioord.model.account.User;
 import com.audioord.model.audio.Track;
 import com.audioord.model.order.TrackFeedback;
 
+import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class TrackFeedbackDAO extends BaseEntityDao<TrackFeedback, Long> {
+/**
+ * TrackFeedback DAO class, extends {@link BaseEntityDao}
+ */
+public final class TrackFeedbackDAO extends BaseEntityDao<TrackFeedback, Long> {
   private static final String FEEDBACK_TABLE_COLUMN_FEEDBACK_ID = "FeedbackId";
   private static final String FEEDBACK_TABLE_COLUMN_COMMENT = "Comment";
   private static final String FEEDBACK_TABLE_COLUMN_DATE_CREATED = "Created";
@@ -38,6 +43,13 @@ public class TrackFeedbackDAO extends BaseEntityDao<TrackFeedback, Long> {
   private static final String SQL_DELETE_FEEDBACK = "delete from feedback where Id = ?";
 
   EntityMapper<TrackFeedback> mapper = new EntityMapper<TrackFeedback>() {
+    /**
+     *Parse {@link ResultSet} and creates {@link TrackFeedback} object
+     * @param rs ResultSet
+     * @return {@link TrackFeedback} object
+     * @throws SQLException {@link SQLException}
+     * @throws DAOException {@link DAOException}
+     */
     @Override
     public TrackFeedback parse(ResultSet rs) throws SQLException, DAOException {
       User user = new User(rs.getString(FEEDBACK_TABLE_COLUMN_USERNAME), Role.fromString(rs.getString(FEEDBACK_TABLE_COLUMN_ROLE)));
@@ -59,6 +71,12 @@ public class TrackFeedbackDAO extends BaseEntityDao<TrackFeedback, Long> {
       return trackFeedback;
     }
 
+    /**
+     *fill {@link PreparedStatement} with {@link TrackFeedback} info
+     * @param st     {@link PreparedStatement}
+     * @param entity {@link TrackFeedback} object
+     * @throws SQLException in case of my errors
+     */
     @Override
     public void write(PreparedStatement st, TrackFeedback entity) throws SQLException {
       st.setString(1, entity.getComments());
@@ -78,18 +96,41 @@ public class TrackFeedbackDAO extends BaseEntityDao<TrackFeedback, Long> {
     return null;
   }
 
+  /**
+   * Allows to delete row with {@link TrackFeedback} object info using id
+   * check {@link BaseEntityDao#remove(Serializable, String)}
+   *
+   * @param id id
+   * @return if the number of changed rows is greater than 0 - true, otherwise - false
+   * @throws DAOException {@link DAOException}
+   */
   @Override
   public boolean delete(Long id) throws DAOException {
     return remove(id, SQL_DELETE_FEEDBACK);
   }
 
+  /**
+   * Allows to create row, which have info of input {@link TrackFeedback} object
+   * check {@link BaseEntityDao#update(Entity, EntityMapper, String)}
+   *
+   * @param entity {@link TrackFeedback} object
+   * @return if the number of changed rows is greater than 0 - true, otherwise - false
+   * @throws DAOException {@link DAOException}
+   */
   @Override
   public boolean create(TrackFeedback entity) throws DAOException {
     return update(entity, mapper, SQL_CREATE_FEEDBACK);
   }
 
+  /**
+   * Allows to get list of {@link TrackFeedback}  using id of {@link Track}
+   * check {@link BaseEntityDao#findAll(EntityMapper, String, Object...)}
+   *
+   * @param trackId track id
+   * @return list of {@link TrackFeedback} objects
+   * @throws DAOException {@link DAOException}
+   */
   public List<TrackFeedback> getFeedbacksByTrackId(Long trackId) throws DAOException {
     return findAll(mapper, SQL_GET_ALL_FEEDBACKS_BY_TRACK_ID, trackId);
   }
-
 }

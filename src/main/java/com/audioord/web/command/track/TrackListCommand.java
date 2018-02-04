@@ -11,6 +11,10 @@ import com.audioord.web.http.Response;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class describes the object-command, which shows all tracks in the system and returns to track list page
+ * implementation of {@link Command}
+ */
 public class TrackListCommand implements Command {
 
   public static final String NAME = "track_list";
@@ -23,6 +27,16 @@ public class TrackListCommand implements Command {
   private static final String ATTRIBUTE_CURRENT_PAGE = "currentPage";
   private final TrackDAO trackDAO = new TrackDAO();
 
+  /**
+   * The input parameters for paging are checked if they are not valid. then the default value is initialized
+   * Further, the parameter is extracted for sorting, and if this parameter is valid, then a sorted track list is created
+   * if command executed successfully, then creation of list of {@link Track} objects and redirection to track list page
+   *
+   * @param request  {@link Request}
+   * @param response {@link Response}
+   * @return name page string
+   * @throws DAOException {@link DAOException}
+   */
   @Override
   public String execute(Request request, Response response) throws DAOException {
     int page = 1;

@@ -18,6 +18,10 @@ import com.audioord.web.command.user.UserListCommand;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * When started, creates commands for later use
+ * serves as a repository of available commands
+ */
 public final class Commands {
 
   private static final Map<String, Command> COMMAND_MAP = define(new HashMap<>());

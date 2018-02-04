@@ -11,6 +11,10 @@ import com.audioord.web.http.Response;
 
 import java.io.IOException;
 
+/**
+ * Class describes the object-command, which edit order status and returns to index page
+ * implementation of {@link Command}
+ */
 public class OrderStatusEdit implements Command {
 
   public static final String NAME = "order_edit";
@@ -19,6 +23,19 @@ public class OrderStatusEdit implements Command {
 
   private final OrderDAO orderDAO = new OrderDAO();
 
+  /**
+   * There is creation of {@link Order} object and its validation, if order didn't exists, then redirecting to
+   * order list page
+   * if status of is invalid, then redirecting to order list page
+   * if status has no changes, then redirecting to order list page
+   * if command is successful, then updating {@link Order} object and redirection index page
+   *
+   * @param request  {@link Request}
+   * @param response {@link Response}
+   * @return string name of page
+   * @throws IOException  in case, when params incorrect
+   * @throws DAOException {@link DAOException}
+   */
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {
 

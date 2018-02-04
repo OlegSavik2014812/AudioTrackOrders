@@ -13,24 +13,54 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * abstract generic BaseEntity DAO class, implements {@link EntityDAO}
+ */
 public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable> implements EntityDAO<E, K> {
 
   private static final Logger LOG = Logger.getLogger(BaseEntityDao.class);
 
   private ConnectionSource connectionSource;
 
+  /**
+   * BaseEntityDao constructor,which determines what will be the source of connections
+   * in this case the source of connections is DataBasePool, which is initialized once
+   */
   public BaseEntityDao() {
     this.connectionSource = DBPool.getInstance();
   }
 
+  /**
+   * Additional BaseEntityDao constructor, which accepts as an input parameter the source of the connections
+   *
+   * @param connectionSource source of the connections
+   */
   public BaseEntityDao(ConnectionSource connectionSource) {
     this.connectionSource = Objects.requireNonNull(connectionSource);
   }
 
+  /**
+   * Allows to get source of connections
+   *
+   * @return {@link ConnectionSource}
+   */
   public ConnectionSource getConnectionSource() {
     return connectionSource;
   }
 
+  /**
+   * Allows to remove raw from database using parametrized id and input SQL query
+   * also it checks input id to null
+   * removeMethod gets connection from {@link ConnectionSource#getConnection()}, creates {@link PreparedStatement}
+   * and fills it with input id
+   * execution of statement returns number of affected rows
+   * if it was affected at least one row, it's returns true,otherwise false
+   *
+   * @param id  parametrized input id
+   * @param sql SQL query string
+   * @return if the number of changed rows is greater than 0 - true, otherwise - false
+   * @throws DAOException {@link DAOException}
+   */
   protected boolean remove(K id, String sql) throws DAOException {
     Objects.requireNonNull(id, "Param Id could not be null");
 
@@ -52,6 +82,21 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     return isRemoved;
   }
 
+  /**
+   * Allows to get id of {@link Entity} from database using {@link Entity} object, {@link EntityMapper}
+   * and SQL query string
+   * createMethod gets connection from {@link ConnectionSource#getConnection()}, creates {@link PreparedStatement}
+   * calls {@link EntityMapper#write(PreparedStatement, Entity)}, which fills {@link PreparedStatement} with info
+   * of {@link Entity}
+   * execute this statement and assign to {@link ResultSet}
+   *
+   * @param entity {@link Entity}
+   * @param mapper {@link EntityMapper}
+   * @param sql    SQL query string
+   * @return {@link Entity} id
+   * @throws DAOException {@link DAOException}
+   */
+
   protected K create(E entity, EntityMapper<E> mapper, String sql) throws DAOException {
     K id = null;
     try (Connection con = connectionSource.getConnection();
@@ -72,6 +117,22 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     return id;
   }
 
+  /**
+   * Allows to update(create) raw from database using input{@link Entity} object, input {@link EntityMapper}
+   * and SQL query string
+   * also it checks input {@link Entity} and {@link EntityMapper} to null
+   * updateMethod gets connection from {@link ConnectionSource#getConnection()}, creates {@link PreparedStatement}
+   * calls {@link EntityMapper#write(PreparedStatement, Entity)}, which fills {@link PreparedStatement} with params
+   * of {@link Entity}
+   * execution of statement returns number of affected rows
+   * if it was affected at least one row, it's returns true,otherwise false
+   *
+   * @param entity {@link Entity} object
+   * @param mapper {@link EntityMapper}
+   * @param sql    update(create) SQL query string
+   * @return if the number of changed rows is greater than 0 - true, otherwise false
+   * @throws DAOException {@link DAOException}
+   */
   protected boolean update(E entity, EntityMapper<E> mapper, String sql) throws DAOException {
     Objects.requireNonNull(entity, "Param Entity could not be null");
     Objects.requireNonNull(mapper, "Param Mapper could not be null");
@@ -94,6 +155,20 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     return isCreated;
   }
 
+  /**
+   * Allows to get {@link List} of {@link Entity} from database using input {@link EntityMapper}
+   * ,input SQL query string and {@link List} of parametrized id
+   * also it checks input {@link EntityMapper} to null
+   * getByIdsMethod gets connection from {@link ConnectionSource#getConnection()}, creates {@link PreparedStatement}
+   * fills {@link PreparedStatement} with input ids, execute this statement and assign to {@link ResultSet}
+   * Further in the cycle there is a creation of {@link Entity} objects and addition to {@link List} of {@link Entity}
+   *
+   * @param mapper {@link EntityMapper}
+   * @param sql    get SQL query string
+   * @param ids    {@link List} of ids
+   * @return {@link List} of {@link Entity} objects
+   * @throws DAOException {@link DAOException}
+   */
   protected List<E> getByIds(EntityMapper<E> mapper, String sql, List<K> ids) throws DAOException {
     Objects.requireNonNull(mapper, "Param Mapper could not be null");
 
@@ -119,6 +194,21 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     return list;
   }
 
+  /**
+   * Allows to get {@link List} of {@link Entity} from database using input SQL query string,
+   * input {@link EntityMapper} and array of {@link Object} params
+   * also it checks input {@link EntityMapper} to null
+   * findAllMethod gets connection from {@link ConnectionSource#getConnection()}, creates {@link PreparedStatement}
+   * checks array to null and array size
+   * fills {@link PreparedStatement} with input params,execute this statement and assign to {@link ResultSet}
+   * Further in the cycle there is a creation of {@link Entity} objects and addition to {@link List} of {@link Entity}
+   *
+   * @param mapper {@link EntityMapper}
+   * @param sql    SQL query string
+   * @param params array of {@link Object}
+   * @return {@link List} of {@link Entity}
+   * @throws DAOException {@link DAOException}
+   */
   protected List<E> findAll(EntityMapper<E> mapper, String sql, Object... params) throws DAOException {
     Objects.requireNonNull(mapper, "Param Mapper could not be null");
 
@@ -148,6 +238,21 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
     return list;
   }
 
+  /**
+   * Allows to get {@link Entity} from database using input SQL query string,
+   * input {@link EntityMapper} and array of {@link Object} params
+   * also it checks input {@link EntityMapper} to null
+   * findMethod gets connection from {@link ConnectionSource#getConnection()}, creates {@link PreparedStatement}
+   * checks array of {@link Object} to null and array size
+   * fills {@link PreparedStatement} with input params,execute this statement and assign to {@link ResultSet}
+   * Further there is a creation of {@link Entity} object
+   *
+   * @param mapper {@link EntityMapper}
+   * @param sql    SQL query string
+   * @param params array of {@link Object}
+   * @return {@link Entity} object
+   * @throws DAOException {@link DAOException}
+   */
   protected E find(EntityMapper<E> mapper, String sql, Object... params) throws DAOException {
     Objects.requireNonNull(mapper);
 

@@ -1,5 +1,8 @@
 package com.audioord.web.command;
 
+/**
+ * provides system with directory pathways of jsp pages
+ */
 public final class Pages {
 
   public static final String INDEX_PAGE = "/index.jsp";

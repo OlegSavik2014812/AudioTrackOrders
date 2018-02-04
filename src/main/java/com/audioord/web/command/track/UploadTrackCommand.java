@@ -16,6 +16,10 @@ import org.apache.commons.fileupload.FileItem;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class describes the object-command, which upload new track and returns to add track page
+ * implementation of {@link Command}
+ */
 public class UploadTrackCommand implements Command {
 
   public static final String NAME = "upload_track";
@@ -23,6 +27,22 @@ public class UploadTrackCommand implements Command {
 
   private final TrackDAO trackDAO = new TrackDAO();
 
+  /**
+   * there is extraction file from request and it's assigned to {@link FileItem} object
+   * if fileItem is equal to null then redirection to track add page
+   * <p>
+   * then writing file using {@link FileUtils#writeFile(FileItem, String)}
+   * after that there is creation of {@link Track} object with file params, in bad case there is deleting file, that
+   * can not be parsed
+   * if command executed successfully, then creation of new {@link Track} object with real params of file and
+   * redirection to add track page
+   *
+   * @param request  {@link Request}
+   * @param response {@link Response}
+   * @return string name of page
+   * @throws IOException  in case, when params incorrect
+   * @throws DAOException {@link DAOException}
+   */
   @Override
   public String execute(Request request, Response response) throws DAOException, IOException {
     FileItem fileItem = request.getFileItem("file");

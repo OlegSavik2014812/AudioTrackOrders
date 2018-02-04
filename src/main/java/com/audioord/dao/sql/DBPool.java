@@ -13,25 +13,38 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Database Connection Pool provides
+ */
 public final class DBPool extends DBPoolBase {
 
   private static final Logger LOG = Logger.getLogger(DBPool.class);
 
   private static final ReentrantLock LOCK = new ReentrantLock();
 
-  /** Pool max connections number */
+  /**
+   * Pool max connections number
+   */
   private static final int SIZE = 8;
 
-  /** Pool state */
+  /**
+   * Pool state
+   */
   private static AtomicBoolean isInitialized = new AtomicBoolean(false);
 
-  /** current pool instance * */
+  /**
+   * current pool instance *
+   */
   private static DBPool instance;
 
-  /** available connections */
+  /**
+   * available connections
+   */
   private BlockingQueue<Connection> free;
 
-  /** used connections */
+  /**
+   * used connections
+   */
   private BlockingQueue<Connection> used;
 
   /**
@@ -40,10 +53,10 @@ public final class DBPool extends DBPoolBase {
    */
   private DBPool() {
     super(
-        System.getProperty("db.driver"),
-        System.getProperty("db.username"),
-        System.getProperty("db.password"),
-        System.getProperty("db.url"));
+    System.getProperty("db.driver"),
+    System.getProperty("db.username"),
+    System.getProperty("db.password"),
+    System.getProperty("db.url"));
   }
 
   /**
@@ -68,7 +81,9 @@ public final class DBPool extends DBPoolBase {
     return instance;
   }
 
-  /** Internal pool load */
+  /**
+   * Internal pool load
+   */
   @Override
   protected void initialize() {
     if (!validate()) {
@@ -97,7 +112,7 @@ public final class DBPool extends DBPoolBase {
    * Provides available connection from the pool.
    *
    * @return {@link Connection}
-   * @throws PoolException in case of no connections
+   * @throws PoolException {@link PoolException} in case of no connections
    */
   @Override
   public Connection getConnection() throws PoolException {

@@ -8,12 +8,26 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLDecoder;
 
+/**
+ * Class describes object,which uses as additional servlet for processing file data
+ */
 public class FileServlet extends MainServlet {
 
   public static final String UPLOAD_DIR_PATH = "WEB-INF/uploads";
   private static final Logger LOG = Logger.getLogger(MainServlet.class);
   private static final int DEFAULT_BUFFER_SIZE = 10240; // 10KB.
 
+  /**
+   * There is reading from {@link HttpServletRequest} file, which user want to download
+   * identifying real path on computer and if it exist
+   * validate file extension
+   * if file extension is valid, then it init response '
+   * read and write file array of bytes
+   *
+   * @param req {@link HttpServletRequest}
+   * @param res {@link HttpServletResponse}
+   * @throws Exception in case when input data is not valid
+   */
   @Override
   public void processRequest(HttpServletRequest req, HttpServletResponse res) throws Exception {
     String requestedFile = req.getPathInfo();

@@ -5,6 +5,9 @@ import com.audioord.model.account.User;
 
 import java.util.Date;
 
+/**
+ * Class describing object for storing information about OrderDiscount, extends {@link Entity}
+ */
 public class OrderDiscount extends Entity<Long> {
 
   private double discountPercent;
@@ -12,6 +15,14 @@ public class OrderDiscount extends Entity<Long> {
   private Date effectiveTo;
   private User user;
 
+  /**
+   * constructor of {@link OrderDiscount} with params
+   *
+   * @param discountPercent percent of discount
+   * @param effectiveFrom   date, begin of discount usage
+   * @param effectiveTo     date, end of discount usage
+   * @param user            {@link User} object
+   */
   public OrderDiscount(double discountPercent, Date effectiveFrom, Date effectiveTo, User user) {
     this.discountPercent = discountPercent;
     this.effectiveFrom = effectiveFrom;
@@ -19,6 +30,9 @@ public class OrderDiscount extends Entity<Long> {
     this.user = user;
   }
 
+  /**
+   * @return discountPercent
+   */
   public double getDiscountPercent() {
     return discountPercent;
   }
@@ -27,6 +41,9 @@ public class OrderDiscount extends Entity<Long> {
     this.discountPercent = discountPercent;
   }
 
+  /**
+   * @return date, begin of discount usage
+   */
   public Date getEffectiveFrom() {
     return effectiveFrom;
   }
@@ -35,6 +52,9 @@ public class OrderDiscount extends Entity<Long> {
     this.effectiveFrom = effectiveFrom;
   }
 
+  /**
+   * @return date, end of discount usage
+   */
   public Date getEffectiveTo() {
     return effectiveTo;
   }
@@ -43,10 +63,16 @@ public class OrderDiscount extends Entity<Long> {
     this.effectiveTo = effectiveTo;
   }
 
+  /**
+   * @return {@link User} object
+   */
   public User getUser() {
     return user;
   }
 
+  /**
+   * @param user {@link User} object
+   */
   public void setUser(User user) {
     this.user = user;
   }

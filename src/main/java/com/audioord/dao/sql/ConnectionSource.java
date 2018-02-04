@@ -2,14 +2,17 @@ package com.audioord.dao.sql;
 
 import java.sql.Connection;
 
-/** Connection source for DB */
+
+/**
+ * Connection source for DB
+ */
 public interface ConnectionSource {
 
   /**
    * Retrieves connection to database
    *
    * @return {@link java.sql.Connection}
-   * @throws PoolException
+   * @throws PoolException {@link PoolException}
    */
   java.sql.Connection getConnection() throws PoolException;
 
