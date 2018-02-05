@@ -13,7 +13,7 @@ public class CommandSecurity {
   public static boolean isAllowedToAdmin(String commandName) {
     boolean isAllowed = false;
     for (AdminCommand adminCommand : AdminCommand.values()) {
-      if (commandName.equals(adminCommand.toString().toLowerCase())) {
+      if (commandName.equals(adminCommand.toString().toLowerCase())) { /*REVERSE*/
         isAllowed = true;
         break;
       }

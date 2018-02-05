@@ -66,7 +66,6 @@ public final class DBPool extends DBPoolBase {
    */
   public static ConnectionSource getInstance() {
     if (!isInitialized.get()) {
-
       try {
         LOCK.lock();
         if (!isInitialized.get()) {

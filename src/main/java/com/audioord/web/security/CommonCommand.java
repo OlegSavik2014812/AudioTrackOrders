@@ -1,7 +1,7 @@
 package com.audioord.web.security;
 
 /**
- * * enum, provides system with common command name
+ * * enum, provides system with command name
  */
 public enum CommonCommand {
   CHANGE_LOCAL,

@@ -1,11 +1,10 @@
 package com.audioord.web.cart;
 
+import java.util.List;
+
 /**
  * interface, provides implementation with additional methods
  */
-
-import java.util.List;
-
 public interface Cart extends Iterable<CartItem> {
 
   void addCartItem(CartItem c);
