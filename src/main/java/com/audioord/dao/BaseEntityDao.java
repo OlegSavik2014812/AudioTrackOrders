@@ -107,13 +107,13 @@ public abstract class BaseEntityDao<E extends Entity<K>, K extends Serializable>
       st.executeUpdate();
       ResultSet rs = st.getGeneratedKeys();
       if (rs.next()) {
-        return (K) Long.valueOf(rs.getLong(1));
+         id = (K)rs.getObject(1);
       }
 
     } catch (SQLException | PoolException e) {
       throw new DAOException(e);
     }
-
+    
     return id;
   }
 
