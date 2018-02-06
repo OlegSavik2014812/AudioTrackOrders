@@ -82,9 +82,9 @@ public class SignUpCommand implements Command {
       return Pages.SIGN_UP_PAGE; // could not create user
     }
 
-
+    User userWithId = userDAO.getByUsername(userName);
     // add current user to session
-    request.setSessionAttribute(ATTRIBUTE_USER, user);
+    request.setSessionAttribute(ATTRIBUTE_USER, userWithId);
 
     return Pages.INDEX_PAGE;
   }

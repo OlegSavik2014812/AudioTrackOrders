@@ -42,8 +42,8 @@
           <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Название</th>
-            <th scope="col">Исполнитель</th>
+            <th scope="col"><fmt:message key="tracklist.track_name"/></th>
+            <th scope="col"><fmt:message key="tracklist.artist_name"/></th>
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>

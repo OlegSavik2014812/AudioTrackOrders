@@ -17,9 +17,7 @@ import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class describes the object-command, which put ordered tracks from cart to order
@@ -66,8 +64,8 @@ public class MakeCartOrderCommand implements Command {
       cart.clearCart();
       return Pages.INDEX_PAGE;
     }
-
-    List<Track> tracks = getTracks(cart);
+    Set<Track> tracks = new HashSet<>();
+    tracks.addAll(getTracks(cart));
     if (tracks.size() != cart.getItemsTotalCount()) {
       // not all tracks exists any more order can not be performed
       return Pages.CART_LIST_PAGE;
@@ -77,14 +75,16 @@ public class MakeCartOrderCommand implements Command {
     // make new order
     OrderDiscount orderDiscount = request.getSessionAttribute(ATTRIBUTE_BONUS, OrderDiscount.class);
     double percent = 1d;
+
     if (orderDiscount != null) {
       percent = (100 - orderDiscount.getDiscountPercent()) / 100;
     }
-
+    List<Track> trackList = new ArrayList<>();
+    trackList.addAll(tracks);
     Order trackOrder = new Order(user, new Date());
     trackOrder.setStatus(OrderStatus.SUBMITTED);
     trackOrder.setTotalPrice(cart.getTotalCost() * percent);
-    trackOrder.setTracks(tracks);
+    trackOrder.setTracks(trackList);
 
     // clear cart after order save
     if (orderDAO.create(trackOrder)) {

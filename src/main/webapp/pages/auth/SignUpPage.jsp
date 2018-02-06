@@ -12,6 +12,12 @@
   <title><fmt:message key="signup.title"/></title>
   <c:import url="../css_import.jsp"/>
   <link href="<c:url value="/css/login.css"/>" rel="stylesheet" type="text/css">
+
+  <style>
+    .form-control.disabled {
+      border-color: red;
+    }
+  </style>
 </head>
 
 <body>
@@ -28,38 +34,39 @@
         <label for="username" class="sr-only">
           <fmt:message key="signup.enter_username"/>
         </label>
-        <input type="text" name="userName" id="username" class="form-control"
-               placeholder="<fmt:message key="signup.enter_username"/> " required=""
-               pattern=^[a-zA-Z][a-zA-Z0-9-_\.]{4,20}$ autofocus="">
+        <div>
+          <input type="text" name="userName" id="username" class="form-control"
+                 placeholder="<fmt:message key="signup.enter_username"/> " autofocus="" onchange="isFormValid()">
+        </div>
       </div>
 
       <div class="form-group">
         <label for="inputPassword1" class="sr-only"><fmt:message key="signup.enter_password"/> </label>
         <input type="password" id="inputPassword1" name="password1" class="form-control"
                placeholder="<fmt:message key="signin.enter_password"/>"
-               required="">
+               required="" onchange="isFormValid()">
       </div>
 
       <div class="form-group">
         <label for="inputPassword2" class="sr-only"><fmt:message key="signup.confirm_password"/> </label>
         <input type="password" id="inputPassword2" name="password2" class="form-control"
                placeholder="<fmt:message key="signup.confirm_password"/>"
-               required="">
+               required="" onchange="isFormValid()">
       </div>
 
       <div class="form-group">
         <label for="inputFirstName" class="sr-only"><fmt:message key="signup.firstname"/> </label>
-        <input type="text" id="inputFirstName" name="firstName" class="form-control" pattern=^[A-Z][a-z\.]{1,20}$
-               placeholder="<fmt:message key="signup.firstname"/> ">
+        <input type="text" id="inputFirstName" name="firstName" class="form-control"
+               placeholder="<fmt:message key="signup.firstname"/> " onchange="isFormValid()">
       </div>
 
       <div class="form-group">
         <label for="inputLastName" class="sr-only"><fmt:message key="signup.lastname"/> </label>
-        <input type="text" id="inputLastName" name="lastName" class="form-control" pattern=^[A-Z][a-z\.]{1,20}$
-               placeholder="<fmt:message key="signup.lastname"/> ">
+        <input type="text" id="inputLastName" name="lastName" class="form-control"
+               placeholder="<fmt:message key="signup.lastname"/>" onchange=isFormValid()>
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block" id="submitButton" type="submit">
+      <button class="btn btn-lg btn-primary btn-block" id="submitButton" type="submit" disabled>
         <fmt:message key="button.signup"/>
       </button>
 

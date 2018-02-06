@@ -1,25 +1,25 @@
 package com.audioord.web.cart;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Class describing object for storing information about User Cart
  */
 public class ShopCart implements Cart {
 
-  private List<CartItem> cartItems;
+  private Set<CartItem> cartItems;
 
   /**
    * constructor, initialize list of {@link CartItem} objects
    */
   public ShopCart() {
-    this.cartItems = new ArrayList<>();
+    this.cartItems = new HashSet<>();
   }
 
-  public ShopCart(List<CartItem> cartItems) {
+  public ShopCart(Set<CartItem> cartItems) {
     this.cartItems = cartItems;
   }
 
@@ -89,8 +89,8 @@ public class ShopCart implements Cart {
    * @return unmodifiable list of {@link CartItem} objects
    */
   @Override
-  public List<CartItem> getList() {
-    return Collections.unmodifiableList(cartItems);
+  public Set<CartItem> getList() {
+    return Collections.unmodifiableSet(cartItems);
   }
 
   /**

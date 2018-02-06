@@ -48,6 +48,7 @@ public class UserListCommand implements Command {
     List<User> userList;
     int noOfRecords = userDAO.countAllUsers();
     int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+    page = validatePageValue(page, noOfPages);
     userList = userDAO.getAllUsers((page - 1) * recordsPerPage, recordsPerPage);
     if (userList == null || userList.isEmpty()) {
       return Pages.INDEX_PAGE;
@@ -57,5 +58,16 @@ public class UserListCommand implements Command {
     request.addAttribute(ATTRIBUTE_NUMBER_OF_PAGES, noOfPages);
     request.addAttribute(ATTRIBUTE_CURRENT_PAGE, page);
     return Pages.USER_LIST_PAGE;
+  }
+
+  private int validatePageValue(int page, int noOfPages) {
+    if (page > noOfPages) {
+      return noOfPages;
+    }
+    if (page < 0) {
+      return 1;
+    } else {
+      return page;
+    }
   }
 }

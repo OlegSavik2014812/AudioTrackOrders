@@ -63,7 +63,9 @@
           <div class="mb-3">
             <label for="name"><fmt:message key="edittrack.track_name"/> </label>
             <div class="input-group">
-              <input type="text" class="form-control" id="name" name="trackName" value="${track.name}" required>
+              <input type="text" class="form-control" id="name" name="trackName" value="${track.name}" required
+                     onchange="isTrackParamsValid()">
+
                 <%--<div class="invalid-feedback" style="width: 100%;">--%>
                 <%--Your username is required.--%>
                 <%--</div>--%>
@@ -73,14 +75,16 @@
           <div class=" row">
             <div class="col-md-6 mb-3">
               <label for="artist"><fmt:message key="edittrack.artist_name"/> </label>
-              <input type="text" class="form-control" id="artist" name="artist" value="${track.artist}" required>
+              <input type="text" class="form-control" id="artist" name="artist" value="${track.artist}" required
+                     onchange="isTrackParamsValid()">
                 <%--<div class="invalid-feedback">--%>
                 <%--Valid first name is required.--%>
                 <%--</div>--%>
             </div>
             <div class="col-md-6 mb-3">
               <label for="album"><fmt:message key="index.album_name"/> </label>
-              <input type="text" class="form-control" id="album" name="album" value="${track.album}" required>
+              <input type="text" class="form-control" id="album" name="album" value="${track.album}" required
+                     onchange="isTrackParamsValid()">
                 <%--<div class="invalid-feedback">--%>
                 <%--Valid last name is required.--%>
                 <%--</div>--%>
@@ -90,7 +94,7 @@
           <div class="mb-3">
             <label for="price"><fmt:message key="edittrack.price"/> </label>
             <div class="input-group">
-              <input type="number" class="form-control" id="price" name="price" required>
+              <input type=text class="form-control" id="price" name="price" onchange="isTrackParamsValid()" required>
                 <%--<div class="invalid-feedback" style="width: 100%;">--%>
                 <%--Your username is required.--%>
                 <%--</div>--%>
@@ -98,7 +102,8 @@
           </div>
 
           <hr class="mb-4"/>
-          <button class="btn btn-primary btn-lg btn-block" type="submit"><fmt:message key="edittrack.save"/></button>
+          <button class="btn btn-primary btn-lg btn-block" type="submit" id="button-save-track" disabled><fmt:message
+            key="edittrack.save"/></button>
         </form>
       </c:if>
     </div>

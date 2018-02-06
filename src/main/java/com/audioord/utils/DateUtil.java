@@ -63,4 +63,8 @@ public final class DateUtil {
     }
     return null;
   }
+
+  public static Date getCurrentDate() {
+    return parseDate(new Date().toString());
+  }
 }

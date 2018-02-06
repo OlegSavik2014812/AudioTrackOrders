@@ -44,7 +44,7 @@ public class EditTrackFeedbackCommand implements Command {
     Long trackId = (Long) request.raw().getSession().getAttribute("trackId");
     Track track = trackDAO.getById(Long.valueOf(trackId));
     String comments = request.getParameter("comment");
-    if (comments.length() > 255) {
+    if (comments.length() > 255 || comments.length() == 0) {
       return Pages.FEEDBACK_PAGE;
     }
     TrackFeedback trackFeedback = new TrackFeedback(user, comments, track);

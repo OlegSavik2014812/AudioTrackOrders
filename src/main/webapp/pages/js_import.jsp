@@ -9,4 +9,7 @@
 <script src="<c:url value="/js/ajaxcommand.js"/>"></script>
 <script src="<c:url value="/js/fileinput.js"/>"></script>
 <script src="<c:url value="/js/disablecopypaste.js" />"></script>
-<script src="<c:url value="/js/getusercommand.js"/> "></script>
+<script type="text/javascript" src="<c:url value="/js/validate-form.js"/> "></script>
+<script type="text/javascript" src="<c:url value="/js/validate-feedback.js"/> "></script>
+<script type="text/javascript " src="<c:url value="/js/submit-feedback.js" />"></script>
+<script type="text/javascript " src="<c:url value="/js/validate-edit-track.js" />"></script>

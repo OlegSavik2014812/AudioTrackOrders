@@ -50,6 +50,7 @@ public class TrackListCommand implements Command {
     List<Track> trackList = new ArrayList<>();
     int noOfRecords = trackDAO.countAllTracks();
     int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+    page = validatePageValue(page, noOfPages);
     switch (trackSort) {
       case MOST_POPULAR: {
         trackList = trackDAO.getMostPopularTracks((page - 1) * recordsPerPage,
@@ -88,6 +89,20 @@ public class TrackListCommand implements Command {
         }
       }
       return MOST_POPULAR;
+    }
+  }
+
+  private int validatePageValue(int page, int noOfPages) {
+    if (page > noOfPages) {
+      if (noOfPages == 0) {
+        return 1;
+      }
+      return noOfPages;
+    }
+    if (page < 0) {
+      return 1;
+    } else {
+      return page;
     }
   }
 }

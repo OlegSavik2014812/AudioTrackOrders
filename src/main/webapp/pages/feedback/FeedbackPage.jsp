@@ -24,7 +24,7 @@
 </div>
 <div class="container">
   <div class="row justify-content-center">
-    <c:if test="${sessionScope.USER!=null}">
+    <c:if test="${sessionScope.USER!=null&& sessionScope.USER.role!= 'ADMIN'}">
       <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="button_user"
               data-target="#editFeedBackModal">
         <fmt:message key="editfeedback.send_feedback"/>
@@ -74,11 +74,11 @@
 
               </label>
               <input type="text" id="comment" class="form-control" name="comment"
-                     placeholder="<fmt:message key="editfeedback.write_comment"/> " required
-                     pattern=".{0,254}"
+                     placeholder="<fmt:message key="editfeedback.write_comment"/> " onchange="isFormCommentValid()"
                      autofocus="">
             </div>
-            <button onclick="form_submit_feedback()" type="submit" class="btn btn-secondary" data-dismiss="modal">
+            <button onclick="form_submit_feedback()" type="submit" class="btn btn-secondary" data-dismiss="modal"
+                    id="modal-button-submit" disabled>
               <fmt:message key="editfeedback.add"/>
             </button>
           </form>
@@ -87,11 +87,6 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  function form_submit_feedback() {
-    document.getElementById("edit_feedback").submit();
-  }
-</script>
 <c:import url="../js_import.jsp"/>
 </body>
 </html>

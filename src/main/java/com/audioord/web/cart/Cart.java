@@ -1,6 +1,6 @@
 package com.audioord.web.cart;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * interface, provides implementation with additional methods
@@ -17,7 +17,7 @@ public interface Cart extends Iterable<CartItem> {
 
   double getTotalCost();
 
-  List<CartItem> getList();
+  Set<CartItem> getList();
 
   boolean getHasItems();
 

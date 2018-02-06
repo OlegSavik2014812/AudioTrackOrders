@@ -58,10 +58,14 @@ public class RequestHandler {
   private void execute(Command command, ServletContext ctx, Request req, Response res) {
     try {
 
-      String page = command.execute(req, res);
+      String path = command.execute(req, res);
+      //handle command redirect
+      if (path.startsWith("redirect:")) {
+        res.raw().sendRedirect(path.replaceFirst("redirect:", ""));
 
-      ctx.getRequestDispatcher(page).forward(req.raw(), res.raw());
-
+      } else {
+        ctx.getRequestDispatcher(path).forward(req.raw(), res.raw());
+      }
     } catch (Exception e) {
       LOG.error(e);
     }
