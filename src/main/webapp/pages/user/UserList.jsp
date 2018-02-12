@@ -17,21 +17,41 @@
           <th scope="col"><fmt:message key="userlist.username"/></th>
           <th scope="col"><fmt:message key="userlist.first_name"/></th>
           <th scope="col"><fmt:message key="userlist.last_name"/></th>
+          <th scope="col"><fmt:message key="userlist.cash"/></th>
+          <th scope="col"><fmt:message key="userlist.discount"/></th>
+          <th scope="col"><fmt:message key="userlist.edit_cash"/></th>
           <th></th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${UserList}" var="user">
+        <c:forEach items="${UserMap}" var="userMap">
+
           <tr>
-            <td><c:out value="${user.username}"/></td>
-            <td><c:out value="${user.firstName}"/></td>
-            <td><c:out value="${user.lastName}"/></td>
+            <td><c:out value="${userMap.key.username}"/></td>
+            <td><c:out value="${userMap.key.firstName}"/></td>
+            <td><c:out value="${userMap.key.lastName}"/></td>
+            <td><c:out value="${userMap.key.cash}"/></td>
 
             <td>
               <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='ADMIN'}">
+                <c:if test="${userMap.value==false}">
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="button_user"
+                          data-target="#editDiscountModal">
+                    <span class="oi oi-check"></span>
+                  </button>
+                </c:if>
+                <c:if test="${userMap.value==true}">
+                  <a href="<c:url value="/action?name=delete_discount&id=${userMap.key.id}" />">
+                    <span class="oi oi-x"></span>
+                  </a>
+                </c:if>
+              </c:if>
+            </td>
+            <td>
+              <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='ADMIN'}">
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="button_user"
-                        data-target="#editDiscountModal">
-                  <span class="oi oi-plus"></span>
+                        data-target="#editUserCash">
+                  <span class="oi oi-dollar"></span>
                 </button>
               </c:if>
             </td>
@@ -44,7 +64,7 @@
 
   <div class="row">
     <div class="col-12 ">
-      <c:url value="/action?name=track_list&sort=${sort}&page=##" var="searchUri"/>
+      <c:url value="/action?name=user_list&page=##" var="searchUri"/>
       <tags:Paging uri="${searchUri}" currPage="${currentPage}" totalPages="${noOfPages}"/>
     </div>
   </div>
@@ -102,9 +122,54 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="editUserCash" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabelCash"><fmt:message key="user.add_cash"/></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="action" id="add_cash">
+            <input type="hidden" name="name" value="add_money">
+
+            <div class="form-group">
+              <label for="usernamecash" class="sr-only">
+                <fmt:message key="editdiscount.enter_username"/>
+              </label>
+              <input type="text" id="usernamecash" class="form-control" name="username"
+                     placeholder="<fmt:message key="editdiscount.enter_username"/> " required="" autofocus="">
+            </div>
+
+            <div class="form-group">
+              <label for="cash" class="sr-only">
+                <fmt:message key="editdiscount.enter_percent"/>
+              </label>
+              <input type="text" id="cash" class="form-control" name="cash"
+                     placeholder="<fmt:message key="user.add_cash"/> " required="" autofocus="">
+            </div>
+            <button onclick="form_submit_cash()" type="submit" class="btn btn-secondary" data-dismiss="modal">
+              <fmt:message
+                key="editdiscount.add"/></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 <script type="text/javascript">
   function form_submit_discount() {
     document.getElementById("add_discount").submit();
   }
+
+  function form_submit_cash() {
+    document.getElementById("add_cash").submit();
+  }
 </script>
+

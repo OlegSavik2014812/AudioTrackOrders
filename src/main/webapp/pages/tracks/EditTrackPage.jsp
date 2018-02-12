@@ -15,7 +15,22 @@
   </title>
   <c:import url="../css_import.jsp"/>
   <link href="<c:url value="/css/fileinput.css"/>" rel="stylesheet" type="text/css">
+  <style>
+    .form-control.disabled {
+      border-color: red;
+    }
 
+    .validation-message {
+      color: red;
+      font-size: 12px;
+      word-wrap: break-word;
+      display: none;
+    }
+
+    .validation-message.visible {
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
@@ -45,6 +60,7 @@
         <form action="${uploadUrl}" method="POST" enctype="multipart/form-data">
           <div class="mb-3">
             <label class="custom-file" id="customFile">
+              <span class="validation-message"><fmt:message key="signup.msg.username"/> </span>
               <input type="file" class="custom-file-input" id="file" name="file" aria-describedby="fileHelp" required>
               <span class="custom-file-control form-control-file"> </span>
             </label>
@@ -61,6 +77,7 @@
           <input type="hidden" name="trackId" value="${track.id}">
 
           <div class="mb-3">
+            <span class="validation-message"><fmt:message key="signup.msg.username"/> </span>
             <label for="name"><fmt:message key="edittrack.track_name"/> </label>
             <div class="input-group">
               <input type="text" class="form-control" id="name" name="trackName" value="${track.name}" required
@@ -74,6 +91,7 @@
 
           <div class=" row">
             <div class="col-md-6 mb-3">
+              <span class="validation-message"><fmt:message key="signup.msg.username"/> </span>
               <label for="artist"><fmt:message key="edittrack.artist_name"/> </label>
               <input type="text" class="form-control" id="artist" name="artist" value="${track.artist}" required
                      onchange="isTrackParamsValid()">
@@ -82,6 +100,7 @@
                 <%--</div>--%>
             </div>
             <div class="col-md-6 mb-3">
+              <span class="validation-message"><fmt:message key="signup.msg.username"/> </span>
               <label for="album"><fmt:message key="index.album_name"/> </label>
               <input type="text" class="form-control" id="album" name="album" value="${track.album}" required
                      onchange="isTrackParamsValid()">
@@ -92,6 +111,7 @@
           </div>
 
           <div class="mb-3">
+            <span class="validation-message"><fmt:message key="signup.msg.username"/> </span>
             <label for="price"><fmt:message key="edittrack.price"/> </label>
             <div class="input-group">
               <input type=text class="form-control" id="price" name="price" onchange="isTrackParamsValid()" required>

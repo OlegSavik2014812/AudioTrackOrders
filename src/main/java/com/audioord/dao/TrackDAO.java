@@ -41,7 +41,10 @@ public final class TrackDAO extends BaseEntityDao<Track, Long> {
 
   private static final String SQL_GET_BY_IDS =
   "SELECT track, artist, album, popularity, uri, price, duration, id FROM track where track.id in (##)";
-
+  private static final String SQL_GET_TRACKS_BY_PACK_ID =
+  "select t.Id, t.Track, t.Artist, t.Album,t.Popularity,t.URI,t.Price,t.Duration from track t, packagetrack pt,package p where t.id = pt.IdTrack and pt.IdPackage=p.Id and p.id = ?";
+  private static final String SQL_GET_TRACKS_BY_ALBUM_ID =
+  "select t.Id, t.Track, t.Artist, t.Album,t.Popularity,t.URI,t.Price,t.Duration from track t, albumtrack aat,album a where t.id = aat.IdTrack and aat.IdAlbum=a.Id and a.id = ?";
   private static final String SQL_ADD_TRACK =
   "INSERT INTO Track (track, artist, album, popularity, uri, price, duration) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -254,5 +257,13 @@ public final class TrackDAO extends BaseEntityDao<Track, Long> {
    */
   public List<Track> getAllUserTracks(Long userId) throws DAOException {
     return findAll(mapper, SQL_GET_USER_TRACKS, userId);
+  }
+
+  public List<Track> getPackageTracks(Long packId) throws DAOException {
+    return findAll(mapper, SQL_GET_TRACKS_BY_PACK_ID, packId);
+  }
+
+  public List<Track> getAlbumTracks(Long albumId) throws DAOException {
+    return findAll(mapper, SQL_GET_TRACKS_BY_ALBUM_ID, albumId);
   }
 }

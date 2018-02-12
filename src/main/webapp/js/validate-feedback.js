@@ -3,10 +3,13 @@ function isCommentValid() {
   var comment = htmlElement.value;
   var commentRegExp = new RegExp('.{0,254}');
   var isElementValid = commentRegExp.test(comment);
+  var elem = $('#price').siblings('.validation-message');
 
   if (!isElementValid && !!comment) {
+    elem.addClass('visible');
     setDisabledCssClass(htmlElement);
   } else {
+    elem.removeClass('visible');
     removeDisabledCssClass(htmlElement);
   }
   return isElementValid;

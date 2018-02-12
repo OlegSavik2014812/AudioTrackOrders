@@ -16,6 +16,23 @@
 <body>
 <c:import url="../NavBar.jsp"/>
 
+<style>
+  .form-control.disabled {
+    border-color: red;
+  }
+
+  .validation-message {
+    color: red;
+    font-size: 12px;
+    word-wrap: break-word;
+    display: none;
+  }
+
+  .validation-message.visible {
+    display: block;
+  }
+</style>
+
 <div class="container">
   <div class="row">
 
@@ -28,6 +45,7 @@
         <label for="username" class="sr-only">
           <fmt:message key="signin.enter_username"/>
         </label>
+        <span class="validation-message"><fmt:message key="signup.msg.username"/> </span>
         <input type="text" id="username" class="form-control" name="userName"
                placeholder="<fmt:message key="signin.enter_username"/> " required="" autofocus="">
       </div>
@@ -36,12 +54,13 @@
         <label for="inputPassword" class="sr-only">
           <fmt:message key="signin.enter_password"/>
         </label>
+        <span class="validation-message"><fmt:message key="signup.msg.username"/> </span>
         <input type="password" name="password" id="inputPassword" class="form-control"
                placeholder="<fmt:message key="signin.enter_password"/>"
                required="">
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
+      <button class="btn btn-lg btn-primary btn-block" id="submitButton" type="submit">
         <fmt:message key="button.signin"/>
       </button>
 

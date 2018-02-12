@@ -3,11 +3,13 @@ function isTrackNameValid() {
   var trackName = htmlElement.value;
   var trackNameRegExp = new RegExp('^.{1,255}$');
   var isElementValid = trackNameRegExp.test(trackName);
-
+  var elem = $('#name').siblings('.validation-message');
   if (!isElementValid && !!trackName) {
     setDisabledCssClass(htmlElement);
+    elem.addClass('visible');
   } else {
     removeDisabledCssClass(htmlElement);
+    elem.removeClass('visible');
   }
 
   return isElementValid;
@@ -18,10 +20,13 @@ function isArtistNameValid() {
   var artistName = htmlElement.value;
   var artistNameRegExp = new RegExp('^.{1,255}$');
   var isElementValid = artistNameRegExp.test(artistName);
+  var elem = $('#artist').siblings('.validation-message');
 
   if (!isElementValid && !!artistName) {
     setDisabledCssClass(htmlElement);
+    elem.addClass('visible');
   } else {
+    elem.removeClass('visible');
     removeDisabledCssClass(htmlElement);
   }
   return isElementValid;
@@ -32,10 +37,13 @@ function isAlbumNameValid() {
   var albumName = htmlElement.value;
   var albumNameRegExp = new RegExp('^.{1,255}$');
   var isElementValid = albumNameRegExp.test(albumName);
+  var elem = $('#album').siblings('.validation-message');
 
   if (!isElementValid && !!albumName) {
     setDisabledCssClass(htmlElement);
+    elem.addClass('visible');
   } else {
+    elem.removeClass('visible');
     removeDisabledCssClass(htmlElement);
   }
 
@@ -47,10 +55,13 @@ function isPriceValueValid() {
   var priceValue = htmlElement.value;
   var priceValueRegExp = new RegExp('^\\d+([.]\\d{0,2})?$');
   var isElementValid = priceValueRegExp.test(priceValue);
+  var elem = $('#price').siblings('.validation-message');
 
   if (!isElementValid && !!priceValue) {
     setDisabledCssClass(htmlElement);
+    elem.addClass('visible');
   } else {
+    elem.removeClass('visible');
     removeDisabledCssClass(htmlElement);
   }
   return isElementValid;

@@ -11,3 +11,18 @@ function executeTrackAdd(url) {
       }
     });
 }
+
+
+function executeNoMoney(url) {
+  $.ajax(
+    {
+      type: "POST",
+      url: url,
+      success: function () {
+        $('#addModalNoMoney').modal('show');
+      },
+      error: function (e) {
+        console.log(e);
+      }
+    });
+}

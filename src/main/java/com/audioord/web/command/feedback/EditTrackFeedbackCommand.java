@@ -43,9 +43,12 @@ public class EditTrackFeedbackCommand implements Command {
 
     Long trackId = (Long) request.raw().getSession().getAttribute("trackId");
     Track track = trackDAO.getById(Long.valueOf(trackId));
+    if (track == null) {
+      return Pages.INDEX_PAGE;
+    }
     String comments = request.getParameter("comment");
     if (comments.length() > 255 || comments.length() == 0) {
-      return Pages.FEEDBACK_PAGE;
+      return "/action?name=feedback_list&track_id=" + track.getId();
     }
     TrackFeedback trackFeedback = new TrackFeedback(user, comments, track);
     trackFeedback.setCreatedAt(new Date());
@@ -53,8 +56,6 @@ public class EditTrackFeedbackCommand implements Command {
     if (!trackFeedbackDAO.create(trackFeedback)) {
       return Pages.FEEDBACK_PAGE;
     }
-
-    request.removeSessionAttribute("trackId");
-    return Pages.INDEX_PAGE;
+    return "/action?name=feedback_list&track_id=" + track.getId();
   }
 }

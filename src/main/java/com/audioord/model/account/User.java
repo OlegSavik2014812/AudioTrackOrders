@@ -12,6 +12,7 @@ public class User extends Entity<Long> {
   private String firstName;
   private String lastName;
   private Role role;
+  private double cash;
 
   /**
    * constructor creates object of User class
@@ -79,6 +80,14 @@ public class User extends Entity<Long> {
    */
   public void setRole(Role role) {
     this.role = role;
+  }
+
+  public double getCash() {
+    return cash;
+  }
+
+  public void setCash(double cash) {
+    this.cash = cash;
   }
 
   @Override

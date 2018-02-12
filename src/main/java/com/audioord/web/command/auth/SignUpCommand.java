@@ -10,6 +10,7 @@ import com.audioord.web.command.Command;
 import com.audioord.web.command.Pages;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -54,20 +55,25 @@ public class SignUpCommand implements Command {
     String userName = request.getParameter(PRM_USERNAME);
     String firstName = request.getParameter(PRM_FIRST_NAME);
     String lastName = request.getParameter(PRM_LAST_NAME);
-
     String password1 = request.getParameter(PRM_PASSWORD1);
     String password2 = request.getParameter(PRM_PASSWORD2);
 
     if (!Objects.equals(password1, password2) || password1.length() < 4) {
+      request.setSessionAttribute("error", "error");
       return Pages.SIGN_UP_PAGE; // password not confirmed, or have incorrect length
+    }
+
+    if (!validateUserParams(userName, firstName, lastName, password1, password2)) {
+      return Pages.SIGN_UP_PAGE;
     }
 
     if (authInfoDao.getById(userName) != null) {
       request.addAttribute("error", "exist");
       return Pages.SIGN_UP_PAGE; // user already exists
     }
+    String encyptedPassword = DigestUtils.md5Hex(password1);
 
-    AuthInfo authInfo = new AuthInfo(userName, password1);
+    AuthInfo authInfo = new AuthInfo(userName, encyptedPassword);
 
     if (!authInfoDao.create(authInfo)) {
       return Pages.SIGN_UP_PAGE; // could not create auth info
@@ -87,5 +93,14 @@ public class SignUpCommand implements Command {
     request.setSessionAttribute(ATTRIBUTE_USER, userWithId);
 
     return Pages.INDEX_PAGE;
+  }
+
+  private boolean validateUserParams(String... params) {
+    for (String param : params) {
+      if (!param.isEmpty()) {
+        return true;
+      }
+    }
+    return false;
   }
 }

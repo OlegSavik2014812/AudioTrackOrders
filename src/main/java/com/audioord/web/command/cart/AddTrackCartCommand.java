@@ -2,6 +2,7 @@ package com.audioord.web.command.cart;
 
 import com.audioord.dao.DAOException;
 import com.audioord.dao.TrackDAO;
+import com.audioord.model.account.User;
 import com.audioord.model.audio.Track;
 import com.audioord.web.cart.Cart;
 import com.audioord.web.cart.CartItem;
@@ -44,7 +45,10 @@ public class AddTrackCartCommand implements Command {
     if (!request.hasParameter(PRM_TRACK_ID)) {
       return Pages.TRACK_LIST_PAGE;
     }
-
+    User user = request.getSessionAttribute("USER", User.class);
+    if (user == null) {
+      return Pages.TRACK_LIST_PAGE;
+    }
     // parse track id from request
     String prmTrackId = request.getParameter(PRM_TRACK_ID);
     long trackId = Long.parseLong(prmTrackId);
@@ -54,7 +58,9 @@ public class AddTrackCartCommand implements Command {
     if (track == null) {
       return Pages.TRACK_LIST_PAGE;
     }
-
+    if (user.getCash() - track.getPrice() < 0) {
+      return Pages.TRACK_LIST_PAGE;
+    }
     // put selected track to user session cart
     Cart cart = request.getSessionAttribute(PRM_CART, Cart.class);
     if (cart == null) {

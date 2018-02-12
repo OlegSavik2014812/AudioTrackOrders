@@ -10,13 +10,15 @@ import com.audioord.web.http.Response;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Class describes the object-command, which shows all tracks in the system and returns to track list page
  * implementation of {@link Command}
  */
 public class TrackListCommand implements Command {
-
+  private static final String PAGE_PATTERN = "^\\d+$";
   public static final String NAME = "track_list";
   private static final String PRM_SORT = "sort";
   private static final String PRM_PAGE = "page";
@@ -42,14 +44,19 @@ public class TrackListCommand implements Command {
     int page = 1;
     int recordsPerPage = 8;
 
+
     if (request.hasParameter(PRM_PAGE)) {
-      page = Integer.parseInt(request.getParameter(PRM_PAGE));
+      if (validateRequestPage(request.getParameter(PRM_PAGE))) {
+        page = Integer.parseInt(request.getParameter(PRM_PAGE));
+      } else {
+        page = 1;
+      }
     }
     TrackSort trackSort = TrackSort.fromString(request.getParameter(PRM_SORT));
-
     List<Track> trackList = new ArrayList<>();
     int noOfRecords = trackDAO.countAllTracks();
     int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+
     page = validatePageValue(page, noOfPages);
     switch (trackSort) {
       case MOST_POPULAR: {
@@ -104,5 +111,11 @@ public class TrackListCommand implements Command {
     } else {
       return page;
     }
+  }
+
+  private boolean validateRequestPage(String page) {
+    Pattern pattern = Pattern.compile("^\\d+$");
+    Matcher matcher = pattern.matcher(page);
+    return matcher.find();
   }
 }

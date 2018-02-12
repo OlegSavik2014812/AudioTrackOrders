@@ -15,7 +15,7 @@ import java.util.Date;
 public final class DateUtil {
 
   private static final Logger LOG = Logger.getLogger(DateUtil.class);
-  private final static SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+  private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMM-dd");
 
   private DateUtil() {
     super();

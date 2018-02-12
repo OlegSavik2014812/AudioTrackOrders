@@ -32,5 +32,17 @@
       </a>
     </li>
   </ul>
+  <ul class="nav nav-pills flex-column">
+    <li class="nav-item">
+      <a class="nav-link" href="<c:url value="/action?name=show_packs"/>">
+        <fmt:message key="menu.packs"/>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<c:url value="/action?name=show_albums"/>">
+        <fmt:message key="menu.albums"/>
+      </a>
+    </li>
+  </ul>
 
 </nav>

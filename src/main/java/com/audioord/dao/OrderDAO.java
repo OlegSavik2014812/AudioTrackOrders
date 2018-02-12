@@ -8,6 +8,7 @@ import com.audioord.model.audio.Track;
 import com.audioord.model.order.Order;
 import com.audioord.model.order.OrderStatus;
 
+import java.math.BigInteger;
 import java.sql.*;
 import java.util.Date;
 import java.util.List;
@@ -129,7 +130,7 @@ public final class OrderDAO extends BaseEntityDao<Order, Long> {
    */
   @Override
   public boolean create(Order entity) throws DAOException {
-    Long orderId = create(entity, mapper, SQL_CREATE_ORDER);
+    Long orderId = (Long)create(entity, mapper, SQL_CREATE_ORDER);
     // create track order here as we wat to keep in in a single method
     try (Connection con = getConnectionSource().getConnection();
          PreparedStatement st = con.prepareCall(SQL_CREATE_TRACK_ORDER)) {

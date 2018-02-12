@@ -8,5 +8,6 @@ public enum UserCommand {
   ADD_CART,
   CART_ORDER,
   USER_TRACKS,
-  EDIT_FEEDBACK
+  EDIT_FEEDBACK,
+  NO_MONEY
 }

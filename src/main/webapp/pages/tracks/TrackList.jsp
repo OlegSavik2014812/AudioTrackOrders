@@ -62,10 +62,24 @@
               <fmt:formatNumber value="${track.price}" type="currency"/>
             </td>
             <td>
-              <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='CLIENT'}">
+              <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='CLIENT'&&sessionScope.USER.cash>track.price}">
                 <c:url value="/action?name=add_cart&track_id=${track.id}" var="addUri"/>
                 <a href="#" onclick="executeTrackAdd('${addUri}');">
                   <span class="oi oi-cart"></span>
+                </a>
+              </c:if>
+              <c:if
+                test="${sessionScope.USER!=null&&sessionScope.USER.role=='CLIENT'&&sessionScope.USER.cash<=track.price}">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="button_user"
+                        data-target="#addModalNoMoney">
+
+                  <span class="oi oi-cart"></span>
+                </button>
+              </c:if>
+              <c:if test="${sessionScope.USER!=null&&sessionScope.USER.role=='ADMIN'&&sessionScope.PACK!=null}">
+                <c:url value="/action?name=add_pack_track&track_id=${track.id}" var="addUri"/>
+                <a href="#" onclick="executeTrackAdd('${addUri}');">
+                  <span class="oi oi-box"></span>
                 </a>
               </c:if>
             </td>
@@ -90,6 +104,18 @@
       <div class="modal-content">
         <div class="modal-body">
           <fmt:message key="addtrack.cart"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="addModalNoMoney" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+       aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body">
+          <fmt:message key="addtrack.no_money"/>
         </div>
       </div>
     </div>

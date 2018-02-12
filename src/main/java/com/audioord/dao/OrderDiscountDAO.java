@@ -25,7 +25,7 @@ public final class OrderDiscountDAO extends BaseEntityDao<OrderDiscount, Long> {
 
   private static final String SQL_CREATE_DISCOUNT = "insert into discount(Percent ,DateFrom,DateTo,IdUser) values(?,?,?,?)";
   private static final String SQL_GET_DISCOUNT_BY_USER_ID = "SELECT u.Id as UserId, u.Username, u.Role,  u.FirstName, u.LastName, d.Percent, d.DateFrom , d.DateTo FROM discount d JOIN USER u ON u.Id = d.IdUser where d.IdUser = ?";
-
+  private static final String SQL_DELETE_DISCOUNT_BY_USER_ID = "delete from discount where IdUser = ?";
   private EntityMapper<OrderDiscount> mapper = new EntityMapper<OrderDiscount>() {
     /**
      * Parse {@link ResultSet} and creates {@link OrderDiscount} object
@@ -72,7 +72,7 @@ public final class OrderDiscountDAO extends BaseEntityDao<OrderDiscount, Long> {
 
   @Override
   public boolean delete(Long id) throws DAOException {
-    return false;
+    return remove(id, SQL_DELETE_DISCOUNT_BY_USER_ID);
   }
 
   /**

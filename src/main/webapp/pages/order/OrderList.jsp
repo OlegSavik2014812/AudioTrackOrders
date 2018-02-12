@@ -35,8 +35,10 @@
               (${fn:length(item.tracks)})
               <a href="#" data-toggle="modal" data-target="#modal${item.id}"><span
                 class="oi oi-musical-note"></span></a>
+
               <div id="modal${item.id}" class="modal fade" tabindex="-1" role="dialog"
                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <ul class="list-group">
@@ -65,8 +67,9 @@
                     </button>
                     <div class="dropdown-menu">
                       <c:url value="/action?name=order_edit&order_id=${item.id}&status=REJECTED" var="urlOrderReject"/>
-                      <c:url value="/action?name=order_edit&order_id=${item.id}&status=COMPLETED"
-                             var="urlOrderComplete"/>
+                      <c:url
+                        value="/action?name=order_edit&order_id=${item.id}&status=COMPLETED&username=${item.user.username}"
+                        var="urlOrderComplete"/>
                       <a class="dropdown-item" href="${urlOrderReject}"><fmt:message key="orderlist.reject"/> </a>
                       <a class="dropdown-item" href="${urlOrderComplete}"><fmt:message
                         key="orderlist.complete"/> </a>

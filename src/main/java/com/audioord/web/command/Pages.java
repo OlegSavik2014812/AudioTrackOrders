@@ -23,7 +23,12 @@ public final class Pages {
 
   public static final String USER_LIST_PAGE = "/pages/user/UserListPage.jsp";
   public static final String FEEDBACK_PAGE = "/pages/feedback/FeedbackPage.jsp";
-
+  public static final String EDIT_PACK_PAGE = "/pages/pack/EditPack.jsp";
+  public static final String PACK_PAGE = "/pages/pack/PackPage.jsp";
+  public static final String PACK_LIST = "/pages/pack/PacksList.jsp";
+  public static final String PACK_TRACK_LIST = "/pages/pack/PackTrackListPage.jsp";
+  public static final String ALBUM_LIST = "/pages/album/AlbumsList.jsp";
+  public static final String ALBUM_TRACK_LIST = "/pages/album/AlbumTracksList.jsp";
   // public static final String PURCHASES_PAGE = "/pages/UserPurchasedTracks.jsp";
 
   // public static final String ADD_DISCOUNT_PAGE = "/pages/EditUserDiscountPage.jsp";

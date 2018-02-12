@@ -2,6 +2,8 @@ package com.audioord.web.command.order;
 
 import com.audioord.dao.DAOException;
 import com.audioord.dao.OrderDAO;
+import com.audioord.dao.UserDAO;
+import com.audioord.model.account.User;
 import com.audioord.model.order.Order;
 import com.audioord.model.order.OrderStatus;
 import com.audioord.web.command.Command;
@@ -19,9 +21,11 @@ public class OrderStatusEdit implements Command {
 
   public static final String NAME = "order_edit";
   private static final String PRM_ORDER_ID = "order_id";
+  private static final String PRM_USERNAME = "username";
   private static final String PRM_ORDER_STATUS = "status";
 
   private final OrderDAO orderDAO = new OrderDAO();
+  private final UserDAO userDAO = new UserDAO();
 
   /**
    * There is creation of {@link Order} object and its validation, if order didn't exists, then redirecting to
@@ -55,10 +59,16 @@ public class OrderStatusEdit implements Command {
     if (order.getStatus() == status) {
       return Pages.ORDER_LIST_PAGE;
     }
-
+    User user = userDAO.getByUsername(request.getParameter(PRM_USERNAME));
+    double userCash = user.getCash() - order.getTotalPrice();
+    if (userCash < 0) {
+      order.setStatus(OrderStatus.REJECTED);
+      orderDAO.update(order);
+    }
     order.setStatus(status);
     orderDAO.update(order);
-
+    user.setCash(userCash);
+    userDAO.update(user);
     return Pages.INDEX_PAGE;
   }
 }

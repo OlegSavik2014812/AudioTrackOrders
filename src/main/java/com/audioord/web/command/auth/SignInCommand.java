@@ -11,6 +11,7 @@ import com.audioord.web.command.Command;
 import com.audioord.web.command.Pages;
 import com.audioord.web.http.Request;
 import com.audioord.web.http.Response;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -56,6 +57,7 @@ public class SignInCommand implements Command {
 
     String userName = request.getParameter(PRM_USERNAME);
     String password = request.getParameter(PRM_PASSWORD);
+    String encryptedPassword = DigestUtils.md5Hex(password);
 
     if (userName.isEmpty() || password.isEmpty()) { // required fields
       return Pages.SIGN_IN_PAGE;
@@ -63,20 +65,21 @@ public class SignInCommand implements Command {
 
     AuthInfo authInfo = authInfoDao.getById(userName);
     if (authInfo == null) { // unknown user
-      return Pages.SIGN_IN_PAGE;
+      return Pages.SIGN_UP_PAGE;
     }
 
-    if (!authInfo.getPassword().equals(password)) { // wrong password
+    if (!authInfo.getPassword().equals(encryptedPassword)) { // wrong password
       return Pages.SIGN_IN_PAGE;
     }
 
     User user = userDAO.getByUsername(authInfo.getUserName());
-    OrderDiscount orderDiscount = orderDiscountDAO.getByUserId(user.getId());
-    if (user != null) {
-      request.setSessionAttribute(ATTRIBUTE_USER, user);
-      request.setSessionAttribute(ATTRIBUTE_BONUS, orderDiscount);
+    if (user == null) {
+      return Pages.SIGN_UP_PAGE;
     }
 
+    OrderDiscount orderDiscount = orderDiscountDAO.getByUserId(user.getId());
+    request.setSessionAttribute(ATTRIBUTE_USER, user);
+    request.setSessionAttribute(ATTRIBUTE_BONUS, orderDiscount);
     return Pages.INDEX_PAGE;
   }
 }

@@ -73,6 +73,7 @@
               <label for="comment" class="sr-only">
 
               </label>
+              <span class="validation-message"><fmt:message key="signup.msg.username"/> </span>
               <input type="text" id="comment" class="form-control" name="comment"
                      placeholder="<fmt:message key="editfeedback.write_comment"/> " onchange="isFormCommentValid()"
                      autofocus="">

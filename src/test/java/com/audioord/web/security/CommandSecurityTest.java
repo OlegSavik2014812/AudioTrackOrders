@@ -10,49 +10,49 @@ public class CommandSecurityTest {
   private final String commandNameForbidden = "do_something";
 
   @Test
-  public void testIsAllowedToAdmin() throws Exception {
+  public void shouldAllowAdmin() throws Exception {
     boolean isAllowed = CommandSecurity.isAllowedToAdmin(commandNameAdmin);
     Assert.assertTrue(isAllowed);
   }
 
   @Test
-  public void testIsNotAllowedToAdmin() throws Exception {
+  public void shouldNotAllowAdmin() throws Exception {
     boolean isAllowed = CommandSecurity.isAllowedToGuest(commandNameUser);
     Assert.assertFalse(isAllowed);
   }
 
   @Test
-  public void testIsAllowedToAdminAsGuest() throws Exception {
+  public void shouldAllowAdminAsGuest() throws Exception {
     boolean isAllowed = CommandSecurity.isAllowedToAdmin(commandNameGuest);
     Assert.assertTrue(isAllowed);
   }
 
   @Test
-  public void testIsAllowedToClient() throws Exception {
+  public void shouldAllowClient() throws Exception {
     boolean isAllowed = CommandSecurity.isAllowedToClient(commandNameUser);
     Assert.assertTrue(isAllowed);
   }
 
   @Test
-  public void testIsNotAllowedToClient() throws Exception {
+  public void shouldNotAllowClient() throws Exception {
     boolean isAllowed = CommandSecurity.isAllowedToAdmin(commandNameUser);
     Assert.assertFalse(isAllowed);
   }
 
   @Test
-  public void testIsAllowedToClientAsGuest() throws Exception {
+  public void shouldAllowClientAsGuest() throws Exception {
     boolean isAllowed = CommandSecurity.isAllowedToClient(commandNameGuest);
     Assert.assertTrue(isAllowed);
   }
 
   @Test
-  public void testIsAllowedToGuest() throws Exception {
+  public void shouldAllowGuest() throws Exception {
     boolean isAllowed = CommandSecurity.isAllowedToGuest(commandNameGuest);
     Assert.assertTrue(isAllowed);
   }
 
   @Test
-  public void testIsNotAllowedToGuest() throws Exception {
+  public void shouldNotAllowGuest() throws Exception {
     boolean isAllowed = CommandSecurity.isAllowedToGuest(commandNameForbidden);
     Assert.assertFalse(isAllowed);
   }

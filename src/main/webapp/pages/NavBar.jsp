@@ -15,10 +15,18 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a class="navbar-brand head_name" href="<c:url value="/action?name=track_list&sort=MOST_POPULAR&page=1"/>">
-      <img src="<c:url value="/img/logo.png"/>" width="30" height="30">
-      <fmt:message key="navbar.head_name"/>
-    </a>
+    <c:if test="${sessionScope.trackId==null}">
+      <a class="navbar-brand head_name" href="<c:url value="/action?name=track_list&sort=MOST_POPULAR&page=1"/>">
+        <img src="<c:url value="/img/logo.png"/>" width="30" height="30">
+        <fmt:message key="navbar.head_name"/>
+      </a>
+    </c:if>
+    <c:if test="${sessionScope.trackId!=null}">
+      <a class="navbar-brand head_name" href="<c:url value="/action?name=go_out_from_feedback"/>">
+        <img src="<c:url value="/img/logo.png"/>" width="30" height="30">
+        <fmt:message key="navbar.head_name"/>
+      </a>
+    </c:if>
 
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
@@ -26,6 +34,14 @@
         <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='ADMIN'}">
           <a class="nav-item nav-link" href="<c:url value="/action?name=upload_track"/>"><fmt:message
             key="navbar.add_music"/> </a>
+          <c:if test="${sessionScope.PACK== null}">
+            <a class="nav-item nav-link" href="<c:url value="/action?name=edit_pack"/>"><fmt:message
+              key="edtipack.editpack"/> </a>
+          </c:if>
+          <c:if test="${sessionScope.PACK!=null}">
+            <a class="nav-item nav-link" href="<c:url value="/action?name=view_pack"/>"><fmt:message
+              key="edtipack.show_pack"/> </a>
+          </c:if>
         </c:if>
 
         <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='CLIENT'}">
@@ -60,10 +76,11 @@
               <i class=""></i>
                 ${sessionScope.USER.username}
             </a>
-
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                 <%--USER CART--%>
               <c:if test="${sessionScope.USER != null && sessionScope.USER.role=='CLIENT'}">
+                <a class="dropdown-item" href="#"><fmt:message key="user.cash"/><c:out
+                  value="${sessionScope.USER.cash}"/></a>
                 <a class="dropdown-item" href="<c:url value="/action?name=view_cart"/>"><fmt:message
                   key="navbar.basket"/> </a>
               </c:if>

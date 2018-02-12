@@ -19,18 +19,19 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
   private static final String USER_TABLE_COLUMN_ROLE = "Role";
   private static final String USER_TABLE_COLUMN_FIRST_NAME = "FirstName";
   private static final String USER_TABLE_COLUMN_LAST_NAME = "LastName";
+  private static final String USER_TABLE_COLUMN_CASH = "Cash";
 
   private static final String SQL_UPDATE_USER_BY_ID =
-  "UPDATE User SET UserName = ?, Role = ?, FirstName = ?, LastName = ? WHERE Id = ?";
+  "UPDATE User SET UserName = ?, Role = ?, FirstName = ?, LastName = ? ,Cash = ? WHERE Id = ?";
 
   private static final String SQL_GET_USER_BY_ID =
-  "SELECT UserName, Role,  FirstName, LastName, Id FROM User WHERE Id=?";
+  "SELECT UserName, Role,  FirstName, LastName, Id,Cash FROM User WHERE Id=?";
 
   private static final String SQL_GET_USER_BY_USERNAME =
-  "SELECT UserName, Role,  FirstName, LastName, Id FROM User WHERE UserName=?";
+  "SELECT UserName, Role,  FirstName, LastName, Id,Cash FROM User WHERE UserName=?";
 
   private static final String SQL_CREATE_USER =
-  "INSERT INTO User (UserName, Role,  FirstName, LastName) VALUES (?,?,?,?)";
+  "INSERT INTO User (UserName, Role,  FirstName, LastName,Cash) VALUES (?,?,?,?,?)";
 
   private static final String SQL_DELETE_USER_BY_ID =
   "DELETE FROM User WHERE Id=?";
@@ -39,7 +40,8 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
   "SELECT count(id) FROM user where Role = 'CLIENT'";
 
   private static final String SQL_GET_ALL =
-  "SELECT UserName, Role, FirstName, LastName, Id FROM user where Role = 'CLIENT' ORDER BY Id DESC LIMIT ?, ?";
+  "SELECT UserName, Role, FirstName, LastName, Id,Cash FROM user where Role = 'CLIENT' ORDER BY Id DESC LIMIT ?, ?";
+
 
   private final EntityMapper<User> userMapper = new EntityMapper<User>() {
     /**
@@ -54,6 +56,7 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
       user.setFirstName(rs.getString(USER_TABLE_COLUMN_FIRST_NAME));
       user.setLastName(rs.getString(USER_TABLE_COLUMN_LAST_NAME));
       user.setId(rs.getLong(USER_TABLE_COLUMN_ID));
+      user.setCash(rs.getDouble(USER_TABLE_COLUMN_CASH));
       return user;
     }
 
@@ -69,9 +72,11 @@ public final class UserDAO extends BaseEntityDao<User, Long> {
       st.setString(2, user.getRole().name());
       st.setString(3, user.getFirstName());
       st.setString(4, user.getLastName());
+      st.setDouble(5, user.getCash());
       if (user.getId() != null) {
-        st.setLong(5, user.getId());
+        st.setLong(6, user.getId());
       }
+
     }
   };
 

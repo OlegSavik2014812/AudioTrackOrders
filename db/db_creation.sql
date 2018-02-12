@@ -69,6 +69,13 @@ CREATE TABLE `Order`
 CREATE INDEX fk_order_user_id
   ON `Order` (IdUser);
 
+
+CREATE TABLE `audio_orders`.`package` (
+  `Id`   BIGINT(20)   NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(256) NULL     DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+);
+
 CREATE TABLE Track
 (
   Id         BIGINT AUTO_INCREMENT
@@ -97,6 +104,25 @@ CREATE TABLE TrackOrder
   CONSTRAINT fk_trackorder_order_id
   FOREIGN KEY (IdOrder) REFERENCES `Order` (Id)
 );
+CREATE TABLE `audio_orders`.`packagetrack` (
+  `Id`        BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `IdTrack`   BIGINT(20) NOT NULL,
+  `IdPackage` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `package_fk_idx` (`IdPackage` ASC),
+  INDEX `track_fk_idx` (`IdTrack` ASC),
+  CONSTRAINT `package_fk`
+  FOREIGN KEY (`IdPackage`)
+  REFERENCES `audio_orders`.`package` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `track_fk`
+  FOREIGN KEY (`IdTrack`)
+  REFERENCES `audio_orders`.`track` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+
 
 CREATE INDEX fk_trackorder_track_id
   ON TrackOrder (IdTrack);
